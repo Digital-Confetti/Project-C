@@ -28,27 +28,6 @@
         this.movingVerticaly = 0;
         this.movingUp = 0;
 
-
-        this.input.on('wheel', function (pointer, gameObjects, deltaX, deltaY, deltaZ) {
-
-           
-            if (deltaY > 0){
-
-                this.movingUp = 1;
-                this.movingVerticaly = 1;
-
-                console.log('Rueda activada, Delta{ x: ' + deltaX + ' y: ' + deltaY + ' z: ' + deltaZ);
-
-                //MovePlayerVertical(10);
-            } else if (deltaY < 0){
-
-                this.movingUp = 0;
-                this.movingVerticaly = 1;
-
-                //MovePlayerVertical(-10);
-            }
-        });
-
         this.input.on('pointerdown', function (pointer) {
 
             if (pointer.rightButtonDown())
