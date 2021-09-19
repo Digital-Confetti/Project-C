@@ -4,8 +4,8 @@
         // our game's configuration
         let config = {
         type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
-        width: 640,         // game width
-        height: 360,        // game height
+        width: 800,         // game width 640
+        height: 500,        // game height 360
         scene: gameScene    // our newly created scene
         };
 
@@ -13,167 +13,60 @@
         let game = new Phaser.Game(config);
 
     gameScene.preload = function() {
-        this.load.image('background', 'stores/background.png');
-        this.load.image('player', 'stores/player.png');
-        this.load.image('dragon', 'stores/dragon.png');
-        this.load.image('treasure', 'stores/treasure.png');
+
+        this.load.spritesheet('dude',
+        'stores/Char_4.png',
+        { frameWidth: 64, frameHeight: 64 });   
+        
+        
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
+
 
     gameScene.create = function() {
         // reset camera effects
         this.cameras.main.resetFX();
-
         this.input.mouse.disableContextMenu();
 
-        this.movingVerticaly = 0;
-        this.movingUp = 0;
-
-        this.input.on('pointerdown', function (pointer) {
-
-            if (pointer.rightButtonDown())
-            {
-                //if (pointer.getDuration() > 500)
-                this.playerSpeed = this.playerMaxSpeed * 2;
-            }
-            else if (pointer.leftButtonDown())
-            {
-                // player walks
-                this.playerSpeed = this.playerMaxSpeed;
-            }
-            
-        }, this);
-
-        this.input.on('pointerup', function (pointer) {
-
-            if (pointer.leftButtonReleased() || pointer.rightButtonReleased()){
-                this.playerSpeed = 0;
-            }
-    
-        }, this);
-
-        let bg = this.add.sprite(0,0, 'background');
-        bg.setOrigin(0,0);
-
+        // let bg = this.add.sprite(0,0, 'background');
+        // bg.setOrigin(0,0);
         
-        this.player = this.add.sprite(40, 180, 'player');
-        this.player.setScale(0.5);
+        this.player = this.add.sprite(40, 180, 'dude');
+        // this.player.setScale(0.5);
 
-        // player is alive
-        this.isPlayerAlive = true;
-
-         // goal
-        this.treasure = this.add.sprite(this.sys.game.config.width - 80, this.sys.game.config.height / 2, 'treasure');
-        this.treasure.setScale(0.6);
-
-        // group of enemies
-        this.enemies = this.add.group({
-            key: 'dragon',
-            repeat: 5,
-            setXY: {
-            x: 110,
-            y: 100,
-            stepX: 80,
-            stepY: 20
-            }
+        this.anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 16 }),
+            frameRate: 10,
+            repeat: -1
         });
-        // scale enemies
-        Phaser.Actions.ScaleXY(this.enemies.getChildren(), -0.5, -0.5);
-
-        // set speeds
-        Phaser.Actions.Call(this.enemies.getChildren(), function(enemy) {
-            enemy.speed = Math.random() * 2 + 1;
-        }, this);
-
-        // this.add.image(400,300,'pelota');
-        /* this.add.image(0,0,'pelota');
-         -> Añade la imagen
         
-        #   this.add.image(0,0,'pelota').setOrigin(0,0);
-        #   -> Añade la imagen + cambia las coordenadas de su anchor
-
-        #   this.gameoverImage = this.add.image(x,y,'name');
-        #   -> Carga la imagen de gameOver
-
-        #   this.gameoverImage.visible  = false;
-        #   -> Hacemos invisible una imagen;
-
-        #   this.platform = this.physics.add.image(x,y,'name');
-        #   -> Añadimos fisicas a un objeto platform generico
-
-        #   this.platform.body.allowGravity = false;
-        #   -> Hacemos que no le afecte la gravedad
-
-        */
-
-        /*  / Version unitaria
-        #   
-        #   this.pelota = this.physics.add.image(400,300,'pelota').setScale(0.1);
-        #   this.pelota.setBounce(0.4);
-        #   this.pelota.setCollideWorldBounds(true);
-        */
+        this.anims.create({
+            key: 'turn',
+            frames: [ { key: 'dude', frame: 4 } ],
+            frameRate: 20
+        });
         
-        //this.pelotas = this.physics.add.staticGroup();
-
-        //this.cursors = this.input.keyboard.createCursorKeys();
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frameRate: 10,
+            repeat: -1
+        });
+    
+        
 
     }
 
     // some parameters for our scene (our own customer variables - these are NOT part of the Phaser API)
     gameScene.init = function() {
-        this.playerMaxSpeed = 1.5;
-        this.playerSpeed = 0;
-        this.enemyMaxY = 280;
-        this.enemyMinY = 80;
+        
     }
 
     gameScene.update = function(){
-         // only if the player is alive
-        if (!this.isPlayerAlive) {
-            return;
-        }
 
-        var pointer = this.input.activePointer;
-
-        this.MovePlayer();
-
-        /*
-          // check for active input
-        if (pointer.isDown) {
-                // player walks
-            this.player.x += this.playerSpeed;
-            
-        }
-        */
+        this.player.anims.play('left', true);
         
-
-        // enemy movement
-        let enemies = this.enemies.getChildren();
-        let numEnemies = enemies.length;
-        for (let i = 0; i < numEnemies; i++) {
-            // move enemies
-            enemies[i].y += enemies[i].speed;
-            // reverse movement if reached the edges
-            if (enemies[i].y >= this.enemyMaxY && enemies[i].speed > 0) {
-            enemies[i].speed *= -1;
-            } else if (enemies[i].y <= this.enemyMinY && enemies[i].speed < 0) {
-            enemies[i].speed *= -1;
-            }
-
-             // enemy collision
-            if (Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), enemies[i].getBounds())) {
-                this.gameOver();
-            }
-        }
-
-        
-
-        // treasure collision
-        if (Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), this.treasure.getBounds())) {
-            this.gameOver();
-        }
-
-        //this.pelotas.create(100,300, 'pelota').setScale(0.1).setBounce(0.4).setCollideWorldBounds(true);
-    
     }
 
     gameScene.gameOver = function() {
@@ -193,23 +86,3 @@
           this.scene.restart();
         }, [], this);
       };
-    
-      gameScene.MovePlayer = function(){
-          this.player.x += this.playerSpeed;
-
-          if (this.movingVerticaly == 1)
-          {
-            console.log("TRAZA");
-              if(this.movingUp == 1)
-              {
-                  this.player.y += 10;
-              } else {
-                  this.player.y += -10;
-              }
-              this.movingVerticaly = 0;
-          }
-      }
-
-      gameScene.MovePlayerVertical = function(k){
-          this.player.y += k;
-      }
