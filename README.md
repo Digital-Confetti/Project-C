@@ -1,1 +1,2 @@
-# Juegos-en-Red
+# Juego de Juegos en Red
+## Digital Confetti
