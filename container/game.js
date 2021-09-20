@@ -78,11 +78,15 @@ Digital Confetti -2021-
     gameScene.createGameObjects = function(){
         // Adding Sprite to the player
         player = this.physics.add.sprite(400, 250, 'kennewsprites');
-            player.setOrigin(0,0);
+            // Setting bounce
             player.setBounce(0.1);
+            // Making player collideable by WorldBounds
             player.setCollideWorldBounds(true);
-            // Recortamos la collider Box
-            player.body.setSize(14, 98, false);
+            // Displacing the hitbox
+            player.body.setOffset(0, 20);
+            // Setting Size of the collider box
+            player.body.setSize(40, 79, false);
+            
 
         // Creating Platforms
         platforms = this.physics.add.staticGroup();
@@ -129,7 +133,7 @@ Digital Confetti -2021-
         // Creating animations
         this.createAnimations();
 
-        // Declarating input events
+        // Declarating input methods
         this.inputDeclaration();
 
     }
@@ -140,12 +144,22 @@ Digital Confetti -2021-
         if (keyD && !keyA) {
 
             player.body.velocity.x = horizontalSpeed;
-            player.anims.play('left', true);
+            player.anims.play('right', true);
+
+            if(player.flipX)
+            {
+                player.flipX = false;
+            }
 
         } else if (keyA && !keyD) {
 
             player.body.velocity.x = -1 * horizontalSpeed;
             player.anims.play('right', true);
+
+            if(!player.flipX)
+            {
+                player.flipX = true;
+            }
 
         } else {
 
@@ -159,6 +173,11 @@ Digital Confetti -2021-
         {
             console.log('Salto');
             player.setVelocityY(-330);
+        }
+
+        if (player.body.touching.none)
+        {
+            console.log('AA');
         }
 
     }  
