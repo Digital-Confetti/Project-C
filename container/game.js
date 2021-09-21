@@ -24,7 +24,7 @@ Project C
 Digital Confetti -2021-
     Javier Raja Huertas         (twt: @tuicher, github: tuicher)
     Rodrigo Díaz Pau            
-    Miguel Rodríguez de Rojas   
+    Miguel Rodríguez de Rojas   (github: Lonflis)
     Héctor Muñoz Gómez          
 */      
     // Creating a Scene
