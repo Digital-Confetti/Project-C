@@ -63,6 +63,7 @@ Digital Confetti -2021-
     var keyA;
     var keyD;
     var keySPACE;
+    var keySHIFT;
 
     
     gameScene.preload = function() {
@@ -215,6 +216,10 @@ Digital Confetti -2021-
             {
                 keySPACE = true;
                 console.log('SPACE Pressed');
+            }else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SHIFT)
+            {
+                keySHIFT = true;
+                console.log('SHIFT Pressed');
             }
     
         });
@@ -242,6 +247,10 @@ Digital Confetti -2021-
             {
                 keySPACE = false;
                 console.log('SPACE Depressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SHIFT)
+            {
+                keySHIFT = false;
+                console.log('SHIFT Depressed');
             }
 
         });
