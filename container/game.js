@@ -33,8 +33,8 @@ Digital Confetti -2021-
     // Our game's configuration
     let config = {
     type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
-    width: 800,         // game width 640
-    height: 500,        // game height 360
+    width: 1280,         // game width 640
+    height: 720,        // game height 360
     scene: gameScene,   // our newly created scene
     // Adding Physics
         physics: {
@@ -51,7 +51,7 @@ Digital Confetti -2021-
 
     // Player
     var player;
-    var horizontalSpeed = 150;
+    var horizontalSpeed = 225;
     var verticalSpeed = 10;
 
     // Platforms
@@ -69,6 +69,8 @@ Digital Confetti -2021-
         // loading the spritesheet on 
         this.load.spritesheet('kennewsprites', 'stores/kennewsprites.png', { frameWidth: 76, frameHeight: 101 });
 
+        this.load.spritesheet('dude', 'stores/dude.png',{ frameWidth: 32, frameHeight: 48 });
+
         this.load.image('ground' , 'stores/platform.png');
            
         //this.load.spritesheet('kennewsprites', 'src/sprites/kennewsprites.png', 76, 101, 63);
@@ -77,24 +79,26 @@ Digital Confetti -2021-
     // Function thats add all the sprites to the gameObjects
     gameScene.createGameObjects = function(){
         // Adding Sprite to the player
-        player = this.physics.add.sprite(400, 250, 'kennewsprites');
+        player = this.physics.add.sprite(400, 250, 'dude');
             // Setting bounce
             player.setBounce(0.1);
             // Making player collideable by WorldBounds
             player.setCollideWorldBounds(true);
             // Displacing the hitbox
-            player.body.setOffset(0, 20);
+            player.body.setOffset(0, 0);
             // Setting Size of the collider box
-            player.body.setSize(40, 79, false);
+            player.body.setSize(32, 48, false);
             
 
         // Creating Platforms
         platforms = this.physics.add.staticGroup();
-        platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-        platforms.create(600, 400, 'ground');
+        platforms.create(700, 700, 'ground').setScale(4,2).refreshBody();
+        platforms.create(600, 375, 'ground').setScale(0.5,1).refreshBody();
         platforms.create(50, 250, 'ground');
-        platforms.create(750, 220, 'ground');
-        platforms.create(210, 500,'ground');
+        platforms.create(1100, 220, 'ground');
+        platforms.create(1180, 580, 'ground').setScale(0.25,1).refreshBody();
+        platforms.create(980, 480, 'ground').setScale(0.25,1).refreshBody();
+        platforms.create(170, 500,'ground');
 
         // Add collider
         this.physics.add.collider(player, platforms);
@@ -106,21 +110,21 @@ Digital Confetti -2021-
         // Iddle
         this.anims.create({
             key: 'idle',
-            frames: this.anims.generateFrameNumbers('kennewsprites', { start: 0, end: 3 }),
-            frameRate: 8
+            frames: [ { key: 'dude', frame: 4 } ],
+            frameRate: 20
         });
 
         // Right
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('kennewsprites', { start: 4, end: 6 }),
-            frameRate: 8
+            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frameRate: 10,
+            repeat: -1
         });
 
         // Left
         this.anims.create({
             key: 'left',
-            frames: this.anims.generateFrameNumbers('kennewsprites', { start: 8, end: 13 }),
             frameRate: 8
         });
     }
