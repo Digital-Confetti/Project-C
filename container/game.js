@@ -25,7 +25,7 @@ Digital Confetti -2021-
     Javier Raja Huertas         (twt: @tuicher, github: tuicher)
     Rodrigo Díaz Pau            
     Miguel Rodríguez de Rojas   (github: Lonflis)
-    Héctor Muñoz Gómez          
+    Héctor Muñoz Gómez          (github: Sh3ry01)
 */      
     // Creating a Scene
     let gameScene = new Phaser.Scene('Game');
@@ -186,7 +186,6 @@ Digital Confetti -2021-
 
         this.plyMove();
     }
-
     gameScene.inputDeclaration = function()
     {
         // Input event that checks when a key goes down
