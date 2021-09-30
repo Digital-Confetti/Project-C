@@ -176,7 +176,7 @@ Digital Confetti -2021-
         if (keySPACE && player.body.touching.down)
         {
             console.log('Salto');
-            player.setVelocityY(-330);
+            player.setVelocityY(-430);
         }
 
         if (player.body.touching.none)
