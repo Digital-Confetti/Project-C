@@ -20,12 +20,12 @@ ___________________________ ,8"  8I ______________________________________ d8" _
                                         `"Ybbd8"'  `"YbbdP"'  88       88  88    `"Ybbd8"'   "Y888   "Y888 88                                                                                                                              
 */
 /*
-Project C 
-Digital Confetti -2021-
-    Javier Raja Huertas         (twt: @tuicher, github: tuicher)
-    Rodrigo Díaz Pau            
-    Miguel Rodríguez de Rojas   (github: Lonflis)
-    Héctor Muñoz Gómez          (github: Sh3ry01)
+Travellers Tournament
+    Digital Confetti -2021-
+        Javier Raja Huertas             (twt: @tuicher, github: tuicher)
+        Rodrigo Díaz Pau            
+        Miguel Rodríguez de Rojas       (github: Lonflis)
+        Héctor Muñoz Gómez              (github: Sh3ry01)
 */ 
 
 import {Game_Scene} from './game.js';
