@@ -9,7 +9,7 @@ export class Menu_Scene extends Phaser.Scene{
     preload(){
         console.log('Menu Escena');
 
-        
+        this.scene.launch("game_Scene");
     }
 
     // Here we need to create all the Modules
