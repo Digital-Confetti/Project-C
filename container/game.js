@@ -14,13 +14,14 @@ export class Game_Scene extends Phaser.Scene {
         // Play
         this.horizontalSpeed = 225;
         this.verticalSpeed = 10;
-
+      
         // Input Variables
         this.keyW = false;   // ^ Boolean Key Catchers
         this.keyS = false;
         this.keyA = false;
         this.keyD = false;
         this.keySPACE = false;
+
 
         // Platforms
         this.platforms;
@@ -179,6 +180,10 @@ export class Game_Scene extends Phaser.Scene {
             {
                 that.keySPACE = true;
                 console.log('SPACE Pressed');
+            }else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SHIFT)
+            {
+                keySHIFT = true;
+                console.log('SHIFT Pressed');
             }
     
         });
@@ -206,6 +211,10 @@ export class Game_Scene extends Phaser.Scene {
             {
                 that.keySPACE = false;
                 console.log('SPACE Depressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SHIFT)
+            {
+                keySHIFT = false;
+                console.log('SHIFT Depressed');
             }
 
         });
