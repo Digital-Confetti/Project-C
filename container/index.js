@@ -30,6 +30,7 @@ Travellers Tournament
 
 import {Game_Scene} from './game.js';
 import {Menu_Scene} from './menu.js';
+import {Play_Menu_Scene} from './menujugar.js';
 
 const config = {
     type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
@@ -44,7 +45,7 @@ const config = {
                 debug: false
             }
         },
-        scene: [Menu_Scene, Game_Scene]
+        scene: [Menu_Scene, Play_Menu_Scene, Game_Scene]
     };
 
     var game = new Phaser.Game(config);
