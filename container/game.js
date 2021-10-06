@@ -4,6 +4,8 @@ import {Player} from './player.js';
 // exporting
 export class Game_Scene extends Phaser.Scene {
 
+    
+
     constructor()
     {
         super({ key: 'game_Scene'});
@@ -12,6 +14,7 @@ export class Game_Scene extends Phaser.Scene {
         // atribute declaration
         this.player;
         // Play
+        this.aceleration = 3;
         this.horizontalSpeed = 225;
         this.verticalSpeed = 10;
       
@@ -21,16 +24,43 @@ export class Game_Scene extends Phaser.Scene {
         this.keyA = false;
         this.keyD = false;
         this.keySPACE = false;
-
+        this.keySHIFT = false;
 
         // Platforms
         this.platforms;
+
+        // moving
+        this.moving_R = false;
+        this.dash_R = false;
+        this.drag = 3;
+        this.dashForce = 200;
+                         // s -> ms
+        this.dashCoolDown = 3 * 1000;
+        this.dashAllowed = false;
+        this.dashActivated = false;
+        
+
+        // Timers
+        this.timer_dash;
+
+        // debug
+        this.text_Debug;
+        
+
+        // proto
+        const stateMachine = {
+            IDDLE: "iddle",
+            RIGHT: "right",
+            LEFT:  "left",
+            JUMPING: "jumping",
+        }
 
     }
     
     preload() {
         // loading the spritesheet on 
-        this.load.spritesheet('kennewsprites', 'stores/kennewsprites.png', { frameWidth: 76, frameHeight: 101 });
+
+        this.load.spritesheet('byConfetti', 'stores/by_Confetti.png', {frameWidth: 60, frameHeight: 84});
 
         this.load.spritesheet('dude', 'stores/dude.png',{ frameWidth: 32, frameHeight: 48 });
 
@@ -42,20 +72,21 @@ export class Game_Scene extends Phaser.Scene {
     // Function thats add all the sprites to the gameObjects
     createGameObjects() {
         // Adding Sprite to the player
-        this.player = this.physics.add.sprite(400, 250, 'dude');
+        this.player = this.physics.add.sprite(400, 250, 'byConfetti');
             // Setting bounce
             this.player.setBounce(0.1);
             // Making player collideable by WorldBounds
             this.player.setCollideWorldBounds(true);
             // Displacing the hitbox
-            this.player.body.setOffset(0, 0);
+            this.player.body.setOffset(11, 0);
             // Setting Size of the collider box
-            this.player.body.setSize(32, 48, false);
+            this.player.body.setSize(33, 84, false);
+            //this.player.body.refreshBody();
             
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
-        this. platforms.create(700, 700, 'ground').setScale(4,2).refreshBody();
+        this.platforms.create(700, 700, 'ground').setScale(4,2).refreshBody();
         this.platforms.create(600, 375, 'ground').setScale(0.5,1).refreshBody();
         this.platforms.create(50, 250, 'ground');
         this.platforms.create(1100, 220, 'ground');
@@ -65,6 +96,7 @@ export class Game_Scene extends Phaser.Scene {
 
         // Add collider
         this.physics.add.collider(this.player, this.platforms);
+
     }
 
     // Fuctiong thats create the animations
@@ -98,10 +130,16 @@ export class Game_Scene extends Phaser.Scene {
         this.createGameObjects();
 
         // Creating animations
-        this.createAnimations();
+        //this.createAnimations();
 
         // Declarating input methods
         this.inputDeclaration();
+
+        // text debug
+        this.text_Debug = this.add.text(32, 32);
+
+        // Timers
+        this.timer_dash = this.time.addEvent({ delay: this.dashCoolDown, loop: true});
 
     }
 
@@ -109,29 +147,52 @@ export class Game_Scene extends Phaser.Scene {
     {
         // Horizontal movement
         if (this.keyD && !this.keyA) {
+            if (this.player.body.velocity.x <= this.horizontalSpeed){
+                this.player.body.velocity.x += this.aceleration;
+            }
+            
+            //this.player.anims.play('right', true);
+            this.moving_R = true;
 
-            this.player.body.velocity.x = this.horizontalSpeed;
-            this.player.anims.play('right', true);
-
+            // Unflipping the sprite
             if(this.player.flipX)
             {
                 this.player.flipX = false;
             }
 
         } else if (this.keyA && !this.keyD) {
+            
+            if (this.player.body.velocity.x >= -1 * this.horizontalSpeed){
+                this.player.body.velocity.x -= this.aceleration;
+            }
 
-            this.player.body.velocity.x = -1 * this.horizontalSpeed;
-            this.player.anims.play('right', true);
+            //this.player.anims.play('right', true);
+            this.moving_R = false;
 
+            // Flipping the sprite
             if(!this.player.flipX)
             {
                 this.player.flipX = true;
             }
-
+        
+        // Move degradation
         } else {
-
-            this.player.body.velocity.x = 0;
-            this.player.anims.play('idle', true);
+            if (this.moving_R && this.player.body.velocity.x != 0)
+            {
+                this.player.body.velocity.x -= this.drag;
+                if (this.player.body.velocity.x < 0)
+                {
+                    this.player.setVelocityX(0);
+                }
+            } else if (!this.moving_R && this.player.body.velocity.x != 0)
+            {
+                this.player.body.velocity.x += this.drag;
+                if (this.player.body.velocity.x > 0)
+                {   
+                    this.player.setVelocityX(0);
+                }
+            }
+            //this.player.anims.play('idle', true);
         }
 
         // Vertical movement
@@ -142,21 +203,74 @@ export class Game_Scene extends Phaser.Scene {
             this.player.setVelocityY(-430);
         }
 
+        // Horizontal movement
+            // Dash
+            /*
+        if(this.dashAllowed && this.keySHIFT)
+        {
+            if (this.keyD)
+            { 
+                this.player.body.velocity.x += this.dashForce;
+            } else if (this.keyA)
+            {
+                this.player.body.velocity.x -= this.dashForce;
+            }
+        }*/
+
+        if(this.dashActivated && this.moving_R)
+        {
+            this.player.body.velocity.x = 2 *this.dashForce;
+        } else if(this.dashActivated && !this.moving_R) {
+
+            this.player.body.velocity.x = -2 * this.dashForce;
+        }
+        
+
+        /*
         if (this.player.body.touching.none)
         {
             console.log('AA');
         }
+        */
+
+        
 
     }  
 
     update() {
+        var out;
 
         this.plyMove();
+
+        out = 'Progreso: ' + this.timer_dash.getProgress().toString().substr(0, 4);
+        
+        this.text_Debug.setText(out);
+        
+        let progress = this.timer_dash.getProgress();
+
+        if (progress >= 0.05  && progress <=0.97)
+        {
+            this.dashActivated = false;
+        }
+
+        if (progress >= 0.98)
+        {
+            this.timer_dash.paused = true;
+            this.dashAllowed = true;
+        } 
+        if (this.timer_dash.paused && this.keySHIFT)
+        {
+            this.timer_dash.paused = false;
+            this.dashAllowed = false;
+            this.dashActivated = true;
+        }
     }
 
     inputDeclaration() {
 
+        // that
         var that = this;
+        
         // Input event that checks when a key goes down
         this.input.keyboard.on('keydown', function (event) {
 
@@ -182,7 +296,7 @@ export class Game_Scene extends Phaser.Scene {
                 console.log('SPACE Pressed');
             }else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SHIFT)
             {
-                keySHIFT = true;
+                that.keySHIFT = true;
                 console.log('SHIFT Pressed');
             }
     
@@ -213,7 +327,7 @@ export class Game_Scene extends Phaser.Scene {
                 console.log('SPACE Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SHIFT)
             {
-                keySHIFT = false;
+                that.keySHIFT = false;
                 console.log('SHIFT Depressed');
             }
 
