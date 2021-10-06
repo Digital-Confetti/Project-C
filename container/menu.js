@@ -28,7 +28,7 @@ export class Menu_Scene extends Phaser.Scene {
         var that = this;
         this.input.on('pointerdown', function(pointer){
             console.log('Menu a Game');
-            that.scene.start("game_Scene");
+            that.scene.start("play_menu_Scene");
         });
     }
 
