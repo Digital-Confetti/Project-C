@@ -124,6 +124,14 @@ export class Game_Scene extends Phaser.Scene {
         });
     }
 
+    timer_Create()
+    {
+
+        // Dash Timer
+        this.timer_dash = this.time.addEvent({ delay: this.dashCoolDown, loop: true});
+
+    }
+
     create(){
 
         // Adding sprites
@@ -138,9 +146,46 @@ export class Game_Scene extends Phaser.Scene {
         // text debug
         this.text_Debug = this.add.text(32, 32);
 
-        // Timers
-        this.timer_dash = this.time.addEvent({ delay: this.dashCoolDown, loop: true});
+        this.timer_Create();
 
+    }
+
+    timer_Update()
+    {
+        let progress = this.timer_dash.getProgress();
+
+        if (progress >= 0.18 && progress <= 0.97)
+        {
+            this.dashActivated = false;
+
+            if (this.player.body.velocity.x > this.horizontalSpeed)
+            {
+                if (this.moving_R)
+                {
+                    this.player.body.velocity.x = 0.95 * this.horizontalSpeed;
+                } else {
+                    this.player.body.velocity.x = -0.95 * this.horizontalSpeed;
+                }
+            }
+            
+            
+        } else if (progress >= 0.98)
+        {
+            this.timer_dash.paused = true;
+            this.dashAllowed = true;
+        } 
+
+        if (this.timer_dash.paused && this.keySHIFT)
+        {
+            this.timer_dash.paused = false;
+            this.dashAllowed = false;
+            this.dashActivated = true;
+        }
+    }
+
+    drag_Force( orientation)
+    {
+        
     }
 
     plyMove()
@@ -176,18 +221,18 @@ export class Game_Scene extends Phaser.Scene {
             }
         
         // Move degradation
-        } else {
+        } else if (!this.keyA && !this.keyD){
             if (this.moving_R && this.player.body.velocity.x != 0)
             {
                 this.player.body.velocity.x -= this.drag;
-                if (this.player.body.velocity.x < 0)
+                if (this.player.body.velocity.x <= 0)
                 {
                     this.player.setVelocityX(0);
                 }
             } else if (!this.moving_R && this.player.body.velocity.x != 0)
             {
                 this.player.body.velocity.x += this.drag;
-                if (this.player.body.velocity.x > 0)
+                if (this.player.body.velocity.x >= 0)
                 {   
                     this.player.setVelocityX(0);
                 }
@@ -219,7 +264,7 @@ export class Game_Scene extends Phaser.Scene {
 
         if(this.dashActivated && this.moving_R)
         {
-            this.player.body.velocity.x = 2 *this.dashForce;
+            this.player.body.velocity.x = 2 * this.dashForce;
         } else if(this.dashActivated && !this.moving_R) {
 
             this.player.body.velocity.x = -2 * this.dashForce;
@@ -238,32 +283,20 @@ export class Game_Scene extends Phaser.Scene {
     }  
 
     update() {
-        var out;
+
+        this.timer_Update();
 
         this.plyMove();
+
+       
+
+        var out;
 
         out = 'Progreso: ' + this.timer_dash.getProgress().toString().substr(0, 4);
         
         this.text_Debug.setText(out);
         
-        let progress = this.timer_dash.getProgress();
-
-        if (progress >= 0.05  && progress <=0.97)
-        {
-            this.dashActivated = false;
-        }
-
-        if (progress >= 0.98)
-        {
-            this.timer_dash.paused = true;
-            this.dashAllowed = true;
-        } 
-        if (this.timer_dash.paused && this.keySHIFT)
-        {
-            this.timer_dash.paused = false;
-            this.dashAllowed = false;
-            this.dashActivated = true;
-        }
+        
     }
 
     inputDeclaration() {
