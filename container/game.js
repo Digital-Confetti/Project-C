@@ -32,8 +32,8 @@ export class Game_Scene extends Phaser.Scene {
         // moving
         this.moving_R = false;
         this.dash_R = false;
-        this.drag = 3;
-        this.dashForce = 200;
+        this.drag = 4.5;
+        this.dashForce = 800;
                          // s -> ms
         this.dashCoolDown = 3 * 1000;
         this.dashAllowed = false;
@@ -99,6 +99,7 @@ export class Game_Scene extends Phaser.Scene {
 
     }
 
+    //TO DO: Use JSON atlas.
     // Fuctiong thats create the animations
     createAnimations(){
 
@@ -154,7 +155,7 @@ export class Game_Scene extends Phaser.Scene {
     {
         let progress = this.timer_dash.getProgress();
 
-        if (progress >= 0.18 && progress <= 0.97)
+        if (progress >= 0.10 && progress <= 0.97)
         {
             this.dashActivated = false;
 
@@ -180,122 +181,105 @@ export class Game_Scene extends Phaser.Scene {
             this.timer_dash.paused = false;
             this.dashAllowed = false;
             this.dashActivated = true;
+            this.dash_R = this.moving_R;
         }
+
     }
 
-    drag_Force( orientation)
-    {
-        
-    }
-
-    plyMove()
+    plyMove(delta)
     {
         // Horizontal movement
         if (this.keyD && !this.keyA) {
             if (this.player.body.velocity.x <= this.horizontalSpeed){
-                this.player.body.velocity.x += this.aceleration;
+                this.player.body.velocity.x += this.aceleration * delta;
             }
             
             //this.player.anims.play('right', true);
-            this.moving_R = true;
-
-            // Unflipping the sprite
-            if(this.player.flipX)
-            {
-                this.player.flipX = false;
-            }
+            this.moving_R = true;       
 
         } else if (this.keyA && !this.keyD) {
             
             if (this.player.body.velocity.x >= -1 * this.horizontalSpeed){
-                this.player.body.velocity.x -= this.aceleration;
+                this.player.body.velocity.x -= this.aceleration * delta;
             }
 
             //this.player.anims.play('right', true);
             this.moving_R = false;
-
-            // Flipping the sprite
-            if(!this.player.flipX)
-            {
-                this.player.flipX = true;
-            }
         
-        // Move degradation
+        // drag force
         } else if (!this.keyA && !this.keyD){
             if (this.moving_R && this.player.body.velocity.x != 0)
             {
-                this.player.body.velocity.x -= this.drag;
+                this.player.body.velocity.x -= this.drag * delta;
+                
                 if (this.player.body.velocity.x <= 0)
                 {
                     this.player.setVelocityX(0);
                 }
             } else if (!this.moving_R && this.player.body.velocity.x != 0)
             {
-                this.player.body.velocity.x += this.drag;
+                this.player.body.velocity.x += this.drag * delta;
+                
                 if (this.player.body.velocity.x >= 0)
                 {   
                     this.player.setVelocityX(0);
                 }
             }
-            //this.player.anims.play('idle', true);
         }
 
         // Vertical movement
-            // Jump
+        // Jump
         if (this.keySPACE && this.player.body.touching.down)
         {
             console.log('Salto');
             this.player.setVelocityY(-430);
         }
 
-        // Horizontal movement
-            // Dash
-            /*
-        if(this.dashAllowed && this.keySHIFT)
+        if(this.dashActivated)
         {
-            if (this.keyD)
-            { 
-                this.player.body.velocity.x += this.dashForce;
-            } else if (this.keyA)
+            if(this.player.body.touching.left)
             {
-                this.player.body.velocity.x -= this.dashForce;
+                this.dash_R = true;
+                this.moving_R = true;
+            } else if (this.player.body.touching.right)
+            {
+                this.dash_R = false;
+                this.moving_R = false;
             }
-        }*/
 
-        if(this.dashActivated && this.moving_R)
-        {
-            this.player.body.velocity.x = 2 * this.dashForce;
-        } else if(this.dashActivated && !this.moving_R) {
-
-            this.player.body.velocity.x = -2 * this.dashForce;
+            if (this.dash_R)
+            {
+                this.player.body.velocity.x = this.dashForce;
+            } else {
+                this.player.body.velocity.x = -1 * this.dashForce;
+            }
         }
-        
 
-        /*
-        if (this.player.body.touching.none)
+        // Flipping the sprite 
+        if (this.player.flipX == this.moving_R)
         {
-            console.log('AA');
+            this.player.flipX = !this.moving_R;
         }
-        */
 
-        
-
+        if(this.player.body.velocity.x > 0)
+        {
+            this.player.flipX = false;
+        } else if (this.player.body.velocity < 0){
+            this.player.flipX = true;
+        }
     }  
 
-    update() {
+    update(timer, delta) {
 
         this.timer_Update();
 
-        this.plyMove();
-
-       
+        this.plyMove(delta);
 
         var out;
 
         out = 'Progreso: ' + this.timer_dash.getProgress().toString().substr(0, 4);
         
         this.text_Debug.setText(out);
-        
         
     }
 
