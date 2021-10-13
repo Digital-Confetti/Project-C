@@ -156,10 +156,12 @@ export class Game_Scene extends Phaser.Scene {
     timer_Update() {
         let progress = this.timer_dash.getProgress();
 
-        if (progress >= 0.10 && progress <= 0.97)
-        {
-            this.dashActivated = false;
+        
+        this.timer_dash.paused = this.player.dashAllowed;
 
+        if (progress >= 0.08 && progress <= 0.97)
+        {
+            this.player.dashActivated = false;
             if (this.player.body.velocity.x > this.horizontalSpeed) {
                 if (this.moving_R) {
                     this.player.body.velocity.x = 0.95 * this.horizontalSpeed;
@@ -170,13 +172,14 @@ export class Game_Scene extends Phaser.Scene {
 
 
         } else if (progress >= 0.98) {
-            this.timer_dash.paused = true;
-            this.dashAllowed = true;
+            this.player.dashAllowed = true;
         }
 
 
     }
 
+    // NOT USED
+    /*
     plyMove(delta)
     {
         // Horizontal movement
@@ -260,13 +263,14 @@ export class Game_Scene extends Phaser.Scene {
         } else if (this.player.body.velocity.x < 0){
             this.player.flipX = true;
         }
-    }  
+    }
+    */  
 
     update(timer, delta) {
 
-        //this.timer_Update();
+        this.timer_Update();
 
-        this.player.update();
+        this.player.update(delta);
 
         var out;
 
