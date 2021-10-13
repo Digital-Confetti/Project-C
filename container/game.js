@@ -176,13 +176,6 @@ export class Game_Scene extends Phaser.Scene {
             this.dashAllowed = true;
         } 
 
-        if (this.timer_dash.paused && this.keySHIFT)
-        {
-            this.timer_dash.paused = false;
-            this.dashAllowed = false;
-            this.dashActivated = true;
-            this.dash_R = this.moving_R;
-        }
 
     }
 
@@ -255,16 +248,18 @@ export class Game_Scene extends Phaser.Scene {
             }
         }
 
-        // Flipping the sprite 
-        if (this.player.flipX == this.moving_R)
+        if (this.timer_dash.paused && this.keySHIFT)
         {
-            this.player.flipX = !this.moving_R;
+            this.timer_dash.paused = false;
+            this.dashAllowed = false;
+            this.dashActivated = true;
+            this.dash_R = this.moving_R;
         }
 
         if(this.player.body.velocity.x > 0)
         {
             this.player.flipX = false;
-        } else if (this.player.body.velocity < 0){
+        } else if (this.player.body.velocity.x < 0){
             this.player.flipX = true;
         }
     }  
