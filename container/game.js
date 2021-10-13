@@ -31,9 +31,9 @@ export class Game_Scene extends Phaser.Scene {
         // moving
         this.moving_R = false;
         this.dash_R = false;
-        this.drag = 3;
-        this.dashForce = 200;
-        // s -> ms
+        this.drag = 4.5;
+        this.dashForce = 800;
+                         // s -> ms
         this.dashCoolDown = 3 * 1000;
         this.dashAllowed = false;
         this.dashActivated = false;
@@ -100,6 +100,7 @@ export class Game_Scene extends Phaser.Scene {
 
     }
 
+    //TO DO: Use JSON atlas.
     // Fuctiong thats create the animations
     createAnimations() {
 
@@ -155,7 +156,8 @@ export class Game_Scene extends Phaser.Scene {
     timer_Update() {
         let progress = this.timer_dash.getProgress();
 
-        if (progress >= 0.18 && progress <= 0.97) {
+        if (progress >= 0.10 && progress <= 0.97)
+        {
             this.dashActivated = false;
 
             if (this.player.body.velocity.x > this.horizontalSpeed) {
@@ -172,118 +174,106 @@ export class Game_Scene extends Phaser.Scene {
             this.dashAllowed = true;
         }
 
-        if (this.timer_dash.paused && this.keySHIFT) {
-            this.timer_dash.paused = false;
-            this.dashAllowed = false;
-            this.dashActivated = true;
-        }
-    }
-
-    drag_Force(orientation) {
 
     }
 
-    plyMove() {
+    plyMove(delta)
+    {
         // Horizontal movement
         if (this.keyD && !this.keyA) {
-            if (this.body.velocity.x <= this.horizontalSpeed) {
-                this.body.velocity.x += this.aceleration;
-                
+            if (this.player.body.velocity.x <= this.horizontalSpeed){
+                this.player.body.velocity.x += this.aceleration * delta;
             }
 
             //this.player.anims.play('right', true);
-            this.moving_R = true;
-
-            // Unflipping the sprite
-            if (this.flipX) {
-                this.flipX = false;
-            }
+            this.moving_R = true;       
 
         } else if (this.keyA && !this.keyD) {
-
-            if (this.body.velocity.x >= -1 * this.horizontalSpeed) {
-                this.body.velocity.x -= this.aceleration;
+            
+            if (this.player.body.velocity.x >= -1 * this.horizontalSpeed){
+                this.player.body.velocity.x -= this.aceleration * delta;
             }
 
             //this.player.anims.play('right', true);
             this.moving_R = false;
-
-            // Flipping the sprite
-            if (!this.flipX) {
-                this.flipX = true;
-            }
-
-            // Move degradation
-        } else if (!this.keyA && !this.keyD) {
-            if (this.moving_R && this.body.velocity.x != 0) {
-                this.body.velocity.x -= this.drag;
-                if (this.body.velocity.x <= 0) {
-                    this.setVelocityX(0);
+        
+        // drag force
+        } else if (!this.keyA && !this.keyD){
+            if (this.moving_R && this.player.body.velocity.x != 0)
+            {
+                this.player.body.velocity.x -= this.drag * delta;
+                
+                if (this.player.body.velocity.x <= 0)
+                {
+                    this.player.setVelocityX(0);
                 }
-            } else if (!this.moving_R && this.body.velocity.x != 0) {
-                this.body.velocity.x += this.drag;
-                if (this.body.velocity.x >= 0) {
-                    this.setVelocityX(0);
+            } else if (!this.moving_R && this.player.body.velocity.x != 0)
+            {
+                this.player.body.velocity.x += this.drag * delta;
+                
+                if (this.player.body.velocity.x >= 0)
+                {   
+                    this.player.setVelocityX(0);
                 }
             }
-            //this.player.anims.play('idle', true);
         }
 
         // Vertical movement
         // Jump
-        if (this.keySPACE && this.body.touching.down) {
+        if (this.keySPACE && this.player.body.touching.down)
+        {
             console.log('Salto');
             this.setVelocityY(-430);
         }
 
-        // Horizontal movement
-        // Dash
-        /*
-    if(this.dashAllowed && this.keySHIFT)
-    {
-        if (this.keyD)
-        { 
-            this.player.body.velocity.x += this.dashForce;
-        } else if (this.keyA)
+        if(this.dashActivated)
         {
-            this.player.body.velocity.x -= this.dashForce;
+            if(this.player.body.touching.left)
+            {
+                this.dash_R = true;
+                this.moving_R = true;
+            } else if (this.player.body.touching.right)
+            {
+                this.dash_R = false;
+                this.moving_R = false;
+            }
+
+            if (this.dash_R)
+            {
+                this.player.body.velocity.x = this.dashForce;
+            } else {
+                this.player.body.velocity.x = -1 * this.dashForce;
+            }
         }
-    }*/
 
-        if (this.dashActivated && this.moving_R) {
-            this.player.body.velocity.x = 2 * this.dashForce;
-        } else if (this.dashActivated && !this.moving_R) {
-
-            this.player.body.velocity.x = -2 * this.dashForce;
-        }
-
-
-        /*
-        if (this.player.body.touching.none)
+        if (this.timer_dash.paused && this.keySHIFT)
         {
-            console.log('AA');
+            this.timer_dash.paused = false;
+            this.dashAllowed = false;
+            this.dashActivated = true;
+            this.dash_R = this.moving_R;
         }
-        */
 
+        if(this.player.body.velocity.x > 0)
+        {
+            this.player.flipX = false;
+        } else if (this.player.body.velocity.x < 0){
+            this.player.flipX = true;
+        }
+    }  
 
-
-    }
-
-    update() {
+    update(timer, delta) {
 
         //this.timer_Update();
 
-        //this.plyMove();
         this.player.update();
-
 
         var out;
 
         out = 'Progreso: ' + this.timer_dash.getProgress().toString().substr(0, 4);
 
         this.text_Debug.setText(out);
-
-
+        
     }
 
     inputDeclaration() {
