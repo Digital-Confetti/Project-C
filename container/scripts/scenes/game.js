@@ -1,5 +1,5 @@
 // importing
-import { GrundLegend } from './grundlegend.js';
+import { GrundLegend } from '../player/grundlegend.js';
 //import { Player } from './player.js';
 
 // exporting
@@ -59,11 +59,11 @@ export class Game_Scene extends Phaser.Scene {
     preload() {
         // loading the spritesheet on 
 
-        this.load.spritesheet('byConfetti', 'stores/by_Confetti.png', { frameWidth: 60, frameHeight: 84 });
+        this.load.spritesheet('byConfetti', 'stores/characters/by_Confetti.png', { frameWidth: 60, frameHeight: 84 });
 
-        this.load.spritesheet('dude', 'stores/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('dude', 'stores/characters/dude.png', { frameWidth: 32, frameHeight: 48 });
 
-        this.load.image('ground', 'stores/platform.png');
+        this.load.image('ground', 'stores/schenery/platform.png');
 
         //this.load.spritesheet('kennewsprites', 'src/sprites/kennewsprites.png', 76, 101, 63);
     }
