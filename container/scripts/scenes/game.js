@@ -1,6 +1,6 @@
 // importing
 import { GrundLegend } from '../player/grundlegend.js';
-//import { Player } from './player.js';
+import { Avalor } from '../player/avalor.js';
 
 // exporting
 export class Game_Scene extends Phaser.Scene {
@@ -23,6 +23,15 @@ export class Game_Scene extends Phaser.Scene {
         // s -> ms
         this.dashCoolDown = 3 * 1000;
 
+        // receiver of the selected character
+        this.selectedCharacter;
+
+    }
+
+    init(data){
+        // saving the selected character
+        this.selectedCharacter = data.character;
+
     }
 
     preload() {
@@ -30,18 +39,29 @@ export class Game_Scene extends Phaser.Scene {
 
         this.load.atlas("GrundLegend", "stores/characters/a.png", "stores/characters/a.json");
 
+
         console.log(this.textures)
         //this.load.spritesheet('byConfetti', 'stores/characters/by_Confetti.png', { frameWidth: 60, frameHeight: 84 });
 
         this.load.spritesheet('dude', 'stores/characters/dude.png', { frameWidth: 32, frameHeight: 48 });
 
         this.load.image('ground', 'stores/schenery/platform.png');
+
+
     }
 
     // Function thats add all the sprites to the gameObjects
     createGameObjects() {
         // Creating the player
-        this.player = new GrundLegend(this, 100, 100);
+        if(this.selectedCharacter == 'avalor'){
+            this.player = new Avalor(this, 100, 100);
+
+        }else if(this.selectedCharacter == 'grundlegend'){
+            this.player = new GrundLegend(this, 100, 100);
+
+        }else{
+            console.log('error al crear personaje')
+        }
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
@@ -68,21 +88,21 @@ export class Game_Scene extends Phaser.Scene {
             frames: [{ key: 'GrundLegend', frame: "by_Confetti-0.png" }],
             frameRate: -1
         });
-/*
-        // Right
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        // Left
-        this.anims.create({
-            key: 'left',
-            frameRate: 8
-        });
-*/
+        /*
+                // Right
+                this.anims.create({
+                    key: 'right',
+                    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+        
+                // Left
+                this.anims.create({
+                    key: 'left',
+                    frameRate: 8
+                });
+        */
     }
 
     timer_Create() {
@@ -108,18 +128,17 @@ export class Game_Scene extends Phaser.Scene {
         // text debug
         this.text_Debug = this.add.text(32, 32);
 
-       
+
 
     }
 
     timer_Update() {
         let progress = this.timer_dash.getProgress();
 
-        
+
         this.timer_dash.paused = this.player.dashAllowed;
 
-        if (progress >= 0.08 && progress <= 0.97)
-        {
+        if (progress >= 0.08 && progress <= 0.97) {
             this.player.dashActivated = false;
             if (this.player.body.velocity.x > this.horizontalSpeed) {
                 if (this.moving_R) {
@@ -149,7 +168,7 @@ export class Game_Scene extends Phaser.Scene {
         out = 'Progreso: ' + this.timer_dash.getProgress().toString().substr(0, 4);
 
         this.text_Debug.setText(out);
-        
+
     }
 
     inputDeclaration() {
@@ -222,8 +241,7 @@ export class Game_Scene extends Phaser.Scene {
         this.input.mouse.disableContextMenu();
 
         this.input.on('pointerdown', function (event) {
-            if (event.rightButtonDown())
-            {
+            if (event.rightButtonDown()) {
                 that.keySA = true;
                 console.log('RClick Pressed');
             } else if (event.leftButtonDown()) {
@@ -233,13 +251,11 @@ export class Game_Scene extends Phaser.Scene {
         });
 
         this.input.on('pointerup', function (event) {
-            if (event.leftButtonReleased())
-            {
+            if (event.leftButtonReleased()) {
                 that.keySA = false;
                 console.log('LClick Deressed');
             }
-            else if (event.rightButtonReleased())
-            {
+            else if (event.rightButtonReleased()) {
                 that.keySA = false;
                 console.log('RClick Depressed');
             }

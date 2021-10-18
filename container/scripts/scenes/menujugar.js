@@ -49,12 +49,12 @@ export class Play_Menu_Scene extends Phaser.Scene {
         var that = this;
         this.boton1.on('pointerdown', function(pointer){
             console.log('Boton rojo pulsado');
-            that.scene.start("game_Scene");
+            that.scene.start("select_menu_Scene");
         });
 
         this.boton2.on('pointerdown', function(pointer){
             console.log('Boton azul pulsado');
-            that.scene.start("game_Scene");
+            that.scene.start("select_menu_Scene");
         });
 
         this.salir.on('pointerdown', function(pointer){
