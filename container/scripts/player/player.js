@@ -35,8 +35,15 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.dashAllowed = false;
         this.dashActivated = false;
 
-        
+        this.maxVida;
+        this.Vida;
     }
+
+    getVida(){return this.vida;}
+    setVida(v){this.vida = v;}
+
+    getVelocidad(){return this.horizontalSpeed;}
+    setVelocidad(v){this.horizontalSpeed = v;}
     
     playerPhysics(delta){
 

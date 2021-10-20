@@ -1,7 +1,12 @@
 // importing
 import { GrundLegend } from '../player/grundlegend.js';
 import { Avalor } from '../player/avalor.js';
+<<<<<<< Updated upstream
 import { PunchingBag } from '../player/punchingbag.js';
+=======
+import { EspecialDeTuichi } from '../powerups/especialdetuichi.js';
+import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
+>>>>>>> Stashed changes
 
 // exporting
 export class Game_Scene extends Phaser.Scene {
@@ -17,9 +22,12 @@ export class Game_Scene extends Phaser.Scene {
 
         // Timers
         this.timer_dash;
+        this.powerUp_duration_timer;
 
         // debug
         this.text_Debug;
+        this.text_vida;
+        this.text_velocidad;
 
         // s -> ms
         this.dashCoolDown = 3 * 1000;
@@ -27,9 +35,12 @@ export class Game_Scene extends Phaser.Scene {
         // receiver of the selected character
         this.selectedCharacter;
 
+        //active powerup
+        this.activePowerUp;
+
     }
 
-    init(data){
+    init(data) {
         // saving the selected character
         this.selectedCharacter = data.character;
 
@@ -41,8 +52,11 @@ export class Game_Scene extends Phaser.Scene {
         let route = "stores/characters/" + this.selectedCharacter;
         this.load.atlas(this.selectedCharacter, route + ".png", route + ".json");
 
+<<<<<<< Updated upstream
         this.load.atlas("PunchingBag", "stores/characters/PunchingBag/PunchingBag.png", "stores/characters/PunchingBag/PunchingBag.json");
         
+=======
+>>>>>>> Stashed changes
         //this.load.atlas(this.selectedCharacter, "stores/characters/a.png", "stores/characters/a.json");
 
 
@@ -52,25 +66,30 @@ export class Game_Scene extends Phaser.Scene {
         this.load.spritesheet('dude', 'stores/characters/dude.png', { frameWidth: 32, frameHeight: 48 });
         this.load.image('ground', 'stores/schenery/platform.png');
 
+        //powerups
+        this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 383, frameHeight: 312 });
+        this.load.spritesheet('bebidaenergetica', 'stores/powerups/bebidaenergetica.png', { frameWidth: 190, frameHeight: 331 });
 
     }
 
     // Function thats add all the sprites to the gameObjects
     createGameObjects() {
         // Creating the player
-        if(this.selectedCharacter == 'avalor'){
+        if (this.selectedCharacter == 'avalor') {
             this.player = new Avalor(this, 100, 100);
 
-        }else if(this.selectedCharacter == 'grundlegend'){
+        } else if (this.selectedCharacter == 'grundlegend') {
             this.player = new GrundLegend(this, 100, 100);
 
-        }else{
+        } else {
             console.log('error al crear personaje')
         }
         
         // Creating Punching Bag
 
         this.punchingBag = new PunchingBag(this, 600, 100);
+
+        this.activePowerUp = new EspecialDeTuichi(this, 300, 0);
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
@@ -84,10 +103,15 @@ export class Game_Scene extends Phaser.Scene {
 
         // Add collider
         this.physics.add.collider(this.player, this.platforms);
+<<<<<<< Updated upstream
         this.physics.add.collider(this.player, this.punchingBag);
 
         this.physics.add.collider(this.punchingBag, this.platforms);
+=======
+        this.physics.add.collider(this.activePowerUp, this.platforms);
+>>>>>>> Stashed changes
 
+        this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     //TO DO: Use JSON atlas.
@@ -107,11 +131,21 @@ export class Game_Scene extends Phaser.Scene {
         this.anims.create({
             key: 'run',
             frames: [
+<<<<<<< Updated upstream
                 {   key: chara,
                     frame: chara + '_walk00.png'
                 },
                 {   key: chara,
                     frame: chara + '_walk01.png'
+=======
+                {
+                    key: this.selectedCharacter,
+                    frame: "by_Confetti-1.png"
+                },
+                {
+                    key: this.selectedCharacter,
+                    frame: "by_Confetti-2.png"
+>>>>>>> Stashed changes
                 },
             ],
             frameRate: 5,
@@ -185,10 +219,16 @@ export class Game_Scene extends Phaser.Scene {
         // text debug
         this.text_Debug = this.add.text(32, 32);
 
+<<<<<<< Updated upstream
         
         this.player.play('run');
 
         this.punchingBag.play('PB_idle');
+=======
+        this.text_vida = this.add.text(32,82);
+
+        this.text_velocidad = this.add.text(32,132);
+>>>>>>> Stashed changes
 
     }
 
@@ -228,6 +268,37 @@ export class Game_Scene extends Phaser.Scene {
         out = 'Progreso: ' + this.timer_dash.getProgress().toString().substr(0, 4);
 
         this.text_Debug.setText(out);
+
+        this.text_vida.setText('Vida: ' + this.player.getVida());
+
+        this.text_velocidad.setText('Velocidad: ' + this.player.horizontalSpeed);
+
+        //console.log(this.powerUp_duration_timer.getProgress());
+
+    }
+
+
+    pickPowerUp() {
+
+        if (!this.activePowerUp.picked) {
+            console.log('Objeto recogido');
+
+            this.activePowerUp.picked = true;
+            this.activePowerUp.linkedPlayer = this.player;
+
+            this.activePowerUp.trigger();
+
+            //this.powerUp_duration_timer = that.time.delayedCall({ delay: this.activePowerUp.duration, callback: this.activePowerUp.outTimeTrigger()})
+            this.powerUp_duration_timer = this.time.addEvent({ delay: this.activePowerUp.duration, callback: this.activePowerUp.outTimeTrigger(), loop: false });
+
+            /*
+            if(this.activePowerUp.instausable){
+                this.activePowerUp.activateEffect();
+            }
+            */
+
+        }
+
 
     }
 
