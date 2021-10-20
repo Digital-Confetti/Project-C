@@ -1,12 +1,9 @@
 // importing
 import { GrundLegend } from '../player/grundlegend.js';
 import { Avalor } from '../player/avalor.js';
-<<<<<<< Updated upstream
 import { PunchingBag } from '../player/punchingbag.js';
-=======
 import { EspecialDeTuichi } from '../powerups/especialdetuichi.js';
 import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
->>>>>>> Stashed changes
 
 // exporting
 export class Game_Scene extends Phaser.Scene {
@@ -52,11 +49,8 @@ export class Game_Scene extends Phaser.Scene {
         let route = "stores/characters/" + this.selectedCharacter;
         this.load.atlas(this.selectedCharacter, route + ".png", route + ".json");
 
-<<<<<<< Updated upstream
         this.load.atlas("PunchingBag", "stores/characters/PunchingBag/PunchingBag.png", "stores/characters/PunchingBag/PunchingBag.json");
         
-=======
->>>>>>> Stashed changes
         //this.load.atlas(this.selectedCharacter, "stores/characters/a.png", "stores/characters/a.json");
 
 
@@ -103,13 +97,10 @@ export class Game_Scene extends Phaser.Scene {
 
         // Add collider
         this.physics.add.collider(this.player, this.platforms);
-<<<<<<< Updated upstream
         this.physics.add.collider(this.player, this.punchingBag);
 
         this.physics.add.collider(this.punchingBag, this.platforms);
-=======
         this.physics.add.collider(this.activePowerUp, this.platforms);
->>>>>>> Stashed changes
 
         this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
     }
@@ -131,21 +122,11 @@ export class Game_Scene extends Phaser.Scene {
         this.anims.create({
             key: 'run',
             frames: [
-<<<<<<< Updated upstream
                 {   key: chara,
                     frame: chara + '_walk00.png'
                 },
                 {   key: chara,
                     frame: chara + '_walk01.png'
-=======
-                {
-                    key: this.selectedCharacter,
-                    frame: "by_Confetti-1.png"
-                },
-                {
-                    key: this.selectedCharacter,
-                    frame: "by_Confetti-2.png"
->>>>>>> Stashed changes
                 },
             ],
             frameRate: 5,
@@ -219,16 +200,13 @@ export class Game_Scene extends Phaser.Scene {
         // text debug
         this.text_Debug = this.add.text(32, 32);
 
-<<<<<<< Updated upstream
         
         this.player.play('run');
 
         this.punchingBag.play('PB_idle');
-=======
         this.text_vida = this.add.text(32,82);
 
         this.text_velocidad = this.add.text(32,132);
->>>>>>> Stashed changes
 
     }
 
