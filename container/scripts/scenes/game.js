@@ -1,6 +1,7 @@
 // importing
 import { GrundLegend } from '../player/grundlegend.js';
 import { Avalor } from '../player/avalor.js';
+import { PunchingBag } from '../player/punchingbag.js';
 
 // exporting
 export class Game_Scene extends Phaser.Scene {
@@ -39,6 +40,8 @@ export class Game_Scene extends Phaser.Scene {
 
         let route = "stores/characters/" + this.selectedCharacter;
         this.load.atlas(this.selectedCharacter, route + ".png", route + ".json");
+
+        this.load.atlas("PunchingBag", "stores/characters/PunchingBag/PunchingBag.png", "stores/characters/PunchingBag/PunchingBag.json");
         
         //this.load.atlas(this.selectedCharacter, "stores/characters/a.png", "stores/characters/a.json");
 
@@ -47,7 +50,6 @@ export class Game_Scene extends Phaser.Scene {
         //this.load.spritesheet('byConfetti', 'stores/characters/by_Confetti.png', { frameWidth: 60, frameHeight: 84 });
 
         this.load.spritesheet('dude', 'stores/characters/dude.png', { frameWidth: 32, frameHeight: 48 });
-
         this.load.image('ground', 'stores/schenery/platform.png');
 
 
@@ -65,6 +67,10 @@ export class Game_Scene extends Phaser.Scene {
         }else{
             console.log('error al crear personaje')
         }
+        
+        // Creating Punching Bag
+
+        this.punchingBag = new PunchingBag(this, 600, 100);
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
@@ -78,6 +84,9 @@ export class Game_Scene extends Phaser.Scene {
 
         // Add collider
         this.physics.add.collider(this.player, this.platforms);
+        this.physics.add.collider(this.player, this.punchingBag);
+
+        this.physics.add.collider(this.punchingBag, this.platforms);
 
     }
 
@@ -85,26 +94,56 @@ export class Game_Scene extends Phaser.Scene {
     // Fuctiong thats create the animations
     createAnimations() {
 
+        var route = 'stores/characters/'
+
+        var chara = this.selectedCharacter;
         // Idle
         this.anims.create({
             key: 'idle',
-            frames: [{ key: this.selectedCharacter, frame: "by_Confetti-0.png" }],
+            frames: [{ key: chara, frame: chara + '_idle.png' }],
             frameRate: -1
         });
 
         this.anims.create({
             key: 'run',
             frames: [
-                {   key: this.selectedCharacter,
-                    frame: "by_Confetti-1.png" 
+                {   key: chara,
+                    frame: chara + '_walk00.png'
                 },
-                {   key: this.selectedCharacter,
-                    frame: "by_Confetti-2.png" 
+                {   key: chara,
+                    frame: chara + '_walk01.png'
                 },
             ],
-            frameRate: 30,
+            frameRate: 5,
             repeat: -1
         });
+
+        // Debug Punching Bag animations
+
+        this.anims.create({
+            key: 'PB_punch',
+            frames: [
+                {   key: "PunchingBag",
+                    frame: "PunchingBag_2.png" 
+                },
+                {   key: "PunchingBag",
+                    frame: "PunchingBag_3.png" 
+                },
+                {   key: "PunchingBag",
+                    frame: "PunchingBag_4.png" 
+                },
+            ],
+            frameRate: 10,
+            repeat: 1
+        });
+
+        this.anims.create({
+            key: 'PB_idle',
+            frames: [{ key: "PunchingBag", frame: "PunchingBag_2.png" }],
+            frameRate: -1
+        });
+
+
 
         /*
                 // Right
@@ -146,7 +185,10 @@ export class Game_Scene extends Phaser.Scene {
         // text debug
         this.text_Debug = this.add.text(32, 32);
 
+        
+        this.player.play('run');
 
+        this.punchingBag.play('PB_idle');
 
     }
 
@@ -180,8 +222,7 @@ export class Game_Scene extends Phaser.Scene {
 
         this.player.update(delta);
 
-        this.player.play('run');
-
+        this.punchingBag.renove();
         var out;
 
         out = 'Progreso: ' + this.timer_dash.getProgress().toString().substr(0, 4);
@@ -271,7 +312,7 @@ export class Game_Scene extends Phaser.Scene {
 
         this.input.on('pointerup', function (event) {
             if (event.leftButtonReleased()) {
-                that.keySA = false;
+                that.keyNA = false;
                 console.log('LClick Deressed');
             }
             else if (event.rightButtonReleased()) {

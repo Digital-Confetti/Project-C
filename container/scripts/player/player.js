@@ -39,7 +39,6 @@ export class Player extends Phaser.GameObjects.Sprite{
     }
     
     playerPhysics(delta){
-        this.anims.play('idle', true)
 
         // Horizontal movement
         if (this.keyD && !this.keyA) {
