@@ -20,11 +20,11 @@ export class Play_Menu_Scene extends Phaser.Scene {
 
         //this.scene.launch("game_Scene");
 
-        this.load.image('fondo', 'stores/bluemenu.jpg');
-        this.load.image('botonrojo1', 'stores/boton_rojo.png');
-        this.load.image('botonrojo2', 'stores/boton_rojo_luz.png');
-        this.load.image('botonazul1', 'stores/boton_azul.png');
-        this.load.image('botonazul2', 'stores/boton_azul_luz.png');
+        this.load.image('fondo', 'stores/menu/bluemenu.jpg');
+        this.load.image('botonrojo1', 'stores/menu/button/boton_rojo.png');
+        this.load.image('botonrojo2', 'stores/menu/button/boton_rojo_luz.png');
+        this.load.image('botonazul1', 'stores/menu/button/boton_azul.png');
+        this.load.image('botonazul2', 'stores/menu/button/boton_azul_luz.png');
     }
 
     // Here we need to create all the Modules
@@ -49,12 +49,12 @@ export class Play_Menu_Scene extends Phaser.Scene {
         var that = this;
         this.boton1.on('pointerdown', function(pointer){
             console.log('Boton rojo pulsado');
-            that.scene.start("game_Scene");
+            that.scene.start("select_menu_Scene");
         });
 
         this.boton2.on('pointerdown', function(pointer){
             console.log('Boton azul pulsado');
-            that.scene.start("game_Scene");
+            that.scene.start("select_menu_Scene");
         });
 
         this.salir.on('pointerdown', function(pointer){

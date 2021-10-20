@@ -28,9 +28,10 @@ Travellers Tournament
         Héctor Muñoz Gómez              (github: Sh3ry01)
 */ 
 
-import {Game_Scene} from './game.js';
-import {Menu_Scene} from './menu.js';
-import {Play_Menu_Scene} from './menujugar.js';
+import {Game_Scene} from './scripts/scenes/game.js';
+import {Menu_Scene} from './scripts/scenes/menu.js';
+import {Play_Menu_Scene} from './scripts/scenes/menujugar.js';
+import {Play_Select_Scene} from './scripts/scenes/menuseleccion.js';
 
 const config = {
     type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
@@ -45,7 +46,7 @@ const config = {
                 debug: false
             }
         },
-        scene: [Menu_Scene, Play_Menu_Scene, Game_Scene]
+        scene: [Menu_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene]
     };
 
     var game = new Phaser.Game(config);

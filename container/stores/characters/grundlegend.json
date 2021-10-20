@@ -1,0 +1,120 @@
+{
+	"textures": [
+		{
+			"image": "a.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 230,
+				"h": 84
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "by_Confetti-3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 60,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 60,
+						"h": 84
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 60,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.51736111,
+						"y": 0.70833333
+					}
+				},
+				{
+					"filename": "by_Confetti-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 50,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 0,
+						"w": 50,
+						"h": 84
+					},
+					"frame": {
+						"x": 60,
+						"y": 0,
+						"w": 50,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.420833332,
+						"y": 0.70833333
+					}
+				},
+				{
+					"filename": "by_Confetti-2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 60,
+						"h": 82
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 60,
+						"h": 82
+					},
+					"frame": {
+						"x": 110,
+						"y": 0,
+						"w": 60,
+						"h": 82
+					},
+					"anchor": {
+						"x": 0.51736111,
+						"y": 0.7012195087804878
+					}
+				},
+				{
+					"filename": "by_Confetti-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 60,
+						"h": 79
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 5,
+						"w": 60,
+						"h": 79
+					},
+					"frame": {
+						"x": 170,
+						"y": 0,
+						"w": 60,
+						"h": 79
+					},
+					"anchor": {
+						"x": 0.51736111,
+						"y": 0.6898734141772151
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:2204bcc57b5ced1a3b4e310d928fce6d:a965de16012dc059a2f759b7089f18c4:bf9645bc287ef85d0bf835d4803a79ae$"
+	}
+}

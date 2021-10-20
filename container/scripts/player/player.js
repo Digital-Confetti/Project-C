@@ -1,9 +1,9 @@
 // Encharced of handling player modularity
 export class Player extends Phaser.GameObjects.Sprite{
 
-    // This constructor is called on create() metho
-    constructor(scene, x, y){
-        super(scene, x, y, 'byConfetti');
+    // This constructor is called on game.create() method
+    constructor(scene, x, y, sprite){
+        super(scene, x, y, sprite);
 
         this.scene.add.existing(this);
 
@@ -22,16 +22,16 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.keyD = false;
         this.keySPACE = false;
         this.keySHIFT = false;
+        // Normal attack = KeyJ || LClick
+        this.keyNA = false;
+        // Normal attack = KeyK || RClick
+        this.keySA = false;
 
-        //this.timer_dash = timerDash;
-        //this.timer_dash = this.time.addEvent({ delay: this.dashCoolDown, loop: true });
-
+        // Move Variables
         this.moving_R = false;
         this.dash_R = false;
         this.drag = 3;
         this.dashForce = 800;
-                        // s -> ms
-        this.dashCoolDown = 3 * 1000;
         this.dashAllowed = false;
         this.dashActivated = false;
 
@@ -39,6 +39,8 @@ export class Player extends Phaser.GameObjects.Sprite{
     }
     
     playerPhysics(delta){
+        this.anims.play('idle', true)
+
         // Horizontal movement
         if (this.keyD && !this.keyA) {
             if (this.body.velocity.x <= this.horizontalSpeed){

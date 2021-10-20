@@ -14,7 +14,7 @@ export class Menu_Scene extends Phaser.Scene {
 
         //this.scene.launch("game_Scene");
 
-        this.load.image('fondo', 'stores/bluemenu.jpg');
+        this.load.image('fondo', 'stores/menu/bluemenu.jpg');
     }
 
     // Here we need to create all the Modules
