@@ -37,7 +37,10 @@ export class Game_Scene extends Phaser.Scene {
     preload() {
         // loading the spritesheet on 
 
-        this.load.atlas("GrundLegend", "stores/characters/a.png", "stores/characters/a.json");
+        let route = "stores/characters/" + this.selectedCharacter;
+        this.load.atlas(this.selectedCharacter, route + ".png", route + ".json");
+        
+        //this.load.atlas(this.selectedCharacter, "stores/characters/a.png", "stores/characters/a.json");
 
 
         console.log(this.textures)
@@ -82,12 +85,27 @@ export class Game_Scene extends Phaser.Scene {
     // Fuctiong thats create the animations
     createAnimations() {
 
-        // Iddle
+        // Idle
         this.anims.create({
             key: 'idle',
-            frames: [{ key: 'GrundLegend', frame: "by_Confetti-0.png" }],
+            frames: [{ key: this.selectedCharacter, frame: "by_Confetti-0.png" }],
             frameRate: -1
         });
+
+        this.anims.create({
+            key: 'run',
+            frames: [
+                {   key: this.selectedCharacter,
+                    frame: "by_Confetti-1.png" 
+                },
+                {   key: this.selectedCharacter,
+                    frame: "by_Confetti-2.png" 
+                },
+            ],
+            frameRate: 30,
+            repeat: -1
+        });
+
         /*
                 // Right
                 this.anims.create({
@@ -161,7 +179,8 @@ export class Game_Scene extends Phaser.Scene {
         this.timer_Update();
 
         this.player.update(delta);
-        this.player.play('idle');
+
+        this.player.play('run');
 
         var out;
 
