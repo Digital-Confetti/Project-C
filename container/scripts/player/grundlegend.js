@@ -8,7 +8,8 @@ export class GrundLegend extends Player{
         this.vida = 100;
 
         this.body.setBounce(0.1);
-        this.body.setOffset(11, 0);
-        this.body.setSize(33, 84, false);
+        
+        this.body.height = 80;
+        
     }
 }
