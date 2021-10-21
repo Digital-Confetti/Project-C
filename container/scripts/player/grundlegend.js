@@ -8,8 +8,10 @@ export class GrundLegend extends Player{
         this.vida = 100;
 
         this.body.setBounce(0.1);
-        
+        //animacion run
         this.body.height = 80;
+        //animacion idle
+        //this.body.height = 84;
         
     }
 }

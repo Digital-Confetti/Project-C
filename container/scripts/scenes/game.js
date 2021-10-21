@@ -4,6 +4,7 @@ import { Avalor } from '../player/avalor.js';
 import { PunchingBag } from '../player/punchingbag.js';
 import { EspecialDeTuichi } from '../powerups/especialdetuichi.js';
 import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
+import { Platano } from '../powerups/platano.js';
 
 // exporting
 export class Game_Scene extends Phaser.Scene {
@@ -33,7 +34,9 @@ export class Game_Scene extends Phaser.Scene {
         this.selectedCharacter;
 
         //active powerup
-        this.activePowerUp;
+        this.activePowerUp = null;
+
+        this.game_player_powerup_collider;
 
     }
 
@@ -50,7 +53,7 @@ export class Game_Scene extends Phaser.Scene {
         this.load.atlas(this.selectedCharacter, route + ".png", route + ".json");
 
         this.load.atlas("PunchingBag", "stores/characters/PunchingBag/PunchingBag.png", "stores/characters/PunchingBag/PunchingBag.json");
-        
+
         //this.load.atlas(this.selectedCharacter, "stores/characters/a.png", "stores/characters/a.json");
 
 
@@ -63,6 +66,7 @@ export class Game_Scene extends Phaser.Scene {
         //powerups
         this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 383, frameHeight: 312 });
         this.load.spritesheet('bebidaenergetica', 'stores/powerups/bebidaenergetica.png', { frameWidth: 190, frameHeight: 331 });
+        this.load.spritesheet('platano', 'stores/powerups/platano.png', { frameWidth: 161, frameHeight: 151 });
 
     }
 
@@ -78,12 +82,12 @@ export class Game_Scene extends Phaser.Scene {
         } else {
             console.log('error al crear personaje')
         }
-        
+
         // Creating Punching Bag
 
         this.punchingBag = new PunchingBag(this, 600, 100);
 
-        this.activePowerUp = new EspecialDeTuichi(this, 300, 0);
+        this.activePowerUp = new BebidaEnergetica(this, 600, 500);
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
@@ -102,7 +106,7 @@ export class Game_Scene extends Phaser.Scene {
         this.physics.add.collider(this.punchingBag, this.platforms);
         this.physics.add.collider(this.activePowerUp, this.platforms);
 
-        this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
+        this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     //TO DO: Use JSON atlas.
@@ -122,10 +126,12 @@ export class Game_Scene extends Phaser.Scene {
         this.anims.create({
             key: 'run',
             frames: [
-                {   key: chara,
+                {
+                    key: chara,
                     frame: chara + '_walk00.png'
                 },
-                {   key: chara,
+                {
+                    key: chara,
                     frame: chara + '_walk01.png'
                 },
             ],
@@ -138,14 +144,17 @@ export class Game_Scene extends Phaser.Scene {
         this.anims.create({
             key: 'PB_punch',
             frames: [
-                {   key: "PunchingBag",
-                    frame: "PunchingBag_2.png" 
+                {
+                    key: "PunchingBag",
+                    frame: "PunchingBag_2.png"
                 },
-                {   key: "PunchingBag",
-                    frame: "PunchingBag_3.png" 
+                {
+                    key: "PunchingBag",
+                    frame: "PunchingBag_3.png"
                 },
-                {   key: "PunchingBag",
-                    frame: "PunchingBag_4.png" 
+                {
+                    key: "PunchingBag",
+                    frame: "PunchingBag_4.png"
                 },
             ],
             frameRate: 10,
@@ -200,13 +209,13 @@ export class Game_Scene extends Phaser.Scene {
         // text debug
         this.text_Debug = this.add.text(32, 32);
 
-        
+
         this.player.play('run');
 
         this.punchingBag.play('PB_idle');
-        this.text_vida = this.add.text(32,82);
+        this.text_vida = this.add.text(32, 82);
 
-        this.text_velocidad = this.add.text(32,132);
+        this.text_velocidad = this.add.text(32, 132);
 
     }
 
@@ -251,33 +260,26 @@ export class Game_Scene extends Phaser.Scene {
 
         this.text_velocidad.setText('Velocidad: ' + this.player.horizontalSpeed);
 
-        //console.log(this.powerUp_duration_timer.getProgress());
+        
+        if (this.activePowerUp !== null) {
 
+            //console.log(this.activePowerUp.picked);
+            if (this.activePowerUp.picked) {
+                
+                this.activePowerUp.trigger(delta);
+            }
+        }
+
+        
     }
-
 
     pickPowerUp() {
 
         if (!this.activePowerUp.picked) {
-            console.log('Objeto recogido');
 
-            this.activePowerUp.picked = true;
-            this.activePowerUp.linkedPlayer = this.player;
-
-            this.activePowerUp.trigger();
-
-            //this.powerUp_duration_timer = that.time.delayedCall({ delay: this.activePowerUp.duration, callback: this.activePowerUp.outTimeTrigger()})
-            this.powerUp_duration_timer = this.time.addEvent({ delay: this.activePowerUp.duration, callback: this.activePowerUp.outTimeTrigger(), loop: false });
-
-            /*
-            if(this.activePowerUp.instausable){
-                this.activePowerUp.activateEffect();
-            }
-            */
+            this.activePowerUp.collected();
 
         }
-
-
     }
 
     inputDeclaration() {

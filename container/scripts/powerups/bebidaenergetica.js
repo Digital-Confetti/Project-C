@@ -7,9 +7,13 @@ export class BebidaEnergetica extends PowerUp{
         this.setTexture('bebidaenergetica')
         this.setScale(0.2,0.2);
 
+        this.alpha = 1;
+
         //velocity boost 50%
         this.baseVelocity;
-        this.bonusVelocity = 0.5;
+        this.baseAceleration;
+        this.bonusVelocity = 1;
+        this.bonusAceleration = 1;
 
         this.duration = 5 * 1000;
 
@@ -18,26 +22,32 @@ export class BebidaEnergetica extends PowerUp{
 
     }
 
-    calculateVelocity(){
-        
-        return (this.baseVelocity + this.baseVelocity * this.velocityBonus);
-    }
-
-    trigger(){
+    collected(){
         console.log("bebida energetica consumida");
 
+        this.picked = true;
+        this.linkedPlayer = this.scene.player;
+
         this.baseVelocity = this.linkedPlayer.getVelocidad();
+        this.baseAceleration = this.linkedPlayer.getAceleration();
 
         this.linkedPlayer.setVelocidad(this.linkedPlayer.getVelocidad() + this.linkedPlayer.getVelocidad() * this.bonusVelocity);
+        this.linkedPlayer.setAceleration(this.linkedPlayer.getAceleration() + this.linkedPlayer.getAceleration() * this.bonusAceleration);
 
-        this.destroyPowerUp();
+        //provisional object dissapear
+        this.scene.physics.world.disableBody(this.body);
+        this.alpha = 0;
+
+        this.scene.time.delayedCall(this.duration, this.outTimeTrigger, null, this);
 
     }
 
     outTimeTrigger(){
-        this.linkedPlayer.setVelocidad( this.baseVelocity);
         console.log('se acabo el tiempo');
 
-        
+        this.linkedPlayer.setVelocidad( this.baseVelocity);
+        this.linkedPlayer.setAceleration( this.baseAceleration);
+
+        this.destroyPowerUp();
     }
 }

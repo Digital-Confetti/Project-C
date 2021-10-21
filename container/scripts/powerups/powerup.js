@@ -21,12 +21,18 @@ export class PowerUp extends Phaser.GameObjects.Sprite{
 
     }
 
-    
-    outTimeTrigger(){
-        console.log('se acabo el tiempo');
+
+
+    collected(){
+        console.log('objeto recogido');
+    }
+
+    trigger(delta){
+        console.log('objeto activado');
     }
 
     destroyPowerUp(){
+        this.scene.activePowerUp = null;
         this.destroy();
     }
 

@@ -1,5 +1,4 @@
 import { PowerUp } from "./powerup.js";
-import { Player } from "/scripts/player/player.js";
 
 export class EspecialDeTuichi extends PowerUp{
     constructor(scene, x, y){
@@ -10,19 +9,21 @@ export class EspecialDeTuichi extends PowerUp{
 
         this.duration = 0;
 
-        this.body.setOffset(-10, 0);
-        this.body.setSize(393, 312, false);
+        this.body.setOffset(0, 0);
+        this.body.setSize(383, 312, false);
 
     }
 
-    trigger(){
+    collected(){
         console.log("especial de tuichi consumido");
+
+        this.picked = true;
+        this.linkedPlayer = this.scene.player;
 
         this.linkedPlayer.setVida( this.linkedPlayer.getVida() + 20)
 
         this.destroyPowerUp();
 
     }
-
     
 }

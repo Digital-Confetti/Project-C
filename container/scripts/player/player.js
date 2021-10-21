@@ -13,7 +13,7 @@ export class Player extends Phaser.GameObjects.Sprite{
 
         this.aceleration = 3;
         this.horizontalSpeed = 225;
-        this.verticalSpeed = 10;
+        this.verticalpeed = 10;
 
         // Input Variables
         this.keyW = false;   // ^ Boolean Key Catchers
@@ -44,6 +44,11 @@ export class Player extends Phaser.GameObjects.Sprite{
 
     getVelocidad(){return this.horizontalSpeed;}
     setVelocidad(v){this.horizontalSpeed = v;}
+
+    getAceleration(){return this.aceleration;}
+    setAceleration(a){this.aceleration = a;}
+
+    getNa(){return this.keyNA;}
     
     playerPhysics(delta){
 
