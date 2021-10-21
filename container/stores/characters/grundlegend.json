@@ -28,6 +28,10 @@
 						"y": 1,
 						"w": 53,
 						"h": 89
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				},
 				{
@@ -49,6 +53,10 @@
 						"y": 1,
 						"w": 72,
 						"h": 85
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				},
 				{
@@ -70,6 +78,10 @@
 						"y": 1,
 						"w": 40,
 						"h": 85
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				},
 				{
@@ -91,6 +103,10 @@
 						"y": 1,
 						"w": 33,
 						"h": 85
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				},
 				{
@@ -112,6 +128,10 @@
 						"y": 1,
 						"w": 70,
 						"h": 84
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				},
 				{
@@ -133,6 +153,10 @@
 						"y": 1,
 						"w": 53,
 						"h": 81
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.48148148
 					}
 				},
 				{
@@ -154,6 +178,10 @@
 						"y": 1,
 						"w": 53,
 						"h": 78
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
 					}
 				}
 			]
@@ -162,6 +190,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:fa01817b98f3060ab8957e4eeeab91db:2c4fccd01fd0bfd1efb00e8174c486a7:766a219d7d73740186b452dd0113559b$"
+		"smartupdate": "$TexturePacker:SmartUpdate:906510c06e6e43268e8990de6143dc00:2c4fccd01fd0bfd1efb00e8174c486a7:766a219d7d73740186b452dd0113559b$"
 	}
 }
