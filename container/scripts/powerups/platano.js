@@ -72,7 +72,7 @@ export class Platano extends PowerUp{
 
     outTimeTrigger(){
         console.log('platano destruido');
-
+        this.timer.remove();
         this.scene.physics.world.removeCollider(this.platano_player_platano_collider);
         this.scene.game_player_powerup_collider.active = true;
         this.destroyPowerUp();
@@ -82,7 +82,7 @@ export class Platano extends PowerUp{
     hitPlayer(){
         console.log('player dañado');
         this.scene.player.setVida(this.scene.player.getVida() - this.hit_damage);
-        this.timer.remove();
+        
         this.outTimeTrigger();
     }
 

@@ -5,6 +5,8 @@ import { PunchingBag } from '../player/punchingbag.js';
 import { EspecialDeTuichi } from '../powerups/especialdetuichi.js';
 import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
 import { Platano } from '../powerups/platano.js';
+import { Pistola } from '../powerups/pistola.js';
+import { Fusil } from '../powerups/fusil.js';
 
 // exporting
 export class Game_Scene extends Phaser.Scene {
@@ -36,6 +38,7 @@ export class Game_Scene extends Phaser.Scene {
         //active powerup
         this.activePowerUp = null;
 
+        //first player-powerup collider
         this.game_player_powerup_collider;
 
     }
@@ -67,6 +70,10 @@ export class Game_Scene extends Phaser.Scene {
         this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 383, frameHeight: 312 });
         this.load.spritesheet('bebidaenergetica', 'stores/powerups/bebidaenergetica.png', { frameWidth: 190, frameHeight: 331 });
         this.load.spritesheet('platano', 'stores/powerups/platano.png', { frameWidth: 161, frameHeight: 151 });
+        this.load.spritesheet('pistola', 'stores/powerups/pistola.png', { frameWidth: 361, frameHeight: 241 });
+        this.load.spritesheet('fusil', 'stores/powerups/fusil.png', { frameWidth: 855, frameHeight: 251 });
+        this.load.spritesheet('disparo', 'stores/powerups/disparo.png', { frameWidth: 111, frameHeight: 31 });
+
 
     }
 
@@ -87,7 +94,7 @@ export class Game_Scene extends Phaser.Scene {
 
         this.punchingBag = new PunchingBag(this, 600, 100);
 
-        this.activePowerUp = new BebidaEnergetica(this, 600, 500);
+        this.activePowerUp = new Fusil(this, 600, 500);
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
