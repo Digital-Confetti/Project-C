@@ -15,7 +15,22 @@ export class GrundLegend extends Player{
         //animacion idle
         //this.body.height = 84;
         this.horizontalJumpSpeed = 1.5 * this.horizontalSpeed;
+
+        this.dashCoolDown = 3 * 1000;
+        this.dash_Timer = scene.time.addEvent({delay:this.dashCoolDown, loop:true});
         
+        
+    }
+    reset_ATA_N(){ this.playerStatus = Player.PlayerStatus.IDDLE}
+
+    check_NormalAttack()
+    {
+        //console.log('Al ATAQUE');
+        if(this.keyNA)
+        {
+            this.playerStatus = Player.PlayerStatus.ATA_N;
+            this.resetTimer = this.scene.time.delayedCall(0.5 * 1000, this.reset_ATA_N, null, this);
+        }
     }
 
     move_Jump(delta){
@@ -69,7 +84,6 @@ export class GrundLegend extends Player{
         }
     }
 
-
     timer_Update(){
         let progress = this.dash_Timer.getProgress();
 
@@ -106,6 +120,7 @@ export class GrundLegend extends Player{
                     }
                     this.check_Jump();
                     this.check_Dash();
+                    this.check_NormalAttack();
                 break;
             case Player.PlayerStatus.MOVING:
                     if(this.keyA){
@@ -118,6 +133,7 @@ export class GrundLegend extends Player{
                     }
                     this.check_Jump();
                     this.check_Dash();
+                    this.check_NormalAttack();
                 break;
             case Player.PlayerStatus.DASHING:
                 this.dashAllowed = false;
@@ -131,16 +147,22 @@ export class GrundLegend extends Player{
                     this.playerStatus = Player.PlayerStatus.IDDLE;
                 }
                 this.check_Dash();
+                this.check_NormalAttack();
                 break;
             case Player.PlayerStatus.JUMP_2:
                 if (this.body.touching.down){
                     this.playerStatus = Player.PlayerStatus.IDDLE;
                 }
                 this.check_Dash();
+                this.check_NormalAttack();
                 break;
             case Player.PlayerStatus.ATA_S:
                 break;
             case Player.PlayerStatus.ATA_N:
+                if (!this.body.touching.none)
+                {
+                    this.playerStatus = Player.PlayerStatus.IDDLE;
+                }
                 break;
         }
 

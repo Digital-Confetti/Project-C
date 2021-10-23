@@ -284,7 +284,13 @@ export class Game_Scene extends Phaser.Scene {
 
     hit_Treatment()
     {
-        console.log('Tocado el saco');
+        if (this.player.playerStatus == Player.PlayerStatus.DASHING)
+        {
+            this.punchingBag.getHitted(this.player.x < this.punchingBag.x,2,-250);
+        } else if (this.player.playerStatus == Player.PlayerStatus.ATA_N && !this.punchingBag.hited)
+        {
+            this.punchingBag.getHitted(this.player.x < this.punchingBag.x, 1,-50);
+        }
     }
 
     pickPowerUp() {
