@@ -95,7 +95,7 @@ export class Game_Scene extends Phaser.Scene {
 
         this.punchingBag = new PunchingBag(this, 600, 100);
 
-        this.activePowerUp = new Pistola(this, 600, 500);
+        this.activePowerUp = new Platano(this, 600, 500);
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
@@ -279,7 +279,7 @@ export class Game_Scene extends Phaser.Scene {
             }
         }
 
-        //console.log(this.player.moving_R);
+        
     }
 
     hit_Treatment()

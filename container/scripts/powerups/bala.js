@@ -22,6 +22,7 @@ export class Bala extends Phaser.GameObjects.Sprite {
 
 
     flipDirection() {
+        
         this.velocidadx = -this.velocidadx;
     }
 
