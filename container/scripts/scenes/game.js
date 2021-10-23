@@ -95,7 +95,7 @@ export class Game_Scene extends Phaser.Scene {
 
         this.punchingBag = new PunchingBag(this, 600, 100);
 
-        //this.activePowerUp = new Pistola(this, 600, 500);
+        this.activePowerUp = new Pistola(this, 600, 500);
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
@@ -112,9 +112,9 @@ export class Game_Scene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.punchingBag, this.hit_Treatment, null, this);
 
         this.physics.add.collider(this.punchingBag, this.platforms);
-        //this.physics.add.collider(this.activePowerUp, this.platforms);
+        this.physics.add.collider(this.activePowerUp, this.platforms);
 
-        //this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
+        this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     //TO DO: Use JSON atlas.
@@ -165,8 +165,8 @@ export class Game_Scene extends Phaser.Scene {
                     frame: "PunchingBag_4.png"
                 },
             ],
-            frameRate: 15,
-            repeat: 0
+            frameRate: 10,
+            repeat: 1
         });
 
         this.anims.create({
@@ -174,6 +174,7 @@ export class Game_Scene extends Phaser.Scene {
             frames: [{ key: "PunchingBag", frame: "PunchingBag_2.png" }],
             frameRate: -1
         });
+
 
 
         /*
@@ -282,13 +283,13 @@ export class Game_Scene extends Phaser.Scene {
     }
 
     hit_Treatment()
-    {   
-        if (this.player.playerStatus == Player.PlayerStatus.DASHING && !this.punchingBag.hited)
+    {
+        if (this.player.playerStatus == Player.PlayerStatus.DASHING)
         {
             this.punchingBag.getHitted(this.player.x < this.punchingBag.x,2,-250);
         } else if (this.player.playerStatus == Player.PlayerStatus.ATA_N && !this.punchingBag.hited)
         {
-            this.punchingBag.getHitted(this.player.x < this.punchingBag.x, 7,-50);
+            this.punchingBag.getHitted(this.player.x < this.punchingBag.x, 1,-50);
         }
     }
 

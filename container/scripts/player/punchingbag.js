@@ -4,7 +4,7 @@ export class PunchingBag extends Player{
     constructor(scene, x, y){
         super(scene, x, y, 'PB');
 
-        this.body.setSize(30, 66, false);
+        this.body.setSize(33, 64, false);
 
         this.hited = false;
         this.moving_R = true;
@@ -16,7 +16,6 @@ export class PunchingBag extends Player{
         //this.body.setVelocityX(0);
         if (!this.hited)
         {
-            
             if (this.body.velocity.x > 0){
                 this.body.velocity.x -= this.drag * delta;
                 if (this.body.velocity.x <= 0) this.body.velocity.x = 0;
@@ -26,7 +25,6 @@ export class PunchingBag extends Player{
             }
         } if (this.hited)
         {
-            this.flipX = !this.moving_R;
             if (this.moving_R)
             {
                 console.log('DERECHA');
@@ -45,7 +43,6 @@ export class PunchingBag extends Player{
     resetHitted()
     {
         this.hited = false;
-        this.play('PB_idle');
     }
 
     getHitted(direction, x, y)
@@ -53,7 +50,6 @@ export class PunchingBag extends Player{
         this.hited = true;
         this.x_move = x;
         this.y_move = y;
-        this.play('PB_punch');
         if (direction)
         {
             
@@ -63,6 +59,6 @@ export class PunchingBag extends Player{
             this.moving_R = false;
         }
 
-        this.resetTimer = this.scene.time.delayedCall(0.5 * 1000, this.resetHitted, null, this);
+        this.resetTimer = this.scene.time.delayedCall(0.0005 * 1000, this.resetHitted, null, this);
     }
 }
