@@ -8,20 +8,12 @@ export class PowerUp extends Phaser.GameObjects.Sprite{
 
         this.picked = false;
 
-        //duration of the powerup
-        //default 0 for non duration powerups
-        this.duration;
-
-        this.scene.add.existing(this);
-
-        //this.body.setBounce(0.1);
-        this.setInteractive();
         this.scene.physics.world.enable(this);
         this.body.setCollideWorldBounds(true);
 
+        this.scene.add.existing(this);
+
     }
-
-
 
     collected(){
         console.log('objeto recogido');

@@ -57,6 +57,9 @@ export class Player extends Phaser.GameObjects.Sprite{
     getVida(){return this.vida;}
     setVida(v){this.vida = v;}
 
+    getNa(){return this.keyNA;}
+    getMovingR(){return this.moving_R;}
+
     getVelocidad(){return this.horizontalSpeed;}
     setVelocidad(v){this.horizontalSpeed = v;}
     

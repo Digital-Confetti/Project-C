@@ -1,4 +1,5 @@
 import { PowerUp } from "./powerup.js";
+import { Bala } from "./bala.js";
 
 export class Pistola extends PowerUp {
     constructor(scene, x, y) {
@@ -7,92 +8,118 @@ export class Pistola extends PowerUp {
         this.setTexture('pistola')
         this.setScale(0.1, 0.1);
 
-        this.duration = 10 * 1000;
-
-        this.bullet = [];
-
-        this.bullet_speed = 1000;
-
-        this.ammo = 1;
-
-        this.dissapear_cooldown = 1 * 1000;
+        this.body.setOffset(0, 0);
+        this.body.setSize(855, 251, false);
 
         this.hit_damage = 30;
 
-        this.body.setOffset(0, 0);
-        this.body.setSize(361, 241, false);
+        this.bullet = [];
+        this.max_ammo = 1;
+        this.ammo = this.max_ammo;
 
-        this.pistola_player_bullet_collider;
+        this.shoot_cooldown = 0.5 * 1000;
+        this.dissapear_cooldown = 10 * 1000;
+        this.out_of_ammo_cooldown = 1 * 1000;
+
+        this.able_shoot = true;
+        this.dissapeared = false;
+
+        this.fusil_player_bullet_collider = [];
 
         this.timer;
 
     }
 
     collected() {
-        console.log("platano recogido");
 
         this.picked = true;
+        this.body.allowGravity = false;
         this.linkedPlayer = this.scene.player;
 
-        this.timer = this.scene.time.delayedCall(this.duration, this.outTimeTrigger, null, this);
+        this.timer = this.scene.time.delayedCall(this.dissapear_cooldown, this.outTimeTrigger, null, this);
 
     }
 
     trigger(delta) {
 
-        this.x = this.linkedPlayer.x;
-        this.y = this.linkedPlayer.y - 20;
+        this.x = this.linkedPlayer.x + 40;
+        this.y = this.linkedPlayer.y;
 
-        this.body.velocity.x = 0;
-        this.body.velocity.y = 0;
 
-        if (this.linkedPlayer.getNa() && this.ammo > 0) {
+
+        if (this.linkedPlayer.getNa() && this.ammo > 0 && this.able_shoot) {
             this.ammo--;
+            this.able_shoot = false;
 
             console.log('disparo realizado');
 
-            this.scene.physics.world.removeCollider(this.scene.game_player_powerup_collider)
-            // ^^
-            //this.scene.game_player_powerup_collider.active = false;
+            this.scene.game_player_powerup_collider.active = false;
 
-            this.bullet.push(this.scene.physics.add.image(this.x+25, this.y-7, 'disparo').setScale(0.2, 0.2));
-            
-            this.scene.time.delayedCall(this.dissapear_cooldown, this.outTimeTrigger, null, this)
+            this.bala = new Bala(this.scene, this.x + 25, this.y-7);
+            if(!this.linkedPlayer.moving_R){
+                //this.bala.flipDirection
+            }
+            this.colisionador = this.scene.physics.add.collider(this.scene.player, this.bala, this.hitPlayer, null, this);
 
-            this.pistola_player_bullet_collider = this.scene.physics.add.collider(this.scene.player, this.bullet, this.hitPlayer, null, this);
+            this.bullet.push(this.bala);
+            this.fusil_player_bullet_collider.push(this.colisionador);
+
+            this.scene.time.delayedCall(this.shoot_cooldown, function () { this.able_shoot = true }, null, this);
+
         }
 
-        if(this.bullet !== null){
+        
 
-            for(var i = 0; i < this.bullet.length; i++){
-                this.bullet[i].body.velocity.x = this.bullet_speed;
-                this.bullet[i].body.velocity.y = 0;
+        for (var i = 0; i < this.bullet.length; i++) {
+
+            if (this.bullet[i].active) {
+
+                this.bullet[i].update();
+
             }
 
         }
+
+        if (this.ammo == 0 && !this.dissapeared) {
+            this.dissapeared = true;
+
+            this.timer.remove();
+
+            this.scene.time.delayedCall(this.out_of_ammo_cooldown, this.outTimeTrigger, null, this)
+        }
+
 
     }
 
     outTimeTrigger() {
-        console.log('pistola destruida');
-        this.timer.remove();
 
-        this.scene.physics.world.removeCollider(this.pistola_player_bullet_collider);
+        this.dissapeared = true;
+
+        console.log('fusil destruido');
+
         this.scene.game_player_powerup_collider.active = true;
-        
-        if(this.bullet !== null){
-            for(var i = 0; i < this.bullet.length; i++){
+
+        for (var i = 0; i < this.bullet.length; i++) {
+
+            if (this.bullet[i].active) {
                 this.bullet[i].destroy();
+                this.scene.physics.world.removeCollider(this.fusil_player_bullet_collider[i]);
             }
+
         }
+
         this.destroyPowerUp();
 
     }
 
-    hitPlayer() {
+    hitPlayer(player, bullet) {
         console.log('player dañado');
-        this.scene.player.setVida(this.scene.player.getVida() - this.hit_damage);
-        this.outTimeTrigger();
+
+        bullet.active = false;
+        bullet.destroy();
+
+        player.setVida(player.getVida() - this.hit_damage);
+
     }
 
 }

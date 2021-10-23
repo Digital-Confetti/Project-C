@@ -279,7 +279,7 @@ export class Game_Scene extends Phaser.Scene {
             }
         }
 
-        
+        //console.log(this.player.moving_R);
     }
 
     hit_Treatment()
