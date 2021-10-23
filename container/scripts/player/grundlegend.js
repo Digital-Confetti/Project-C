@@ -159,7 +159,7 @@ export class GrundLegend extends Player{
             case Player.PlayerStatus.ATA_S:
                 break;
             case Player.PlayerStatus.ATA_N:
-                if (!this.body.touching.none)
+                if (this.body.touching.right || this.body.touching.left )
                 {
                     this.playerStatus = Player.PlayerStatus.IDDLE;
                 }
