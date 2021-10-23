@@ -10,6 +10,8 @@ export class GrundLegend extends Player{
         this.body.setBounce(0.1);
         //animacion run
         this.body.height = 80;
+        this.jump_aceleration = 1;
+        this.jump_drag = 1;
         //animacion idle
         //this.body.height = 84;
         this.horizontalJumpSpeed = 1.5 * this.horizontalSpeed;
@@ -24,11 +26,11 @@ export class GrundLegend extends Player{
         } else if (!this.keyA && !this.keyD)
         {
             if (this.looking_R && this.body.velocity.x != 0){
-                this.body.velocity.x -= this.drag * delta;
+                this.body.velocity.x -= this.jump_drag * delta;
                 if (this.body.velocity.x <= 0){
                     this.body.setVelocityX(0);
             }} else if (!this.looking_R && this.body.velocity.x != 0){
-                this.body.velocity.x += this.drag * delta; 
+                this.body.velocity.x += this.jump_drag * delta; 
                 if (this.body.velocity.x >= 0){   
                     this.body.setVelocityX(0);
             }}
@@ -36,9 +38,9 @@ export class GrundLegend extends Player{
         }
 
         if(this.looking_R){
-            if (this.body.velocity.x < this.horizontalJumpSpeed) this.body.velocity.x += this.aceleration * delta;
+            if (this.body.velocity.x < this.horizontalJumpSpeed) this.body.velocity.x += this.jump_aceleration * delta;
         } else {
-            if (this.body.velocity.x > -1 * this.horizontalJumpSpeed) this.body.velocity.x -= this.aceleration * delta;
+            if (this.body.velocity.x > -1 * this.horizontalJumpSpeed) this.body.velocity.x -= this.jump_aceleration * delta;
         }
 
         
@@ -233,13 +235,16 @@ export class GrundLegend extends Player{
                 break;
         }
 
+        this.flipX = !this.looking_R;
+/*
         // Auto-Flip Sprite
-        if(this.body.velocity.x > 0)
+        if(this.body.velocity.x > 0.8)
         {
             this.flipX = false;
-        } else if (this.body.velocity.x < 0){
+        } else if (this.body.velocity.x < 0.8){
             this.flipX = true;
         }
+*/
     }
 
     update(delta)
