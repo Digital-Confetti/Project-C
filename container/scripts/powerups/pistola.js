@@ -11,7 +11,7 @@ export class Pistola extends PowerUp {
         this.body.setOffset(0, 0);
         this.body.setSize(855, 251, false);
 
-        this.hit_damage = 30;
+        this.hit_damage = 20;
 
         this.bullet = [];
         this.max_ammo = 1;
@@ -42,10 +42,21 @@ export class Pistola extends PowerUp {
 
     trigger(delta) {
 
-        this.x = this.linkedPlayer.x + 40;
-        this.y = this.linkedPlayer.y;
+        if(this.linkedPlayer.looking_R){
+            this.x = this.linkedPlayer.x + 40;
+            this.y = this.linkedPlayer.y;
+            if(this.flipX){
+                this.flipX = false;
+            }
+        }else{
+            this.x = this.linkedPlayer.x - 40;
+            this.y = this.linkedPlayer.y;
+            if(!this.flipX){
+                this.flipX = true;
+            }
+        }
 
-
+        //console.log(this.linkedPlayer.looking_R);
 
         if (this.linkedPlayer.getNa() && this.ammo > 0 && this.able_shoot) {
             this.ammo--;
@@ -55,10 +66,14 @@ export class Pistola extends PowerUp {
 
             this.scene.game_player_powerup_collider.active = false;
 
-            this.bala = new Bala(this.scene, this.x + 25, this.y-7);
-            if(!this.linkedPlayer.moving_R){
-                //this.bala.flipDirection
+            
+            if(this.linkedPlayer.looking_R){
+                this.bala = new Bala(this.scene, this.x + 25, this.y-7);
+            }else{
+                this.bala = new Bala(this.scene, this.x - 25, this.y-7);
+                this.bala.flipDirection();
             }
+
             this.colisionador = this.scene.physics.add.collider(this.scene.player, this.bala, this.hitPlayer, null, this);
 
             this.bullet.push(this.bala);
