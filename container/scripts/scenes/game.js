@@ -1,6 +1,7 @@
 // importing
 import { GrundLegend } from '../player/grundlegend.js';
 import { Avalor } from '../player/avalor.js';
+import { Player } from '../player/player.js';
 import { PunchingBag } from '../player/punchingbag.js';
 import { EspecialDeTuichi } from '../powerups/especialdetuichi.js';
 import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
@@ -94,7 +95,7 @@ export class Game_Scene extends Phaser.Scene {
 
         this.punchingBag = new PunchingBag(this, 600, 100);
 
-        this.activePowerUp = new Fusil(this, 600, 500);
+        this.activePowerUp = new Pistola(this, 600, 500);
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
@@ -108,7 +109,7 @@ export class Game_Scene extends Phaser.Scene {
 
         // Add collider
         this.physics.add.collider(this.player, this.platforms);
-        this.physics.add.collider(this.player, this.punchingBag);
+        this.physics.add.collider(this.player, this.punchingBag, this.hit_Treatment, null, this);
 
         this.physics.add.collider(this.punchingBag, this.platforms);
         this.physics.add.collider(this.activePowerUp, this.platforms);
@@ -202,7 +203,7 @@ export class Game_Scene extends Phaser.Scene {
 
     create() {
 
-        this.timer_Create();
+        //this.timer_Create();
 
         // Adding sprites
         this.createGameObjects();
@@ -233,8 +234,9 @@ export class Game_Scene extends Phaser.Scene {
         this.timer_dash.paused = this.player.dashAllowed;
 
         if (progress >= 0.08 && progress <= 0.97) {
+            this.player.playerStatus = Player.PlayerStatus.IDDLE;
             this.player.dashActivated = false;
-            if (this.player.body.velocity.x > this.horizontalSpeed) {
+            if (math.abs(this.player.body.velocity.x) > this.horizontalSpeed) {
                 if (this.moving_R) {
                     this.player.body.velocity.x = 0.95 * this.horizontalSpeed;
                 } else {
@@ -252,14 +254,14 @@ export class Game_Scene extends Phaser.Scene {
 
     update(timer, delta) {
 
-        this.timer_Update();
+        //this.timer_Update();
 
         this.player.update(delta);
 
-        this.punchingBag.renove();
+        this.punchingBag.renove(delta);
         var out;
 
-        out = 'Progreso: ' + this.timer_dash.getProgress().toString().substr(0, 4);
+        out = 'Progreso: ' + this.player.dash_Timer.getProgress().toString().substr(0, 4);
 
         this.text_Debug.setText(out);
 
@@ -278,6 +280,11 @@ export class Game_Scene extends Phaser.Scene {
         }
 
         
+    }
+
+    hit_Treatment()
+    {
+        console.log('Tocado el saco');
     }
 
     pickPowerUp() {

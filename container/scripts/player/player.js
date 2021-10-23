@@ -1,6 +1,17 @@
 // Encharced of handling player modularity
 export class Player extends Phaser.GameObjects.Sprite{
 
+    // State Machine
+    static PlayerStatus = {
+        IDDLE: 0,
+        MOVING: 1,
+        DASHING: 2,
+        JUMP_1: 3,
+        JUMP_2: 4,
+        ATA_S: 5,
+        ATA_N: 6
+    };
+
     // This constructor is called on game.create() method
     constructor(scene, x, y, sprite){
         super(scene, x, y, sprite);
@@ -11,6 +22,9 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.scene.physics.world.enable(this);
         this.body.setCollideWorldBounds(true);
 
+        this.playerStatus = Player.PlayerStatus.IDDLE;
+
+        // Dinamic atributes
         this.aceleration = 3;
         this.horizontalSpeed = 225;
         this.verticalpeed = 10;
@@ -28,13 +42,17 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.keySA = false;
 
         // Move Variables
-        this.moving_R = false;
+        this.looking_R = false;
         this.dash_R = false;
         this.drag = 3;
         this.dashForce = 800;
         this.dashAllowed = false;
         this.dashActivated = false;
 
+        this.dashCoolDown = 3 * 1000;
+        this.dash_Timer = scene.time.addEvent({ delay: this.dashCoolDown, loop: true });
+
+        // Vida
         this.maxVida;
         this.Vida;
     }
@@ -58,7 +76,7 @@ export class Player extends Phaser.GameObjects.Sprite{
                 this.body.velocity.x += this.aceleration * delta;
             }
 
-            if (!this.moving_R) this.moving_R = true;       
+            if (!this.looking_R) this.looking_R = true;       
 
         } else if (this.keyA && !this.keyD) {
             
@@ -66,24 +84,18 @@ export class Player extends Phaser.GameObjects.Sprite{
                 this.body.velocity.x -= this.aceleration * delta;
             }
 
-            if (this.moving_R) this.moving_R = false;  
+            if (this.looking_R) this.looking_R = false;  
         
         // No Key Down -> Movement degradation
         } else if (!this.keyA && !this.keyD){
-            if (this.moving_R && this.body.velocity.x != 0)
-            {
+            if (this.looking_R && this.body.velocity.x != 0){
                 this.body.velocity.x -= this.drag * delta;
-                
-                if (this.body.velocity.x <= 0)
-                {
+                if (this.body.velocity.x <= 0){
                     this.body.setVelocityX(0);
                 }
-            } else if (!this.moving_R && this.body.velocity.x != 0)
-            {
+            } else if (!this.looking_R && this.body.velocity.x != 0){
                 this.body.velocity.x += this.drag * delta;
-                
-                if (this.body.velocity.x >= 0)
-                {   
+                if (this.body.velocity.x >= 0){   
                     this.body.setVelocityX(0);
                 }
             }
@@ -95,7 +107,7 @@ export class Player extends Phaser.GameObjects.Sprite{
         {
             this.dashAllowed = false;
             this.dashActivated = true;
-            this.dash_R = this.moving_R;
+            this.dash_R = this.looking_R;
         }
 
         // Vertical movement
@@ -111,11 +123,11 @@ export class Player extends Phaser.GameObjects.Sprite{
             if(this.body.touching.left)
             {
                 this.dash_R = true;
-                this.moving_R = true;
+                this.looking_R = true;
             } else if (this.body.touching.right)
             {
                 this.dash_R = false;
-                this.moving_R = false;
+                this.looking_R = false;
             }
 
             if (this.dash_R)
@@ -125,8 +137,8 @@ export class Player extends Phaser.GameObjects.Sprite{
                 this.body.velocity.x = -1 * this.dashForce;
             }
              // Dash end movement
-        } else if (this.body.velocity.x > this.horizontalSpeed) {
-            if (this.moving_R) {
+        } else if (Math.abs(this.body.velocity.x) > this.horizontalSpeed) {
+            if (this.looking_R) {
                 this.body.velocity.x = 0.95 * this.horizontalSpeed;
             } else {
                 this.body.velocity.x = -0.95 * this.horizontalSpeed;

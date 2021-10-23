@@ -40,7 +40,7 @@ export class Pistola extends PowerUp {
 
     trigger(delta) {
 
-        this.x = this.linkedPlayer.x+40;
+        this.x = this.linkedPlayer.x;
         this.y = this.linkedPlayer.y - 20;
 
         this.body.velocity.x = 0;
@@ -51,7 +51,9 @@ export class Pistola extends PowerUp {
 
             console.log('disparo realizado');
 
-            this.scene.game_player_powerup_collider.active = false;
+            this.scene.physics.world.removeCollider(this.scene.game_player_powerup_collider)
+            // ^^
+            //this.scene.game_player_powerup_collider.active = false;
 
             this.bullet.push(this.scene.physics.add.image(this.x+25, this.y-7, 'disparo').setScale(0.2, 0.2));
             
