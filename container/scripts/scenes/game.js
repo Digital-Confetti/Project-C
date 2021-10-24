@@ -166,7 +166,7 @@ export class Game_Scene extends Phaser.Scene {
                 },
             ],
             frameRate: 10,
-            repeat: 1
+            repeat: 0
         });
 
         this.anims.create({

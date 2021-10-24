@@ -43,6 +43,7 @@ export class PunchingBag extends Player{
     resetHitted()
     {
         this.hited = false;
+        this.play('PB_idle');
     }
 
     getHitted(direction, x, y)
@@ -50,6 +51,10 @@ export class PunchingBag extends Player{
         this.hited = true;
         this.x_move = x;
         this.y_move = y;
+
+        this.flipX = !direction;
+
+        this.play('PB_punch');
         if (direction)
         {
             
@@ -59,6 +64,6 @@ export class PunchingBag extends Player{
             this.moving_R = false;
         }
 
-        this.resetTimer = this.scene.time.delayedCall(0.0005 * 1000, this.resetHitted, null, this);
+        this.resetTimer = this.scene.time.delayedCall(0.5 * 1000, this.resetHitted, null, this);
     }
 }
