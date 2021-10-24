@@ -25,6 +25,7 @@ export class PowerUp extends Phaser.GameObjects.Sprite{
 
     destroyPowerUp(){
         this.scene.activePowerUp = null;
+        this.scene.power_up_spawned = false;
         this.destroy();
     }
 

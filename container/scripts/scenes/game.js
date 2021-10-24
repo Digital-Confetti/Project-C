@@ -32,12 +32,14 @@ export class Game_Scene extends Phaser.Scene {
 
         // s -> ms
         this.dashCoolDown = 3 * 1000;
+        this.power_ups_respawn_cooldown = 5 * 1000;
 
         // receiver of the selected character
         this.selectedCharacter;
 
         //active powerup
         this.activePowerUp = null;
+        this.power_up_spawned = false;
 
         //first player-powerup collider
         this.game_player_powerup_collider;
@@ -95,7 +97,7 @@ export class Game_Scene extends Phaser.Scene {
 
         this.punchingBag = new PunchingBag(this, 600, 100);
 
-        this.activePowerUp = new Platano(this, 600, 500);
+        //this.activePowerUp = new Fusil(this, 600, 500);
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
@@ -112,9 +114,9 @@ export class Game_Scene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.punchingBag, this.hit_Treatment, null, this);
 
         this.physics.add.collider(this.punchingBag, this.platforms);
-        this.physics.add.collider(this.activePowerUp, this.platforms);
+        //this.physics.add.collider(this.activePowerUp, this.platforms);
 
-        this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
+        //this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     //TO DO: Use JSON atlas.
@@ -226,6 +228,30 @@ export class Game_Scene extends Phaser.Scene {
 
     }
 
+    spawnPowerUp(){
+        this.i = Math.floor(Math.random() * 5) + 1;
+        this.x = Math.floor(Math.random() * 1080) + 200;
+        this.y = 50;
+
+        if(this.i == 1){
+            this.activePowerUp = new EspecialDeTuichi(this, this.x, this.y);
+
+        }else if(this.i == 2){
+            this.activePowerUp = new BebidaEnergetica(this, this.x, this.y);
+
+        }else if(this.i == 3){
+            this.activePowerUp = new Platano(this, this.x, this.y);
+            
+        }else if(this.i == 4){
+            this.activePowerUp = new Pistola(this, this.x, this.y);
+            
+        }else if(this.i == 5){
+            this.activePowerUp = new Fusil(this, this.x, this.y);
+        }
+        this.physics.add.collider(this.activePowerUp, this.platforms);
+        this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
+    }
+
     update(timer, delta) {
 
         //this.timer_Update();
@@ -251,8 +277,14 @@ export class Game_Scene extends Phaser.Scene {
                 
                 this.activePowerUp.trigger(delta);
             }
-        }
+        }else{
+            if(!this.power_up_spawned){
+                this.power_up_spawned = true;
+                this.time.delayedCall(this.power_ups_respawn_cooldown, this.spawnPowerUp, null, this);
 
+            }
+            
+        }
         
     }
 

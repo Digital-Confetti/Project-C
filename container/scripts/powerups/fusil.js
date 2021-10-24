@@ -44,13 +44,13 @@ export class Fusil extends PowerUp {
 
         if(this.linkedPlayer.looking_R){
             this.x = this.linkedPlayer.x + 40;
-            this.y = this.linkedPlayer.y;
+            this.y = this.linkedPlayer.y-50;
             if(this.flipX){
                 this.flipX = false;
             }
         }else{
             this.x = this.linkedPlayer.x - 40;
-            this.y = this.linkedPlayer.y;
+            this.y = this.linkedPlayer.y-50;
             if(!this.flipX){
                 this.flipX = true;
             }
@@ -68,9 +68,9 @@ export class Fusil extends PowerUp {
 
             
             if(this.linkedPlayer.looking_R){
-                this.bala = new Bala(this.scene, this.x + 25, this.y);
+                this.bala = new Bala(this.scene, this.x + 25, this.y-7);
             }else{
-                this.bala = new Bala(this.scene, this.x - 25, this.y);
+                this.bala = new Bala(this.scene, this.x - 25, this.y-7);
                 this.bala.flipDirection();
             }
 
