@@ -51,7 +51,7 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.Vida;
 
         // State machine
-        //this.state = Player.PlayerStatus.INACTIVE;
+        this.playerStatus = Player.PlayerStatus.IDDLE;
     }
 
     getVida(){return this.vida;}

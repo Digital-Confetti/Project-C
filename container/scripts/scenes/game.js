@@ -18,6 +18,7 @@ export class Game_Scene extends Phaser.Scene {
         super({ key: 'game_Scene' });
 
         this.player;
+        this.player2;
 
         this.platforms;
 
@@ -32,12 +33,14 @@ export class Game_Scene extends Phaser.Scene {
 
         // s -> ms
         this.dashCoolDown = 3 * 1000;
+        this.power_ups_respawn_cooldown = 5 * 1000;
 
         // receiver of the selected character
         this.selectedCharacter;
 
         //active powerup
         this.activePowerUp = null;
+        this.power_up_spawned = false;
 
         //first player-powerup collider
         this.game_player_powerup_collider;
@@ -86,16 +89,15 @@ export class Game_Scene extends Phaser.Scene {
 
         } else if (this.selectedCharacter == 'grundlegend') {
             this.player = new GrundLegend(this, 100, 100);
-
+            this.player2 = new GrundLegend(this, 1000, 100);
         } else {
             console.log('error al crear personaje')
         }
-
         // Creating Punching Bag
 
         this.punchingBag = new PunchingBag(this, 600, 100);
 
-        this.activePowerUp = new Platano(this, 600, 500);
+        //this.activePowerUp = new Fusil(this, 600, 500);
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
@@ -111,10 +113,17 @@ export class Game_Scene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platforms);
         this.physics.add.collider(this.player, this.punchingBag, this.hit_Treatment, null, this);
 
-        this.physics.add.collider(this.punchingBag, this.platforms);
-        this.physics.add.collider(this.activePowerUp, this.platforms);
+        this.physics.add.collider(this.player2, this.platforms);
+        this.physics.add.collider(this.player2, this.punchingBag, this.hit_Treatment, null, this);
 
-        this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
+        this.physics.add.collider(this.player2, this.player);
+
+        //this.game_player_powerup_collider = this.physics.add.collider(this.player2, this.activePowerUp, this.pickPowerUp, null, this);
+
+        this.physics.add.collider(this.punchingBag, this.platforms);
+        //this.physics.add.collider(this.activePowerUp, this.platforms);
+
+        //this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     //TO DO: Use JSON atlas.
@@ -149,23 +158,6 @@ export class Game_Scene extends Phaser.Scene {
             frameRate: -1
         });
 
-
-
-        /*
-                // Right
-                this.anims.create({
-                    key: 'right',
-                    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-                    frameRate: 10,
-                    repeat: -1
-                });
-        
-                // Left
-                this.anims.create({
-                    key: 'left',
-                    frameRate: 8
-                });
-        */
     }
 
     timer_Create() {
@@ -190,10 +182,7 @@ export class Game_Scene extends Phaser.Scene {
 
         // text debug
         this.text_Debug = this.add.text(32, 32);
-
-
-        this.player.play('run');
-
+        this.player.play('idle');
         this.punchingBag.play('PB_idle');
         this.text_vida = this.add.text(32, 82);
 
@@ -201,29 +190,29 @@ export class Game_Scene extends Phaser.Scene {
 
     }
 
-    timer_Update() {
-        let progress = this.timer_dash.getProgress();
+    spawnPowerUp(){
+        this.i = Math.floor(Math.random() * 5) + 1;
+        this.i = 3;
+        this.x = Math.floor(Math.random() * 1080) + 200;
+        this.y = 50;
 
+        if(this.i == 1){
+            this.activePowerUp = new EspecialDeTuichi(this, this.x, this.y);
 
-        this.timer_dash.paused = this.player.dashAllowed;
+        }else if(this.i == 2){
+            this.activePowerUp = new BebidaEnergetica(this, this.x, this.y);
 
-        if (progress >= 0.08 && progress <= 0.97) {
-            this.player.playerStatus = Player.PlayerStatus.IDDLE;
-            this.player.dashActivated = false;
-            if (math.abs(this.player.body.velocity.x) > this.horizontalSpeed) {
-                if (this.moving_R) {
-                    this.player.body.velocity.x = 0.95 * this.horizontalSpeed;
-                } else {
-                    this.player.body.velocity.x = -0.95 * this.horizontalSpeed;
-                }
-            }
-
-
-        } else if (progress >= 0.98) {
-            this.player.dashAllowed = true;
+        }else if(this.i == 3){
+            this.activePowerUp = new Platano(this, this.x, this.y);
+            
+        }else if(this.i == 4){
+            this.activePowerUp = new Pistola(this, this.x, this.y);
+            
+        }else if(this.i == 5){
+            this.activePowerUp = new Fusil(this, this.x, this.y);
         }
-
-
+        this.physics.add.collider(this.activePowerUp, this.platforms);
+        this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     update(timer, delta) {
@@ -231,6 +220,7 @@ export class Game_Scene extends Phaser.Scene {
         //this.timer_Update();
 
         this.player.update(delta);
+        this.player2.update(delta);
 
         this.punchingBag.renove(delta);
         var out;
@@ -251,8 +241,14 @@ export class Game_Scene extends Phaser.Scene {
                 
                 this.activePowerUp.trigger(delta);
             }
-        }
+        }else{
+            if(!this.power_up_spawned){
+                this.power_up_spawned = true;
+                this.time.delayedCall(this.power_ups_respawn_cooldown, this.spawnPowerUp, null, this);
 
+            }
+            
+        }
         
     }
 

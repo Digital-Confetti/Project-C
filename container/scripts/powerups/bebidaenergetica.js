@@ -29,10 +29,10 @@ export class BebidaEnergetica extends PowerUp{
         this.linkedPlayer = this.scene.player;
 
         this.baseVelocity = this.linkedPlayer.getVelocidad();
-        this.baseAceleration = this.linkedPlayer.getAceleration();
+        //this.baseAceleration = this.linkedPlayer.getAceleration();
 
         this.linkedPlayer.setVelocidad(this.linkedPlayer.getVelocidad() + this.linkedPlayer.getVelocidad() * this.bonusVelocity);
-        this.linkedPlayer.setAceleration(this.linkedPlayer.getAceleration() + this.linkedPlayer.getAceleration() * this.bonusAceleration);
+        //this.linkedPlayer.setAceleration(this.linkedPlayer.getAceleration() + this.linkedPlayer.getAceleration() * this.bonusAceleration);
 
         //provisional object dissapear
         this.scene.physics.world.disableBody(this.body);
@@ -46,7 +46,7 @@ export class BebidaEnergetica extends PowerUp{
         console.log('se acabo el tiempo');
 
         this.linkedPlayer.setVelocidad( this.baseVelocity);
-        this.linkedPlayer.setAceleration( this.baseAceleration);
+        //this.linkedPlayer.setAceleration( this.baseAceleration);
 
         this.destroyPowerUp();
     }

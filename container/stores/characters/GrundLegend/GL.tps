@@ -351,7 +351,7 @@
             <key type="filename">grundlegend_Punch0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.65,1</point_f>
+                <point_f>0.55,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -366,7 +366,7 @@
             <key type="filename">grundlegend_Punch1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.603774,1</point_f>
+                <point_f>0.528302,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -381,7 +381,7 @@
             <key type="filename">grundlegend_Punch2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.430556,1</point_f>
+                <point_f>0.375,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -394,11 +394,25 @@
                 <false/>
             </struct>
             <key type="filename">grundlegend_Special1.png</key>
-            <key type="filename">grundlegend_Special2.png</key>
             <key type="filename">grundlegend_Spectial0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.475,0.785714</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>10,21,20,42</rect>
+                <key>scale9Paddings</key>
+                <rect>10,21,20,42</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">grundlegend_Special2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.475,0.797619</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -426,24 +440,10 @@
                 <false/>
             </struct>
             <key type="filename">grundlegend_Walk0.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.773585,0.988095</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>13,21,27,42</rect>
-                <key>scale9Paddings</key>
-                <rect>13,21,27,42</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">grundlegend_Walk1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.698113,1</point_f>
+                <point_f>0.603774,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>
@@ -458,7 +458,7 @@
             <key type="filename">grundlegend_dash.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.414286,0.940476</point_f>
+                <point_f>0.485714,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>

@@ -44,13 +44,13 @@ export class Pistola extends PowerUp {
 
         if(this.linkedPlayer.looking_R){
             this.x = this.linkedPlayer.x + 40;
-            this.y = this.linkedPlayer.y;
+            this.y = this.linkedPlayer.y-50;
             if(this.flipX){
                 this.flipX = false;
             }
         }else{
             this.x = this.linkedPlayer.x - 40;
-            this.y = this.linkedPlayer.y;
+            this.y = this.linkedPlayer.y-50;
             if(!this.flipX){
                 this.flipX = true;
             }
