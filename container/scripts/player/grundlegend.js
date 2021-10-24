@@ -13,15 +13,73 @@ export class GrundLegend extends Player{
         this.jump_aceleration = 1;
         this.jump_drag = 1;
         //animacion idle
-        //this.body.height = 84;
+        this.body.height = 84;
         this.horizontalJumpSpeed = 1.5 * this.horizontalSpeed;
+
+        this.playingAnim = 'idle';
 
         this.dashCoolDown = 3 * 1000;
         this.dash_Timer = scene.time.addEvent({delay:this.dashCoolDown, loop:true});
         
-        
+        this.create_Animations(scene);
     }
-    reset_ATA_N(){ this.playerStatus = Player.PlayerStatus.IDDLE}
+
+    create_Animations(scene)
+    {
+        
+        var route = 'stores/characters/'
+
+        var chara = 'grundlegend'
+        // Idle
+        scene.anims.create({
+            key: 'idle',
+            frames: [{ key: chara, frame: chara + '_idle.png' }],
+            frameRate: -1
+        });
+
+        scene.anims.create({
+            key: 'dash',
+            frames: [{ key: chara, frame: chara + '_dash.png' }],
+            frameRate: -1
+        });
+
+        scene.anims.create({
+            key: 'run',
+            frames: [{
+                    key: chara,
+                    frame: chara + '_Walk0.png'
+                },{
+                    key: chara,
+                    frame: chara + '_Walk1.png'
+                },
+            ],
+            frameRate: 10,
+            repeat: -1
+        });
+
+        scene.anims.create({
+            key: 'punch',
+            frames: [
+                {
+                    key: chara,
+                    frame: chara + '_Punch0.png'
+                },
+                {
+                    key: chara,
+                    frame: chara + '_Punch1.png'
+                },
+                {
+                    key: chara,
+                    frame: chara + '_Punch2.png'
+                },
+            ],
+            frameRate: 5,
+            repeat: 0
+        });
+    }
+
+    reset_ATA_N(){ this.playerStatus = Player.PlayerStatus.IDDLE;
+    }
 
     check_NormalAttack()
     {
@@ -29,7 +87,7 @@ export class GrundLegend extends Player{
         if(this.keyNA)
         {
             this.playerStatus = Player.PlayerStatus.ATA_N;
-            this.resetTimer = this.scene.time.delayedCall(0.5 * 1000, this.reset_ATA_N, null, this);
+            this.resetTimer = this.scene.time.delayedCall(0.66 * 1000, this.reset_ATA_N, null, this);
         }
     }
 
@@ -90,7 +148,7 @@ export class GrundLegend extends Player{
         this.dash_Timer.paused = this.dashAllowed;
 
         if (progress >= 0.08 && progress <= 0.97) {
-            this.playerStatus = Player.PlayerStatus.IDDLE;
+            this.playerStatus = Player.PlayerStatus.MOVING;
             this.dashActivated = false;
             if (Math.abs(this.body.velocity.x) > this.horizontalSpeed) {
                 if (this.moving_R) {
@@ -159,10 +217,6 @@ export class GrundLegend extends Player{
             case Player.PlayerStatus.ATA_S:
                 break;
             case Player.PlayerStatus.ATA_N:
-                if (!this.body.touching.none)
-                {
-                    this.playerStatus = Player.PlayerStatus.IDDLE;
-                }
                 break;
         }
 
@@ -242,10 +296,13 @@ export class GrundLegend extends Player{
         switch(this.playerStatus)
         {
             case Player.PlayerStatus.IDDLE:
+                this.load_animation('idle');
                 break;
             case Player.PlayerStatus.MOVING:
+                this.load_animation('run');
                 break;
             case Player.PlayerStatus.DASHING:
+                this.load_animation('dash');
                 break;
             case Player.PlayerStatus.JUMP_1:
                 break;
@@ -254,19 +311,20 @@ export class GrundLegend extends Player{
             case Player.PlayerStatus.ATA_S:
                 break;
             case Player.PlayerStatus.ATA_N:
+                this.load_animation('punch');
                 break;
         }
 
         this.flipX = !this.looking_R;
-/*
-        // Auto-Flip Sprite
-        if(this.body.velocity.x > 0.8)
+    }
+
+    load_animation(anima)
+    { 
+        if (this.playingAnim != anima)
         {
-            this.flipX = false;
-        } else if (this.body.velocity.x < 0.8){
-            this.flipX = true;
+            this.playingAnim = anima;
+            this.play(this.playingAnim);
         }
-*/
     }
 
     update(delta)

@@ -57,10 +57,8 @@ export class PunchingBag extends Player{
         this.play('PB_punch');
         if (direction)
         {
-            
             this.moving_R = true;
         } else {
-            
             this.moving_R = false;
         }
 

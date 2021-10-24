@@ -4,30 +4,105 @@
 			"image": "grundlegend.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 388,
-				"h": 91
+				"w": 125,
+				"h": 788
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "grundlegend_Punch01.png",
+					"filename": "grundlegend_JumpAttack1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 53,
-						"h": 89
+						"w": 77,
+						"h": 85
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 53,
-						"h": 89
+						"w": 77,
+						"h": 85
 					},
 					"frame": {
 						"x": 1,
 						"y": 1,
-						"w": 53,
-						"h": 89
+						"w": 77,
+						"h": 85
+					},
+					"anchor": {
+						"x": 0.2857142857142857,
+						"y": 0.7176470588235294
+					}
+				},
+				{
+					"filename": "grundlegend_Punch0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 84
+					},
+					"frame": {
+						"x": 80,
+						"y": 1,
+						"w": 40,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.65,
+						"y": 1
+					}
+				},
+				{
+					"filename": "grundlegend_Special1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 84
+					},
+					"frame": {
+						"x": 80,
+						"y": 87,
+						"w": 40,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.475,
+						"y": 0.78571429
+					}
+				},
+				{
+					"filename": "grundlegend_DownAttack1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 75,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 75,
+						"h": 84
+					},
+					"frame": {
+						"x": 1,
+						"y": 88,
+						"w": 75,
+						"h": 84
 					},
 					"anchor": {
 						"x": 0.5,
@@ -35,78 +110,78 @@
 					}
 				},
 				{
-					"filename": "grundlegend_Punch02.png",
+					"filename": "grundlegend_Special2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 72,
-						"h": 85
+						"w": 40,
+						"h": 84
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 72,
-						"h": 85
+						"w": 40,
+						"h": 84
 					},
 					"frame": {
-						"x": 56,
-						"y": 1,
-						"w": 72,
-						"h": 85
+						"x": 78,
+						"y": 173,
+						"w": 40,
+						"h": 84
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.475,
+						"y": 0.78571429
 					}
 				},
 				{
-					"filename": "grundlegend_Punch00.png",
+					"filename": "grundlegend_Punch2.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 40,
-						"h": 85
+						"w": 72,
+						"h": 84
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 40,
-						"h": 85
+						"w": 72,
+						"h": 84
 					},
 					"frame": {
-						"x": 130,
-						"y": 1,
-						"w": 40,
-						"h": 85
+						"x": 1,
+						"y": 174,
+						"w": 72,
+						"h": 84
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.43055556,
+						"y": 1
 					}
 				},
 				{
-					"filename": "grundlegend_idle.png",
+					"filename": "grundlegend_Special3.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 33,
-						"h": 85
+						"w": 47,
+						"h": 84
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 33,
-						"h": 85
+						"w": 47,
+						"h": 84
 					},
 					"frame": {
-						"x": 172,
-						"y": 1,
-						"w": 33,
-						"h": 85
+						"x": 75,
+						"y": 259,
+						"w": 47,
+						"h": 84
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.5
+						"x": 0.40425532,
+						"y": 0.78571429
 					}
 				},
 				{
@@ -124,9 +199,59 @@
 						"h": 84
 					},
 					"frame": {
-						"x": 207,
-						"y": 1,
+						"x": 1,
+						"y": 260,
 						"w": 70,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.4142857142857143,
+						"y": 0.9404761904761905
+					}
+				},
+				{
+					"filename": "grundlegend_JumpDownAttack1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 105
+					},
+					"frame": {
+						"x": 73,
+						"y": 345,
+						"w": 51,
+						"h": 105
+					},
+					"anchor": {
+						"x": 0.50980392,
+						"y": 0.6
+					}
+				},
+				{
+					"filename": "grundlegend_DownAttack0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 54,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 54,
+						"h": 84
+					},
+					"frame": {
+						"x": 1,
+						"y": 346,
+						"w": 54,
 						"h": 84
 					},
 					"anchor": {
@@ -135,49 +260,349 @@
 					}
 				},
 				{
-					"filename": "grundlegend_walk01.png",
+					"filename": "grundlegend_JumpAttack0.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
 						"w": 53,
-						"h": 81
+						"h": 85
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
 						"w": 53,
-						"h": 81
+						"h": 85
 					},
 					"frame": {
-						"x": 279,
-						"y": 1,
+						"x": 1,
+						"y": 432,
 						"w": 53,
-						"h": 81
+						"h": 85
 					},
 					"anchor": {
-						"x": 0.5,
-						"y": 0.48148148
+						"x": 0.41509433962264153,
+						"y": 0.7176470588235294
 					}
 				},
 				{
-					"filename": "grundlegend_walk00.png",
+					"filename": "grundlegend_Proyectil00.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 15,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 15,
+						"h": 12
+					},
+					"frame": {
+						"x": 56,
+						"y": 432,
+						"w": 15,
+						"h": 12
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "grundlegend_Punch1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
 						"w": 53,
-						"h": 78
+						"h": 84
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
 						"w": 53,
-						"h": 78
+						"h": 84
 					},
 					"frame": {
-						"x": 334,
-						"y": 1,
+						"x": 56,
+						"y": 452,
 						"w": 53,
-						"h": 78
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.60377358,
+						"y": 1
+					}
+				},
+				{
+					"filename": "grundlegend_Walk1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 53,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 2,
+						"w": 53,
+						"h": 82
+					},
+					"frame": {
+						"x": 1,
+						"y": 519,
+						"w": 53,
+						"h": 82
+					},
+					"anchor": {
+						"x": 0.69811321,
+						"y": 1
+					}
+				},
+				{
+					"filename": "grundlegend_Walk0.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 53,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 7,
+						"w": 53,
+						"h": 77
+					},
+					"frame": {
+						"x": 56,
+						"y": 538,
+						"w": 53,
+						"h": 77
+					},
+					"anchor": {
+						"x": 0.77358491,
+						"y": 0.98809524
+					}
+				},
+				{
+					"filename": "grundlegend_Jump.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 84
+					},
+					"frame": {
+						"x": 1,
+						"y": 603,
+						"w": 51,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "grundlegend_JumpDownAttack0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 51,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 51,
+						"h": 84
+					},
+					"frame": {
+						"x": 1,
+						"y": 689,
+						"w": 51,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.49019608,
+						"y": 0.75
+					}
+				},
+				{
+					"filename": "grundlegend_Proyectil01.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 12
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 12
+					},
+					"frame": {
+						"x": 1,
+						"y": 775,
+						"w": 16,
+						"h": 12
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "grundlegend_Spectial0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 40,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 40,
+						"h": 84
+					},
+					"frame": {
+						"x": 54,
+						"y": 617,
+						"w": 40,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.475,
+						"y": 0.78571429
+					}
+				},
+				{
+					"filename": "grundlegend_idle.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 33,
+						"h": 84
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 33,
+						"h": 84
+					},
+					"frame": {
+						"x": 54,
+						"y": 703,
+						"w": 33,
+						"h": 84
+					},
+					"anchor": {
+						"x": 0.6969697,
+						"y": 1
+					}
+				},
+				{
+					"filename": "grundlegend_Proyectil20.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 32
+					},
+					"frame": {
+						"x": 89,
+						"y": 703,
+						"w": 34,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "grundlegend_Proyectil21.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 34,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 34,
+						"h": 32
+					},
+					"frame": {
+						"x": 89,
+						"y": 737,
+						"w": 34,
+						"h": 32
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "grundlegend_Proyectil10.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 23,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 23,
+						"h": 20
+					},
+					"frame": {
+						"x": 96,
+						"y": 617,
+						"w": 23,
+						"h": 20
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				},
+				{
+					"filename": "grundlegend_Proyectil11.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 23,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 23,
+						"h": 20
+					},
+					"frame": {
+						"x": 96,
+						"y": 639,
+						"w": 23,
+						"h": 20
 					},
 					"anchor": {
 						"x": 0.5,
@@ -190,6 +615,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:906510c06e6e43268e8990de6143dc00:2c4fccd01fd0bfd1efb00e8174c486a7:766a219d7d73740186b452dd0113559b$"
+		"smartupdate": "$TexturePacker:SmartUpdate:bfea47c0652c901fb2d51c0ab99fc49a:76882e00cf65c89e063a19620a1ffbb7:766a219d7d73740186b452dd0113559b$"
 	}
 }

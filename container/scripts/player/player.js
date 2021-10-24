@@ -5,7 +5,7 @@ export class Player extends Phaser.GameObjects.Sprite{
         INACTIVE: 0,
         IDDLE: 1,
         MOVING: 2,
-        JUMP: 3,
+        JUMP_1: 3,
         JUMP_2: 4,
         DASHING: 5,
         ATA_S: 6,

@@ -121,32 +121,6 @@ export class Game_Scene extends Phaser.Scene {
     // Fuctiong thats create the animations
     createAnimations() {
 
-        var route = 'stores/characters/'
-
-        var chara = this.selectedCharacter;
-        // Idle
-        this.anims.create({
-            key: 'idle',
-            frames: [{ key: chara, frame: chara + '_idle.png' }],
-            frameRate: -1
-        });
-
-        this.anims.create({
-            key: 'run',
-            frames: [
-                {
-                    key: chara,
-                    frame: chara + '_walk00.png'
-                },
-                {
-                    key: chara,
-                    frame: chara + '_walk01.png'
-                },
-            ],
-            frameRate: 5,
-            repeat: -1
-        });
-
         // Debug Punching Bag animations
 
         this.anims.create({
