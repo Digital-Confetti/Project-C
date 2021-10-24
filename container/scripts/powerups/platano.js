@@ -40,6 +40,7 @@ export class Platano extends PowerUp {
 
         if (this.linkedPlayer.getNa() && !this.throwed) {
             this.throwed = true;
+            this.body.allowGravity = true;
 
             if (this.linkedPlayer.looking_R) {
                 this.body.velocity.x = this.throw_force;
@@ -65,7 +66,8 @@ export class Platano extends PowerUp {
         if (!this.throwed) {
 
             this.x = this.linkedPlayer.x;
-            this.y = this.linkedPlayer.y - 20;
+            this.y = this.linkedPlayer.y - 60;
+            this.body.allowGravity = false;
 
             if (this.linkedPlayer.looking_R) {
                 if (this.flipX) {
