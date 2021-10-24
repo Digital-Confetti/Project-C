@@ -9,7 +9,7 @@ export class GrundLegend extends Player{
 
         this.body.setBounce(0.1);
         //animacion run
-        this.body.height = 80;
+        //this.body.height = 80;
         this.jump_aceleration = 1;
         this.jump_drag = 1;
         //animacion idle
@@ -17,6 +17,7 @@ export class GrundLegend extends Player{
         this.horizontalJumpSpeed = 1.5 * this.horizontalSpeed;
 
         this.playingAnim = 'idle';
+        this.play(this.playingAnim);
 
         this.dashCoolDown = 3 * 1000;
         this.dash_Timer = scene.time.addEvent({delay:this.dashCoolDown, loop:true});

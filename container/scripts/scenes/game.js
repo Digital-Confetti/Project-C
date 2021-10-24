@@ -18,6 +18,7 @@ export class Game_Scene extends Phaser.Scene {
         super({ key: 'game_Scene' });
 
         this.player;
+        this.player2;
 
         this.platforms;
 
@@ -86,11 +87,10 @@ export class Game_Scene extends Phaser.Scene {
 
         } else if (this.selectedCharacter == 'grundlegend') {
             this.player = new GrundLegend(this, 100, 100);
-
+            this.player2 = new GrundLegend(this, 1000, 100);
         } else {
             console.log('error al crear personaje')
         }
-
         // Creating Punching Bag
 
         this.punchingBag = new PunchingBag(this, 600, 100);
@@ -110,6 +110,13 @@ export class Game_Scene extends Phaser.Scene {
         // Add collider
         this.physics.add.collider(this.player, this.platforms);
         this.physics.add.collider(this.player, this.punchingBag, this.hit_Treatment, null, this);
+
+        this.physics.add.collider(this.player2, this.platforms);
+        this.physics.add.collider(this.player2, this.punchingBag, this.hit_Treatment, null, this);
+
+        this.physics.add.collider(this.player2, this.player);
+
+        //this.game_player_powerup_collider = this.physics.add.collider(this.player2, this.activePowerUp, this.pickPowerUp, null, this);
 
         this.physics.add.collider(this.punchingBag, this.platforms);
         this.physics.add.collider(this.activePowerUp, this.platforms);
@@ -149,23 +156,6 @@ export class Game_Scene extends Phaser.Scene {
             frameRate: -1
         });
 
-
-
-        /*
-                // Right
-                this.anims.create({
-                    key: 'right',
-                    frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-                    frameRate: 10,
-                    repeat: -1
-                });
-        
-                // Left
-                this.anims.create({
-                    key: 'left',
-                    frameRate: 8
-                });
-        */
     }
 
     timer_Create() {
@@ -190,39 +180,11 @@ export class Game_Scene extends Phaser.Scene {
 
         // text debug
         this.text_Debug = this.add.text(32, 32);
-
-
-        this.player.play('run');
-
+        this.player.play('idle');
         this.punchingBag.play('PB_idle');
         this.text_vida = this.add.text(32, 82);
 
         this.text_velocidad = this.add.text(32, 132);
-
-    }
-
-    timer_Update() {
-        let progress = this.timer_dash.getProgress();
-
-
-        this.timer_dash.paused = this.player.dashAllowed;
-
-        if (progress >= 0.08 && progress <= 0.97) {
-            this.player.playerStatus = Player.PlayerStatus.IDDLE;
-            this.player.dashActivated = false;
-            if (math.abs(this.player.body.velocity.x) > this.horizontalSpeed) {
-                if (this.moving_R) {
-                    this.player.body.velocity.x = 0.95 * this.horizontalSpeed;
-                } else {
-                    this.player.body.velocity.x = -0.95 * this.horizontalSpeed;
-                }
-            }
-
-
-        } else if (progress >= 0.98) {
-            this.player.dashAllowed = true;
-        }
-
 
     }
 
@@ -231,6 +193,7 @@ export class Game_Scene extends Phaser.Scene {
         //this.timer_Update();
 
         this.player.update(delta);
+        this.player2.update(delta);
 
         this.punchingBag.renove(delta);
         var out;

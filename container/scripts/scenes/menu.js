@@ -7,6 +7,7 @@ export class Menu_Scene extends Phaser.Scene {
         this.text;
         this.pointer;
     }
+    
 
     // Here we need to load all the graphics
     preload() {
