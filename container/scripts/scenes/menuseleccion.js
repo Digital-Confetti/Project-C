@@ -19,12 +19,20 @@ export class Play_Select_Scene extends Phaser.Scene{
 
         //this.scene.launch("game_Scene");
 
-        this.load.image('fondo', 'stores/menu/bluemenu.jpg');
+        this.load.image('fondoseleccion', 'stores/menu/seleccion_perosnajes2.jpg');
+        this.load.image('gunlegends', 'stores/menu/grunlegend.png');
     }
 
     create() {
-        this.background = this.add.image(0, 0, 'fondo');
-        this.background.setScale(1.5);
+        this.background = this.add.image(0, 0, 'fondoseleccion');
+        this.background.setScale(1.4);
+        this.background.setOrigin(0);
+
+        this.grunlegendsboton = this.add.image(670, 210, 'gunlegends').setInteractive();
+        this.grunlegendsboton.setScale(1.0);
+        this.grunlegendsboton.alpha=0.2;
+        
+
 
         this.text1 = this.add.text(460, 300, 'Grund Legend', { color: '#000000', fontSize: '28px', fontFamily: 'Gemunu Libre'});
         this.text1.setInteractive();
@@ -38,7 +46,7 @@ export class Play_Select_Scene extends Phaser.Scene{
         //this.events.emit ('gameCountDown', ({countDown: 10}));
         
         var that = this;
-        this.text1.on('pointerdown', function(pointer){
+        this.grunlegendsboton.on('pointerdown', function(pointer){
             console.log('Personaje 1 seleccionado');
             that.scene.start("game_Scene", {character: 'grundlegend'});
         });
@@ -52,12 +60,16 @@ export class Play_Select_Scene extends Phaser.Scene{
             console.log('Boton salir pulsado');
             that.scene.start("play_menu_Scene");
         })
-        
+        this.iniciar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+
     }
 
     update() {
         this.pointer = this.input.activePointer;
-
+        if(this.iniciar.isDown){
+            console.log('enter')
+            this.scene.start("game_Scene", {character: 'grundlegend'});
+        }
         //console.log(this.pointer.x, this.pointer.y);
     }
 }
