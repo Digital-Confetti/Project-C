@@ -282,7 +282,7 @@ export class Game_Scene extends Phaser.Scene {
                 this.player2.lauch_reset_HITTED();
             }
         }
-
+//Ottonai hitting player
         if (this.player.playerStatus != Player.PlayerStatus.ATA_N)
         {
             if (this.player2.playerStatus == Player.PlayerStatus.DASHING && this.player.playerStatus != Player.PlayerStatus.HITTED)
