@@ -164,7 +164,7 @@ export class Play_Select_Scene extends Phaser.Scene{
         });
         this.salir_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
-            that.scene.start("menu_Scene");
+            that.scene.start("play_menu_Scene");
         });
         this.iniciar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
