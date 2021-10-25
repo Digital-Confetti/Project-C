@@ -359,7 +359,7 @@ export class Game_Scene extends Phaser.Scene {
                 console.log('K Pressed');
             }
 
-            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP && !thet.keyW) {
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP ) {
                 thet.keySPACE = true;
                 console.log('UP Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.LEFT && !thet.keyA) {
@@ -381,7 +381,7 @@ export class Game_Scene extends Phaser.Scene {
         // Input event that checks when a key goes up
         this.input.keyboard.on('keyup', function (event) {
 
-            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W && that.keyW) {
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W ) {
                 that.keyW = false;
                 console.log('W Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.A && that.keyA) {

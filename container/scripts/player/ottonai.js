@@ -52,10 +52,13 @@ export class Ottonai extends Player{
             key: 'otto_run',
             frames: [{
                     key: chara,
-                    frame: chara + '_Walk0.png'
+                    frame: chara + '_walk0.png'
                 },{
                     key: chara,
-                    frame: chara + '_Walk1.png'
+                    frame: chara + '_walk1.png'
+                },{
+                    key: chara,
+                    frame: chara + '_walk2.png'
                 },
             ],
             frameRate: 10,
