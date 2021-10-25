@@ -139,31 +139,31 @@ export class Play_Menu_Scene extends Phaser.Scene {
                 console.log('aagado')
                 this.salir_luz.alpha = 1;
                 this.boton1_luz.alpha = 0;
-                this.menu_boton = 0;
+                this.menu_boton = 1;
                 console.log(this.menu_boton);
             }else if (this.salir_luz.alpha == 1){
                 console.log('salir izquierda')
                 this.personajes_luz.alpha = 1;
                 this.salir_luz.alpha = 0;
-                this.menu_boton = 1;
+                this.menu_boton = 0;
                 console.log(this.menu_boton);
             }else if (this.personajes_luz.alpha == 1){
                 console.log(' s')
                 this.personajes_luz.alpha = 0;
                 this.configuracion_luz.alpha = 1;
-                this.menu_boton = 2;
+                this.menu_boton = 4;
                 console.log(this.menu_boton);
             }else if (this.configuracion_luz.alpha == 1){
                 console.log(' r')
                 this.configuracion_luz.alpha = 0;
                 this.controles_luz.alpha = 1;
-                this.menu_boton = 3;
+                this.menu_boton = 4;
                 console.log(this.menu_boton);
             }else if (this.controles_luz.alpha == 1){
                 console.log(' j')
                 this.boton2_luz.alpha = 1;
                 this.controles_luz.alpha = 0;
-                this.menu_boton = 4;
+                this.menu_boton = 0;
                 console.log(this.menu_boton);
             }else if (this.boton2_luz.alpha == 1){
                 console.log(' g')
@@ -183,7 +183,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
                 console.log(' g2')
                 this.boton2_luz.alpha = 0;
                 this.controles_luz.alpha = 1;
-                this.menu_boton = 5;
+                this.menu_boton = 4;
                 console.log(this.menu_boton);
             }else if (this.controles_luz.alpha == 1){
                 console.log(' j2')
@@ -195,13 +195,13 @@ export class Play_Menu_Scene extends Phaser.Scene {
                 console.log(' r2')
                 this.configuracion_luz.alpha = 0;
                 this.personajes_luz.alpha = 1;
-                this.menu_boton = 3;
+                this.menu_boton = 2;
                 console.log(this.menu_boton);
             }else if (this.personajes_luz.alpha == 1){
                 console.log(' s2')
                 this.personajes_luz.alpha = 0;
                 this.salir_luz.alpha = 1;
-                this.menu_boton = 2;
+                this.menu_boton = 3;
                 console.log(this.menu_boton);
             }else if (this.salir_luz.alpha == 1){
                 console.log('salir izquierda2')
