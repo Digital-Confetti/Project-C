@@ -66,7 +66,7 @@ export class Game_Scene extends Phaser.Scene {
 
         console.log(this.textures)
         //this.load.spritesheet('byConfetti', 'stores/characters/by_Confetti.png', { frameWidth: 60, frameHeight: 84 });
-
+        this.load.image('fondoescenario', 'stores/schenery/fondo_escenario.jpg');
         this.load.spritesheet('dude', 'stores/characters/dude.png', { frameWidth: 32, frameHeight: 48 });
         this.load.image('large_ground', 'stores/schenery/Layer_large.png');
         this.load.image('medium_ground', 'stores/schenery/Layer_medium.png');
@@ -177,7 +177,9 @@ export class Game_Scene extends Phaser.Scene {
     create() {
 
         //this.timer_Create();
-
+        this.background = this.add.image(0, 0, 'fondoescenario');
+        this.background.setScale(1.4);
+        this.background.setOrigin(0);
         // Adding sprites
         this.createGameObjects();
 
