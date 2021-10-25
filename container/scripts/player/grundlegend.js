@@ -14,6 +14,7 @@ export class GrundLegend extends Player{
         this.jump_drag = 1;
         //animacion idle
         this.body.height = 84;
+        this.body.width = 60;
         this.horizontalJumpSpeed = 1.5 * this.horizontalSpeed;
 
         this.playingAnim = 'idle';
@@ -21,6 +22,9 @@ export class GrundLegend extends Player{
 
         this.dashCoolDown = 3 * 1000;
         this.dash_Timer = scene.time.addEvent({delay:this.dashCoolDown, loop:true});
+
+        this.x_move;
+        this.y_move;
         
         this.create_Animations(scene);
     }
@@ -79,8 +83,13 @@ export class GrundLegend extends Player{
         });
     }
 
-    reset_ATA_N(){ this.playerStatus = Player.PlayerStatus.IDDLE;
+    reset_ATA_N(){ this.playerStatus = Player.PlayerStatus.IDDLE;}
+    
+
+    lauch_reset_HITTED() {
+        this.reset_HIT = this.scene.time.delayedCall(0.25 * 1000, this.reset_HITTED, null, this);
     }
+    reset_HITTED(){ this.playerStatus = Player.PlayerStatus.IDDLE;}
 
     check_NormalAttack()
     {
@@ -219,6 +228,8 @@ export class GrundLegend extends Player{
                 break;
             case Player.PlayerStatus.ATA_N:
                 break;
+            case Player.PlayerStatus.HITTED:
+                break;
         }
 
     }
@@ -288,6 +299,20 @@ export class GrundLegend extends Player{
                 break;
             case Player.PlayerStatus.ATA_N:
                 break;
+            case Player.PlayerStatus.HITTED:
+                if (this.moving_R)
+                {
+                    console.log('DERECHA');
+                    this.body.acceleration.x = this.x_move;
+                    this.body.velocity.y = this.y_move;
+                    //this.body.acceleration.y = -7;
+                } else {
+                    console.log('IZQUIERDA');
+                    this.body.acceleration.x = -1 * this.x_move;
+                    this.body.velocity.y = this.y_move;
+                    //this.body.acceleration.y = -7;
+                }
+                break;
         }
     }
 
@@ -313,6 +338,8 @@ export class GrundLegend extends Player{
                 break;
             case Player.PlayerStatus.ATA_N:
                 this.load_animation('punch');
+                break;
+            case Player.PlayerStatus.HITTED:
                 break;
         }
 

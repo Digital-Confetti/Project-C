@@ -116,7 +116,7 @@ export class Game_Scene extends Phaser.Scene {
         this.physics.add.collider(this.player2, this.platforms);
         this.physics.add.collider(this.player2, this.punchingBag, this.hit_Treatment, null, this);
 
-        this.physics.add.collider(this.player2, this.player);
+        this.physics.add.collider(this.player2, this.player, this.hit_Treatment_2P, null, this);
 
         //this.game_player_powerup_collider = this.physics.add.collider(this.player2, this.activePowerUp, this.pickPowerUp, null, this);
 
@@ -251,6 +251,48 @@ export class Game_Scene extends Phaser.Scene {
 
             }
             
+        }
+        
+    }
+
+    hit_Treatment_2P()
+    {
+        if (this.player2.playerStatus != Player.PlayerStatus.ATA_N)
+        {
+            if (this.player.playerStatus == Player.PlayerStatus.DASHING && this.player2.playerStatus != Player.PlayerStatus.HITTED)
+            {
+                this.player2.x_move = 2;
+                this.player2.y_move = -250;
+                this.player2.looking_R = this.player.x < this.punchingBag.x;
+                this.player2.playerStatus = Player.PlayerStatus.HITTED;
+                this.player2.lauch_reset_HITTED();
+            } else if (this.player.playerStatus == Player.PlayerStatus.ATA_N && this.player2.playerStatus != Player.PlayerStatus.HITTED)
+            {
+                this.player2.x_move = 2;
+                this.player2.y_move = -250;
+                this.player2.looking_R = this.player.x < this.punchingBag.x;
+                this.player2.playerStatus = Player.PlayerStatus.HITTED;
+                this.player2.lauch_reset_HITTED();
+            }
+        }
+
+        if (this.player.playerStatus != Player.PlayerStatus.ATA_N)
+        {
+            if (this.player2.playerStatus == Player.PlayerStatus.DASHING && this.player.playerStatus != Player.PlayerStatus.HITTED)
+            {
+                this.player.x_move = 2;
+                this.player.y_move = -250;
+                this.player.looking_R = this.player.x < this.punchingBag.x;
+                this.player.playerStatus = Player.PlayerStatus.HITTED;
+                this.player.lauch_reset_HITTED();
+            } else if (this.player2.playerStatus == Player.PlayerStatus.ATA_N && this.player.playerStatus != Player.PlayerStatus.HITTED)
+            {
+                this.player.x_move = 1;
+                this.player.y_move = -50;
+                this.player.looking_R = this.player.x < this.punchingBag.x;
+                this.player.playerStatus = Player.PlayerStatus.HITTED;
+                this.player.lauch_reset_HITTED();
+            }
         }
         
     }
