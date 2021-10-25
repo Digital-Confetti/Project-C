@@ -92,7 +92,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
         this.configuracion.setScale(1);
         this.configuracion_luz = this.add.image(1150, 270, 'botonconfiguracion2').setInteractive();
         this.configuracion_luz.setScale(1);
-        this.configuracion_luz.apha = 0;
+        this.configuracion_luz.alpha = 0;
 
         this.personajes = this.add.image(1150, 390, 'botonpersonajes').setInteractive();
         this.personajes.setScale(1);
