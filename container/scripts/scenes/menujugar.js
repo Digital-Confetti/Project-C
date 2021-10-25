@@ -134,14 +134,64 @@ export class Play_Menu_Scene extends Phaser.Scene {
     }
 
     update() {
+        var that = this;
         this.boton1.on('pointerover', function(pointer){
-            console.log('Boton rojo pulsado');
-            this.boton1_luz.alpha = 1;
-        });
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 1;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 0;
+        });/*
         this.boton1.on('pointerout', function(pointer){
             console.log('Boton rojo pulsado');
-            console.log('Boton rojo pulsado');
-            this.boton1_luz.alpha = 0;
+            that.boton1_luz.alpha = 0;
+        });*/
+        this.boton2.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 1;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 0;
+        });
+        this.salir.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 1;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 0;
+        });
+        this.configuracion.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 1;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 0;
+        });
+        this.controles.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 1;
+            that.personajes_luz.alpha = 0;
+        });
+        this.personajes.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 1;
         });
         if(this.TeclaA.isDown || this.TeclaW.isDown ){
             if(this.boton1_luz.alpha == 1){
