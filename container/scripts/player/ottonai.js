@@ -27,6 +27,7 @@ export class Ottonai extends Player{
         this.y_move;
         
         this.create_Animations(scene);
+        this.play('otto_idle');
     }
 
     create_Animations(scene)

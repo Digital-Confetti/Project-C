@@ -164,9 +164,9 @@ export class Play_Select_Scene extends Phaser.Scene{
            that.scene.start("game_Scene", {character: 'grundlegend'});
         });
         this.otonaiboton.on('pointerdown', function(pointer){
-            console.log('Personaje 1 seleccionado');
+            console.log('Personaje 2 seleccionado');
             that.sound.play('tambor');
-           that.scene.start("game_Scene", {character: 'grundlegend'});
+           that.scene.start("game_Scene", {character: 'ottonai'});
         });
         this.salir_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');

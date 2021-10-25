@@ -88,9 +88,9 @@ export class Game_Scene extends Phaser.Scene {
     // Function thats add all the sprites to the gameObjects
     createGameObjects() {
         // Creating the player
-        if (this.selectedCharacter == 'avalor') {
-            this.player = new Avalor(this, 100, 100);
-
+        if (this.selectedCharacter == 'ottonai') {
+            this.player = new Ottonai(this, 100, 100);
+            this.player2 = new GrundLegend(this, 1000, 100);
         } else if (this.selectedCharacter == 'grundlegend') {
             this.player = new GrundLegend(this, 100, 100);
             this.player2 = new Ottonai(this, 1000, 100);
@@ -192,7 +192,6 @@ export class Game_Scene extends Phaser.Scene {
 
         // text debug
         this.text_Debug = this.add.text(32, 32);
-        this.player.play('idle');
         this.punchingBag.play('PB_idle');
         this.text_vida = this.add.text(32, 82);
 
