@@ -103,29 +103,30 @@ export class Play_Menu_Scene extends Phaser.Scene {
         //this.salir.setInteractive();
         
         var that = this;
-        this.boton1.on('pointerdown', function(pointer){
+        this.boton1_luz.on('pointerdown', function(pointer){
             console.log('Boton rojo pulsado');
             that.scene.start("select_menu_Scene");
         });
 
-        this.boton2.on('pointerdown', function(pointer){
+        this.boton2_luz.on('pointerdown', function(pointer){
             console.log('Boton azul pulsado');
             that.scene.start("select_menu_Scene");
         });
 
-        this.salir.on('pointerdown', function(pointer){
+        this.salir_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
             that.scene.start("menu_Scene");
         });
-        this.controles.on('pointerdown', function(pointer){
+        
+        this.controles_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
             that.scene.start("select_menu_controles");
         });
-        this.configuracion.on('pointerdown', function(pointer){
+        this.configuracion_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
             that.scene.start("menu_Scene");
         });
-        this.personajes.on('pointerdown', function(pointer){
+        this.personajes_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
             that.scene.start("select_menu_Scene");
         });
@@ -135,6 +136,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
 
     update() {
         var that = this;
+        
         this.boton1.on('pointerover', function(pointer){
             console.log(that.boton1_luz);
             that.boton1_luz.alpha = 1;
