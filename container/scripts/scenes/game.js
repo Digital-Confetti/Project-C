@@ -328,6 +328,7 @@ export class Game_Scene extends Phaser.Scene {
 
         // that
         var that = this.player;
+        var thet = this.player2;
 
         // Input event that checks when a key goes down
         this.input.keyboard.on('keydown', function (event) {
@@ -356,6 +357,23 @@ export class Game_Scene extends Phaser.Scene {
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.K) {
                 that.keySA = true;
                 console.log('K Pressed');
+            }
+
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP && !thet.keyW) {
+                thet.keySPACE = true;
+                console.log('UP Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.LEFT && !thet.keyA) {
+                thet.keyA = true;
+                console.log('LEFT Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.DOWN && !thet.keyS) {
+                thet.keyS = true;
+                console.log('DOWN Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.RIGHT && !thet.keyD) {
+                thet.keyD = true;
+                console.log('RIGHT Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
+                thet.keySHIFT = true;
+                console.log('CTRL Pressed');
             }
 
         });
@@ -388,6 +406,23 @@ export class Game_Scene extends Phaser.Scene {
                 that.keySA = false;
                 console.log('K Depressed');
             }
+
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP && thet.keyW) {
+                thet.keySPACE = false;
+                console.log('UP Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.LEFT && thet.keyA) {
+                thet.keyA = false;
+                console.log('LEFT Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.DOWN && thet.keyS) {
+                thet.keyS = false;
+                console.log('DOWN Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.RIGHT && thet.keyD) {
+                thet.keyD = false;
+                console.log('RIGHT Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
+                thet.keySHIFT = false;
+                console.log('CTRL Pressed');
+            }
         });
 
         // Mouse Input
@@ -395,21 +430,21 @@ export class Game_Scene extends Phaser.Scene {
 
         this.input.on('pointerdown', function (event) {
             if (event.rightButtonDown()) {
-                that.keySA = true;
+                thet.keySA = true;
                 console.log('RClick Pressed');
             } else if (event.leftButtonDown()) {
-                that.keyNA = true;
+                thet.keyNA = true;
                 console.log('LClick Pressed');
             }
         });
 
         this.input.on('pointerup', function (event) {
             if (event.leftButtonReleased()) {
-                that.keyNA = false;
+                thet.keyNA = false;
                 console.log('LClick Deressed');
             }
             else if (event.rightButtonReleased()) {
-                that.keySA = false;
+                thet.keySA = false;
                 console.log('RClick Depressed');
             }
         });
