@@ -17,6 +17,7 @@ export class Menu_Scene extends Phaser.Scene {
         //this.scene.launch("game_Scene");
 
         this.load.image('fondo', 'stores/menu/pantalla_de_inicio.jpg');
+        this.load.audio('tambor', 'stores/sounds/golpe_tambor.mp3');
     }
 
     // Here we need to create all the Modules
@@ -31,6 +32,7 @@ export class Menu_Scene extends Phaser.Scene {
         var that = this;
         this.input.on('pointerdown', function(pointer){
             console.log('Menu a Game');
+            that.sound.play('tambor');
             that.scene.start("play_menu_Scene");
         });
         this.iniciar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);

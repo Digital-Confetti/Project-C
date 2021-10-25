@@ -26,6 +26,10 @@ export class Play_Select_Scene extends Phaser.Scene{
         this.load.image('botonsalir', 'stores/menu/button/boton_salir.png');
         this.load.image('botonsalir2', 'stores/menu/button/boton_salir_pulsado.png');
         this.load.image('grunlegends_player', 'stores/menu/grunlegends_jugador.png');
+
+        //AUDIO
+        this.load.audio('tambor', 'stores/sounds/golpe_tambor.mp3');
+        this.load.audio('espada', 'stores/sounds/desenvainar_espada.mp3');
     }
     Moveup()
     {
@@ -156,14 +160,17 @@ export class Play_Select_Scene extends Phaser.Scene{
         var that = this;
         this.grunlegendsboton.on('pointerdown', function(pointer){
             console.log('Personaje 1 seleccionado');
+            that.sound.play('tambor');
            that.scene.start("game_Scene", {character: 'grundlegend'});
         });
         this.otonaiboton.on('pointerdown', function(pointer){
             console.log('Personaje 1 seleccionado');
+            that.sound.play('tambor');
            that.scene.start("game_Scene", {character: 'grundlegend'});
         });
         this.salir_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
+            that.sound.play('espada');
             that.scene.start("play_menu_Scene");
         });
         this.iniciar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
@@ -196,6 +203,7 @@ export class Play_Select_Scene extends Phaser.Scene{
         this.pointer = this.input.activePointer;
         if(this.iniciar.isDown){
             console.log('enter')
+            this.sound.play('tambor');
             this.scene.start("game_Scene", {character: 'grundlegend'});
         }
         //console.log(this.pointer.x, this.pointer.y);
