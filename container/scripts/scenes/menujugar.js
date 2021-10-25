@@ -1,4 +1,15 @@
 export class Play_Menu_Scene extends Phaser.Scene {
+
+    static MenuStatus = {
+        OFFLINE: 0,
+        ONLINE: 1,
+        CONTROLES: 2,
+        CONFI: 3,
+        PERSONAJES: 4,
+        SALIR: 5
+    };
+
+
     constructor() {
         super({ key: 'play_menu_Scene' });
 
@@ -50,9 +61,17 @@ export class Play_Menu_Scene extends Phaser.Scene {
     // Here we need to create all the Modules
     //^^^---Like player, platform, Pwr_Up..
     create() {
+        var that = this;
+        this.input.keyboard.on('keydown', function (event) {
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W && !that.keyW) {
+                that.TeclaW = true;
+                console.log('W Pressed');
+            }
+        });
+
         this.TeclaA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.TeclaD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.TeclaW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        //this.TeclaW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.TeclaS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.iniciar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.menu_boton = 0;
@@ -133,7 +152,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
 
         
     }
-
+    
     update() {
         var that = this;
         
@@ -195,7 +214,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.controles_luz.alpha = 0;
             that.personajes_luz.alpha = 1;
         });
-        if(this.TeclaA.isDown || this.TeclaW.isDown ){
+        if(this.TeclaA.isDown || this.TeclaW){
             if(this.boton1_luz.alpha == 1){
                 console.log('aagado')
                 this.salir_luz.alpha = 1;
