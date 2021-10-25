@@ -309,8 +309,9 @@ export class Game_Scene extends Phaser.Scene {
                 that.keySA = true;
                 console.log('K Pressed');
             }
-            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP && !thet.keyW) {
-                thet.keyW = true;
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP) {
+                //thet.keyW = true;
+                thet.keySPACE = true;
                 console.log('UP Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.LEFT && !thet.keyA) {
                 thet.keyA = true;
@@ -321,10 +322,14 @@ export class Game_Scene extends Phaser.Scene {
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.RIGHT && !thet.keyD) {
                 thet.keyD = true;
                 console.log('RIGHT Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO) {
+            } else
+            /*
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO) {
                 thet.keySPACE = true;
                 console.log('NUMPAD_ZERO Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
+            } else 
+            */
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
                 thet.keySHIFT = true;
                 console.log('SHIFT Pressed');
             }
@@ -360,8 +365,9 @@ export class Game_Scene extends Phaser.Scene {
                 console.log('K Depressed');
             } 
             
-            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP && thet.keyW) {
-                thet.keyW = false;
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP) {
+                thet.keySPACE = false;
+                //thet.keyW = false;
                 console.log('UP Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.LEFT && thet.keyA) {
                 thet.keyA = false;
@@ -372,10 +378,14 @@ export class Game_Scene extends Phaser.Scene {
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.RIGHT && thet.keyD) {
                 thet.keyD = false;
                 console.log('RIGHT Depressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO) {
+            } else 
+            /*
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO) {
                 thet.keySPACE = false;
                 console.log('NUMPAD_ZERO Depressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
+            } else 
+            */
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
                 thet.keySHIFT = false;
                 console.log('SHIFT Depressed');
             }
