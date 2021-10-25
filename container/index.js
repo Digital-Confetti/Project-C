@@ -33,6 +33,7 @@ import {Menu_Scene} from './scripts/scenes/menu.js';
 import {Play_Menu_Scene} from './scripts/scenes/menujugar.js';
 import {Play_Select_Scene} from './scripts/scenes/menuseleccion.js';
 import {Controles_Scene} from './scripts/scenes/controles.js';
+import {Personajes_Scene} from './scripts/scenes/personajes.js';
 
 const config = {
     type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
@@ -48,7 +49,7 @@ const config = {
             }
         },
         //scene: [Menu_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene]
-        scene: [Menu_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene,Controles_Scene]
+        scene: [Menu_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene,Controles_Scene,Personajes_Scene]
 
     };
 

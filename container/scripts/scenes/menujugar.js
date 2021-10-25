@@ -235,11 +235,11 @@ export class Play_Menu_Scene extends Phaser.Scene {
         });
         this.configuracion_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
-            that.scene.start("menu_Scene");
+            that.scene.start("select_menu_controles");
         });
         this.personajes_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
-            that.scene.start("select_menu_Scene");
+            that.scene.start("select_menu_personajes");
         });
 
         
@@ -312,10 +312,10 @@ export class Play_Menu_Scene extends Phaser.Scene {
                     this.scene.start("menu_Scene");
                     break;
                 case 2: //personajes
-                    this.scene.start("select_menu_Scene");
+                    this.scene.start("select_menu_personajes");
                     break;
                 case 3: //menu configuracion
-                    this.scene.start("menu_Scene");
+                    this.scene.start("select_menu_controles");
                     break;  
                 case 4: //controles
                     this.scene.start("select_menu_controles");
