@@ -341,7 +341,7 @@ export class GrundLegend extends Player{
         // Load the animation
         this.animate(delta);
 
-        console.log(this.playerStatus);
+        //console.log(this.playerStatus);
     }
 
 /*  #### OLD ####

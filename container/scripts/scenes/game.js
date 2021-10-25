@@ -68,7 +68,10 @@ export class Game_Scene extends Phaser.Scene {
         //this.load.spritesheet('byConfetti', 'stores/characters/by_Confetti.png', { frameWidth: 60, frameHeight: 84 });
 
         this.load.spritesheet('dude', 'stores/characters/dude.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.image('ground', 'stores/schenery/platform.png');
+        //this.load.image('ground', 'stores/schenery/platform.png');
+        this.load.image('large_ground', 'stores/schenery/Layer_large.png');
+        this.load.image('medium_ground', 'stores/schenery/Layer_medium.png');
+        this.load.image('short_ground', 'stores/schenery/Layer_short.png');
 
         //powerups
         this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 383, frameHeight: 312 });
@@ -101,13 +104,16 @@ export class Game_Scene extends Phaser.Scene {
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(700, 700, 'ground').setScale(4, 2).refreshBody();
-        this.platforms.create(600, 375, 'ground').setScale(0.5, 1).refreshBody();
-        this.platforms.create(50, 250, 'ground');
-        this.platforms.create(1100, 220, 'ground');
-        this.platforms.create(1180, 580, 'ground').setScale(0.25, 1).refreshBody();
-        this.platforms.create(980, 480, 'ground').setScale(0.25, 1).refreshBody();
-        this.platforms.create(170, 500, 'ground');
+        //Bottom layer
+        this.platforms.create(320,600, 'large_ground').setScale(2.5, 2).refreshBody();
+        this.platforms.create(960,600, 'large_ground').setScale(2.5, 2).refreshBody();
+
+        //Medium layer
+        this.platforms.create(640,450, 'medium_ground').setScale(2.5, 2).refreshBody();
+
+        //Upper layer
+        this.platforms.create(180,300, 'medium_ground').setScale(2.5, 2).refreshBody();
+        this.platforms.create(1100,300, 'medium_ground').setScale(2.5, 2).refreshBody();
 
         // Add collider
         this.physics.add.collider(this.player, this.platforms);
@@ -218,8 +224,11 @@ export class Game_Scene extends Phaser.Scene {
     update(timer, delta) {
 
         //this.timer_Update();
-
+        
+        //Player 1
         this.player.update(delta);
+
+        //Player 2
         this.player2.update(delta);
 
         this.punchingBag.renove(delta);
@@ -277,9 +286,10 @@ export class Game_Scene extends Phaser.Scene {
         // that
         var that = this.player;
 
+        var thet = this.player2;
+
         // Input event that checks when a key goes down
         this.input.keyboard.on('keydown', function (event) {
-
             if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W && !that.keyW) {
                 that.keyW = true;
                 console.log('W Pressed');
@@ -304,6 +314,30 @@ export class Game_Scene extends Phaser.Scene {
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.K) {
                 that.keySA = true;
                 console.log('K Pressed');
+            }
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP) {
+                //thet.keyW = true;
+                thet.keySPACE = true;
+                console.log('UP Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.LEFT && !thet.keyA) {
+                thet.keyA = true;
+                console.log('LEFT Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.DOWN && !thet.keyS) {
+                thet.keyS = true;
+                console.log('DOWN Pressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.RIGHT && !thet.keyD) {
+                thet.keyD = true;
+                console.log('RIGHT Pressed');
+            } else
+            /*
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO) {
+                thet.keySPACE = true;
+                console.log('NUMPAD_ZERO Pressed');
+            } else 
+            */
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
+                thet.keySHIFT = true;
+                console.log('SHIFT Pressed');
             }
 
         });
@@ -335,6 +369,31 @@ export class Game_Scene extends Phaser.Scene {
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.K) {
                 that.keySA = false;
                 console.log('K Depressed');
+            } 
+            
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP) {
+                thet.keySPACE = false;
+                //thet.keyW = false;
+                console.log('UP Depressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.LEFT && thet.keyA) {
+                thet.keyA = false;
+                console.log('LEFT Depressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.DOWN && thet.keyS) {
+                thet.keyS = false;
+                console.log('DOWN Depressed');
+            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.RIGHT && thet.keyD) {
+                thet.keyD = false;
+                console.log('RIGHT Depressed');
+            } else 
+            /*
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.NUMPAD_ZERO) {
+                thet.keySPACE = false;
+                console.log('NUMPAD_ZERO Depressed');
+            } else 
+            */
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
+                thet.keySHIFT = false;
+                console.log('SHIFT Depressed');
             }
         });
 
@@ -343,21 +402,21 @@ export class Game_Scene extends Phaser.Scene {
 
         this.input.on('pointerdown', function (event) {
             if (event.rightButtonDown()) {
-                that.keySA = true;
+                thet.keySA = true;
                 console.log('RClick Pressed');
             } else if (event.leftButtonDown()) {
-                that.keyNA = true;
+                thet.keyNA = true;
                 console.log('LClick Pressed');
             }
         });
 
         this.input.on('pointerup', function (event) {
             if (event.leftButtonReleased()) {
-                that.keyNA = false;
+                thet.keyNA = false;
                 console.log('LClick Deressed');
             }
             else if (event.rightButtonReleased()) {
-                that.keySA = false;
+                thet.keySA = false;
                 console.log('RClick Depressed');
             }
         });
