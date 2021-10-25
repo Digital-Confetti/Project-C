@@ -68,20 +68,13 @@ export class Ottonai extends Player{
         scene.anims.create({
             key: 'otto_punch',
             frames: [
+                
                 {
                     key: chara,
-                    frame: chara + '_Punch0.png'
-                },
-                {
-                    key: chara,
-                    frame: chara + '_Punch1.png'
-                },
-                {
-                    key: chara,
-                    frame: chara + '_Punch2.png'
-                },
+                    frame: chara + '_normalAttack2.png'
+                }
             ],
-            frameRate: 5,
+            frameRate: -1,
             repeat: 0
         });
     }
