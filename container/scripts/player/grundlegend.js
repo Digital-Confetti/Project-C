@@ -89,7 +89,8 @@ export class GrundLegend extends Player{
     lauch_reset_HITTED() {
         this.reset_HIT = this.scene.time.delayedCall(0.25 * 1000, this.reset_HITTED, null, this);
     }
-    reset_HITTED(){ this.playerStatus = Player.PlayerStatus.IDDLE;}
+    reset_HITTED(){ this.playerStatus = Player.PlayerStatus.IDDLE;
+        this.setTint(0xFFFFFF);}
 
     check_NormalAttack()
     {
@@ -340,6 +341,7 @@ export class GrundLegend extends Player{
                 this.load_animation('punch');
                 break;
             case Player.PlayerStatus.HITTED:
+                this.setTint(0xff0000);
                 break;
         }
 
