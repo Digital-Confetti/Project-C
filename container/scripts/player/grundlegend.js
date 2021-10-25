@@ -332,10 +332,13 @@ export class GrundLegend extends Player{
     {
         this.timer_Update();
 
+        // PrevST + Inputs = NewST
         this.logic(delta);
 
+        // Actualize  position // Create 
         this.calculate(delta);
 
+        // Load the animation
         this.animate(delta);
 
         console.log(this.playerStatus);
