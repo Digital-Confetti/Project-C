@@ -1,6 +1,6 @@
 // importing
 import { GrundLegend } from '../player/grundlegend.js';
-import { Avalor } from '../player/avalor.js';
+import { Ottonai } from '../player/ottonai.js';
 import { Player } from '../player/player.js';
 import { PunchingBag } from '../player/punchingbag.js';
 import { EspecialDeTuichi } from '../powerups/especialdetuichi.js';
@@ -56,8 +56,9 @@ export class Game_Scene extends Phaser.Scene {
     preload() {
         // loading the spritesheet on 
 
-        let route = "stores/characters/" + this.selectedCharacter;
-        this.load.atlas(this.selectedCharacter, route + ".png", route + ".json");
+        //let route = "stores/characters/" + this.selectedCharacter;
+        this.load.atlas('grundlegend', "stores/characters/grundlegend.png", "stores/characters/grundlegend.json");         
+        this.load.atlas('ottonai', "stores/characters/ottonai.png", "stores/characters/ottonai.json");
 
         this.load.atlas("PunchingBag", "stores/characters/PunchingBag/PunchingBag.png", "stores/characters/PunchingBag/PunchingBag.json");
 
@@ -92,7 +93,7 @@ export class Game_Scene extends Phaser.Scene {
 
         } else if (this.selectedCharacter == 'grundlegend') {
             this.player = new GrundLegend(this, 100, 100);
-            this.player2 = new GrundLegend(this, 1000, 100);
+            this.player2 = new Ottonai(this, 1000, 100);
         } else {
             console.log('error al crear personaje')
         }
