@@ -50,10 +50,10 @@ export class Play_Menu_Scene extends Phaser.Scene {
     // Here we need to create all the Modules
     //^^^---Like player, platform, Pwr_Up..
     create() {
-        this.TeclaA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        this.TeclaD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        this.TeclaW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        this.TeclaS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        this.TeclaA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.TeclaD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.TeclaW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        this.TeclaS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.iniciar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.menu_boton = 0;
         console.log(this);
@@ -134,6 +134,15 @@ export class Play_Menu_Scene extends Phaser.Scene {
     }
 
     update() {
+        this.boton1.on('pointerover', function(pointer){
+            console.log('Boton rojo pulsado');
+            this.boton1_luz.alpha = 1;
+        });
+        this.boton1.on('pointerout', function(pointer){
+            console.log('Boton rojo pulsado');
+            console.log('Boton rojo pulsado');
+            this.boton1_luz.alpha = 0;
+        });
         if(this.TeclaA.isDown || this.TeclaW.isDown ){
             if(this.boton1_luz.alpha == 1){
                 console.log('aagado')
@@ -237,15 +246,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
 
   
 
-        this.configuracion.on('pointerdown', function(pointer){
-            console.log('Boton salir pulsado');
-            that.scene.start("menu_Scene");
-        });
-        this.personajes.on('pointerdown', function(pointer){
-            console.log('Boton salir pulsado');
-            that.scene.start("select_menu_Scene");
-        });
-
+      
         
         this.pointer = this.input.activePointer;
         //console.log(this.TecladoStatus);
