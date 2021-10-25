@@ -68,7 +68,10 @@ export class Game_Scene extends Phaser.Scene {
         //this.load.spritesheet('byConfetti', 'stores/characters/by_Confetti.png', { frameWidth: 60, frameHeight: 84 });
 
         this.load.spritesheet('dude', 'stores/characters/dude.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.image('ground', 'stores/schenery/platform.png');
+        //this.load.image('ground', 'stores/schenery/platform.png');
+        this.load.image('large_ground', 'stores/schenery/Layer_large.png');
+        this.load.image('medium_ground', 'stores/schenery/Layer_medium.png');
+        this.load.image('short_ground', 'stores/schenery/Layer_short.png');
 
         //powerups
         this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 383, frameHeight: 312 });
@@ -101,13 +104,16 @@ export class Game_Scene extends Phaser.Scene {
 
         // Creating Platforms
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(700, 700, 'ground').setScale(4, 2).refreshBody();
-        this.platforms.create(600, 375, 'ground').setScale(0.5, 1).refreshBody();
-        this.platforms.create(50, 250, 'ground');
-        this.platforms.create(1100, 220, 'ground');
-        this.platforms.create(1180, 580, 'ground').setScale(0.25, 1).refreshBody();
-        this.platforms.create(980, 480, 'ground').setScale(0.25, 1).refreshBody();
-        this.platforms.create(170, 500, 'ground');
+        //Bottom layer
+        this.platforms.create(320,600, 'large_ground').setScale(2.5, 2).refreshBody();
+        this.platforms.create(960,600, 'large_ground').setScale(2.5, 2).refreshBody();
+
+        //Medium layer
+        this.platforms.create(640,450, 'medium_ground').setScale(2.5, 2).refreshBody();
+
+        //Upper layer
+        this.platforms.create(180,300, 'medium_ground').setScale(2.5, 2).refreshBody();
+        this.platforms.create(1100,300, 'medium_ground').setScale(2.5, 2).refreshBody();
 
         // Add collider
         this.physics.add.collider(this.player, this.platforms);
