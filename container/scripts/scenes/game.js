@@ -1,6 +1,6 @@
 // importing
 import { GrundLegend } from '../player/grundlegend.js';
-import { Avalor } from '../player/avalor.js';
+import { Ottonai } from '../player/ottonai.js';
 import { Player } from '../player/player.js';
 import { PunchingBag } from '../player/punchingbag.js';
 import { EspecialDeTuichi } from '../powerups/especialdetuichi.js';
@@ -56,8 +56,9 @@ export class Game_Scene extends Phaser.Scene {
     preload() {
         // loading the spritesheet on 
 
-        let route = "stores/characters/" + this.selectedCharacter;
-        this.load.atlas(this.selectedCharacter, route + ".png", route + ".json");
+        //let route = "stores/characters/" + this.selectedCharacter;
+        this.load.atlas('grundlegend', "stores/characters/grundlegend.png", "stores/characters/grundlegend.json");         
+        this.load.atlas('ottonai', "stores/characters/ottonai.png", "stores/characters/ottonai.json");
 
         this.load.atlas("PunchingBag", "stores/characters/PunchingBag/PunchingBag.png", "stores/characters/PunchingBag/PunchingBag.json");
 
@@ -66,7 +67,7 @@ export class Game_Scene extends Phaser.Scene {
 
         console.log(this.textures)
         //this.load.spritesheet('byConfetti', 'stores/characters/by_Confetti.png', { frameWidth: 60, frameHeight: 84 });
-
+        this.load.image('fondoescenario', 'stores/schenery/fondo_escenario.jpg');
         this.load.spritesheet('dude', 'stores/characters/dude.png', { frameWidth: 32, frameHeight: 48 });
         this.load.image('large_ground', 'stores/schenery/Layer_large.png');
         this.load.image('medium_ground', 'stores/schenery/Layer_medium.png');
@@ -92,7 +93,7 @@ export class Game_Scene extends Phaser.Scene {
 
         } else if (this.selectedCharacter == 'grundlegend') {
             this.player = new GrundLegend(this, 100, 100);
-            this.player2 = new GrundLegend(this, 1000, 100);
+            this.player2 = new Ottonai(this, 1000, 100);
         } else {
             console.log('error al crear personaje')
         }
@@ -177,7 +178,9 @@ export class Game_Scene extends Phaser.Scene {
     create() {
 
         //this.timer_Create();
-
+        this.background = this.add.image(0, 0, 'fondoescenario');
+        this.background.setScale(1.4);
+        this.background.setOrigin(0);
         // Adding sprites
         this.createGameObjects();
 
