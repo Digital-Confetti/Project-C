@@ -27,8 +27,84 @@ export class Play_Select_Scene extends Phaser.Scene{
         this.load.image('botonsalir2', 'stores/menu/button/boton_salir_pulsado.png');
         this.load.image('grunlegends_player', 'stores/menu/grunlegends_jugador.png');
     }
-
+    Moveup()
+    {
+        if (this.grunlegendsboton.alpha == 0.4){
+            console.log('1')
+            this.Otonaiplayer.alpha=1;
+            this.grunlegendplayer.alpha=0;
+            this.otonaiboton.alpha = 0.4;
+            this.grunlegendsboton.alpha = 0;
+            this.menu_boton = 0;
+            this.salir_luz.alpha = 0;
+        }else if (this.salir_luz.alpha == 1){
+            console.log('3')
+            this.Otonaiplayer.alpha=0;
+            this.grunlegendplayer.alpha=1;
+            this.otonaiboton.alpha = 0;
+            this.grunlegendsboton.alpha = 0.4 ;
+            this.menu_boton = 0;
+            this.salir_luz.alpha = 0;
+            
+        }else if(this.otonaiboton.alpha == 0.4){
+            console.log('2')
+            this.Otonaiplayer.alpha=0;
+            this.grunlegendplayer.alpha=0;
+            this.otonaiboton.alpha = 0;
+            this.grunlegendsboton.alpha = 0;
+            this.menu_boton = 1;
+            this.salir_luz.alpha = 1;
+    }
+    }
+    Movedown()
+    {
+        if (this.grunlegendsboton.alpha == 0.4){
+            console.log('1')
+            this.Otonaiplayer.alpha=0;
+            this.grunlegendplayer.alpha=0;
+            this.otonaiboton.alpha = 0;
+            this.grunlegendsboton.alpha = 0;
+            this.menu_boton = 0;
+            this.salir_luz.alpha = 1;
+            //console.log(this.menu_boton);
+        }else if (this.salir_luz.alpha == 1){
+            console.log('3')
+            this.Otonaiplayer.alpha=1;
+            this.grunlegendplayer.alpha=0;
+            this.otonaiboton.alpha = 0.4;
+            this.grunlegendsboton.alpha = 0 ;
+            this.menu_boton = 0;
+            this.salir_luz.alpha = 0;                  
+        }else if(this.otonaiboton.alpha == 0.4){
+            console.log('2')
+            this.Otonaiplayer.alpha=0;
+            this.grunlegendplayer.alpha=1;
+            this.otonaiboton.alpha = 0;
+            this.grunlegendsboton.alpha = 0.4;
+            this.menu_boton = 1;
+            this.salir_luz.alpha = 0;
+        }
+    }
     create() {
+        var that = this;
+        this.input.keyboard.on('keydown', function (event) {
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W && !that.keyW) {            
+                console.log('W Pressed');
+                that.Movedown();
+            }else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.A && !that.keyA) {                             
+                console.log('A Pressed');
+                that.Movedown();
+            }
+            else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.D && !that.keyD) {               
+                that.Moveup();
+                console.log('A Pressed');
+            }
+            else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.S && !that.keyS) {  
+                that.Moveup();             
+                
+                console.log('A Pressed');
+            }
+        });
         this.TeclaA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.TeclaD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.TeclaW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -116,61 +192,7 @@ export class Play_Select_Scene extends Phaser.Scene{
             that.Otonaiplayer.alpha=1;
             that.grunlegendplayer.alpha=0;  
         });
-        if(this.TeclaA.isDown || this.TeclaW.isDown ){           
-            if (this.grunlegendsboton.alpha == 0.4){
-                        console.log('1')
-                        this.Otonaiplayer.alpha=1;
-                        this.grunlegendplayer.alpha=0;
-                        this.otonaiboton.alpha = 0.4;
-                        this.grunlegendsboton.alpha = 0;
-                        this.menu_boton = 0;
-                        this.salir_luz.alpha = 0;
-                }else if (this.salir_luz.alpha == 1){
-                        console.log('3')
-                        this.Otonaiplayer.alpha=0;
-                        this.grunlegendplayer.alpha=1;
-                        this.otonaiboton.alpha = 0;
-                        this.grunlegendsboton.alpha = 0.4 ;
-                        this.menu_boton = 0;
-                        this.salir_luz.alpha = 0;
-                        
-                }else if(this.otonaiboton.alpha == 0.4){
-                    console.log('2')
-                    this.Otonaiplayer.alpha=0;
-                    this.grunlegendplayer.alpha=0;
-                    this.otonaiboton.alpha = 0;
-                    this.grunlegendsboton.alpha = 0;
-                    this.menu_boton = 1;
-                    this.salir_luz.alpha = 1;
-                }
-            }else if(this.TeclaD.isDown || this.TeclaS.isDown ){
-                if (this.grunlegendsboton.alpha == 0.4){
-                    console.log('1')
-                    this.Otonaiplayer.alpha=0;
-                    this.grunlegendplayer.alpha=0;
-                    this.otonaiboton.alpha = 0;
-                    this.grunlegendsboton.alpha = 0;
-                    this.menu_boton = 0;
-                    this.salir_luz.alpha = 1;
-                    //console.log(this.menu_boton);
-                }else if (this.salir_luz.alpha == 1){
-                    console.log('3')
-                    this.Otonaiplayer.alpha=1;
-                    this.grunlegendplayer.alpha=0;
-                    this.otonaiboton.alpha = 0.4;
-                    this.grunlegendsboton.alpha = 0 ;
-                    this.menu_boton = 0;
-                    this.salir_luz.alpha = 0;                  
-                }else if(this.otonaiboton.alpha == 0.4){
-                    console.log('2')
-                    this.Otonaiplayer.alpha=0;
-                    this.grunlegendplayer.alpha=1;
-                    this.otonaiboton.alpha = 0;
-                    this.grunlegendsboton.alpha = 0.4;
-                    this.menu_boton = 1;
-                    this.salir_luz.alpha = 0;
-                }
-        }
+
         this.pointer = this.input.activePointer;
         if(this.iniciar.isDown){
             console.log('enter')
