@@ -175,18 +175,22 @@ export class Play_Menu_Scene extends Phaser.Scene {
         this.background.setScale(1.4);
         this.background.setOrigin(0);
 
-        this.boton1 = this.add.image(580, 370, 'botonrojo1').setInteractive();
-        this.boton1.setScale(1.45);
-        this.boton1_luz = this.add.image(580, 370, 'botonrojo2').setInteractive();
-        this.boton1_luz.setScale(1.45);
+        this.boton1 = this.add.image(570, 335, 'botonrojo1').setInteractive();
+        this.boton1.setScale(1.5);
+        this.boton1.setAngle(30);
+        this.boton1_luz = this.add.image(570, 335, 'botonrojo2').setInteractive();
+        this.boton1_luz.setScale(1.55);
         this.boton1_luz.alpha = 1;
+        this.boton1_luz.setAngle(30);
         //this.text1 = this.add.text(560, 300, 'Jugar Offline', { color: '#000000', fontSize: '28px', fontFamily: 'Gemunu Libre'});
 
-        this.boton2 = this.add.image(705, 375, 'botonazul1').setInteractive();
-        this.boton2.setScale(1.45);
-        this.boton2_luz = this.add.image(705, 375, 'botonazul2').setInteractive();
-        this.boton2_luz.setScale(1.45);
+        this.boton2 = this.add.image(750, 430, 'botonazul1').setInteractive();
+        this.boton2.setScale(1.54);
+        this.boton2.setAngle(30);
+        this.boton2_luz = this.add.image(735, 430, 'botonazul2').setInteractive();
+        this.boton2_luz.setScale(1.6);
         this.boton2_luz.alpha = 0;
+        this.boton2_luz.setAngle(30);
         //this.text2 = this.add.text(460, 270, 'Jugar Online', { color: '#000000', fontSize: '28px', fontFamily: 'Gemunu Libre'});
 
         this.salir = this.add.image(100, 50, 'botonsalir').setInteractive();
