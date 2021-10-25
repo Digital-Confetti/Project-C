@@ -50,10 +50,10 @@ export class Play_Menu_Scene extends Phaser.Scene {
     // Here we need to create all the Modules
     //^^^---Like player, platform, Pwr_Up..
     create() {
-        this.TeclaA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        this.TeclaD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        this.TeclaW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        this.TeclaS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        this.TeclaA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.TeclaD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.TeclaW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        this.TeclaS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.iniciar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.menu_boton = 0;
         console.log(this);
@@ -92,7 +92,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
         this.configuracion.setScale(1);
         this.configuracion_luz = this.add.image(1150, 270, 'botonconfiguracion2').setInteractive();
         this.configuracion_luz.setScale(1);
-        this.configuracion_luz.apha = 0;
+        this.configuracion_luz.alpha = 0;
 
         this.personajes = this.add.image(1150, 390, 'botonpersonajes').setInteractive();
         this.personajes.setScale(1);
@@ -103,29 +103,30 @@ export class Play_Menu_Scene extends Phaser.Scene {
         //this.salir.setInteractive();
         
         var that = this;
-        this.boton1.on('pointerdown', function(pointer){
+        this.boton1_luz.on('pointerdown', function(pointer){
             console.log('Boton rojo pulsado');
             that.scene.start("select_menu_Scene");
         });
 
-        this.boton2.on('pointerdown', function(pointer){
+        this.boton2_luz.on('pointerdown', function(pointer){
             console.log('Boton azul pulsado');
             that.scene.start("select_menu_Scene");
         });
 
-        this.salir.on('pointerdown', function(pointer){
+        this.salir_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
             that.scene.start("menu_Scene");
         });
-        this.controles.on('pointerdown', function(pointer){
+        
+        this.controles_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
             that.scene.start("select_menu_controles");
         });
-        this.configuracion.on('pointerdown', function(pointer){
+        this.configuracion_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
             that.scene.start("menu_Scene");
         });
-        this.personajes.on('pointerdown', function(pointer){
+        this.personajes_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
             that.scene.start("select_menu_Scene");
         });
@@ -134,36 +135,96 @@ export class Play_Menu_Scene extends Phaser.Scene {
     }
 
     update() {
+        var that = this;
+        
+        this.boton1.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 1;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 0;
+        });/*
+        this.boton1.on('pointerout', function(pointer){
+            console.log('Boton rojo pulsado');
+            that.boton1_luz.alpha = 0;
+        });*/
+        this.boton2.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 1;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 0;
+        });
+        this.salir.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 1;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 0;
+        });
+        this.configuracion.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 1;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 0;
+        });
+        this.controles.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 1;
+            that.personajes_luz.alpha = 0;
+        });
+        this.personajes.on('pointerover', function(pointer){
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 1;
+        });
         if(this.TeclaA.isDown || this.TeclaW.isDown ){
             if(this.boton1_luz.alpha == 1){
                 console.log('aagado')
                 this.salir_luz.alpha = 1;
                 this.boton1_luz.alpha = 0;
-                this.menu_boton = 0;
+                this.menu_boton = 1;
                 console.log(this.menu_boton);
             }else if (this.salir_luz.alpha == 1){
                 console.log('salir izquierda')
                 this.personajes_luz.alpha = 1;
                 this.salir_luz.alpha = 0;
-                this.menu_boton = 1;
+                this.menu_boton = 0;
                 console.log(this.menu_boton);
             }else if (this.personajes_luz.alpha == 1){
                 console.log(' s')
                 this.personajes_luz.alpha = 0;
                 this.configuracion_luz.alpha = 1;
-                this.menu_boton = 2;
+                this.menu_boton = 4;
                 console.log(this.menu_boton);
             }else if (this.configuracion_luz.alpha == 1){
                 console.log(' r')
                 this.configuracion_luz.alpha = 0;
                 this.controles_luz.alpha = 1;
-                this.menu_boton = 3;
+                this.menu_boton = 4;
                 console.log(this.menu_boton);
             }else if (this.controles_luz.alpha == 1){
                 console.log(' j')
                 this.boton2_luz.alpha = 1;
                 this.controles_luz.alpha = 0;
-                this.menu_boton = 4;
+                this.menu_boton = 0;
                 console.log(this.menu_boton);
             }else if (this.boton2_luz.alpha == 1){
                 console.log(' g')
@@ -183,7 +244,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
                 console.log(' g2')
                 this.boton2_luz.alpha = 0;
                 this.controles_luz.alpha = 1;
-                this.menu_boton = 5;
+                this.menu_boton = 4;
                 console.log(this.menu_boton);
             }else if (this.controles_luz.alpha == 1){
                 console.log(' j2')
@@ -195,13 +256,13 @@ export class Play_Menu_Scene extends Phaser.Scene {
                 console.log(' r2')
                 this.configuracion_luz.alpha = 0;
                 this.personajes_luz.alpha = 1;
-                this.menu_boton = 3;
+                this.menu_boton = 2;
                 console.log(this.menu_boton);
             }else if (this.personajes_luz.alpha == 1){
                 console.log(' s2')
                 this.personajes_luz.alpha = 0;
                 this.salir_luz.alpha = 1;
-                this.menu_boton = 2;
+                this.menu_boton = 3;
                 console.log(this.menu_boton);
             }else if (this.salir_luz.alpha == 1){
                 console.log('salir izquierda2')
@@ -237,15 +298,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
 
   
 
-        this.configuracion.on('pointerdown', function(pointer){
-            console.log('Boton salir pulsado');
-            that.scene.start("menu_Scene");
-        });
-        this.personajes.on('pointerdown', function(pointer){
-            console.log('Boton salir pulsado');
-            that.scene.start("select_menu_Scene");
-        });
-
+      
         
         this.pointer = this.input.activePointer;
         //console.log(this.TecladoStatus);
