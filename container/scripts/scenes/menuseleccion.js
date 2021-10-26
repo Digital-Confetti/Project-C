@@ -43,7 +43,7 @@ export class Play_Select_Scene extends Phaser.Scene{
             this.grunlegendplayer.alpha=0;
             this.otonaiboton.alpha = 0.4;
             this.grunlegendsboton.alpha = 0;
-            this.menu_boton = 0;
+            this.menu_boton = 2;
             this.salir_luz.alpha = 0;
         }else if (this.salir_luz.alpha == 1){
             console.log('3')
@@ -51,7 +51,7 @@ export class Play_Select_Scene extends Phaser.Scene{
             this.grunlegendplayer.alpha=1;
             this.otonaiboton.alpha = 0;
             this.grunlegendsboton.alpha = 0.4 ;
-            this.menu_boton = 0;
+            this.menu_boton = 1;
             this.salir_luz.alpha = 0;
             
         }else if(this.otonaiboton.alpha == 0.4){
@@ -60,7 +60,7 @@ export class Play_Select_Scene extends Phaser.Scene{
             this.grunlegendplayer.alpha=0;
             this.otonaiboton.alpha = 0;
             this.grunlegendsboton.alpha = 0;
-            this.menu_boton = 1;
+            this.menu_boton = 0;
             this.salir_luz.alpha = 1;
     }
     }
@@ -81,7 +81,7 @@ export class Play_Select_Scene extends Phaser.Scene{
             this.grunlegendplayer.alpha=0;
             this.otonaiboton.alpha = 0.4;
             this.grunlegendsboton.alpha = 0 ;
-            this.menu_boton = 0;
+            this.menu_boton = 2;
             this.salir_luz.alpha = 0;                  
         }else if(this.otonaiboton.alpha == 0.4){
             console.log('2')
@@ -208,10 +208,21 @@ export class Play_Select_Scene extends Phaser.Scene{
 
         this.pointer = this.input.activePointer;
         if(this.iniciar.isDown){
-            console.log('enter')
-            this.sound.play('tambor');
-            that.scene.sleep('musica_Scene');
-            this.scene.start("game_Scene", {character: 'grundlegend'});
+
+            switch (this.menu_boton) {
+                case 0: //elecion salir
+                    this.sound.play('espada');
+                    this.scene.start("play_menu_Scene");
+                    break;
+                case 1: // eleccion grund legend
+                    this.sound.play('tambor');
+                    this.scene.start("game_Scene", {character: 'grundlegend'});
+                    break;
+                case 2: // eleccion ottonai
+                    this.sound.play('tambor');
+                    this.scene.start("game_Scene", {character: 'ottonai'});
+                    break;
+            }
         }
         //console.log(this.pointer.x, this.pointer.y);
     }

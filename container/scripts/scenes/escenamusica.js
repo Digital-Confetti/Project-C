@@ -40,7 +40,7 @@ export class Musica_Scene extends Phaser.Scene {
 
     update(){
         
-        console.log('musica');
+        //console.log('musica');
         
         if(!this.loaded){
             this.loaded = true;

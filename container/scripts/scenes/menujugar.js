@@ -139,7 +139,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
             console.log('salir izquierda2')
             this.boton1_luz.alpha = 1;
             this.salir_luz.alpha = 0;
-            this.menu_boton = 1;
+            this.menu_boton = 0;
             console.log(this.menu_boton);
         }
 
@@ -246,7 +246,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
         this.controles_luz.on('pointerdown', function (pointer) {
             console.log('Boton salir pulsado');
             that.sound.play('tambor');
-            that.scene.start("select_Pausa");
+            that.scene.start("select_menu_controles");
         });//SELECT_MENU_CONTROLES
         this.configuracion_luz.on('pointerdown', function (pointer) {
             console.log('Boton salir pulsado');
