@@ -23,6 +23,7 @@ export class Menu_Scene extends Phaser.Scene {
     // Here we need to create all the Modules
     //^^^---Like player, platform, Pwr_Up..
     create() {
+
         this.background = this.add.image(0, 0, 'fondo');
         this.background.setScale(1.4);
         this.background.setOrigin(0);
@@ -42,6 +43,7 @@ export class Menu_Scene extends Phaser.Scene {
     update() {
         if(this.iniciar.isDown){
             console.log('enter')
+            this.sound.play('tambor');
             this.scene.start('play_menu_Scene');
         }
         ///ig(iniciar.isDown)

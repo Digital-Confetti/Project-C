@@ -12,6 +12,8 @@ export class Play_Select_Scene extends Phaser.Scene{
         this.salir;
 
         this.pointer;
+
+        this.escena_musica;
     }
 
     preload() {
@@ -30,6 +32,8 @@ export class Play_Select_Scene extends Phaser.Scene{
         //AUDIO
         this.load.audio('tambor', 'stores/sounds/golpe_tambor.mp3');
         this.load.audio('espada', 'stores/sounds/desenvainar_espada.mp3');
+
+        this.escena_musica = this.scene.get('musica_Scene');
     }
     Moveup()
     {
@@ -161,12 +165,14 @@ export class Play_Select_Scene extends Phaser.Scene{
         this.grunlegendsboton.on('pointerdown', function(pointer){
             console.log('Personaje 1 seleccionado');
             that.sound.play('tambor');
+            that.escena_musica.stopMenuMusic();
            that.scene.start("game_Scene", {character: 'grundlegend'});
         });
         this.otonaiboton.on('pointerdown', function(pointer){
             console.log('Personaje 2 seleccionado');
             that.sound.play('tambor');
-           that.scene.start("game_Scene", {character: 'ottonai'});
+            that.escena_musica.stopMenuMusic();
+           that.scene.start("game_Scene", {character: 'grundlegend'});
         });
         this.salir_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
@@ -204,6 +210,7 @@ export class Play_Select_Scene extends Phaser.Scene{
         if(this.iniciar.isDown){
             console.log('enter')
             this.sound.play('tambor');
+            that.scene.sleep('musica_Scene');
             this.scene.start("game_Scene", {character: 'grundlegend'});
         }
         //console.log(this.pointer.x, this.pointer.y);
