@@ -1,4 +1,5 @@
 import { Player } from "./player.js";
+import { GL_Proyectile } from "./gl_proyectile.js";
 
 export class GrundLegend extends Player{
     constructor(scene, x, y){
@@ -25,6 +26,11 @@ export class GrundLegend extends Player{
 
         this.x_move;
         this.y_move;
+
+        this.charging = false;
+        this.proyectile_Size = 0;
+        this.proyectiles = [];
+        this.shoot_Avaliable = true;
         
         this.create_Animations(scene);
         this.play('idle');
@@ -32,8 +38,6 @@ export class GrundLegend extends Player{
 
     create_Animations(scene)
     {
-        
-        var route = 'stores/characters/'
 
         var chara = 'grundlegend'
         // Idle
@@ -82,9 +86,125 @@ export class GrundLegend extends Player{
             frameRate: 5,
             repeat: 0
         });
+
+        scene.anims.create({
+            key: 'special',
+            frames: [
+                {
+                    key: chara,
+                    frame: chara + '_Special0.png'
+                },
+                {
+                    key: chara,
+                    frame: chara + '_Special1.png'
+                },
+                {
+                    key: chara,
+                    frame: chara + '_Special2.png'
+                },
+                {
+                    key: chara,
+                    frame: chara + '_Special1.png'
+                },
+            ],
+            frameRate: 3,
+            repeat: 0
+        });
+
+        scene.anims.create({
+            key: 'size1',
+            frames: [{ 
+                key: 'grundlegend', 
+                frame: 'grundlegend_Proyectil00.png' 
+            },{ 
+                key: 'grundlegend', 
+                frame: 'grundlegend_Proyectil01.png' 
+            },
+            ],
+            frameRate: 15,
+            repeat: -1
+        });
+
+        scene.anims.create({
+            key: 'size2',
+            frames: [{ 
+                key: 'grundlegend', 
+                frame: 'grundlegend_Proyectil10.png' 
+            },{ 
+                key: 'grundlegend', 
+                frame: 'grundlegend_Proyectil11.png' 
+            },
+            ],
+            frameRate: 15,
+            repeat: -1
+        });
+
+        scene.anims.create({
+            key: 'size3',
+            frames: [{ 
+                key: 'grundlegend', 
+                frame: 'grundlegend_Proyectil20.png' 
+            },{ 
+                key: 'grundlegend', 
+                frame: 'grundlegend_Proyectil21.png' 
+            },
+            ],
+            frameRate: 15,
+            repeat: -1
+        });
     }
 
     reset_ATA_N(){ this.playerStatus = Player.PlayerStatus.IDDLE;}
+
+    reset_Shoot() { this.shoot_Avaliable = true; }
+
+    reCheck_SpecialAttack()
+    {
+        if(this.keySA && this.proyectile_Size < 3)
+        {
+            this.proyectile_Size++;
+            this.SpecialAttackTimer = this.scene.time.delayedCall(0.66 * 1000, this.reCheck_SpecialAttack, null, this);
+            this.conditional_Color();
+        }else{ 
+            if (this.proyectile_Size != 0)
+            {
+                this.shoot();
+                this.shoot_Avaliable = false;
+                this.shoot_timer = this.scene.time.delayedCall(0.5 * 1000, this.reset_Shoot, null, this);
+            }
+            this.proyectile_Size = 0;
+            this.charging = false;
+            this.reset_HITTED();
+        }
+    }
+    shoot()
+    {
+        let bala = new GL_Proyectile(this.scene, this.x, this.y - 50, this.proyectile_Size);
+        if (!this.looking_R)
+        {
+            bala.flipDirection();
+        }
+        this.proyectiles.push(bala);
+          
+    }
+
+    conditional_Color()
+    {
+        switch(this.proyectile_Size)
+        {
+            case 0:
+                break;
+            case 1:
+                this.setTint(0xB2B2FF);
+                break;
+            case 2:
+                this.setTint(0x4F4FFF);
+                break;
+            case 3:
+                this.setTint(0x0000FF);
+                break;
+        }
+    }
     
 
     lauch_reset_HITTED() {
@@ -93,9 +213,18 @@ export class GrundLegend extends Player{
     reset_HITTED(){ this.playerStatus = Player.PlayerStatus.IDDLE;
         this.setTint(0xFFFFFF);}
 
+    check_SpecialAttack()
+    {
+        if(this.keySA && this.body.touching.down && !this.charging)
+        {
+            this.charging = true;
+            this.playerStatus = Player.PlayerStatus.ATA_S;
+            this.resetTimer = this.scene.time.delayedCall(0.66 * 1000, this.reCheck_SpecialAttack, null, this);
+        }
+    }
+
     check_NormalAttack()
     {
-        //console.log('Al ATAQUE');
         if(this.keyNA)
         {
             this.playerStatus = Player.PlayerStatus.ATA_N;
@@ -191,6 +320,7 @@ export class GrundLegend extends Player{
                     this.check_Jump();
                     this.check_Dash();
                     this.check_NormalAttack();
+                    this.check_SpecialAttack()
                 break;
             case Player.PlayerStatus.MOVING:
                     if(this.keyA){
@@ -204,6 +334,7 @@ export class GrundLegend extends Player{
                     this.check_Jump();
                     this.check_Dash();
                     this.check_NormalAttack();
+                    this.check_SpecialAttack()
                 break;
             case Player.PlayerStatus.DASHING:
                 this.dashAllowed = false;
@@ -227,6 +358,13 @@ export class GrundLegend extends Player{
                 this.check_NormalAttack();
                 break;
             case Player.PlayerStatus.ATA_S:
+                if (this.keyA && this.looking_R)
+                {
+                    this.looking_R = false;
+                } else if (this.keyD && !this.looking_R)
+                {
+                    this.looking_R = true;
+                }
                 break;
             case Player.PlayerStatus.ATA_N:
                 break;
@@ -298,6 +436,7 @@ export class GrundLegend extends Player{
                 this.move_Jump(delta);
                 break;
             case Player.PlayerStatus.ATA_S:
+                this.body.velocity.x = 0;
                 break;
             case Player.PlayerStatus.ATA_N:
                 break;
@@ -337,6 +476,7 @@ export class GrundLegend extends Player{
             case Player.PlayerStatus.JUMP_2:
                 break;
             case Player.PlayerStatus.ATA_S:
+                this.load_animation('special');
                 break;
             case Player.PlayerStatus.ATA_N:
                 this.load_animation('punch');
@@ -370,6 +510,12 @@ export class GrundLegend extends Player{
 
         // Load the animation
         this.animate(delta);
+
+        for (var i = 0; i < this.proyectiles.length; i++)
+        {
+            this.proyectiles[i].update();
+        }
+
 
         //console.log(this.playerStatus);
     }
