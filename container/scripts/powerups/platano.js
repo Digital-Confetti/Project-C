@@ -21,16 +21,17 @@ export class Platano extends PowerUp {
         this.drag = 0.5;
 
         this.platano_player_platano_collider;
+        this.platano_player2_platano_collider;
 
         this.timer;
 
     }
 
-    collected() {
+    collected(player) {
         console.log("platano recogido");
 
         this.picked = true;
-        this.linkedPlayer = this.scene.player;
+        this.linkedPlayer = player;
 
         this.timer = this.scene.time.delayedCall(this.duration, this.outTimeTrigger, null, this);
 
@@ -59,8 +60,10 @@ export class Platano extends PowerUp {
 
 
             this.scene.game_player_powerup_collider.active = false;
+            this.scene.game_player2_powerup_collider.active = false;
 
             this.platano_player_platano_collider = this.scene.physics.add.collider(this.scene.player, this, this.hitPlayer, null, this);
+            this.platano_player2_platano_collider = this.scene.physics.add.collider(this.scene.player2, this, this.hitPlayer, null, this);
         }
 
         if (!this.throwed) {
@@ -107,9 +110,9 @@ export class Platano extends PowerUp {
 
     }
 
-    hitPlayer() {
+    hitPlayer(player) {
         console.log('player dañado');
-        this.scene.player.setVida(this.scene.player.getVida() - this.hit_damage);
+        player.setVida(player.getVida() - this.hit_damage);
 
         this.outTimeTrigger();
     }

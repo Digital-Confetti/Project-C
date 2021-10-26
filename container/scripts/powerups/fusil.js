@@ -25,16 +25,17 @@ export class Fusil extends PowerUp {
         this.dissapeared = false;
 
         this.fusil_player_bullet_collider = [];
+        this.fusil_player2_bullet_collider = [];
 
         this.timer;
 
     }
 
-    collected() {
+    collected(player) {
 
         this.picked = true;
         this.body.allowGravity = false;
-        this.linkedPlayer = this.scene.player;
+        this.linkedPlayer = player;
 
         this.timer = this.scene.time.delayedCall(this.dissapear_cooldown, this.outTimeTrigger, null, this);
 
@@ -75,9 +76,11 @@ export class Fusil extends PowerUp {
             }
 
             this.colisionador = this.scene.physics.add.collider(this.scene.player, this.bala, this.hitPlayer, null, this);
+            this.colisionador2 = this.scene.physics.add.collider(this.scene.player2, this.bala, this.hitPlayer, null, this);
 
             this.bullet.push(this.bala);
             this.fusil_player_bullet_collider.push(this.colisionador);
+            this.fusil_player2_bullet_collider.push(this.colisionador2);
 
             this.scene.time.delayedCall(this.shoot_cooldown, function () { this.able_shoot = true }, null, this);
 
@@ -119,6 +122,7 @@ export class Fusil extends PowerUp {
             if (this.bullet[i].active) {
                 this.bullet[i].destroy();
                 this.scene.physics.world.removeCollider(this.fusil_player_bullet_collider[i]);
+                this.scene.physics.world.removeCollider(this.fusil_player2_bullet_collider[i]);
             }
 
         }

@@ -16,11 +16,11 @@ export class EspecialDeTuichi extends PowerUp{
 
     }
 
-    collected(){
+    collected(player){
         console.log("especial de tuichi consumido");
 
         this.picked = true;
-        this.linkedPlayer = this.scene.player;
+        this.linkedPlayer = player;
 
         this.linkedPlayer.setVida( this.linkedPlayer.getVida() + this.healing);
 

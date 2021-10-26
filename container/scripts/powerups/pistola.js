@@ -11,7 +11,7 @@ export class Pistola extends PowerUp {
         this.body.setOffset(0, 0);
         this.body.setSize(30, 31, false);
 
-        this.hit_damage = 20;
+        this.hit_damage = 30;
 
         this.bullet = [];
         this.max_ammo = 1;
@@ -25,16 +25,17 @@ export class Pistola extends PowerUp {
         this.dissapeared = false;
 
         this.fusil_player_bullet_collider = [];
+        this.fusil_player2_bullet_collider = [];
 
         this.timer;
 
     }
 
-    collected() {
+    collected(player) {
 
         this.picked = true;
         this.body.allowGravity = false;
-        this.linkedPlayer = this.scene.player;
+        this.linkedPlayer = player;
 
         this.timer = this.scene.time.delayedCall(this.dissapear_cooldown, this.outTimeTrigger, null, this);
 
@@ -65,6 +66,7 @@ export class Pistola extends PowerUp {
             console.log('disparo realizado');
 
             this.scene.game_player_powerup_collider.active = false;
+            this.scene.game_player2_powerup_collider.active = false;
 
             
             if(this.linkedPlayer.looking_R){
@@ -75,9 +77,11 @@ export class Pistola extends PowerUp {
             }
 
             this.colisionador = this.scene.physics.add.collider(this.scene.player, this.bala, this.hitPlayer, null, this);
+            this.colisionador2 = this.scene.physics.add.collider(this.scene.player2, this.bala, this.hitPlayer, null, this);
 
             this.bullet.push(this.bala);
             this.fusil_player_bullet_collider.push(this.colisionador);
+            this.fusil_player2_bullet_collider.push(this.colisionador2);
 
             this.scene.time.delayedCall(this.shoot_cooldown, function () { this.able_shoot = true }, null, this);
 
@@ -119,6 +123,7 @@ export class Pistola extends PowerUp {
             if (this.bullet[i].active) {
                 this.bullet[i].destroy();
                 this.scene.physics.world.removeCollider(this.fusil_player_bullet_collider[i]);
+                this.scene.physics.world.removeCollider(this.fusil_player2_bullet_collider[i]);
             }
 
         }

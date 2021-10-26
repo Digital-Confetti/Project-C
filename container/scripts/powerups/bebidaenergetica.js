@@ -22,11 +22,11 @@ export class BebidaEnergetica extends PowerUp{
 
     }
 
-    collected(){
+    collected(player){
         console.log("bebida energetica consumida");
 
         this.picked = true;
-        this.linkedPlayer = this.scene.player;
+        this.linkedPlayer = player;
 
         this.baseVelocity = this.linkedPlayer.getVelocidad();
         //this.baseAceleration = this.linkedPlayer.getAceleration();

@@ -201,7 +201,7 @@ export class Game_Scene extends Phaser.Scene {
 
     spawnPowerUp(){
         this.i = Math.floor(Math.random() * 5) + 1;
-        //this.i = 5;
+        this.i = 5;
         this.x = Math.floor(Math.random() * 1080) + 200;
         this.y = 50;
 
@@ -222,6 +222,7 @@ export class Game_Scene extends Phaser.Scene {
         }
         this.physics.add.collider(this.activePowerUp, this.platforms);
         this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
+        this.game_player2_powerup_collider = this.physics.add.collider(this.player2, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     update(timer, delta) {
@@ -238,9 +239,9 @@ export class Game_Scene extends Phaser.Scene {
 
         this.text_Debug.setText(out);
 
-        this.text_vida.setText('Vida: ' + this.player.getVida());
+        this.text_vida.setText('Vida: ' + this.player2.getVida());
 
-        this.text_velocidad.setText('Velocidad: ' + this.player.horizontalSpeed);
+        this.text_velocidad.setText('Velocidad: ' + this.player2.horizontalSpeed);
 
         
         if (this.activePowerUp !== null) {
@@ -314,11 +315,11 @@ export class Game_Scene extends Phaser.Scene {
         }
     }
 
-    pickPowerUp() {
+    pickPowerUp(player, powerup) {
 
         if (!this.activePowerUp.picked) {
 
-            this.activePowerUp.collected();
+            this.activePowerUp.collected(player);
 
         }
     }
