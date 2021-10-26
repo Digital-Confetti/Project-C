@@ -76,6 +76,8 @@ export class Pistola extends PowerUp {
                 this.bala.flipDirection();
             }
 
+            this.scene.sound.play('disparo');
+
             this.colisionador = this.scene.physics.add.collider(this.scene.player, this.bala, this.hitPlayer, null, this);
             this.colisionador2 = this.scene.physics.add.collider(this.scene.player2, this.bala, this.hitPlayer, null, this);
 
@@ -138,6 +140,7 @@ export class Pistola extends PowerUp {
         bullet.active = false;
         bullet.destroy();
 
+        this.scene.sound.play('impacto');
         player.setVida(player.getVida() - this.hit_damage);
 
     }

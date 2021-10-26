@@ -82,7 +82,12 @@ export class Game_Scene extends Phaser.Scene {
         this.load.spritesheet('fusil', 'stores/powerups/fusil.png', { frameWidth: 59, frameHeight: 26 });
         this.load.spritesheet('disparo', 'stores/powerups/disparo.png', { frameWidth: 14, frameHeight: 7 });
 
-
+        //sound effects
+        this.load.audio('disparo', 'stores/sounds/disparo.mp3');
+        this.load.audio('impacto', 'stores/sounds/impacto.mp3');
+        this.load.audio('comer', 'stores/sounds/comer.mp3');
+        this.load.audio('beber', 'stores/sounds/beber.mp3');
+        this.load.audio('caida', 'stores/sounds/caida.mp3');
     }
 
     // Function thats add all the sprites to the gameObjects
@@ -201,7 +206,7 @@ export class Game_Scene extends Phaser.Scene {
 
     spawnPowerUp(){
         this.i = Math.floor(Math.random() * 5) + 1;
-        //this.i = 5;
+        //this.i = 2;
         this.x = Math.floor(Math.random() * 1080) + 200;
         this.y = 50;
 

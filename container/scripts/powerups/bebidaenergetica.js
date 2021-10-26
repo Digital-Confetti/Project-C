@@ -31,6 +31,8 @@ export class BebidaEnergetica extends PowerUp{
         this.baseVelocity = this.linkedPlayer.getVelocidad();
         //this.baseAceleration = this.linkedPlayer.getAceleration();
 
+        this.scene.sound.play('beber');
+
         this.linkedPlayer.setVelocidad(this.linkedPlayer.getVelocidad() + this.linkedPlayer.getVelocidad() * this.bonusVelocity);
         //this.linkedPlayer.setAceleration(this.linkedPlayer.getAceleration() + this.linkedPlayer.getAceleration() * this.bonusAceleration);
 

@@ -22,6 +22,8 @@ export class EspecialDeTuichi extends PowerUp{
         this.picked = true;
         this.linkedPlayer = player;
 
+        this.scene.sound.play('comer');
+
         this.linkedPlayer.setVida( this.linkedPlayer.getVida() + this.healing);
 
         this.destroyPowerUp();

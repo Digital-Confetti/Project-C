@@ -112,6 +112,7 @@ export class Platano extends PowerUp {
 
     hitPlayer(player) {
         console.log('player dañado');
+        this.scene.sound.play('caida');
         player.setVida(player.getVida() - this.hit_damage);
 
         this.outTimeTrigger();
