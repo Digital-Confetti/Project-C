@@ -6,14 +6,14 @@ export class Bala extends Phaser.GameObjects.Sprite {
         this.body.allowGravity = false;
 
         this.setTexture('disparo')
-        this.setScale(0.2, 0.2);
+        this.setScale(3, 3);
 
         this.body.setOffset(0, 0);
-        this.body.setSize(111, 31, false);
+        this.body.setSize(14, 7, false);
 
         this.active = true;
 
-        this.velocidadx = 1000
+        this.velocidadx = 1300
         this.velocidady = 0;
 
         this.scene.add.existing(this);
@@ -23,6 +23,7 @@ export class Bala extends Phaser.GameObjects.Sprite {
 
     flipDirection() {
         
+        this.flipX = true;
         this.velocidadx = -this.velocidadx;
     }
 

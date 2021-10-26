@@ -6,12 +6,12 @@ export class Pistola extends PowerUp {
         super(scene, x, y);
 
         this.setTexture('pistola')
-        this.setScale(0.1, 0.1);
+        this.setScale(1.5, 1.5);
 
         this.body.setOffset(0, 0);
-        this.body.setSize(855, 251, false);
+        this.body.setSize(30, 31, false);
 
-        this.hit_damage = 20;
+        this.hit_damage = 30;
 
         this.bullet = [];
         this.max_ammo = 1;
@@ -25,16 +25,17 @@ export class Pistola extends PowerUp {
         this.dissapeared = false;
 
         this.fusil_player_bullet_collider = [];
+        this.fusil_player2_bullet_collider = [];
 
         this.timer;
 
     }
 
-    collected() {
+    collected(player) {
 
         this.picked = true;
         this.body.allowGravity = false;
-        this.linkedPlayer = this.scene.player;
+        this.linkedPlayer = player;
 
         this.timer = this.scene.time.delayedCall(this.dissapear_cooldown, this.outTimeTrigger, null, this);
 
@@ -65,19 +66,24 @@ export class Pistola extends PowerUp {
             console.log('disparo realizado');
 
             this.scene.game_player_powerup_collider.active = false;
+            this.scene.game_player2_powerup_collider.active = false;
 
             
             if(this.linkedPlayer.looking_R){
-                this.bala = new Bala(this.scene, this.x + 25, this.y-7);
+                this.bala = new Bala(this.scene, this.x + 25, this.y-2);
             }else{
-                this.bala = new Bala(this.scene, this.x - 25, this.y-7);
+                this.bala = new Bala(this.scene, this.x - 25, this.y-2);
                 this.bala.flipDirection();
             }
 
+            this.scene.sound.play('disparo');
+
             this.colisionador = this.scene.physics.add.collider(this.scene.player, this.bala, this.hitPlayer, null, this);
+            this.colisionador2 = this.scene.physics.add.collider(this.scene.player2, this.bala, this.hitPlayer, null, this);
 
             this.bullet.push(this.bala);
             this.fusil_player_bullet_collider.push(this.colisionador);
+            this.fusil_player2_bullet_collider.push(this.colisionador2);
 
             this.scene.time.delayedCall(this.shoot_cooldown, function () { this.able_shoot = true }, null, this);
 
@@ -119,6 +125,7 @@ export class Pistola extends PowerUp {
             if (this.bullet[i].active) {
                 this.bullet[i].destroy();
                 this.scene.physics.world.removeCollider(this.fusil_player_bullet_collider[i]);
+                this.scene.physics.world.removeCollider(this.fusil_player2_bullet_collider[i]);
             }
 
         }
@@ -133,6 +140,7 @@ export class Pistola extends PowerUp {
         bullet.active = false;
         bullet.destroy();
 
+        this.scene.sound.play('impacto');
         player.setVida(player.getVida() - this.hit_damage);
 
     }

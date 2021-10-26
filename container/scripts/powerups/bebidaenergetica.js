@@ -5,7 +5,7 @@ export class BebidaEnergetica extends PowerUp{
         super(scene, x, y);
 
         this.setTexture('bebidaenergetica')
-        this.setScale(0.2,0.2);
+        this.setScale(1.5,1.5);
 
         this.alpha = 1;
 
@@ -18,18 +18,20 @@ export class BebidaEnergetica extends PowerUp{
         this.duration = 5 * 1000;
 
         this.body.setOffset(0, 0);
-        this.body.setSize(190, 331, false);
+        this.body.setSize(30, 32, false);
 
     }
 
-    collected(){
+    collected(player){
         console.log("bebida energetica consumida");
 
         this.picked = true;
-        this.linkedPlayer = this.scene.player;
+        this.linkedPlayer = player;
 
         this.baseVelocity = this.linkedPlayer.getVelocidad();
         //this.baseAceleration = this.linkedPlayer.getAceleration();
+
+        this.scene.sound.play('beber');
 
         this.linkedPlayer.setVelocidad(this.linkedPlayer.getVelocidad() + this.linkedPlayer.getVelocidad() * this.bonusVelocity);
         //this.linkedPlayer.setAceleration(this.linkedPlayer.getAceleration() + this.linkedPlayer.getAceleration() * this.bonusAceleration);

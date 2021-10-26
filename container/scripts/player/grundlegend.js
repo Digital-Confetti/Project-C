@@ -4,8 +4,8 @@ export class GrundLegend extends Player{
     constructor(scene, x, y){
         super(scene, x, y, 'grundlegend');
 
-        this.maxVida = 100;
-        this.vida = 100;
+        this.maxVida = 180;
+        this.vida = 180;
 
         this.body.setBounce(0.1);
         //animacion run
@@ -27,6 +27,7 @@ export class GrundLegend extends Player{
         this.y_move;
         
         this.create_Animations(scene);
+        this.play('idle');
     }
 
     create_Animations(scene)

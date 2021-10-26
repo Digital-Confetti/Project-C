@@ -60,6 +60,10 @@ export class Play_Menu_Scene extends Phaser.Scene {
         this.load.audio('tambor', 'stores/sounds/golpe_tambor.mp3');
         this.load.audio('espada', 'stores/sounds/desenvainar_espada.mp3');
 
+        this.scene.launch("musica_Scene");
+        //console.log(Musica_Scene.loaded);
+        //this.escena_paralela.playMusic();
+
     }
     Moveup() {
         if (this.boton1_luz.alpha == 1) {

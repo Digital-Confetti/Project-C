@@ -26,14 +26,19 @@ export class Game_Scene extends Phaser.Scene {
         this.timer_dash;
         this.powerUp_duration_timer;
 
-        // debug
+        // debug player 1
         this.text_Debug;
         this.text_vida;
         this.text_velocidad;
 
+        // debug player 1
+        this.text_Debug2;
+        this.text_vida2;
+        this.text_velocidad2;
+
         // s -> ms
         this.dashCoolDown = 3 * 1000;
-        this.power_ups_respawn_cooldown = 5 * 1000;
+        this.power_ups_respawn_cooldown = 2 * 1000;
 
         // receiver of the selected character
         this.selectedCharacter;
@@ -75,22 +80,27 @@ export class Game_Scene extends Phaser.Scene {
         
 
         //powerups
-        this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 383, frameHeight: 312 });
-        this.load.spritesheet('bebidaenergetica', 'stores/powerups/bebidaenergetica.png', { frameWidth: 190, frameHeight: 331 });
-        this.load.spritesheet('platano', 'stores/powerups/platano.png', { frameWidth: 161, frameHeight: 151 });
-        this.load.spritesheet('pistola', 'stores/powerups/pistola.png', { frameWidth: 361, frameHeight: 241 });
-        this.load.spritesheet('fusil', 'stores/powerups/fusil.png', { frameWidth: 855, frameHeight: 251 });
-        this.load.spritesheet('disparo', 'stores/powerups/disparo.png', { frameWidth: 111, frameHeight: 31 });
+        this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 42, frameHeight: 30 });
+        this.load.spritesheet('bebidaenergetica', 'stores/powerups/bebidaenergetica.png', { frameWidth: 30, frameHeight: 32 });
+        this.load.spritesheet('platano', 'stores/powerups/platano.png', { frameWidth: 30, frameHeight: 25 });
+        this.load.spritesheet('pistola', 'stores/powerups/pistola.png', { frameWidth: 30, frameHeight: 31 });
+        this.load.spritesheet('fusil', 'stores/powerups/fusil.png', { frameWidth: 59, frameHeight: 26 });
+        this.load.spritesheet('disparo', 'stores/powerups/disparo.png', { frameWidth: 14, frameHeight: 7 });
 
-
+        //sound effects
+        this.load.audio('disparo', 'stores/sounds/disparo.mp3');
+        this.load.audio('impacto', 'stores/sounds/impacto.mp3');
+        this.load.audio('comer', 'stores/sounds/comer.mp3');
+        this.load.audio('beber', 'stores/sounds/beber.mp3');
+        this.load.audio('caida', 'stores/sounds/caida.mp3');
     }
 
     // Function thats add all the sprites to the gameObjects
     createGameObjects() {
         // Creating the player
-        if (this.selectedCharacter == 'avalor') {
-            this.player = new Avalor(this, 100, 100);
-
+        if (this.selectedCharacter == 'ottonai') {
+            this.player = new Ottonai(this, 100, 100);
+            this.player2 = new GrundLegend(this, 1000, 100);
         } else if (this.selectedCharacter == 'grundlegend') {
             this.player = new GrundLegend(this, 100, 100);
             this.player2 = new Ottonai(this, 1000, 100);
@@ -192,17 +202,19 @@ export class Game_Scene extends Phaser.Scene {
 
         // text debug
         this.text_Debug = this.add.text(32, 32);
-        this.player.play('idle');
-        this.punchingBag.play('PB_idle');
         this.text_vida = this.add.text(32, 82);
-
         this.text_velocidad = this.add.text(32, 132);
+        
+        this.text_Debug2 = this.add.text(1100, 32);
+        this.text_vida2 = this.add.text(1100, 82);
+        this.text_velocidad2 = this.add.text(1100, 132);
 
+        this.punchingBag.play('PB_idle');
     }
 
     spawnPowerUp(){
         this.i = Math.floor(Math.random() * 5) + 1;
-        //this.i = 3;
+        //this.i = 2;
         this.x = Math.floor(Math.random() * 1080) + 200;
         this.y = 50;
 
@@ -223,6 +235,7 @@ export class Game_Scene extends Phaser.Scene {
         }
         this.physics.add.collider(this.activePowerUp, this.platforms);
         this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
+        this.game_player2_powerup_collider = this.physics.add.collider(this.player2, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     update(timer, delta) {
@@ -242,6 +255,13 @@ export class Game_Scene extends Phaser.Scene {
         this.text_vida.setText('Vida: ' + this.player.getVida());
 
         this.text_velocidad.setText('Velocidad: ' + this.player.horizontalSpeed);
+
+
+        this.text_Debug2.setText('Progreso: ' + this.player2.dash_Timer.getProgress().toString().substr(0, 4));
+
+        this.text_vida2.setText('Vida: ' + this.player2.getVida());
+
+        this.text_velocidad2.setText('Velocidad: ' + this.player2.horizontalSpeed);
 
         
         if (this.activePowerUp !== null) {
@@ -315,11 +335,11 @@ export class Game_Scene extends Phaser.Scene {
         }
     }
 
-    pickPowerUp() {
+    pickPowerUp(player, powerup) {
 
         if (!this.activePowerUp.picked) {
 
-            this.activePowerUp.collected();
+            this.activePowerUp.collected(player);
 
         }
     }

@@ -34,12 +34,15 @@ import {Play_Menu_Scene} from './scripts/scenes/menujugar.js';
 import {Play_Select_Scene} from './scripts/scenes/menuseleccion.js';
 import {Controles_Scene} from './scripts/scenes/controles.js';
 import {Personajes_Scene} from './scripts/scenes/personajes.js';
+import {Musica_Scene} from './scripts/scenes/escenamusica.js';
+
 
 const config = {
     type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
     width: 1280,         // game width 640
     height: 720,        // game height 360
     pixelArt: true,
+    
     // Adding Physics
         physics: {
             default: 'arcade',
@@ -48,8 +51,11 @@ const config = {
                 debug: false
             }
         },
-        //scene: [Menu_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene]
-        scene: [Menu_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene,Controles_Scene,Personajes_Scene]
+        audio: {
+            disableWebAudio: true
+        },
+
+        scene: [Menu_Scene, Musica_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene,Controles_Scene,Personajes_Scene]
 
     };
 
