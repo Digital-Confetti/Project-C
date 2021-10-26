@@ -172,7 +172,7 @@ export class Play_Select_Scene extends Phaser.Scene{
             console.log('Personaje 2 seleccionado');
             that.sound.play('tambor');
             that.escena_musica.stopMenuMusic();
-           that.scene.start("game_Scene", {character: 'grundlegend'});
+           that.scene.start("game_Scene", {character: 'ottonai'});
         });
         this.salir_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
@@ -216,10 +216,12 @@ export class Play_Select_Scene extends Phaser.Scene{
                     break;
                 case 1: // eleccion grund legend
                     this.sound.play('tambor');
+                    this.escena_musica.stopMenuMusic();
                     this.scene.start("game_Scene", {character: 'grundlegend'});
                     break;
                 case 2: // eleccion ottonai
                     this.sound.play('tambor');
+                    this.escena_musica.stopMenuMusic();
                     this.scene.start("game_Scene", {character: 'ottonai'});
                     break;
             }
