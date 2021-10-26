@@ -498,6 +498,39 @@ export class GrundLegend extends Player{
         }
     }
 
+    checkRespawn() {
+        if ((this.vida <= 0 || this.y > 1500)&&(!this.muerto)) {
+            this.muerto = true;
+
+            this.vidas--;
+            this.vida = this.maxVida;
+
+            this.body.setCollideWorldBounds(false);
+            this.body.allowGravity = false;
+
+            this.x = 3000;
+            this.y = 3000;
+
+            this.scene.time.delayedCall(this.respawn_timer, this.respawn, null, this);
+
+        }
+
+    }
+
+    respawn() {
+
+        this.body.setCollideWorldBounds(true);
+        this.body.allowGravity = true;
+
+        this.x = this.respawnX;
+        this.y = this.respawnY;
+
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
+
+        this.muerto = false;
+    }
+
     update(delta)
     {
         this.timer_Update();
@@ -516,7 +549,7 @@ export class GrundLegend extends Player{
             this.proyectiles[i].update();
         }
 
-
+        this.checkRespawn();
         //console.log(this.playerStatus);
     }
 

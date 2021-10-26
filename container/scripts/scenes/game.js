@@ -29,12 +29,12 @@ export class Game_Scene extends Phaser.Scene {
         // debug player 1
         this.text_Debug;
         this.text_vida;
-        this.text_velocidad;
+        this.text_vidas;
 
         // debug player 1
         this.text_Debug2;
         this.text_vida2;
-        this.text_velocidad2;
+        this.text_vidas2;
 
         // s -> ms
         this.dashCoolDown = 3 * 1000;
@@ -205,18 +205,18 @@ export class Game_Scene extends Phaser.Scene {
         // text debug
         this.text_Debug = this.add.text(32, 32);
         this.text_vida = this.add.text(32, 82);
-        this.text_velocidad = this.add.text(32, 132);
+        this.text_vidas = this.add.text(32, 132);
         
         this.text_Debug2 = this.add.text(1100, 32);
         this.text_vida2 = this.add.text(1100, 82);
-        this.text_velocidad2 = this.add.text(1100, 132);
+        this.text_vidas2 = this.add.text(1100, 132);
 
         this.punchingBag.play('PB_idle');
     }
 
     spawnPowerUp(){
         this.i = Math.floor(Math.random() * 5) + 1;
-        //this.i = 2;
+        this.i = 5;
         this.x = Math.floor(Math.random() * 1080) + 200;
         this.y = 50;
 
@@ -262,14 +262,14 @@ export class Game_Scene extends Phaser.Scene {
 
         this.text_vida.setText('Vida: ' + this.player.getVida());
 
-        this.text_velocidad.setText('Velocidad: ' + this.player.horizontalSpeed);
+        this.text_vidas.setText('Vidas: ' + this.player.getVidas());
 
 
         this.text_Debug2.setText('Progreso: ' + this.player2.dash_Timer.getProgress().toString().substr(0, 4));
 
         this.text_vida2.setText('Vida: ' + this.player2.getVida());
 
-        this.text_velocidad2.setText('Velocidad: ' + this.player2.horizontalSpeed);
+        this.text_vidas2.setText('Vidas: ' + this.player2.getVidas());
 
         
         if (this.activePowerUp !== null) {
@@ -287,6 +287,9 @@ export class Game_Scene extends Phaser.Scene {
             }
             
         }
+
+        console.log(this.player.y);
+        console.log(this.player2.y);
         
     }
 

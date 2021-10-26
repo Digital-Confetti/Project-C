@@ -1,7 +1,7 @@
 import { Player } from "./player.js";
 
-export class Ottonai extends Player{
-    constructor(scene, x, y){
+export class Ottonai extends Player {
+    constructor(scene, x, y) {
         super(scene, x, y, 'ottonai');
 
         this.maxVida = 100;
@@ -21,18 +21,17 @@ export class Ottonai extends Player{
         this.play(this.playingAnim);
 
         this.dashCoolDown = 3 * 1000;
-        this.dash_Timer = scene.time.addEvent({delay:this.dashCoolDown, loop:true});
+        this.dash_Timer = scene.time.addEvent({ delay: this.dashCoolDown, loop: true });
 
         this.x_move;
         this.y_move;
-        
+
         this.create_Animations(scene);
         this.play('otto_idle');
     }
 
-    create_Animations(scene)
-    {
-        
+    create_Animations(scene) {
+
         var route = 'stores/characters/'
 
         var chara = 'ottonai'
@@ -52,15 +51,15 @@ export class Ottonai extends Player{
         scene.anims.create({
             key: 'otto_run',
             frames: [{
-                    key: chara,
-                    frame: chara + '_walk0.png'
-                },{
-                    key: chara,
-                    frame: chara + '_walk1.png'
-                },{
-                    key: chara,
-                    frame: chara + '_walk2.png'
-                },
+                key: chara,
+                frame: chara + '_walk0.png'
+            }, {
+                key: chara,
+                frame: chara + '_walk1.png'
+            }, {
+                key: chara,
+                frame: chara + '_walk2.png'
+            },
             ],
             frameRate: 10,
             repeat: -1
@@ -69,7 +68,7 @@ export class Ottonai extends Player{
         scene.anims.create({
             key: 'otto_punch',
             frames: [
-                
+
                 {
                     key: chara,
                     frame: chara + '_normalAttack2.png'
@@ -80,77 +79,76 @@ export class Ottonai extends Player{
         });
     }
 
-    reset_ATA_N(){ this.playerStatus = Player.PlayerStatus.IDDLE;}
-    
+    reset_ATA_N() { this.playerStatus = Player.PlayerStatus.IDDLE; }
+
 
     lauch_reset_HITTED() {
         this.reset_HIT = this.scene.time.delayedCall(0.25 * 1000, this.reset_HITTED, null, this);
     }
-    reset_HITTED(){ this.playerStatus = Player.PlayerStatus.IDDLE;
-        this.setTint(0xFFFFFF);}
+    reset_HITTED() {
+        this.playerStatus = Player.PlayerStatus.IDDLE;
+        this.setTint(0xFFFFFF);
+    }
 
-    check_NormalAttack()
-    {
+    check_NormalAttack() {
         //console.log('Al ATAQUE');
-        if(this.keyNA)
-        {
+        if (this.keyNA) {
             this.playerStatus = Player.PlayerStatus.ATA_N;
             this.resetTimer = this.scene.time.delayedCall(0.66 * 1000, this.reset_ATA_N, null, this);
         }
     }
 
-    move_Jump(delta){
-        if (this.looking_R && this.keyA){
+    move_Jump(delta) {
+        if (this.looking_R && this.keyA) {
             this.looking_R = false
-        } else if (!this.looking_R && this.keyD){
+        } else if (!this.looking_R && this.keyD) {
             this.looking_R = true
-        } else if (!this.keyA && !this.keyD)
-        {
-            if (this.looking_R && this.body.velocity.x != 0){
+        } else if (!this.keyA && !this.keyD) {
+            if (this.looking_R && this.body.velocity.x != 0) {
                 this.body.velocity.x -= this.jump_drag * delta;
-                if (this.body.velocity.x <= 0){
+                if (this.body.velocity.x <= 0) {
                     this.body.setVelocityX(0);
-            }} else if (!this.looking_R && this.body.velocity.x != 0){
-                this.body.velocity.x += this.jump_drag * delta; 
-                if (this.body.velocity.x >= 0){   
+                }
+            } else if (!this.looking_R && this.body.velocity.x != 0) {
+                this.body.velocity.x += this.jump_drag * delta;
+                if (this.body.velocity.x >= 0) {
                     this.body.setVelocityX(0);
-            }}
+                }
+            }
             return;
         }
 
-        if(this.looking_R){
+        if (this.looking_R) {
             if (this.body.velocity.x < this.horizontalJumpSpeed) this.body.velocity.x += this.jump_aceleration * delta;
         } else {
             if (this.body.velocity.x > -1 * this.horizontalJumpSpeed) this.body.velocity.x -= this.jump_aceleration * delta;
         }
 
-        
+
     }
 
-    check_Jump(){
-        if (this.playerStatus == Player.PlayerStatus.JUMP_1 || this.playerStatus == Player.PlayerStatus.JUMP_2)
-        {
-            if (this.body.touching.down){
+    check_Jump() {
+        if (this.playerStatus == Player.PlayerStatus.JUMP_1 || this.playerStatus == Player.PlayerStatus.JUMP_2) {
+            if (this.body.touching.down) {
                 this.playerStatus = Player.PlayerStatus.IDDLE;
             }
         }
 
-        if (this.keySPACE && this.body.touching.down)
-        {
+        if (this.keySPACE && this.body.touching.down) {
             this.body.setVelocityY(-430);
             this.playerStatus = Player.PlayerStatus.JUMP_1;
         }
     }
 
-    check_Dash(){
-        if (this.dashAllowed && this.keySHIFT){
+    check_Dash() {
+        if (this.dashAllowed && this.keySHIFT) {
             this.dashAllowed = false;
             this.playerStatus = Player.PlayerStatus.DASHING;
             this.dash_R = this.looking_R;
         }
     }
 
-    timer_Update(){
+    timer_Update() {
         let progress = this.dash_Timer.getProgress();
 
         this.dash_Timer.paused = this.dashAllowed;
@@ -172,34 +170,32 @@ export class Ottonai extends Player{
     }
 
     // PrevST + Inputs = NewST
-    logic(delta)
-    {
-        switch(this.playerStatus)
-        {
+    logic(delta) {
+        switch (this.playerStatus) {
             case Player.PlayerStatus.IDDLE:
-                    if(this.keyA){
-                        this.playerStatus = Player.PlayerStatus.MOVING;
-                        this.looking_R = false;
-                    } else if(this.keyD) {
-                        this.playerStatus = Player.PlayerStatus.MOVING;
-                        this.looking_R = true;
-                    }
-                    this.check_Jump();
-                    this.check_Dash();
-                    this.check_NormalAttack();
+                if (this.keyA) {
+                    this.playerStatus = Player.PlayerStatus.MOVING;
+                    this.looking_R = false;
+                } else if (this.keyD) {
+                    this.playerStatus = Player.PlayerStatus.MOVING;
+                    this.looking_R = true;
+                }
+                this.check_Jump();
+                this.check_Dash();
+                this.check_NormalAttack();
                 break;
             case Player.PlayerStatus.MOVING:
-                    if(this.keyA){
-                        this.looking_R = false;
-                    } else if(this.keyD){
-                        this.looking_R = true;
-                    } 
-                    if(!this.keyA && !this.keyD){
-                        this.playerStatus = Player.PlayerStatus.IDDLE;
-                    }
-                    this.check_Jump();
-                    this.check_Dash();
-                    this.check_NormalAttack();
+                if (this.keyA) {
+                    this.looking_R = false;
+                } else if (this.keyD) {
+                    this.looking_R = true;
+                }
+                if (!this.keyA && !this.keyD) {
+                    this.playerStatus = Player.PlayerStatus.IDDLE;
+                }
+                this.check_Jump();
+                this.check_Dash();
+                this.check_NormalAttack();
                 break;
             case Player.PlayerStatus.DASHING:
                 this.dashAllowed = false;
@@ -209,14 +205,14 @@ export class Ottonai extends Player{
                     this.body.setVelocityY(-430);
                     this.playerStatus = Player.PlayerStatus.JUMP_2;
                 }
-                if (this.body.touching.down){
+                if (this.body.touching.down) {
                     this.playerStatus = Player.PlayerStatus.IDDLE;
                 }
                 this.check_Dash();
                 this.check_NormalAttack();
                 break;
             case Player.PlayerStatus.JUMP_2:
-                if (this.body.touching.down){
+                if (this.body.touching.down) {
                     this.playerStatus = Player.PlayerStatus.IDDLE;
                 }
                 this.check_Dash();
@@ -233,29 +229,29 @@ export class Ottonai extends Player{
     }
 
     // Actualize  position // Create 
-    calculate(delta)
-    {
-        switch(this.playerStatus)
-        {
+    calculate(delta) {
+        switch (this.playerStatus) {
             case Player.PlayerStatus.IDDLE:
-                if (this.looking_R && this.body.velocity.x != 0){
+                if (this.looking_R && this.body.velocity.x != 0) {
                     this.body.velocity.x -= this.drag * delta;
-                    if (this.body.velocity.x <= 0){
+                    if (this.body.velocity.x <= 0) {
                         this.body.setVelocityX(0);
-                }} else if (!this.looking_R && this.body.velocity.x != 0){
-                    this.body.velocity.x += this.drag * delta; 
-                    if (this.body.velocity.x >= 0){   
+                    }
+                } else if (!this.looking_R && this.body.velocity.x != 0) {
+                    this.body.velocity.x += this.drag * delta;
+                    if (this.body.velocity.x >= 0) {
                         this.body.setVelocityX(0);
-                }}
+                    }
+                }
                 break;
             case Player.PlayerStatus.MOVING:
-                if (this.looking_R && this.keyA){
+                if (this.looking_R && this.keyA) {
                     this.looking_R = false
-                } else if (!this.looking_R && this.keyD){
+                } else if (!this.looking_R && this.keyD) {
                     this.looking_R = true
                 }
 
-                if(this.looking_R){
+                if (this.looking_R) {
                     if (this.body.velocity.x < this.horizontalSpeed) this.body.velocity.x += this.aceleration * delta;
                 } else {
                     if (this.body.velocity.x > -1 * this.horizontalSpeed) this.body.velocity.x -= this.aceleration * delta;
@@ -267,21 +263,18 @@ export class Ottonai extends Player{
                     } else {
                         this.body.velocity.x = -0.95 * this.horizontalSpeed;
                     }
-                } 
+                }
                 break;
             case Player.PlayerStatus.DASHING:
-                if(this.body.touching.left)
-                {
+                if (this.body.touching.left) {
                     this.dash_R = true;
                     this.looking_R = true;
-                } else if (this.body.touching.right)
-                {
+                } else if (this.body.touching.right) {
                     this.dash_R = false;
                     this.looking_R = false;
                 }
 
-                if (this.dash_R)
-                {
+                if (this.dash_R) {
                     this.body.velocity.x = this.dashForce;
                 } else {
                     this.body.velocity.x = -1 * this.dashForce;
@@ -298,8 +291,7 @@ export class Ottonai extends Player{
             case Player.PlayerStatus.ATA_N:
                 break;
             case Player.PlayerStatus.HITTED:
-                if (this.moving_R)
-                {
+                if (this.moving_R) {
                     console.log('DERECHA');
                     this.body.acceleration.x = this.x_move;
                     this.body.velocity.y = this.y_move;
@@ -315,10 +307,8 @@ export class Ottonai extends Player{
     }
 
     // Load the animation
-    animate(delta)
-    {
-        switch(this.playerStatus)
-        {
+    animate(delta) {
+        switch (this.playerStatus) {
             case Player.PlayerStatus.IDDLE:
                 this.load_animation('otto_idle');
                 break;
@@ -345,17 +335,47 @@ export class Ottonai extends Player{
         this.flipX = !this.looking_R;
     }
 
-    load_animation(anima)
-    { 
-        if (this.playingAnim != anima)
-        {
+    load_animation(anima) {
+        if (this.playingAnim != anima) {
             this.playingAnim = anima;
             this.play(this.playingAnim);
         }
     }
 
-    update(delta)
-    {
+    checkRespawn() {
+        if ((this.vida <= 0 || this.y > 1500)&&(!this.muerto)) {
+            this.muerto = true;
+
+            this.vidas--;
+            this.vida = this.maxVida;
+
+            this.body.setCollideWorldBounds(false);
+            this.body.allowGravity = false;
+
+            this.x = 3000;
+            this.y = 3000;
+
+            this.scene.time.delayedCall(this.respawn_timer, this.respawn, null, this);
+
+        }
+
+    }
+
+    respawn() {
+
+        this.body.setCollideWorldBounds(true);
+        this.body.allowGravity = true;
+
+        this.x = this.respawnX;
+        this.y = this.respawnY;
+
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
+
+        this.muerto = false;
+    }
+
+    update(delta) {
         this.timer_Update();
 
         // PrevST + Inputs = NewST
@@ -367,12 +387,13 @@ export class Ottonai extends Player{
         // Load the animation
         this.animate(delta);
 
+        this.checkRespawn();
         //console.log(this.playerStatus);
     }
 
-/*  #### OLD ####
-    update(delta){
-        this.playerPhysics(delta);
-    }
-*/
+    /*  #### OLD ####
+        update(delta){
+            this.playerPhysics(delta);
+        }
+    */
 }
