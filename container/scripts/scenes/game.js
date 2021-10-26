@@ -26,10 +26,15 @@ export class Game_Scene extends Phaser.Scene {
         this.timer_dash;
         this.powerUp_duration_timer;
 
-        // debug
+        // debug player 1
         this.text_Debug;
         this.text_vida;
         this.text_velocidad;
+
+        // debug player 1
+        this.text_Debug2;
+        this.text_vida2;
+        this.text_velocidad2;
 
         // s -> ms
         this.dashCoolDown = 3 * 1000;
@@ -197,11 +202,14 @@ export class Game_Scene extends Phaser.Scene {
 
         // text debug
         this.text_Debug = this.add.text(32, 32);
-        this.punchingBag.play('PB_idle');
         this.text_vida = this.add.text(32, 82);
-
         this.text_velocidad = this.add.text(32, 132);
+        
+        this.text_Debug2 = this.add.text(1100, 32);
+        this.text_vida2 = this.add.text(1100, 82);
+        this.text_velocidad2 = this.add.text(1100, 132);
 
+        this.punchingBag.play('PB_idle');
     }
 
     spawnPowerUp(){
@@ -244,9 +252,16 @@ export class Game_Scene extends Phaser.Scene {
 
         this.text_Debug.setText(out);
 
-        this.text_vida.setText('Vida: ' + this.player2.getVida());
+        this.text_vida.setText('Vida: ' + this.player.getVida());
 
-        this.text_velocidad.setText('Velocidad: ' + this.player2.horizontalSpeed);
+        this.text_velocidad.setText('Velocidad: ' + this.player.horizontalSpeed);
+
+
+        this.text_Debug2.setText('Progreso: ' + this.player2.dash_Timer.getProgress().toString().substr(0, 4));
+
+        this.text_vida2.setText('Vida: ' + this.player2.getVida());
+
+        this.text_velocidad2.setText('Velocidad: ' + this.player2.horizontalSpeed);
 
         
         if (this.activePowerUp !== null) {
