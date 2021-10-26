@@ -186,6 +186,8 @@ export class Game_Scene extends Phaser.Scene {
     }
 
     create() {
+        //pausa
+        this.pausa = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
         //this.timer_Create();
         this.background = this.add.image(0, 0, 'fondoescenario');
@@ -239,7 +241,13 @@ export class Game_Scene extends Phaser.Scene {
     }
 
     update(timer, delta) {
+        if(this.pausa.isDown){
+            console.log('enter')
+            this.scene.launch("select_Pausa");
+            this.scene.pause("game_Scene")
+        }
 
+        
         //this.timer_Update();
 
         this.player.update(delta);

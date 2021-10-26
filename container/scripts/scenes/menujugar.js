@@ -246,8 +246,8 @@ export class Play_Menu_Scene extends Phaser.Scene {
         this.controles_luz.on('pointerdown', function (pointer) {
             console.log('Boton salir pulsado');
             that.sound.play('tambor');
-            that.scene.start("select_menu_controles");
-        });
+            that.scene.start("select_Pausa");
+        });//SELECT_MENU_CONTROLES
         this.configuracion_luz.on('pointerdown', function (pointer) {
             console.log('Boton salir pulsado');
             that.sound.play('tambor');
