@@ -33,7 +33,7 @@ export class Game_Scene extends Phaser.Scene {
 
         // s -> ms
         this.dashCoolDown = 3 * 1000;
-        this.power_ups_respawn_cooldown = 5 * 1000;
+        this.power_ups_respawn_cooldown = 2 * 1000;
 
         // receiver of the selected character
         this.selectedCharacter;
@@ -75,12 +75,12 @@ export class Game_Scene extends Phaser.Scene {
         
 
         //powerups
-        this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 383, frameHeight: 312 });
-        this.load.spritesheet('bebidaenergetica', 'stores/powerups/bebidaenergetica.png', { frameWidth: 190, frameHeight: 331 });
-        this.load.spritesheet('platano', 'stores/powerups/platano.png', { frameWidth: 161, frameHeight: 151 });
-        this.load.spritesheet('pistola', 'stores/powerups/pistola.png', { frameWidth: 361, frameHeight: 241 });
-        this.load.spritesheet('fusil', 'stores/powerups/fusil.png', { frameWidth: 855, frameHeight: 251 });
-        this.load.spritesheet('disparo', 'stores/powerups/disparo.png', { frameWidth: 111, frameHeight: 31 });
+        this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 42, frameHeight: 30 });
+        this.load.spritesheet('bebidaenergetica', 'stores/powerups/bebidaenergetica.png', { frameWidth: 30, frameHeight: 32 });
+        this.load.spritesheet('platano', 'stores/powerups/platano.png', { frameWidth: 30, frameHeight: 25 });
+        this.load.spritesheet('pistola', 'stores/powerups/pistola.png', { frameWidth: 30, frameHeight: 31 });
+        this.load.spritesheet('fusil', 'stores/powerups/fusil.png', { frameWidth: 59, frameHeight: 26 });
+        this.load.spritesheet('disparo', 'stores/powerups/disparo.png', { frameWidth: 14, frameHeight: 7 });
 
 
     }
@@ -201,7 +201,7 @@ export class Game_Scene extends Phaser.Scene {
 
     spawnPowerUp(){
         this.i = Math.floor(Math.random() * 5) + 1;
-        //this.i = 3;
+        //this.i = 5;
         this.x = Math.floor(Math.random() * 1080) + 200;
         this.y = 50;
 

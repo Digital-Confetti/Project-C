@@ -5,7 +5,7 @@ export class Platano extends PowerUp {
         super(scene, x, y);
 
         this.setTexture('platano')
-        this.setScale(0.3, 0.3);
+        this.setScale(1.5, 1.5);
 
         this.duration = 10 * 1000;
 
@@ -16,7 +16,7 @@ export class Platano extends PowerUp {
         this.throw_force = 200;
 
         this.body.setOffset(0, 0);
-        this.body.setSize(161, 151, false);
+        this.body.setSize(30, 25, false);
 
         this.drag = 0.5;
 

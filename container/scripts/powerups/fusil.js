@@ -6,10 +6,10 @@ export class Fusil extends PowerUp {
         super(scene, x, y);
 
         this.setTexture('fusil')
-        this.setScale(0.1, 0.1);
+        this.setScale(1.5, 1.5);
 
         this.body.setOffset(0, 0);
-        this.body.setSize(855, 251, false);
+        this.body.setSize(59, 26, false);
 
         this.hit_damage = 20;
 
@@ -68,9 +68,9 @@ export class Fusil extends PowerUp {
 
             
             if(this.linkedPlayer.looking_R){
-                this.bala = new Bala(this.scene, this.x + 25, this.y-7);
+                this.bala = new Bala(this.scene, this.x + 25, this.y);
             }else{
-                this.bala = new Bala(this.scene, this.x - 25, this.y-7);
+                this.bala = new Bala(this.scene, this.x - 25, this.y);
                 this.bala.flipDirection();
             }
 

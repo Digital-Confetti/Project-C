@@ -5,7 +5,7 @@ export class BebidaEnergetica extends PowerUp{
         super(scene, x, y);
 
         this.setTexture('bebidaenergetica')
-        this.setScale(0.2,0.2);
+        this.setScale(1.5,1.5);
 
         this.alpha = 1;
 
@@ -18,7 +18,7 @@ export class BebidaEnergetica extends PowerUp{
         this.duration = 5 * 1000;
 
         this.body.setOffset(0, 0);
-        this.body.setSize(190, 331, false);
+        this.body.setSize(30, 32, false);
 
     }
 

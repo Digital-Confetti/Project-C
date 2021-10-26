@@ -5,12 +5,14 @@ export class EspecialDeTuichi extends PowerUp{
         super(scene, x, y);
 
         this.setTexture('especialdetuichi')
-        this.setScale(0.2,0.2);
+        this.setScale(1.5,1.5);
 
         this.duration = 0;
 
+        this.healing = 20;
+
         this.body.setOffset(0, 0);
-        this.body.setSize(383, 312, false);
+        this.body.setSize(42, 32, false);
 
     }
 
@@ -20,7 +22,7 @@ export class EspecialDeTuichi extends PowerUp{
         this.picked = true;
         this.linkedPlayer = this.scene.player;
 
-        this.linkedPlayer.setVida( this.linkedPlayer.getVida() + 20)
+        this.linkedPlayer.setVida( this.linkedPlayer.getVida() + this.healing);
 
         this.destroyPowerUp();
 
