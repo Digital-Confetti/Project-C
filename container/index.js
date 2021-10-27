@@ -36,6 +36,7 @@ import {Controles_Scene} from './scripts/scenes/controles.js';
 import {Personajes_Scene} from './scripts/scenes/personajes.js';
 import {Musica_Scene} from './scripts/scenes/escenamusica.js';
 import {Pausa_Scene} from './scripts/scenes/pausa.js';
+import {Poweups_Scene} from './scripts/scenes/powerups.js';
 
 const config = {
     type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
@@ -55,7 +56,7 @@ const config = {
             disableWebAudio: true
         },
 
-        scene: [Menu_Scene, Musica_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene,Controles_Scene,Personajes_Scene,Pausa_Scene]
+        scene: [Menu_Scene, Musica_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene,Controles_Scene,Personajes_Scene,Pausa_Scene,Poweups_Scene]
 
     };
 
