@@ -1,10 +1,11 @@
 # Travellers Tournament - Fighting Game
-### Digital Confetti
+## Digital Confetti
 
 #### Descripción del juego:
 Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los líderes de la nación más poderosa, Merloq, han organizado un torneo para encontrar al mejor luchador y nombrarlo Mariscal de la Abadía para que dirija todas las empresas militares de la nación, para atraer a los mejores luchadores, no solo se ofrece el título militar sino también un poderosa reliquia, el santo grial, del cual se dice que puede otorgarle lo que sea que desee a quien se haga con el. ¿Cuáles de todos los vasallos encontrará la manera de imponerse al resto de contendientes?
 
-
+##  Diagrama de navegacion:
+La estructura de navegación de nuestro videojuego es la siguiente:
 ![Escenas de flujo ](https://user-images.githubusercontent.com/91007943/139120354-9840a0c2-a7ea-40e6-92a5-70edcca991f1.png)
 
 ##  Pantalla de inicio:
@@ -16,8 +17,7 @@ Nuestra pantalla de inicio es la primera que va a observar nuestro cliente por l
 En el menú principal vamos a poder ir a las diferentes escenas de nuestro videojuego.
 - **Botón rojo**: Combate online.
 - **Botón azul**: Combate offline.
-- **Controles**: Vamos a una pantalla con la informacion de controles
-~~- **Configuracion**:~~
+- **Controles**: Vamos a una pantalla con la informacion de controles.
 - **Personajes**:  Vemos la informacion de los personajes.
 - **Poweups**: Vemos los Powerups y sus funciones.
 - **Salir**: Volvemos a la pantalla de inicio.
