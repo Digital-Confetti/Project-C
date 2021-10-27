@@ -11,9 +11,9 @@ Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los
 
 `J` ➡️ Usar power-up/Ataque normal.
 
-`Shift` ➡️ Dash.
-
 `K` ➡️  Ataque especial/Lanzar power up.
+
+`Shift` ➡️ Dash.
 
 `Space` ➡️  Saltar.
 
@@ -21,11 +21,11 @@ Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los
 
 `Flechas`  ➡️ Movimiento personaje.
 
-`Click Derecho` ➡️ Usar power-up/Ataque normal.
-
-`Ctrl` ➡️ Dash.
+`Click Izquierdo` ➡️ Usar power-up/Ataque normal.
 
 `Click Derecho` ➡️ Ataque especial/Lanzar power up.
+
+`Ctrl` ➡️ Dash.
 
 `Flecha arriba` ➡️ Saltar.
 
