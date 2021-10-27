@@ -92,8 +92,8 @@ export class Ottonai extends Player {
     reset_ATA_S() { this.playerStatus = Player.PlayerStatus.IDDLE;
         this.horizontalSpeed -= this.speed_Bonus;
         this.attack_damage -= this.damage_Bonus;
-        this.setTint(0xFFD3D3);
-        this.resetTimerSA = this.scene.time.delayedCall(1 * 1000, this.reset_Sumado, null, this);
+        this.setTint(0xFFFF7A);
+        this.resetTimerSA = this.scene.time.delayedCall(6 * 1000, this.reset_Sumado, null, this);
     }
 
 
