@@ -35,6 +35,7 @@ Una vez los jugadores seleccionan a su personaje comienza la batalla.
 
 En esta pantalla va a ser donde se va a desarrollar nuestro juego.
 Un jugador va a combatir contra otros jugadores para lograr ser nombrado Mariscal de la Abadia un puesto con gran poder.
+
 En medio de la batalla van a ir cayendo `poweups` , el jugador que logre alcanzar uno de ellos podra gozar de sus beneficios que dependen del tipo de `poweup` que sea.
 Una vez se hayan quedado sin vida los jugadores terminara el juego y sera nombrado un nuevo Mariscal de la Abadia.
 
