@@ -30,17 +30,17 @@ Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los
 `Flecha arriba` ➡️ Saltar.
 
 
-##  Diagrama de navegacion:
+##  Diagrama de navegacion
 La estructura de navegación de nuestro videojuego es la siguiente:
 
 ![_Diagrama de flujo (1)](https://user-images.githubusercontent.com/91007943/139139162-67c88885-9acc-4896-ac0f-5677f5943fce.jpg)
 
-##  Pantalla de inicio:
+##  Pantalla de inicio
 Nuestra pantalla de inicio es la primera que va a observar nuestro cliente por lo tanto hemos querido que sea simple y a la vez llamativa. Pulsando la tecla `Enter` o haciendo `Click` podemos avanzar a la siguiente escena.
 
 ![inicio](https://user-images.githubusercontent.com/91007943/139119839-4e91b110-e63a-49f2-b035-0c2b4e2e882c.jpg)
 
-##  Menú principal:
+##  Menú principal
 En el menú principal vamos a poder ir a las diferentes escenas de nuestro videojuego.
 
 -🟥 **Botón rojo**: Combate online.
@@ -59,14 +59,14 @@ En el menú principal vamos a poder ir a las diferentes escenas de nuestro video
 ![a953163db2a2c076d1361f0012dce1f7](https://user-images.githubusercontent.com/91007943/139138208-7d1a9fcf-2278-451c-8734-c2d31df0aba6.png)
 
 
-##  Seleccion de personajes:
+##  Seleccion de personajes
 En esta pantalla vamos a poder elegir entre nuestro querido `Grund Legend` o al poderoso `Otonnai`.
 Una vez los jugadores seleccionan a su personaje comienza la batalla.
 
 ![4117ca9ad1f8593d283aea073d4d03cb](https://user-images.githubusercontent.com/91007943/139125685-3a0eb7c3-8726-460d-9d76-7debc5262f7d.png)
 
 
-##  Combate:
+##  Combate
 
 En esta pantalla va a ser donde se va a desarrollar nuestro juego.
 Un jugador va a combatir contra otros jugadores para lograr ser nombrado Mariscal de la Abadia un puesto con gran poder.
@@ -78,13 +78,13 @@ Una vez se hayan quedado sin vida los jugadores terminara el juego y sera nombra
 ![0ecec0ec2b92e316bbb82fdc126aca48](https://user-images.githubusercontent.com/91007943/139128523-c0a95a0f-b73e-4ee9-8319-9477cafc4432.png)
 
 
-##  Powerups:
+##  Powerups
 
 Pantalla que recopila toda la informacion necesaria que el jugador debe saber para perfeccionar su combate.
 
 ![powerups](https://user-images.githubusercontent.com/91007943/139119999-4b9a3f65-6fb0-4f73-8921-fe7f20e0fc52.png)
 
-##  Personajes:
+##  Personajes
 
 Se muestra la informacion de los ataques de nuestros personajes.
 - `Grund Legend`
@@ -92,20 +92,20 @@ Se muestra la informacion de los ataques de nuestros personajes.
 
 ![f396649aac76027c099fab4d5962e03c](https://user-images.githubusercontent.com/91007943/139119890-62cd22b3-ed54-4149-a122-45ebaad1e9bd.jpg)
 
-##  Controles:
+##  Controles
 
 Informacion de los todos los controles que va a necesitar nuestro cliente.
 
 
 ![a3010ecf1a883994db79163682e30b1f](https://user-images.githubusercontent.com/91007943/139119876-6de0e134-03c8-4a76-be35-4c9dfac12ec3.png)
 
-##  Victoria:
+##  Victoria
 
 Pantalla en la cual vamos a poder ver al ganador de la pelea y futuro Mariscal de la Abadia. 
 
 ![8f8767b0c17700c09bbbb6b4b2fdbd9d](https://user-images.githubusercontent.com/91007943/139139478-e6c7f143-26b1-4ea8-b1c2-52e6ff77bb20.png)
 
-##  ESPERAMOS QUE OS GUSTE NUESTRO JUEGO :wheelchair: 🎃
+##  ¡¡ESPERAMOS QUE OS GUSTE NUESTRO JUEGO!! :wheelchair: 🎃
  
 
 
