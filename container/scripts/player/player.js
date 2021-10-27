@@ -58,6 +58,8 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.respawn_timer = 2 * 1000;
         this.muerto = false;
 
+        this.attack_damage = 20;
+
         // State machine
         this.playerStatus = Player.PlayerStatus.IDDLE;
     }

@@ -31,7 +31,7 @@ export class GrundLegend extends Player{
         this.proyectile_Size = 0;
         this.proyectiles = [];
         this.shoot_Avaliable = true;
-        this.hit_damage = 10;
+        this.shoot_damage = 10;
         
         this.create_Animations(scene);
         this.play('idle');
@@ -201,7 +201,7 @@ export class GrundLegend extends Player{
 
     hitPlayer(player, bullet)
     {
-        let dmg = this.hit_damage * bullet.p_Size;
+        let dmg = this.shoot_damage * bullet.p_Size;
         this.scene.sound.play('impacto');
         console.log('player dañado: ' + dmg);
         player.setVida(player.getVida() - dmg);

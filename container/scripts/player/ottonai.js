@@ -26,6 +26,10 @@ export class Ottonai extends Player {
         this.x_move;
         this.y_move;
 
+        this.speed_Bonus = 100;
+        this.damage_Bonus = 20;
+        this.sumado = false;
+
         this.create_Animations(scene);
         this.play('otto_idle');
     }
@@ -80,6 +84,15 @@ export class Ottonai extends Player {
     }
 
     reset_ATA_N() { this.playerStatus = Player.PlayerStatus.IDDLE; }
+    reset_Sumado() { this.sumado = false;
+                    this.setTint(0xFFFFFF);
+                    }
+    reset_ATA_S() { this.playerStatus = Player.PlayerStatus.IDDLE;
+        this.horizontalSpeed -= this.speed_Bonus;
+        this.attack_damage -= this.damage_Bonus;
+        this.setTint(0xFFD3D3);
+        this.resetTimerSA = this.scene.time.delayedCall(1 * 1000, this.reset_Sumado, null, this);
+    }
 
 
     lauch_reset_HITTED() {
@@ -95,6 +108,18 @@ export class Ottonai extends Player {
         if (this.keyNA) {
             this.playerStatus = Player.PlayerStatus.ATA_N;
             this.resetTimer = this.scene.time.delayedCall(0.66 * 1000, this.reset_ATA_N, null, this);
+        }
+    }
+
+    check_SpecialAttack()
+    {
+        if (this.keySA && !this.sumado)
+        {
+            this.horizontalSpeed += this.speed_Bonus;
+            this.attack_damage += this.attack_damage;
+            this.sumado = true;
+            this.setTint(0xFF4F4F);
+            this.resetTimerSA = this.scene.time.delayedCall(2 * 1000, this.reset_ATA_S, null, this);
         }
     }
 
@@ -183,6 +208,7 @@ export class Ottonai extends Player {
                 this.check_Jump();
                 this.check_Dash();
                 this.check_NormalAttack();
+                this.check_SpecialAttack();
                 break;
             case Player.PlayerStatus.MOVING:
                 if (this.keyA) {
@@ -196,6 +222,7 @@ export class Ottonai extends Player {
                 this.check_Jump();
                 this.check_Dash();
                 this.check_NormalAttack();
+                this.check_SpecialAttack();
                 break;
             case Player.PlayerStatus.DASHING:
                 this.dashAllowed = false;
@@ -210,6 +237,7 @@ export class Ottonai extends Player {
                 }
                 this.check_Dash();
                 this.check_NormalAttack();
+                this.check_SpecialAttack();
                 break;
             case Player.PlayerStatus.JUMP_2:
                 if (this.body.touching.down) {
@@ -217,6 +245,7 @@ export class Ottonai extends Player {
                 }
                 this.check_Dash();
                 this.check_NormalAttack();
+                this.check_SpecialAttack();
                 break;
             case Player.PlayerStatus.ATA_S:
                 break;

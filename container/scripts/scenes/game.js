@@ -303,6 +303,7 @@ export class Game_Scene extends Phaser.Scene {
                 this.player2.y_move = -250;
                 this.player2.looking_R = this.player.x < this.punchingBag.x;
                 this.player2.playerStatus = Player.PlayerStatus.HITTED;
+                this.player2.vida -= this.player.attack_damage;
                 this.player2.lauch_reset_HITTED();
             } else if (this.player.playerStatus == Player.PlayerStatus.ATA_N && this.player2.playerStatus != Player.PlayerStatus.HITTED)
             {
@@ -310,6 +311,7 @@ export class Game_Scene extends Phaser.Scene {
                 this.player2.y_move = -250;
                 this.player2.looking_R = this.player.x < this.punchingBag.x;
                 this.player2.playerStatus = Player.PlayerStatus.HITTED;
+                this.player2.vida -= this.player.attack_damage;
                 this.player2.lauch_reset_HITTED();
             }
         }
@@ -322,6 +324,7 @@ export class Game_Scene extends Phaser.Scene {
                 this.player.y_move = -250;
                 this.player.looking_R = this.player.x < this.punchingBag.x;
                 this.player.playerStatus = Player.PlayerStatus.HITTED;
+                this.player.vida -= this.player2.attack_damage;
                 this.player.lauch_reset_HITTED();
             } else if (this.player2.playerStatus == Player.PlayerStatus.ATA_N && this.player.playerStatus != Player.PlayerStatus.HITTED)
             {
@@ -329,6 +332,7 @@ export class Game_Scene extends Phaser.Scene {
                 this.player.y_move = -50;
                 this.player.looking_R = this.player.x < this.punchingBag.x;
                 this.player.playerStatus = Player.PlayerStatus.HITTED;
+                this.player.vida -= this.player2.attack_damage;
                 this.player.lauch_reset_HITTED();
             }
         }

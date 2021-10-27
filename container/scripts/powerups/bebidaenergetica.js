@@ -12,7 +12,7 @@ export class BebidaEnergetica extends PowerUp{
         //velocity boost 50%
         this.baseVelocity;
         this.baseAceleration;
-        this.bonusVelocity = 1;
+        this.bonusVelocity = 2;
         this.bonusAceleration = 1;
 
         this.duration = 5 * 1000;
@@ -33,7 +33,7 @@ export class BebidaEnergetica extends PowerUp{
 
         this.scene.sound.play('beber');
 
-        this.linkedPlayer.setVelocidad(this.linkedPlayer.getVelocidad() + this.linkedPlayer.getVelocidad() * this.bonusVelocity);
+        this.linkedPlayer.setVelocidad(this.linkedPlayer.getVelocidad() * this.bonusVelocity);
         //this.linkedPlayer.setAceleration(this.linkedPlayer.getAceleration() + this.linkedPlayer.getAceleration() * this.bonusAceleration);
 
         //provisional object dissapear
