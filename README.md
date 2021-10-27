@@ -9,7 +9,7 @@ Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los
 
 ##  Pantalla de inicio:
 Nuestra pantalla de inicio es la primera que va a observar nuestro cliente por lo tanto hemos querido que sea simple y a la vez llamativa. Pulsando la tecla `Enter` o haciendo `Click` podemos avanzar a la siguiente escena.
-------------
+
 ![inicio](https://user-images.githubusercontent.com/91007943/139119839-4e91b110-e63a-49f2-b035-0c2b4e2e882c.jpg)
 
 ##  Menú principal:
@@ -21,14 +21,13 @@ En el menú principal vamos a poder ir a las diferentes escenas de nuestro video
 - **Personajes**:  Vemos la informacion de los personajes.
 - **Poweups**: Vemos los Powerups y sus funciones.
 - **Salir**: Volvemos a la pantalla de inicio.
-------------
+
 ![menu](https://user-images.githubusercontent.com/91007943/139119849-dfb45615-6b66-4c57-8721-76bdc7515ea7.png)
-![4117ca9ad1f8593d283aea073d4d03cb](https://user-images.githubusercontent.com/91007943/139125685-3a0eb7c3-8726-460d-9d76-7debc5262f7d.png)
 
 ##  Seleccion de personajes:
 En esta pantalla vamos a poder elegir entre nuestro querido `Grund Legend` o al poderoso `Otonnai`.
 Una vez los jugadores seleccionan a su personaje comienza la batalla.
-------------
+
 ![4117ca9ad1f8593d283aea073d4d03cb](https://user-images.githubusercontent.com/91007943/139125685-3a0eb7c3-8726-460d-9d76-7debc5262f7d.png)
 
 
@@ -38,13 +37,13 @@ En esta pantalla va a ser donde se va a desarrollar nuestro juego.
 Un jugador va a combatir contra otros jugadores para lograr ser nombrado Mariscal de la Abadia un puesto con gran poder.
 En medio de la batalla van a ir cayendo `poweups` , el jugador que logre alcanzar uno de ellos podra gozar de sus beneficios que dependen del tipo de `poweup` que sea.
 Una vez se hayan quedado sin vida los jugadores terminara el juego y sera nombrado un nuevo Mariscal de la Abadia.
-------------
+
 ![esceba juegi](https://user-images.githubusercontent.com/91007943/139120189-ca066578-fefc-4593-8953-10f68bd1c831.png)
 
 ##  Powerups:
 
 Pantalla que recopila toda la informacion necesaria que el jugador debe saber para perfeccionar su combate.
-------------
+
 ![powerups](https://user-images.githubusercontent.com/91007943/139119999-4b9a3f65-6fb0-4f73-8921-fe7f20e0fc52.png)
 
 ##  Personajes:
