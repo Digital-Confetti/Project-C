@@ -114,7 +114,7 @@ export class Game_Scene extends Phaser.Scene {
         }
         // Creating Punching Bag
 
-        this.punchingBag = new PunchingBag(this, 600, 100);
+        //this.punchingBag = new PunchingBag(this, 600, 100);
 
         //this.activePowerUp = new Fusil(this, 600, 500);
 
@@ -134,7 +134,7 @@ export class Game_Scene extends Phaser.Scene {
 
         // Add collider
         this.physics.add.collider(this.player, this.platforms);
-        this.physics.add.collider(this.player, this.punchingBag, this.hit_Treatment, null, this);
+        //this.physics.add.collider(this.player, this.punchingBag, this.hit_Treatment, null, this);
 
         this.physics.add.collider(this.player2, this.platforms);
         //this.physics.add.collider(this.player2, this.punchingBag, this.hit_Treatment, null, this);
@@ -143,7 +143,7 @@ export class Game_Scene extends Phaser.Scene {
 
         //this.game_player_powerup_collider = this.physics.add.collider(this.player2, this.activePowerUp, this.pickPowerUp, null, this);
 
-        this.physics.add.collider(this.punchingBag, this.platforms);
+        //this.physics.add.collider(this.punchingBag, this.platforms);
         //this.physics.add.collider(this.activePowerUp, this.platforms);
 
         //this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
@@ -280,7 +280,7 @@ export class Game_Scene extends Phaser.Scene {
         this.player.update(delta);
         this.player2.update(delta);
 
-        this.punchingBag.renove(delta);
+        //this.punchingBag.renove(delta);
         var out;
 
         out = 'Progreso: ' + this.player.dash_Timer.getProgress().toString().substr(0, 4);
