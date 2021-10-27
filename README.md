@@ -32,7 +32,8 @@ Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los
 
 ##  Diagrama de navegacion:
 La estructura de navegación de nuestro videojuego es la siguiente:
-![Escenas de flujo ](https://user-images.githubusercontent.com/91007943/139120354-9840a0c2-a7ea-40e6-92a5-70edcca991f1.png)
+
+![_Diagrama de flujo (1)](https://user-images.githubusercontent.com/91007943/139139162-67c88885-9acc-4896-ac0f-5677f5943fce.jpg)
 
 ##  Pantalla de inicio:
 Nuestra pantalla de inicio es la primera que va a observar nuestro cliente por lo tanto hemos querido que sea simple y a la vez llamativa. Pulsando la tecla `Enter` o haciendo `Click` podemos avanzar a la siguiente escena.
@@ -54,7 +55,9 @@ En el menú principal vamos a poder ir a las diferentes escenas de nuestro video
 
 -↩️ **Salir**: Volvemos a la pantalla de inicio.
 
-![menu](https://user-images.githubusercontent.com/91007943/139119849-dfb45615-6b66-4c57-8721-76bdc7515ea7.png)
+
+![a953163db2a2c076d1361f0012dce1f7](https://user-images.githubusercontent.com/91007943/139138208-7d1a9fcf-2278-451c-8734-c2d31df0aba6.png)
+
 
 ##  Seleccion de personajes:
 En esta pantalla vamos a poder elegir entre nuestro querido `Grund Legend` o al poderoso `Otonnai`.
@@ -95,6 +98,10 @@ Informacion de los todos los controles que va a necesitar nuestro cliente.
 
 
 ![a3010ecf1a883994db79163682e30b1f](https://user-images.githubusercontent.com/91007943/139119876-6de0e134-03c8-4a76-be35-4c9dfac12ec3.png)
+
+##  Victoria:
+
+Pantalla en la cual vamos a poder ver al ganador de la pelea y futuro Mariscal de la Abadia. 
 
 ##  ESPERAMOS QUE OS GUSTE NUESTRO JUEGO :wheelchair: 🎃
  
