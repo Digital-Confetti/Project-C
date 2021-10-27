@@ -1,8 +1,34 @@
 # Travellers Tournament - Fighting Game
-## Digital Confetti
+##  Digital Confetti :tada:
 
-#### Descripción del juego:
+### Descripción del juego:
 Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los líderes de la nación más poderosa, Merloq, han organizado un torneo para encontrar al mejor luchador y nombrarlo Mariscal de la Abadía para que dirija todas las empresas militares de la nación, para atraer a los mejores luchadores, no solo se ofrece el título militar sino también un poderosa reliquia, el santo grial, del cual se dice que puede otorgarle lo que sea que desee a quien se haga con el. ¿Cuáles de todos los vasallos encontrará la manera de imponerse al resto de contendientes?
+
+### Controles para esta version del videojuego:
+#### Controles jugador 1 :one:
+
+`W` `S` `A` `D`  ➡️ Movimiento personaje.
+
+`J` ➡️ Usar power-up/Ataque normal.
+
+`Shift` ➡️ Dash.
+
+`K` ➡️  Ataque especial/Lanzar power up.
+
+`Space` ➡️  Saltar.
+
+#### Controles jugador :two:.
+
+`Flechas`  ➡️ Movimiento personaje.
+
+`Click Derecho` ➡️ Usar power-up/Ataque normal.
+
+`Ctrl` ➡️ Dash.
+
+`Click Derecho` ➡️ Ataque especial/Lanzar power up.
+
+`Flecha arriba` ➡️ Saltar.
+
 
 ##  Diagrama de navegacion:
 La estructura de navegación de nuestro videojuego es la siguiente:
@@ -15,12 +41,18 @@ Nuestra pantalla de inicio es la primera que va a observar nuestro cliente por l
 
 ##  Menú principal:
 En el menú principal vamos a poder ir a las diferentes escenas de nuestro videojuego.
-- **Botón rojo**: Combate online.
-- **Botón azul**: Combate offline.
-- **Controles**: Vamos a una pantalla con la informacion de controles.
-- **Personajes**:  Vemos la informacion de los personajes.
-- **Poweups**: Vemos los Powerups y sus funciones.
-- **Salir**: Volvemos a la pantalla de inicio.
+
+-🟥 **Botón rojo**: Combate online.
+
+-🟦 **Botón azul**: Combate offline.
+
+-🈸 **Controles**: Vamos a una pantalla con la informacion de controles.
+
+-🚻 **Personajes**:  Vemos la informacion de los personajes.
+
+-🔔 **Poweups**: Vemos los Powerups y sus funciones.
+
+-↩️ **Salir**: Volvemos a la pantalla de inicio.
 
 ![menu](https://user-images.githubusercontent.com/91007943/139119849-dfb45615-6b66-4c57-8721-76bdc7515ea7.png)
 
@@ -63,6 +95,10 @@ Informacion de los todos los controles que va a necesitar nuestro cliente.
 
 
 ![a3010ecf1a883994db79163682e30b1f](https://user-images.githubusercontent.com/91007943/139119876-6de0e134-03c8-4a76-be35-4c9dfac12ec3.png)
+
+##  ESPERAMOS QUE OS GUSTE NUESTRO JUEGO :wheelchair: 🎃
+ 
+
 
 ##### Integrantes:
 - Javier Raja Huertas.
