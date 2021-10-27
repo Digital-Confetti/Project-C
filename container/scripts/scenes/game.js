@@ -304,7 +304,7 @@ export class Game_Scene extends Phaser.Scene {
         
 
 
-        this.min_aux = this.min_duration - (parseInt(this.duration_aux2 / 60));
+        this.min_aux = (this.min_duration-1) - (parseInt(this.duration_aux2 / 60));
         this.seg_aux = 59 - (this.duration_aux2 % 60);
 
         this.min = this.min_aux;
