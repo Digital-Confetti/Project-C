@@ -62,7 +62,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
         this.load.audio('tambor', 'stores/sounds/golpe_tambor.mp3');
         this.load.audio('espada', 'stores/sounds/desenvainar_espada.mp3');
 
-        this.scene.launch("musica_Scene");
+        //this.scene.launch("musica_Scene");
         
 
     }
@@ -165,6 +165,8 @@ export class Play_Menu_Scene extends Phaser.Scene {
     // Here we need to create all the Modules
     //^^^---Like player, platform, Pwr_Up..
     create() {
+
+        this.scene.launch("musica_Scene");
 
         var that = this;
         this.input.keyboard.on('keydown', function (event) {
