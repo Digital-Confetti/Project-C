@@ -25,6 +25,7 @@ export class Game_Scene extends Phaser.Scene {
         // Timers
         this.timer_dash;
         this.powerUp_duration_timer;
+        this.game_duration_timer,
 
         // debug player 1
         this.text_Debug;
@@ -36,9 +37,13 @@ export class Game_Scene extends Phaser.Scene {
         this.text_vida2;
         this.text_vidas2;
 
+        //timer de la partida
+        this.text_game_timer;
+
         // s -> ms
         this.dashCoolDown = 3 * 1000;
         this.power_ups_respawn_cooldown = 2 * 1000;
+        this.game_duration = 5 * 60 * 1000;
 
         // receiver of the selected character
         this.selectedCharacter;
@@ -211,7 +216,11 @@ export class Game_Scene extends Phaser.Scene {
         this.text_vida2 = this.add.text(1100, 82);
         this.text_vidas2 = this.add.text(1100, 132);
 
+        this.text_game_timer = this.add.text(640,50);
+
         //this.punchingBag.play('PB_idle');
+
+        this.game_duration_timer = this.time.delayedCall(this.game_duration, this.endGame, [3], this);
     }
 
     spawnPowerUp(){
@@ -240,13 +249,31 @@ export class Game_Scene extends Phaser.Scene {
         this.game_player2_powerup_collider = this.physics.add.collider(this.player2, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
+    checkEndGame(){
+        if(this.player.getVidas() == 0){
+            //gana jugador 2
+            this.endGame(this.player2.key);
+        }else if(this.player2.getVidas() == 0){
+            //gana jugador 1
+            this.endGame(this.player.key);
+        }
+    }
+
+    endGame(i){
+
+        console.log(i);
+        this.scene.start("Victoria_menu", {index: i});
+        
+    }
+
     update(timer, delta) {
+        /*
         if(this.pausa.isDown){
             console.log('enter')
             this.scene.launch("select_Pausa");
             this.scene.pause("game_Scene")
         }
-
+*/
         
         //this.timer_Update();
 
@@ -271,6 +298,12 @@ export class Game_Scene extends Phaser.Scene {
 
         this.text_vidas2.setText('Vidas: ' + this.player2.getVidas());
 
+        this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 4);
+        console.log(this.duration_aux);
+
+        //this.min = this.duration_aux / 60;
+        //this.seg = this.duration_aux % 60;
+        this.text_game_timer.setText(this.min + ':' + this.seg);
         
         if (this.activePowerUp !== null) {
 
@@ -288,8 +321,7 @@ export class Game_Scene extends Phaser.Scene {
             
         }
 
-        console.log(this.player.y);
-        console.log(this.player2.y);
+        this.checkEndGame();
         
     }
 

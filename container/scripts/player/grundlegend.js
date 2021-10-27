@@ -5,6 +5,8 @@ export class GrundLegend extends Player{
     constructor(scene, x, y){
         super(scene, x, y, 'grundlegend');
 
+        this.key = 0;
+
         this.maxVida = 180;
         this.vida = 180;
 

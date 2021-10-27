@@ -16,6 +16,7 @@ export class Musica_Scene extends Phaser.Scene {
 
     create() {
 
+        this.loaded = false;
         
         this.musica = this.sound.add('main_theme');
         this.musica.setLoop(true);
@@ -26,6 +27,7 @@ export class Musica_Scene extends Phaser.Scene {
     pauseMenuMusic(){
         console.log('musica pausada');
         this.musica.pause();
+        //this.loaded = false;
     }
 
     playMenuMusic(){
@@ -36,6 +38,7 @@ export class Musica_Scene extends Phaser.Scene {
     stopMenuMusic(){
         console.log('musica parada');
         this.musica.stop();
+        //this.loaded = false;
     }
 
     update(){

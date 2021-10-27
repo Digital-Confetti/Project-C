@@ -4,6 +4,8 @@ export class Ottonai extends Player {
     constructor(scene, x, y) {
         super(scene, x, y, 'ottonai');
 
+        this.key = 1;
+
         this.maxVida = 100;
         this.vida = 100;
 
