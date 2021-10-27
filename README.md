@@ -22,3 +22,4 @@
 
 #### Descripción del juego:
 Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los líderes de la nación más poderosa, Merloq, han organizado un torneo para encontrar al mejor luchador y nombrarlo Mariscal de la Abadía para que dirija todas las empresas militares de la nación, para atraer a los mejores luchadores, no solo se ofrece el título militar sino también un poderosa reliquia, el santo grial, del cual se dice que puede otorgarle lo que sea que desee a quien se haga con el. ¿Cuáles de todos los vasallos encontrará la manera de imponerse al resto de contendientes?
+![f396649aac76027c099fab4d5962e03c](https://user-images.githubusercontent.com/91007943/139119740-05032d02-06c6-4a2f-9d10-bb5944cfdc8d.jpg)
