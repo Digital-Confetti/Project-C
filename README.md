@@ -51,12 +51,14 @@ Pantalla que recopila toda la informacion necesaria que el jugador debe saber pa
 Se muestra la informacion de los ataques de nuestros personajes.
 - `Grund Legend`
 - `Otonnai`
-------------
+
 ![f396649aac76027c099fab4d5962e03c](https://user-images.githubusercontent.com/91007943/139119890-62cd22b3-ed54-4149-a122-45ebaad1e9bd.jpg)
 
 ##  Controles:
 
 Informacion de los todos los controles que va a necesitar nuestro cliente.
+
+
 ![a3010ecf1a883994db79163682e30b1f](https://user-images.githubusercontent.com/91007943/139119876-6de0e134-03c8-4a76-be35-4c9dfac12ec3.png)
 
 ##### Integrantes:
