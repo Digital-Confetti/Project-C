@@ -11,9 +11,9 @@ Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los
 
 `J` ➡️ Usar power-up/Ataque normal.
 
-`Shift` ➡️ Dash.
-
 `K` ➡️  Ataque especial/Lanzar power up.
+
+`Shift` ➡️ Dash.
 
 `Space` ➡️  Saltar.
 
@@ -21,11 +21,11 @@ Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los
 
 `Flechas`  ➡️ Movimiento personaje.
 
-`Click Derecho` ➡️ Usar power-up/Ataque normal.
-
-`Ctrl` ➡️ Dash.
+`Click Izquierdo` ➡️ Usar power-up/Ataque normal.
 
 `Click Derecho` ➡️ Ataque especial/Lanzar power up.
+
+`Ctrl` ➡️ Dash.
 
 `Flecha arriba` ➡️ Saltar.
 
@@ -61,12 +61,12 @@ En el menú principal vamos a poder ir a las diferentes escenas de nuestro video
 
 ##  Seleccion de personajes
 En esta pantalla vamos a poder elegir entre nuestro querido `Grund Legend` o al poderoso `Otonnai`.
-Una vez los jugadores seleccionan a su personaje comienza la batalla.
+Una vez los jugadores seleccionan a su personaje, comienza la batalla.
 
 ![4117ca9ad1f8593d283aea073d4d03cb](https://user-images.githubusercontent.com/91007943/139125685-3a0eb7c3-8726-460d-9d76-7debc5262f7d.png)
 
 
-##  Combate
+##  Combate 
 
 En esta pantalla va a ser donde se va a desarrollar nuestro juego.
 Un jugador va a combatir contra otros jugadores para lograr ser nombrado Mariscal de la Abadia un puesto con gran poder.
@@ -105,26 +105,38 @@ Pantalla en la cual vamos a poder ver al ganador de la pelea y futuro Mariscal d
 
 ![8f8767b0c17700c09bbbb6b4b2fdbd9d](https://user-images.githubusercontent.com/91007943/139139478-e6c7f143-26b1-4ea8-b1c2-52e6ff77bb20.png)
 
-##  ¡¡ESPERAMOS QUE OS GUSTE NUESTRO JUEGO!! :wheelchair: 🎃
- 
+##  Diseño original
+![Spritesheet_Otonnai](https://user-images.githubusercontent.com/91007943/139141737-dc9be93d-96cc-4ad9-bede-4cb19aa3efa8.png)
+![Spritesheet_GrundLegend](https://user-images.githubusercontent.com/91007943/139141743-193088e8-8fbc-4979-9f7a-18e34309cd1f.png)
+![SpriteSheet_PowerUp](https://user-images.githubusercontent.com/91007943/139141818-22ab4427-bca8-4070-9d01-b952e7b9a112.png)
+
+##  Arte referenciado
+[Menu](https://trome.pe/resizer/EaNnLXvFl0zdkQEEr27r5DVCA8U=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/MB7M2QJI5ZBZZDWYKCW5CGMXTM.jpg "menu")
+
+[Botones](https://cdn.discordapp.com/attachments/889091137401401374/902981333201092608/victor-sanz-artworl.jpg "Botonoes")
+
+[Pantalla inicial](https://wallpapercave.com/wp/wp3652476.jpg "Pantalla inicial")
+
+[Fondo Batalla](https://cdn.discordapp.com/attachments/889091137401401374/902981352322895942/tim-kaminski-sc-crr-01-0000-bg-006-comp-v002-mak-wip7.jpg "Fondo Batalla")
+##  ¡¡ESPERAMOS QUE OS GUSTE NUESTRO JUEGO!! 🧙 :wheelchair: 🤺   🛡️ 
 
 
 ##### Integrantes:
-- Javier Raja Huertas.
+- 🎃 Javier Raja Huertas.
   
       Correo: j.raja.2018@alumnos.urjc.es 
       GitHub: https://github.com/tuicher
-- Héctor Muñoz Gómez.
+- 🎃 Héctor Muñoz Gómez.
 
       Correo: h.munoz.2019@alumnos.urjc.es
       GitHub: https://github.com/Sh3ry01
   
-- Miguel Rodríguez de Rojas.
+- 🎃 Miguel Rodríguez de Rojas.
   
       Correo: m.rodriguezd.2019@alumnos.urjc.es
       GitHub: https://github.com/Lonflis
   
-- Rodrigo Díaz Pau.
+- 🎃 Rodrigo Díaz Pau.
   
       Correo: r.diazpa.2019@alumnos.urjc.es
       GitHub: https://github.com/Esparky757
