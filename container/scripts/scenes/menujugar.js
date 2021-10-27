@@ -55,29 +55,38 @@ export class Play_Menu_Scene extends Phaser.Scene {
         //BOTTON CONTROLES
         this.load.image('botoncontroles', 'stores/menu/button/boton_controles.png');
         this.load.image('botoncontroles2', 'stores/menu/button/boton_controles_pulsado.png');
-
+        //BOTTON POWERUPS
+        this.load.image('botonpoweups', 'stores/menu/button/boton_powerups.png');
+        this.load.image('botonpoweups2', 'stores/menu/button/boton_powerups_luz.png');
         //AUDIO
         this.load.audio('tambor', 'stores/sounds/golpe_tambor.mp3');
         this.load.audio('espada', 'stores/sounds/desenvainar_espada.mp3');
 
         this.scene.launch("musica_Scene");
-        //console.log(Musica_Scene.loaded);
-        //this.escena_paralela.playMusic();
+        
 
     }
-    Moveup() {
+    //MOVIMIENTO A--W
+    Moveup() { 
         if (this.boton1_luz.alpha == 1) {
-            console.log('aagado')
+            console.log('rojo')
             this.salir_luz.alpha = 1;
             this.boton1_luz.alpha = 0;
             this.menu_boton = 1;
             console.log(this.menu_boton);
         } else if (this.salir_luz.alpha == 1) {
             console.log('salir izquierda')
-            this.personajes_luz.alpha = 1;
+            this.powerups_luz.alpha = 1;
             this.salir_luz.alpha = 0;
-            this.menu_boton = 0;
+            this.menu_boton = 6;
             console.log(this.menu_boton);
+        } else if (this.powerups_luz.alpha == 1) {
+            this.powerups_luz.alpha = 0;
+            console.log(' s')
+            this.personajes_luz.alpha = 1;
+            this.menu_boton = 2;
+            console.log(this.menu_boton);
+            
         } else if (this.personajes_luz.alpha == 1) {
             console.log(' s')
             this.personajes_luz.alpha = 0;
@@ -104,7 +113,8 @@ export class Play_Menu_Scene extends Phaser.Scene {
             console.log(this.menu_boton);
         }
     }
-    Movedown() {
+    //MOVIMIENTO S-D
+    Movedown() { 
         if (this.boton1_luz.alpha == 1) {
             console.log('aagado2')
             this.boton2_luz.alpha = 1;
@@ -132,9 +142,16 @@ export class Play_Menu_Scene extends Phaser.Scene {
         } else if (this.personajes_luz.alpha == 1) {
             console.log(' s2')
             this.personajes_luz.alpha = 0;
-            this.salir_luz.alpha = 1;
-            this.menu_boton = 3;
+            this.powerups_luz.alpha = 1;
+            this.menu_boton = 6;
             console.log(this.menu_boton);
+        }else if (this.powerups_luz.alpha == 1) {
+            this.powerups_luz.alpha = 0;
+            console.log(' s')
+            this.personajes_luz.alpha = 0;
+            this.salir_luz.alpha = 1;
+            this.menu_boton = 1;
+            console.log(this.menu_boton);        
         } else if (this.salir_luz.alpha == 1) {
             console.log('salir izquierda2')
             this.boton1_luz.alpha = 1;
@@ -221,6 +238,13 @@ export class Play_Menu_Scene extends Phaser.Scene {
         this.personajes_luz = this.add.image(1150, 390, 'botonpersonajes2').setInteractive();
         this.personajes_luz.setScale(1);
         this.personajes_luz.alpha = 0;
+
+
+        this.powerups = this.add.image(1150, 520, 'botonpoweups').setInteractive();
+        this.powerups.setScale(1);
+        this.powerups_luz = this.add.image(1150, 520, 'botonpoweups2').setInteractive();
+        this.powerups_luz.setScale(1);
+        this.powerups_luz.alpha = 0;
         //this.salir = this.add.text(50,50,'Salir', { color: '#000000', fontSize: '40px', fontFamily: 'Gemunu Libre'});
         //this.salir.setInteractive();
 
@@ -258,7 +282,11 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.sound.play('tambor');
             that.scene.start("select_menu_personajes");
         });
-
+        this.powerups_luz.on('pointerdown', function (pointer) {
+            console.log('Boton salir pulsado');
+            that.sound.play('tambor');
+            that.scene.start("select_menu_powerups");
+        });
 
     }
 
@@ -273,6 +301,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.configuracion_luz.alpha = 0;
             that.controles_luz.alpha = 0;
             that.personajes_luz.alpha = 0;
+            that.powerups_luz.alpha = 0;
         });
         this.boton2.on('pointerover', function (pointer) {
             console.log(that.boton1_luz);
@@ -282,6 +311,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.configuracion_luz.alpha = 0;
             that.controles_luz.alpha = 0;
             that.personajes_luz.alpha = 0;
+            that.powerups_luz.alpha = 0;
         });
         this.salir.on('pointerover', function (pointer) {
             console.log(that.boton1_luz);
@@ -291,6 +321,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.configuracion_luz.alpha = 0;
             that.controles_luz.alpha = 0;
             that.personajes_luz.alpha = 0;
+            that.powerups_luz.alpha = 0;
         });
         this.configuracion.on('pointerover', function (pointer) {
             console.log(that.boton1_luz);
@@ -300,6 +331,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.configuracion_luz.alpha = 1;
             that.controles_luz.alpha = 0;
             that.personajes_luz.alpha = 0;
+            that.powerups_luz.alpha = 0;
         });
         this.controles.on('pointerover', function (pointer) {
             console.log(that.boton1_luz);
@@ -309,6 +341,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.configuracion_luz.alpha = 0;
             that.controles_luz.alpha = 1;
             that.personajes_luz.alpha = 0;
+            that.powerups_luz.alpha = 0;
         });
         this.personajes.on('pointerover', function (pointer) {
             console.log(that.boton1_luz);
@@ -318,6 +351,17 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.configuracion_luz.alpha = 0;
             that.controles_luz.alpha = 0;
             that.personajes_luz.alpha = 1;
+            that.powerups_luz.alpha = 0;
+        });
+        this.powerups.on('pointerover', function (pointer) {
+            console.log(that.boton1_luz);
+            that.boton1_luz.alpha = 0;
+            that.boton2_luz.alpha = 0;
+            that.salir_luz.alpha = 0;
+            that.configuracion_luz.alpha = 0;
+            that.controles_luz.alpha = 0;
+            that.personajes_luz.alpha = 0;
+            that.powerups_luz.alpha = 1;
         });
         if (this.iniciar.isDown) {
             switch (this.menu_boton) {
@@ -345,6 +389,10 @@ export class Play_Menu_Scene extends Phaser.Scene {
                 case 5: //menu online
                     this.sound.play('tambor');
                     this.scene.start("select_menu_Scene");
+                    break;
+                case 6: //menu powerups
+                    this.sound.play('tambor');
+                    this.scene.start("select_menu_powerups");
                     break;
             }
         }

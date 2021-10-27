@@ -42,7 +42,8 @@ export class Pausa_Scene extends Phaser.Scene{
 
         this.resume.on('pointerdown', function(pointer){
             that.sound.play('espada');
-            that.scene.start("game_Scene");
+            that.scene.wake("game_Scene");
+            that.scene.remove("select_Pausa");
         })
         
         /*this.input.keyboard.on('keydown', function (event) {
@@ -60,8 +61,8 @@ export class Pausa_Scene extends Phaser.Scene{
     update() {
         if(this.pausa.isDown){
             console.log('enter')
-            this.scene.launch("select_Pausa");
-            this.scene.start("game_Scene")
+            this.scene.stop("select_Pausa");
+            this.scene.wake("game_Scene")
         }
         this.pointer = this.input.activePointer;
         
