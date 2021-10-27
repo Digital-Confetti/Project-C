@@ -103,6 +103,8 @@ Informacion de los todos los controles que va a necesitar nuestro cliente.
 
 Pantalla en la cual vamos a poder ver al ganador de la pelea y futuro Mariscal de la Abadia. 
 
+![8f8767b0c17700c09bbbb6b4b2fdbd9d](https://user-images.githubusercontent.com/91007943/139139478-e6c7f143-26b1-4ea8-b1c2-52e6ff77bb20.png)
+
 ##  ESPERAMOS QUE OS GUSTE NUESTRO JUEGO :wheelchair: 🎃
  
 
