@@ -37,6 +37,7 @@ import { Controles_Scene } from './scripts/scenes/controles.js';
 import { Personajes_Scene } from './scripts/scenes/personajes.js';
 import { Musica_Scene } from './scripts/scenes/escenamusica.js';
 import { Pausa_Scene } from './scripts/scenes/pausa.js';
+import { Poweups_Scene } from './scripts/scenes/powerups.js';
 
 
 const config = {
