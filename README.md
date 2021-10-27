@@ -112,8 +112,11 @@ Pantalla en la cual vamos a poder ver al ganador de la pelea y futuro Mariscal d
 
 ##  Arte referenciado
 [Menu](https://trome.pe/resizer/EaNnLXvFl0zdkQEEr27r5DVCA8U=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/MB7M2QJI5ZBZZDWYKCW5CGMXTM.jpg "menu")
+
 [Botonoes](https://cdn.discordapp.com/attachments/889091137401401374/902981333201092608/victor-sanz-artworl.jpg "Botonoes")
+
 [Pantalla inicial](https://wallpapercave.com/wp/wp3652476.jpg "Pantalla inicial")
+
 [Fondo Batalla](https://cdn.discordapp.com/attachments/889091137401401374/902981352322895942/tim-kaminski-sc-crr-01-0000-bg-006-comp-v002-mak-wip7.jpg "Fondo Batalla")
 ##  ¡¡ESPERAMOS QUE OS GUSTE NUESTRO JUEGO!! 🧙 :wheelchair: 🤺   🛡️ 
 
