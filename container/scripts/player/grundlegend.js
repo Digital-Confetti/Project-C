@@ -31,6 +31,7 @@ export class GrundLegend extends Player{
         this.proyectile_Size = 0;
         this.proyectiles = [];
         this.shoot_Avaliable = true;
+        this.hit_damage = 10;
         
         this.create_Animations(scene);
         this.play('idle');
@@ -179,13 +180,32 @@ export class GrundLegend extends Player{
     }
     shoot()
     {
-        let bala = new GL_Proyectile(this.scene, this.x, this.y - 50, this.proyectile_Size);
+        var x_pos = this.x;
+        if (this.looking_R)
+        {
+            x_pos += 60;
+        } else {
+            x_pos -= 60;
+        }
+        let bala = new GL_Proyectile(this.scene, x_pos, this.y - 50, this.proyectile_Size);
         if (!this.looking_R)
         {
             bala.flipDirection();
         }
+        this.colisionador = this.scene.physics.add.collider(this.scene.player, bala, this.hitPlayer, null, this);
+        this.colisionador2 = this.scene.physics.add.collider(this.scene.player2, bala, this.hitPlayer, null, this);
+
         this.proyectiles.push(bala);
           
+    }
+
+    hitPlayer(player, bullet)
+    {
+        let dmg = this.hit_damage * bullet.p_Size;
+        this.scene.sound.play('impacto');
+        console.log('player dañado: ' + dmg);
+        player.setVida(player.getVida() - dmg);
+        bullet.destroy();
     }
 
     conditional_Color()
@@ -546,7 +566,7 @@ export class GrundLegend extends Player{
 
         for (var i = 0; i < this.proyectiles.length; i++)
         {
-            this.proyectiles[i].update();
+            this.proyectiles[i].update(delta);
         }
 
         this.checkRespawn();

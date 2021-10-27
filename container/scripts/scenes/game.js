@@ -216,7 +216,7 @@ export class Game_Scene extends Phaser.Scene {
 
     spawnPowerUp(){
         this.i = Math.floor(Math.random() * 5) + 1;
-        this.i = 5;
+        //this.i = 5;
         this.x = Math.floor(Math.random() * 1080) + 200;
         this.y = 50;
 
