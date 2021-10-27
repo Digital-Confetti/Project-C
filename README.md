@@ -39,7 +39,9 @@ Un jugador va a combatir contra otros jugadores para lograr ser nombrado Marisca
 En medio de la batalla van a ir cayendo `poweups` , el jugador que logre alcanzar uno de ellos podra gozar de sus beneficios que dependen del tipo de `poweup` que sea.
 Una vez se hayan quedado sin vida los jugadores terminara el juego y sera nombrado un nuevo Mariscal de la Abadia.
 
-![4117ca9ad1f8593d283aea073d4d03cb](https://user-images.githubusercontent.com/91007943/139128441-43436f4b-b597-4406-8f79-9356e5fc9bd3.png)
+
+![0ecec0ec2b92e316bbb82fdc126aca48](https://user-images.githubusercontent.com/91007943/139128523-c0a95a0f-b73e-4ee9-8319-9477cafc4432.png)
+
 
 ##  Powerups:
 
