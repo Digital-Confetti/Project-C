@@ -43,7 +43,8 @@ export class Game_Scene extends Phaser.Scene {
         // s -> ms
         this.dashCoolDown = 3 * 1000;
         this.power_ups_respawn_cooldown = 2 * 1000;
-        this.game_duration = 5 * 60 * 1000;
+        this.min_duration = 5;
+        this.game_duration = this.min_duration * 60 * 1000;
 
         // receiver of the selected character
         this.selectedCharacter;
@@ -298,12 +299,13 @@ export class Game_Scene extends Phaser.Scene {
 
         this.text_vidas2.setText('Vidas: ' + this.player2.getVidas());
 
-        this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 5) * 300;
+        this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 5) * this.game_duration / 1000;
         this.duration_aux2 = parseInt(this.duration_aux, 10);
         
 
-        this.min_aux = parseInt(this.duration_aux2 / 60);
-        this.seg_aux = this.duration_aux2 % 60;
+
+        this.min_aux = (this.min_duration-1) - (parseInt(this.duration_aux2 / 60));
+        this.seg_aux = 59 - (this.duration_aux2 % 60);
 
         this.min = this.min_aux;
         this.seg = this.seg_aux;
