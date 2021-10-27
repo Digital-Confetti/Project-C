@@ -14,7 +14,7 @@ export class GL_Proyectile extends Phaser.GameObjects.Sprite {
 
         this.body.setSize(14, 7, false);
 
-        this.velocidadx = 75;
+        this.velocidadx = 600;
         this.velocidadx /= proyectile_size;
         this.velocidady = 0;
 
@@ -37,8 +37,8 @@ export class GL_Proyectile extends Phaser.GameObjects.Sprite {
 
     update(delta) {
         if (this.active) {
-            this.body.velocity.x = this.velocidadx * delta;
-            this.body.velocity.y = this.velocidady * delta;
+            this.body.velocity.x = this.velocidadx;
+            this.body.velocity.y = this.velocidady;
         }
 
     }

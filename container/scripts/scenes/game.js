@@ -301,7 +301,7 @@ export class Game_Scene extends Phaser.Scene {
             {
                 this.player2.x_move = 2;
                 this.player2.y_move = -250;
-                this.player2.looking_R = this.player.x < this.punchingBag.x;
+                this.player2.looking_R = this.player.x < this.player2.x;
                 this.player2.playerStatus = Player.PlayerStatus.HITTED;
                 this.player2.vida -= this.player.attack_damage;
                 this.player2.lauch_reset_HITTED();
@@ -309,7 +309,7 @@ export class Game_Scene extends Phaser.Scene {
             {
                 this.player2.x_move = 2;
                 this.player2.y_move = -250;
-                this.player2.looking_R = this.player.x < this.punchingBag.x;
+                this.player2.looking_R = this.player.x < this.player2.x;
                 this.player2.playerStatus = Player.PlayerStatus.HITTED;
                 this.player2.vida -= this.player.attack_damage;
                 this.player2.lauch_reset_HITTED();
@@ -322,7 +322,7 @@ export class Game_Scene extends Phaser.Scene {
             {
                 this.player.x_move = 2;
                 this.player.y_move = -250;
-                this.player.looking_R = this.player.x < this.punchingBag.x;
+                this.player.looking_R = this.player2.x < this.player.x;
                 this.player.playerStatus = Player.PlayerStatus.HITTED;
                 this.player.vida -= this.player2.attack_damage;
                 this.player.lauch_reset_HITTED();
@@ -330,7 +330,7 @@ export class Game_Scene extends Phaser.Scene {
             {
                 this.player.x_move = 1;
                 this.player.y_move = -50;
-                this.player.looking_R = this.player.x < this.punchingBag.x;
+                this.player.looking_R = this.player2.x < this.player.x;
                 this.player.playerStatus = Player.PlayerStatus.HITTED;
                 this.player.vida -= this.player2.attack_damage;
                 this.player.lauch_reset_HITTED();

@@ -105,7 +105,7 @@ export class GrundLegend extends Player{
                 },
                 {
                     key: chara,
-                    frame: chara + '_Special1.png'
+                    frame: chara + '_Special3.png'
                 },
             ],
             frameRate: 3,
@@ -205,6 +205,11 @@ export class GrundLegend extends Player{
         this.scene.sound.play('impacto');
         console.log('player dañado: ' + dmg);
         player.setVida(player.getVida() - dmg);
+            player.x_move = 2;
+            player.y_move = -250;
+            player.looking_R = bullet.x < player.x;
+            player.playerStatus = Player.PlayerStatus.HITTED;
+        player.lauch_reset_HITTED();
         bullet.destroy();
     }
 
@@ -228,7 +233,7 @@ export class GrundLegend extends Player{
     
 
     lauch_reset_HITTED() {
-        this.reset_HIT = this.scene.time.delayedCall(0.25 * 1000, this.reset_HITTED, null, this);
+        this.reset_HIT = this.scene.time.delayedCall(0.49 * 1000, this.reset_HITTED, null, this);
     }
     reset_HITTED(){ this.playerStatus = Player.PlayerStatus.IDDLE;
         this.setTint(0xFFFFFF);}
