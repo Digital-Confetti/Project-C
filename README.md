@@ -61,7 +61,7 @@ En el menú principal vamos a poder ir a las diferentes escenas de nuestro video
 
 ##  Seleccion de personajes
 En esta pantalla vamos a poder elegir entre nuestro querido `Grund Legend` o al poderoso `Otonnai`.
-Una vez los jugadores seleccionan a su personaje comienza la batalla.
+Una vez los jugadores seleccionan a su personaje, comienza la batalla.
 
 ![4117ca9ad1f8593d283aea073d4d03cb](https://user-images.githubusercontent.com/91007943/139125685-3a0eb7c3-8726-460d-9d76-7debc5262f7d.png)
 
@@ -113,7 +113,7 @@ Pantalla en la cual vamos a poder ver al ganador de la pelea y futuro Mariscal d
 ##  Arte referenciado
 [Menu](https://trome.pe/resizer/EaNnLXvFl0zdkQEEr27r5DVCA8U=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/MB7M2QJI5ZBZZDWYKCW5CGMXTM.jpg "menu")
 
-[Botonoes](https://cdn.discordapp.com/attachments/889091137401401374/902981333201092608/victor-sanz-artworl.jpg "Botonoes")
+[Botones](https://cdn.discordapp.com/attachments/889091137401401374/902981333201092608/victor-sanz-artworl.jpg "Botonoes")
 
 [Pantalla inicial](https://wallpapercave.com/wp/wp3652476.jpg "Pantalla inicial")
 
