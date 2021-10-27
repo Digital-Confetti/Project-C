@@ -50,12 +50,23 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.maxVida;
         this.Vida;
 
+        this.vidas = 3;
+
+        this.respawnX = 640;
+        this.respawnY = 100
+
+        this.respawn_timer = 2 * 1000;
+        this.muerto = false;
+
         // State machine
         this.playerStatus = Player.PlayerStatus.IDDLE;
     }
 
     getVida(){return this.vida;}
     setVida(v){this.vida = v;}
+
+    getVidas(){return this.vidas;}
+    setVidas(v){this.vidas = v;}
 
     getNa(){return this.keyNA;}
     getMovingR(){return this.moving_R;}

@@ -26,38 +26,48 @@ Travellers Tournament
         Rodrigo Díaz Pau            
         Miguel Rodríguez de Rojas       (github: Lonflis)
         Héctor Muñoz Gómez              (github: Sh3ry01)
-*/ 
+*/
 
-import {Game_Scene} from './scripts/scenes/game.js';
-import {Menu_Scene} from './scripts/scenes/menu.js';
-import {Play_Menu_Scene} from './scripts/scenes/menujugar.js';
-import {Play_Select_Scene} from './scripts/scenes/menuseleccion.js';
-import {Controles_Scene} from './scripts/scenes/controles.js';
-import {Personajes_Scene} from './scripts/scenes/personajes.js';
-import {Musica_Scene} from './scripts/scenes/escenamusica.js';
-import {Pausa_Scene} from './scripts/scenes/pausa.js';
-import {Poweups_Scene} from './scripts/scenes/powerups.js';
+
+import { Game_Scene } from './scripts/scenes/game.js';
+import { Menu_Scene } from './scripts/scenes/menu.js';
+import { Play_Menu_Scene } from './scripts/scenes/menujugar.js';
+import { Play_Select_Scene } from './scripts/scenes/menuseleccion.js';
+import { Controles_Scene } from './scripts/scenes/controles.js';
+import { Personajes_Scene } from './scripts/scenes/personajes.js';
+import { Musica_Scene } from './scripts/scenes/escenamusica.js';
+import { Pausa_Scene } from './scripts/scenes/pausa.js';
+
 
 const config = {
     type: Phaser.AUTO,  //Phaser will decide how to render our game (WebGL or Canvas)
     width: 1280,         // game width 640
     height: 720,        // game height 360
     pixelArt: true,
-    
+
     // Adding Physics
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 550 },
-                debug: false
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 550 },
+            debug: false,
+
+                checkCollision: {
+                up: true,
+                down: false,
+                left: true,
+                right: true
             }
-        },
-        audio: {
-            disableWebAudio: true
-        },
+        }
+    },
+    audio: {
+        disableWebAudio: true
+    },
+
 
         scene: [Menu_Scene, Musica_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene,Controles_Scene,Personajes_Scene,Pausa_Scene,Poweups_Scene]
 
-    };
 
-    var game = new Phaser.Game(config);
+};
+
+var game = new Phaser.Game(config);
