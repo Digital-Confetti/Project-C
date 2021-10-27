@@ -216,7 +216,7 @@ export class Game_Scene extends Phaser.Scene {
         this.text_vida2 = this.add.text(1100, 82);
         this.text_vidas2 = this.add.text(1100, 132);
 
-        this.text_game_timer = this.add.text(640,50);
+        this.text_game_timer = this.add.text(610,50,'', {fontSize: 40, color: '#000000'});
 
         //this.punchingBag.play('PB_idle');
 
@@ -298,11 +298,15 @@ export class Game_Scene extends Phaser.Scene {
 
         this.text_vidas2.setText('Vidas: ' + this.player2.getVidas());
 
-        this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 4);
-        console.log(this.duration_aux);
+        this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 5) * 300;
+        this.duration_aux2 = parseInt(this.duration_aux, 10);
+        
 
-        //this.min = this.duration_aux / 60;
-        //this.seg = this.duration_aux % 60;
+        this.min_aux = parseInt(this.duration_aux2 / 60);
+        this.seg_aux = this.duration_aux2 % 60;
+
+        this.min = this.min_aux;
+        this.seg = this.seg_aux;
         this.text_game_timer.setText(this.min + ':' + this.seg);
         
         if (this.activePowerUp !== null) {
