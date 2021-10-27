@@ -111,6 +111,8 @@ Pantalla en la cual vamos a poder ver al ganador de la pelea y futuro Mariscal d
 ![SpriteSheet_PowerUp](https://user-images.githubusercontent.com/91007943/139141818-22ab4427-bca8-4070-9d01-b952e7b9a112.png)
 
 ##  Arte referenciado
+
+### Diseño 2D
 [Menu](https://trome.pe/resizer/EaNnLXvFl0zdkQEEr27r5DVCA8U=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/MB7M2QJI5ZBZZDWYKCW5CGMXTM.jpg "menu")
 
 [Botones](https://cdn.discordapp.com/attachments/889091137401401374/902981333201092608/victor-sanz-artworl.jpg "Botonoes")
@@ -118,6 +120,20 @@ Pantalla en la cual vamos a poder ver al ganador de la pelea y futuro Mariscal d
 [Pantalla inicial](https://wallpapercave.com/wp/wp3652476.jpg "Pantalla inicial")
 
 [Fondo Batalla](https://cdn.discordapp.com/attachments/889091137401401374/902981352322895942/tim-kaminski-sc-crr-01-0000-bg-006-comp-v002-mak-wip7.jpg "Fondo Batalla")
+### Audio
+[Disparo](http://www.sonidosmp3gratis.com/download.php?id=16939&sonido=9%20mm%20disparo "Disparo")
+
+[Desenfundar](http://www.sonidosmp3gratis.com/download.php?id=6177&sonido=espada%20desenfundar "Desenfundar")
+
+[Tambor](http://www.sonidosmp3gratis.com/download.php?id=1190&sonido=tambor%2012 "Tambor")
+
+[Derramar sangre](http://www.sonidosmp3gratis.com/download.php?id=14816&sonido=derramar%20sangre "Derramar sangre")
+
+[Sonido beber](http://www.sonidosmp3gratis.com/download.php?id=1031&sonido=beber "Sonido beber")
+
+[Comiendo](http://www.sonidosmp3gratis.com/download.php?id=17275&sonido=comiendo%201 "Comiendo")
+
+[Caida persona](http://www.sonidosmp3gratis.com/download.php?id=10085&sonido=caida%20persona "Caida persona")
 ##  ¡¡ESPERAMOS QUE OS GUSTE NUESTRO JUEGO!! 🧙 :wheelchair: 🤺   🛡️ 
 
 
