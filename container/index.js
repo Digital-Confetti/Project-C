@@ -22,7 +22,7 @@ ___________________________ ,8"  8I ______________________________________ d8" _
 /*
 Travellers Tournament
     Digital Confetti -2021-
-        Javier Raja Huertas             (twt: @tuicher, github: tuicher)
+        Javier Raja Huertas             (github: tuicher)
         Rodrigo Díaz Pau            
         Miguel Rodríguez de Rojas       (github: Lonflis)
         Héctor Muñoz Gómez              (github: Sh3ry01)

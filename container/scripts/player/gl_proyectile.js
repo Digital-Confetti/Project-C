@@ -5,6 +5,8 @@ export class GL_Proyectile extends Phaser.GameObjects.Sprite {
         this.scene.physics.world.enable(this);
         this.body.allowGravity = false;
 
+        this.p_Size = proyectile_size;
+
         let aux = 'size' + proyectile_size;
         this.play(aux);
 
@@ -12,7 +14,8 @@ export class GL_Proyectile extends Phaser.GameObjects.Sprite {
 
         this.body.setSize(14, 7, false);
 
-        this.velocidadx = 800;
+        this.velocidadx = 75;
+        this.velocidadx /= proyectile_size;
         this.velocidady = 0;
 
         this.scene.add.existing(this);
@@ -32,10 +35,10 @@ export class GL_Proyectile extends Phaser.GameObjects.Sprite {
         this.velocidadx = -this.velocidadx;
     }
 
-    update() {
+    update(delta) {
         if (this.active) {
-            this.body.velocity.x = this.velocidadx;
-            this.body.velocity.y = this.velocidady;
+            this.body.velocity.x = this.velocidadx * delta;
+            this.body.velocity.y = this.velocidady * delta;
         }
 
     }
