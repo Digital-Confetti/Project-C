@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: javierraja
+Build-Jdk: 17
+Implementation-Title: rest_ejer1_con_ui
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: es.urjc.code.juegosenred
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/items-backend-and-frontend
+Created-By: Maven Integration for Eclipse
+

@@ -1,0 +1,28 @@
+body {    
+    background-repeat: repeat;
+    background-color: #cccccc;
+}
+
+#phaser_container{
+	background-color: green;
+}
+#chatbox{
+	text-align: left;
+	background-color: green;
+	height:270px;
+	width:430px;
+	border:1px solid;
+	overflow: auto;
+}
+
+#usermsg{
+	width:395px;
+}
+
+#submit{
+	width:60px;
+}
+
+#full-item{
+	margin-bottom: 10px;
+}
