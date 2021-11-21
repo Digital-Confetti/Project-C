@@ -15,6 +15,7 @@
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	    <script src="index.js" type="module"></script>
+        <script src="/scripts/chatBox.js"></script>
          
         <!-- Ponemos un título -->
     <!-- 
@@ -29,10 +30,12 @@
         <div id="full-item">
                 <div id="chatbox">
                 </div>
-                <form name="message" action="">
-                	<input name"usermsg" type="text" id="usermsg" size="63"/>
-                	<input name"submitmsg" type="button" id="submitmsg" value="Send"/>
-                </form>
+                <div id="messageAction">
+                </div>
+                <div id="userdata">
+                    <input type="text" id="nick"/>
+                    <input type="button" id="setName" value="set Nickname"/>
+                </div>
         </div >
           
     </body>

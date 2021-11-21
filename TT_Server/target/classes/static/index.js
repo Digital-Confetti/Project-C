@@ -71,18 +71,3 @@ const config = {
 };
 
 var game = new Phaser.Game(config);
-
-$(document).ready(function () {
-	var submit = $('#submitmsg');
-	var msg = $('#usermsg');
-	var chatBox = $('#chatbox');
-	
-	submit.click( function () {
-		let plainText = msg.val();
-		console.log(plainText);
-		//Borramos el field text
-		msg.val('');
-	});
-	
-});
-

@@ -28,8 +28,11 @@ public class Conmutron {
 		lobbyList.forEach((lobby) -> {
 			if (lobby.getNumPlayers() < this.lobbySize) {
 				this.active = lobby;
+				return;
 			}
 		});
+		
+		
 	}
 	
 	//Funcionalidad asociada a añadir un jugador al lobby activo
@@ -42,7 +45,7 @@ public class Conmutron {
 		} else {
 			
 		}
-		return name;
+		return active.getId();
 	}
 	
 	//newMessage()
