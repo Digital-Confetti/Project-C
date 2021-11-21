@@ -1,6 +1,8 @@
 package digitalconfetti.TT.server;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -22,23 +24,31 @@ import digitalconfetti.TT.server.Items.Conmutron;
 import digitalconfetti.TT.server.Items.Message;
 
 @RestController
-@RequestMapping(value = "/get/")
+@RequestMapping("/lobby/")
 public class MessageController {
 
 	Conmutron conmutron;
 	
 	//POST->Player
 	@PostMapping()
-	public String postlayer(@RequestBody String name)
+	public String postPlayer(@RequestBody String name)
 	{
-		//TODO Conmutron.addPlayer(name);
-		return name;
+		return conmutron.addPlayer(name);
 	}
 	
-	//POST->Mensaje
+	//POST->Mensajes
 	@PostMapping("{lobby}")
 	public ResponseEntity<Boolean> postMessage(@RequestBody Message message, @PathVariable("lobby") String lobby){
 		//TODO Conmutron.newMessage(message)
 		return new ResponseEntity<Boolean>(true, HttpStatus.CREATED);
 	}
+	
+	//GET->Mensajes
+	@GetMapping("{lobby}")
+	public List<Message> getMessages(@PathVariable("lobby") String lobby){
+		List<Message> out = new ArrayList<Message>();
+		//TODO Conmutro.getMessages(lobby);
+		return out;
+	}
+	
 }

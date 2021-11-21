@@ -23,9 +23,10 @@ public class Lobby {
 	private String id;
 	
 	//Jugadores por Lobby
-	private int maxPlayers;
+	private final int maxPlayers;
 	
 	private final int maxMsgs = 15;
+	
 	
 	//Lista de los jugadores adscritos 
 	private List<String> playerList;
@@ -74,7 +75,7 @@ public class Lobby {
 	public Lobby(int maxPlayer){
 		this.id = generate_Id();
 		
-		this.setMaxPlayers(maxPlayer);
+		this.maxPlayers = maxPlayer;
 		
 		this.setPlayerList(new ArrayList<String>());
 		
@@ -83,6 +84,7 @@ public class Lobby {
 		this.mStorage= new MessageStorage(this,"database_"+ this.id + ".csv");
 		
 		this.timer.start();
+		
 	}
 
 	private void setPlayerList(ArrayList<String> arrayList) {
@@ -92,19 +94,15 @@ public class Lobby {
 	public String getId() {
 		return id;
 	}
+	
+	public int getNumPlayers() {
+		return this.conectionMap.size();
+	}
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getMaxPlayers() {
-		return maxPlayers;
-	}
-
-	public void setMaxPlayers(int maxPlayers) {
-		this.maxPlayers = maxPlayers;
-	}
-	
 	//Funcionalidad propia de la sala para emitir mensajes en nombre del sistema
 	private void systemMessage(String player_Name,String body) {
 		DateFormat formatter = new SimpleDateFormat("dd-MM-yyy hh:mm");

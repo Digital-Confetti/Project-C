@@ -1,7 +1,5 @@
-var ip = "10.6.53.93:8080";
-let aux  = "http://" + ip + "/items";
-
-"localhost:8080"
+var ip = "localhost:8080";
+let aux  = "http://" + ip ;
 
 //Load items from server
 function loadItems(callback) {
