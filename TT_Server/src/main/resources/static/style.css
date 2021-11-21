@@ -1,28 +1,33 @@
-body {    
+body {  
     background-repeat: repeat;
-    background-color: #cccccc;
+    background-color: #000000;
 }
 
-#phaser_container{
-	background-color: green;
+canvas {
+	position: fixed;
+	top: 10px;
 }
+
 #chatbox{
 	text-align: left;
-	background-color: green;
-	height:270px;
-	width:430px;
+	background-color: rgb(145, 145, 146);
+	height:700px;
+	width:530px;
 	border:1px solid;
 	overflow: auto;
 }
 
 #usermsg{
-	width:395px;
+	width:475px;
 }
 
 #submit{
-	width:60px;
+	width:30px;
 }
 
 #full-item{
+	position: fixed;
+	right: 10px;
 	margin-bottom: 10px;
+	padding-left: 150px;
 }
