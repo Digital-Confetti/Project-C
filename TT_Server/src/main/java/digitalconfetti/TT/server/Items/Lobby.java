@@ -12,6 +12,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +29,6 @@ public class Lobby {
 	
 	private final int maxMsgs = 15;
 	
-	
 	//Lista de los jugadores adscritos 
 	private List<String> playerList;
 	
@@ -40,8 +41,6 @@ public class Lobby {
 	
 	//Tasa de refresco de estado del server
 	private float s = 3.0f;
-	
-	
 	
 	//Timer de refresco
 	Timer timer = new Timer((int) (s * 1000), new ActionListener(){
@@ -60,6 +59,7 @@ public class Lobby {
 	final private String KEYSET = "ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789";
 	final private int KEYSIZE = 8;
 	
+	// Genera una ID unica
 	private String generate_Id()
 	{
 		String out = "";
@@ -72,16 +72,23 @@ public class Lobby {
 		return out;
 	}
 	
+	// Constructor
+	
 	public Lobby(int maxPlayer){
+		// Creamos la ID única
 		this.id = generate_Id();
 		
+		// Seteamos el maximo de jugadores por Lobby
 		this.maxPlayers = maxPlayer;
 		
+		// Creamos la lista de jugadores
 		this.setPlayerList(new ArrayList<String>());
 		
+		// Mapa de conexiones (Comprobar desconexiones)
 		this.conectionMap = new HashMap<String, Boolean>();
 		
-		this.mStorage= new MessageStorage(this,"database_"+ this.id + ".csv");
+		// Creamos un MessageStorage que se encargará de guardar el log del chat
+		this.mStorage= new MessageStorage(this.id, "MessageStorage/db_"+ this.id + ".csv");
 		
 		this.timer.start();
 		
@@ -112,7 +119,8 @@ public class Lobby {
 	}
 	
 	//Funcionalidad propia de la sala para dictaminar si ya hay alguien con ese nombre en la sala
-	private boolean isPlayerOn(String name){
+	private boolean isPlayerOn(Player player){
+		String name = player.getName();
 		for (int i = 0; i < this.playerList.size(); i++){
 			if (name.equals(this.playerList.get(i))){
 				return true;
@@ -121,20 +129,32 @@ public class Lobby {
 		return false;
 	}
 
-	public String addPlayer(String name){
-		//Comprobaciones
-		if (this.isPlayerOn(name)){
-			// 01->Ya hay un usuario con tu nombre en el server
-			return "ERROR O1";
-		} else if (this.maxPlayers == this.conectionMap.size()) {
+	//Método encargado de añadir un jugador al lobby
+	public Player addPlayer(String name){
+		Player player = new Player(name);
+		
+		//Comprobamos si el jugador ya esta en ese lobby
+		if (this.isPlayerOn(player)){
+			return null;
+		} 
+		
+		/*
+		 * 
+		else if (this.maxPlayers == this.conectionMap.size()) {
 			// 02->La sala está llená
 			return "ERROR 02";
 		}
+		 * 
+		 */
 		
 		//Añadimos al jugador a la lista de jugadores conectados
 		conectionMap.put(name, true);
 		systemMessage(name, "se ha conectado.");
-		return name;
+		player.setLobby(this.id);
+		
+		System.out.println( + this.getNumPlayers() + "/" + this.maxPlayers);
+		
+		return player;
 	}
 	
 	//Funcion que devuelve los mensajes de esa sala

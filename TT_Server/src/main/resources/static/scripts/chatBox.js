@@ -1,12 +1,45 @@
-var ip = "localhost:8080";
-var aux = "http://" + ip;
+var aux = window.location + "get/";
+
+//POST -> Player
+function sendPlayer(playerName){
+    console.log(playerName);
+    $.ajax({
+        method: "POST",
+        url: aux,
+        data: playerName,
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        // name returned
+        // console.log(data.name);
+        player = data.name;
+
+        // lobby returned
+        console.log(data.lobby);
+        lobby = data.lobby;
+        
+
+        let msgAction = $("#messageAction");
+        msgAction.empty();
+        msgAction.append('<input name"usermsg" type="text" id="usermsg" size="63"/>');
+        msgAction.append('<input name"submitmsg" type="button" id="submitmsg" value="Send"/>');
+
+        let userData = $("#userdata");
+        // Vaciamos el user data y ponemos un display del nombre
+        userData.empty();
+        userData.append('<p><b>'+ playerName +'</b></p>');
+    })
+
+}
 
 // GET -> MENSAJES
 function getMessages(callback){
     $.ajax({
         url: aux
     }).done(function (messages) {
-        console.log("Mensajes cargados" + JSON.stringify(items));
+        console.log("Mensajes cargados" + JSON.stringify(messages));
         callback(messages);
     })
 
@@ -17,7 +50,7 @@ function updateMesages(messages){
 }
 
 //  POST -> MENSAJES
-function sendMMassage( msg, callback) {
+function sendMassage( msg, callback) {
     $.ajax({
         method: "POST",
         url: aux,
@@ -33,21 +66,18 @@ function sendMMassage( msg, callback) {
 }
 
 $(document).ready(function () {
-    // Cargamos los mensajes
-        //TODO 
-
-    //Segmento de chat
-    var msgAction = $('#messageAction');
-	var submit = $('#submitmsg');
-	var msg = $('#usermsg');
-	var chatBox = $('#chatbox');
-
-    //
-    var player;
 
     var userData = $("#userdata");
     var setName = $("#setName");
     var nick = $("#nick");
+
+    var msgAction = $('#messageAction');
+    var submit = $('#submitmsg');
+    var msg = $('#usermsg');
+    var chatBox = $('#chatbox');
+    
+    var player;
+    var lobby;
 	
 	submit.click( function () {
 		let plainText = msg.val();
@@ -63,14 +93,9 @@ $(document).ready(function () {
     setName.click( function () {
         let aux = nick.val();
         player = aux;
-        // Llenamos el Msg action
-        msgAction.empty();
-        msgAction.append('<input name"usermsg" type="text" id="usermsg" size="63"/>');
-        msgAction.append('<input name"submitmsg" type="button" id="submitmsg" value="Send"/>');
+        nick.val("");
 
-        // Vaciamos el user data y ponemos un display del nombre
-        userData.empty();
-        userData.append('<p><b>'+ player +'</b></p>');
+        sendPlayer(aux);
     });
 	
 });
