@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import digitalconfetti.TT.server.Items.Lobby;
+import digitalconfetti.TT.server.Items.Message;
 import digitalconfetti.TT.server.Items.Player;
 
 @Component
@@ -48,8 +49,26 @@ public class ComunicationService {
 		return null;
 	}
 	
-	//newMessage()
-	
 	//getMessages()
+	public List<Message> getMessages(String lobby, String name)
+	{
+		List<Message> out = new ArrayList<Message>();
+		lobbyList.forEach((l)->{
+			if(l.getId().equals(lobby)){
+				out.addAll(l.getMessages(name));
+			}
+		});
+		return out;
+	}
+	
+	public boolean addMessage(Message m, String l) {
+		
+		lobbyList.forEach((item)->{
+			if(item.getId().equals(l)){
+				item.addMsg(m);
+			}
+		});
+		return true;
+	}
 
 }

@@ -51,6 +51,7 @@ public class Lobby {
 					player.setValue(false);
 				} else {
 					systemMessage(player.getKey(),"se ha desconectado.");
+					conectionMap.remove(player.getKey());
 				}
 			}
 		}
@@ -88,7 +89,7 @@ public class Lobby {
 		this.conectionMap = new HashMap<String, Boolean>();
 		
 		// Creamos un MessageStorage que se encargará de guardar el log del chat
-		this.mStorage= new MessageStorage(this.id, "MessageStorage/db_"+ this.id + ".csv");
+		this.mStorage= new MessageStorage("MessageStorage/db_"+ this.id + ".csv");
 		
 		this.timer.start();
 		
@@ -155,6 +156,21 @@ public class Lobby {
 		System.out.println( + this.getNumPlayers() + "/" + this.maxPlayers);
 		
 		return player;
+	}
+	
+	public boolean addMsg(Message msg) {
+		mStorage.WriteMessage(msg);
+		return true;
+	}
+	
+	public List<Message> getMessages(String name){
+		for(Entry<String, Boolean> player: conectionMap.entrySet()){
+			if(player.getKey().equals(name)){
+				player.setValue(true);
+				return getMessages();
+			}
+		}
+		return getMessages();
 	}
 	
 	//Funcion que devuelve los mensajes de esa sala

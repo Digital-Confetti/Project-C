@@ -43,15 +43,15 @@ public class MessageController {
 	//POST->Mensajes
 	@PostMapping("{lobby}")
 	public ResponseEntity<Boolean> postMessage(@RequestBody Message message, @PathVariable("lobby") String lobby){
-		//TODO Conmutron.newMessage(message)
+		System.out.println(message.toCsv(":"));
+		boolean out  = conmutron.addMessage(message, lobby);
 		return new ResponseEntity<Boolean>(true, HttpStatus.CREATED);
 	}
 	
 	//GET->Mensajes
-	@GetMapping("{lobby}")
-	public List<Message> getMessages(@PathVariable("lobby") String lobby){
-		List<Message> out = new ArrayList<Message>();
-		//TODO Conmutro.getMessages(lobby);
+	@GetMapping("{lobby}/{name}")
+	public List<Message> getMessages(@PathVariable("lobby") String lobby, @PathVariable("name") String name){
+		List<Message> out = this.conmutron.getMessages(lobby, name);
 		return out;
 	}
 	

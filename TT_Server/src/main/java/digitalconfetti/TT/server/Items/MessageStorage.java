@@ -16,13 +16,11 @@ public class MessageStorage {
 	
 	private String path;
 	
-	private String id;
 	
 	private String separator = ";";
 	
-	public MessageStorage(String id, String path){
+	public MessageStorage(String path){
 		this.path = path;
-		this.id = id;
 	}
 	
 	public List<Message> ReadMessages(){
@@ -34,9 +32,8 @@ public class MessageStorage {
 			
 			while ((aux = reader.readLine()) != null){
 				chop = aux.split(separator); 
-				if (chop[0].equals(this.id)){
-					out.add(new Message(chop[1],chop[2],chop[3]));
-				}
+				out.add(new Message(chop[0],chop[1],chop[2]));
+				
 			}
 			return out;
 		} catch (IOException e){
@@ -53,9 +50,7 @@ public class MessageStorage {
 			
 			while ((aux = reader.readLine()) != null){
 				chop = aux.split(separator); 
-				if (chop[0].equals(this.id)){
-					out.add(0, new Message(chop[1],chop[2],chop[3]));
-				}
+				out.add(0, new Message(chop[0],chop[1],chop[2]));
 			}
 			return out;
 		} catch (IOException e){
@@ -67,7 +62,7 @@ public class MessageStorage {
 	public void WriteMessage(Message m){
 		try {
 			BufferedWriter file = new BufferedWriter(new FileWriter(this.path, true));
-			file.write(m.toCsv(this.id, separator));
+			file.write(m.toCsv(separator));
 			file.close();
 		} catch (IOException e){
 			System.out.println(e);

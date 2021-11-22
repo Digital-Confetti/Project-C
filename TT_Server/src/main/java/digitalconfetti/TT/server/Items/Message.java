@@ -17,12 +17,8 @@ public class Message {
 		this.setUser(user);
 	}
 	
-	public String toString() {
-		String out = this.date + "-" + this.user + ": " + this.text;
-		return out;
-	}
-	public String toCsv(String lobby_id, String separator){
-		String out = lobby_id + separator + this.user + separator + this.date + separator + this.text + '\n';
+	public String toCsv(String separator){
+		String out = this.user + separator + this.date + separator + this.text + '\n';
 		return out;
 	}
 	

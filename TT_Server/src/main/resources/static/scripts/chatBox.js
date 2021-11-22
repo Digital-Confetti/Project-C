@@ -1,7 +1,7 @@
 var aux = window.location + "get/";
 
 //POST -> Player
-function sendPlayer(playerName){
+function sendPlayer(playerName, callback){
     console.log(playerName);
     $.ajax({
         method: "POST",
@@ -20,48 +20,82 @@ function sendPlayer(playerName){
         console.log(data.lobby);
         lobby = data.lobby;
         
-
+        // Rellenamos lon la interfaz de chat
         let msgAction = $("#messageAction");
         msgAction.empty();
         msgAction.append('<input name"usermsg" type="text" id="usermsg" size="63"/>');
         msgAction.append('<input name"submitmsg" type="button" id="submitmsg" value="Send"/>');
 
-        let userData = $("#userdata");
         // Vaciamos el user data y ponemos un display del nombre
+        let userData = $("#userdata");
         userData.empty();
         userData.append('<p><b>'+ playerName +'</b></p>');
+
+        // Programamos el evento pulsar el submit
+        $('#submitmsg').click( function () {
+            let plainText = $("#usermsg").val();
+            var now = new Date();
+            now = now.toLocaleString();
+
+            var msg = {
+                date: now,
+                text: plainText,
+                user: player,
+            }
+    
+            if(plainText != ''){
+                sendMassage(msg, pingServer);
+            }
+            //Borramos el field text
+            $("#usermsg").val('');
+        });
+
+        //Veces por segundo que mandara su estado el cliente
+        refreshRate = 1;
+
+        //Creamos el timer
+        timer = setInterval(function () {
+            pingServer();
+        }, refreshRate * 1000)
+
+        // hacemos el callback
+        callback();
     })
 
 }
 
-// GET -> MENSAJES
-function getMessages(callback){
-    $.ajax({
-        url: aux
-    }).done(function (messages) {
-        console.log("Mensajes cargados" + JSON.stringify(messages));
-        callback(messages);
-    })
-
-}
-
-function updateMesages(messages){
-
-}
-
-//  POST -> MENSAJES
+//  POST -> MENSAJE
 function sendMassage( msg, callback) {
     $.ajax({
         method: "POST",
-        url: aux,
+        url: aux + lobby,
         data: JSON.stringify(msg),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
-    }).done(function (msg) {
-        console.log("Mensaje creado: " + JSON.stringify(msg));
-        callback(item);
+    }).done(function () {
+        callback();
+    })
+}
+
+// GET -> MENSAJES
+// De paso decimos al server que no nos hemos desconectado y nos bajamos los mensajes que hayan
+function pingServer()
+{
+    $.ajax({
+        url: aux + lobby + '/' + player,
+    }).done(function (info) {
+        console.log("Limpio");
+        let chat = $("#chatbox");
+        let out;
+        chat.empty();
+        for (i = 0; i < info.length; i++){
+            out = "<p>"
+            out += info[i].date + "-" + info[i].user + ": " + info[i].text;
+            out += "</p>"
+            chat.append(out);
+        }
     })
 }
 
@@ -76,18 +110,14 @@ $(document).ready(function () {
     var msg = $('#usermsg');
     var chatBox = $('#chatbox');
     
+    //player name
     var player;
+    
+    // lobby id
     var lobby;
-	
-	submit.click( function () {
-		let plainText = msg.val();
 
-        if(plainText != ''){
-            console.log(plainText);
-        }
-		//Borramos el field text
-		msg.val('');
-	});
+    // timer
+    var timer;
 
     //Boton asociado al addPlayer()
     setName.click( function () {
@@ -95,7 +125,7 @@ $(document).ready(function () {
         player = aux;
         nick.val("");
 
-        sendPlayer(aux);
+        sendPlayer(aux, pingServer);
     });
 	
 });
