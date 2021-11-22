@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import digitalconfetti.TT.server.Items.Conmutron;
+import digitalconfetti.TT.server.Items.ComunicationService;
 import digitalconfetti.TT.server.Items.Message;
 
 @RestController
 @RequestMapping("/lobby/")
 public class MessageController {
 
-	Conmutron conmutron;
+	ComunicationService conmutron;
 	
 	//POST->Player
 	@PostMapping()

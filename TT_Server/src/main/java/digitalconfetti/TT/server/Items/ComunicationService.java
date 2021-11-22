@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-// Begin KSP reference into here
-public class Conmutron {
-// End KSP reference
+public class ComunicationService {
 	
 	@Autowired
 	private List<Lobby> lobbyList = new ArrayList<Lobby>();
@@ -16,7 +14,7 @@ public class Conmutron {
 	
 	private final int lobbySize = 4;
 	
-	public Conmutron() {
+	public ComunicationService() {
 		//Nada mas crear el Objeto creamos el primer lobby
 		this.active = new Lobby(lobbySize);
 		//Añadimos el lobby a la lsta de lobbys

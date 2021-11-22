@@ -12,6 +12,10 @@ function getMessages(callback){
 
 }
 
+function updateMesages(messages){
+
+}
+
 //  POST -> MENSAJES
 function sendMMassage( msg, callback) {
     $.ajax({
@@ -55,6 +59,7 @@ $(document).ready(function () {
 		msg.val('');
 	});
 
+    //Boton asociado al addPlayer()
     setName.click( function () {
         let aux = nick.val();
         player = aux;

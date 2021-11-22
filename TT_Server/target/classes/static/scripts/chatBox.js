@@ -55,6 +55,7 @@ $(document).ready(function () {
 		msg.val('');
 	});
 
+    //Boton asociado al addPlayer()
     setName.click( function () {
         let aux = nick.val();
         player = aux;
