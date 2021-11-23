@@ -113,9 +113,9 @@ public class Lobby {
 
 	//Funcionalidad propia de la sala para emitir mensajes en nombre del sistema
 	private void systemMessage(String player_Name,String body) {
-		DateFormat formatter = new SimpleDateFormat("dd-MM-yyy hh:mm");
+		DateFormat formatter = new SimpleDateFormat("> dd/MM/yyy hh:mm:ss");
 		Date now = new Date();
-		Message m = new Message("System", formatter.format(now), player_Name + " " + body);
+		Message m = new Message("System", formatter.format(now), player_Name + " " + body, "brown");
 		mStorage.WriteMessage(m);
 	}
 	

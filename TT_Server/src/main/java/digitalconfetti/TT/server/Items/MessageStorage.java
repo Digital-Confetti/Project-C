@@ -32,7 +32,7 @@ public class MessageStorage {
 			
 			while ((aux = reader.readLine()) != null){
 				chop = aux.split(separator); 
-				out.add(new Message(chop[0],chop[1],chop[2]));
+				out.add(new Message(chop[0],chop[1],chop[2],chop[3]));
 				
 			}
 			return out;
@@ -50,7 +50,7 @@ public class MessageStorage {
 			
 			while ((aux = reader.readLine()) != null){
 				chop = aux.split(separator); 
-				out.add(0, new Message(chop[0],chop[1],chop[2]));
+				out.add(0, new Message(chop[0],chop[1],chop[2],chop[3]));
 			}
 			return out;
 		} catch (IOException e){

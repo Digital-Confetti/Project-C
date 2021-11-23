@@ -1,12 +1,18 @@
 var aux = window.location + "get/";
 
+var Color = "black";
+
+function setColor (c)
+{
+    Color = c;
+}
+
 //POST -> Player
-function sendPlayer(playerName, callback){
-    console.log(playerName);
+function sendPlayer(newplayer, callback){
     $.ajax({
         method: "POST",
         url: aux,
-        data: playerName,
+        data: newplayer,
         processData: false,
         headers: {
             "Content-Type": "application/json"
@@ -19,6 +25,8 @@ function sendPlayer(playerName, callback){
         // lobby returned
         console.log(data.lobby);
         lobby = data.lobby;
+
+
         
         // Rellenamos lon la interfaz de chat
         let msgAction = $("#messageAction");
@@ -29,18 +37,20 @@ function sendPlayer(playerName, callback){
         // Vaciamos el user data y ponemos un display del nombre
         let userData = $("#userdata");
         userData.empty();
-        userData.append('<p><b>'+ playerName +'</b></p>');
+        userData.append('<p><b>'+ player +'</b></p>');
 
         // Programamos el evento pulsar el submit
         $('#submitmsg').click( function () {
             let plainText = $("#usermsg").val();
             var now = new Date();
             now = now.toLocaleString();
+            var pickedColor = Color;
 
             var msg = {
                 date: now,
                 text: plainText,
                 user: player,
+                color: pickedColor,
             }
     
             if(plainText != ''){
@@ -91,13 +101,14 @@ function pingServer()
         let out;
         chat.empty();
         for (i = 0; i < info.length; i++){
-            out = "<p>"
-            out += info[i].date + "-" + info[i].user + ": " + info[i].text;
-            out += "</p>"
+            out = '<p>' + info[i].date;
+            out += '- <label style="color:'+ info[i].color + '"><b>' + info[i].user + "</b>: " + info[i].text;
+            out += "</label></p>"
             chat.append(out);
         }
     })
 }
+
 
 $(document).ready(function () {
 
@@ -124,6 +135,8 @@ $(document).ready(function () {
         let aux = nick.val();
         player = aux;
         nick.val("");
+        
+        setColor($('select option').filter(':selected').val());
 
         sendPlayer(aux, pingServer);
     });

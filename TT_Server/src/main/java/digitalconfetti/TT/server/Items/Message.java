@@ -11,14 +11,18 @@ public class Message {
 	//usuario emisor del mensaje
 	private String user;
 	
-	public Message(String user, String date, String text){
+	//color de mensaje
+	private String color;
+	
+	public Message(String user, String date, String text, String color){
 		this.setDate(date);
 		this.setText(text);
 		this.setUser(user);
+		this.setColor(color);
 	}
 	
 	public String toCsv(String separator){
-		String out = this.user + separator + this.date + separator + this.text + '\n';
+		String out = this.user + separator + this.date + separator + this.text + separator + this.color + '\n';
 		return out;
 	}
 	
@@ -45,6 +49,15 @@ public class Message {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+	
+	public String getColor(){
+		return color;
+	}
+	
+	public void setColor(String color)
+	{
+		this.color = color;
 	}
 
 }
