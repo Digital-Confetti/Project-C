@@ -10,5 +10,5 @@ if ($exist -eq $False)
 }
 
 # Corremos el Servidor
-$server = ".\TT_Server_BETA-RELEASE-1.0.jar"
+$server = ".\TT_SERVER_RELEASE_FASE3.jar"
 java -jar "$server"
