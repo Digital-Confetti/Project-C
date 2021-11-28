@@ -1,33 +1,6 @@
 # Travellers Tournament - Fighting Game
-
-## Servidor de Juego:
-El ejecutable del servidor servidor de encuentra en la ruta. 
-El codigo fuente del servidor se encuentra en la siguiente ruta.
-### Esquema interno
-FOTO UML
-TT_Server cuenta con 2 partes diferenciadas, una orientada a la comunicacion (Compuesta por el Message Controller, y el Comunication service), y una orientada a la gestion interna de estos servicios (Clase Mensaje, Lobby...).
-- MessageController: Clase del tipo @Controller, es el controller encargado de las comunicaciones entre los clientes. Su funcionamiento basicamente se basa en convertir las disitnas peticiones HTTTP en solicitues a la clase ComunicationService.
-- ComunicationService: Clase tipo @Service, encargada de la gestion de lobbys, mensajes, connexiones...
-
-Clases a resaltar:
--Clase Lobby: Es la encargada de toda la gestion del chat. Basicamente esta clase es la encargada de gestionar las conexiones y desconexiones, guardar los mensajes...
--Clase MessageStorage: Hemos optado por una clase de este tipo para cada lobby para simplificar su uso. Hemos usado .csv para un mejor manejo de la lectura y escritura de los datos.
-
-### Guia de instalador del servidor.
-- Descargar el arcivo `TT_Server_RELEASE_Fase3.zip` dentro de la release
-- Descomprimir el archivo en la carpeta que deseemos. FOTO FASE3
-- Existen 2 maneras de ejecutalo: La facil y la manual.
-
-Camino Facil:
-FOTO FASE4
-- `Click-Derecho` en `TT_Server_BF13_EZEXECUTE.ps1`
-- Ejecutar con Powershell.
-
-Camino Manual:
-- Ejecutar el archivo `TT_SERVER_RELEASE_FASE3.jar`
-Desde DigitalConfetti desaconsejamos hacer click y ya está; puesto que esto generaá un proceso de muy dificil acceso de terminar. Por lo que aconsejamos el uso del siguiente comando, desde una terminal situada en el `directorio /TT_Server_RELEASE_Fase3`
-> java -jar TT_SERVER_RELEASE_FASE3.jar
-
+Github del servidor [TT_Server](https://github.com/Digital-Confetti/TT_Server)
+##  Digital Confetti :tada:
 
 ### Descripción del juego:
 Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los líderes de la nación más poderosa, Merloq, han organizado un torneo para encontrar al mejor luchador y nombrarlo Mariscal de la Abadía para que dirija todas las empresas militares de la nación, para atraer a los mejores luchadores, no solo se ofrece el título militar sino también un poderosa reliquia, el santo grial, del cual se dice que puede otorgarle lo que sea que desee a quien se haga con el. ¿Cuáles de todos los vasallos encontrará la manera de imponerse al resto de contendientes?
