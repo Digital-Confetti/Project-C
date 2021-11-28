@@ -38,9 +38,9 @@ Desde DigitalConfetti desaconsejamos hacer click y ya está; puesto que esto gen
 
 -Tras haber ejecutado el servidor deberas ir a tu navegador y escribir -> localhost:8080
 
-*Si algun amigo tuyo quiere conectarse al servidor tendra que sustituir "localhost" por tu ip local -> ipLocal:8080
+*Si algun amigo tuyo quiere conectarse al servidor tendra que sustituir "localhost" por tu ip local -> ipLocal:8080 (solo si estais en la misma red) 
 
-Desde digitalConfetti recomendamos investigar como encontrar tu ip local, enlace recomendado: https://computerhoy.com/paso-a-paso/internet/como-saber-cual-es-direccion-ip-mi-ordenador-24347
+Desde digitalConfetti recomendamos investigar que es y como encontrar tu ip local, enlace recomendado: https://computerhoy.com/paso-a-paso/internet/como-saber-cual-es-direccion-ip-mi-ordenador-24347
 
 ### Descripción del juego:
 Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los líderes de la nación más poderosa, Merloq, han organizado un torneo para encontrar al mejor luchador y nombrarlo Mariscal de la Abadía para que dirija todas las empresas militares de la nación, para atraer a los mejores luchadores, no solo se ofrece el título militar sino también un poderosa reliquia, el santo grial, del cual se dice que puede otorgarle lo que sea que desee a quien se haga con el. ¿Cuáles de todos los vasallos encontrará la manera de imponerse al resto de contendientes?
