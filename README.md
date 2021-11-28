@@ -15,7 +15,9 @@ Clases a resaltar:
 -Clase MessageStorage: Hemos optado por una clase de este tipo para cada lobby para simplificar su uso. Hemos usado .csv para un mejor manejo de la lectura y escritura de los datos.
 
 ### Guia de instalador del servidor.
-- Descargar el arcivo `TT_Server_RELEASE_Fase3.zip` dentro de la release
+- Descargar el arcivo `TT_Server_RELEASE_Fase3.zip` dentro de la release, esta en la ruta: 
+
+`Travellers-Tournament/TT_Server/Instalador/'TT_Server_RELEASE_Fase3.zip'`
 - Descomprimir el archivo en la carpeta que deseemos. 
 
  ![_Foto fase 3](https://github.com/Digital-Confetti/Travellers-Tournament/blob/main/TT_Server/imgs/FASE%203.PNG)
