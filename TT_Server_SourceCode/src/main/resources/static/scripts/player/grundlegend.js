@@ -1,6 +1,7 @@
 import { Player } from "./player.js";
 import { GL_Proyectile } from "./gl_proyectile.js";
 
+
 export class GrundLegend extends Player{
     constructor(scene, x, y){
         super(scene, x, y, 'grundlegend');
@@ -237,8 +238,10 @@ export class GrundLegend extends Player{
     lauch_reset_HITTED() {
         this.reset_HIT = this.scene.time.delayedCall(0.49 * 1000, this.reset_HITTED, null, this);
     }
+
     reset_HITTED(){ this.playerStatus = Player.PlayerStatus.IDDLE;
-        this.setTint(0xFFFFFF);}
+        this.setTint(0xFFFFFF);
+    }
 
     check_SpecialAttack()
     {

@@ -193,7 +193,6 @@ export class Play_Menu_Scene extends Phaser.Scene {
         this.TeclaS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.iniciar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         this.menu_boton = 0;
-        console.log(this);
         this.background = this.add.image(0, 0, 'fondo_inicio');
         this.background.setScale(1.4);
         this.background.setOrigin(0);
@@ -252,40 +251,33 @@ export class Play_Menu_Scene extends Phaser.Scene {
 
         var that = this;
         this.boton1_luz.on('pointerdown', function (pointer) {
-            console.log('Boton rojo pulsado');
             that.sound.play('tambor');
             that.scene.start("select_menu_Scene");
         });
 
         this.boton2_luz.on('pointerdown', function (pointer) {
-            console.log('Boton azul pulsado');
             that.sound.play('tambor');
             that.scene.start("select_menu_Scene");
         });
 
         this.salir_luz.on('pointerdown', function (pointer) {
-            console.log('Boton salir pulsado');
             that.sound.play('espada');
             that.scene.start("menu_Scene");
         });
 
         this.controles_luz.on('pointerdown', function (pointer) {
-            console.log('Boton salir pulsado');
             that.sound.play('tambor');
             that.scene.start("select_menu_controles");
         });//SELECT_MENU_CONTROLES
         this.configuracion_luz.on('pointerdown', function (pointer) {
-            console.log('Boton salir pulsado');
             that.sound.play('tambor');
             that.scene.start("select_menu_controles");
         });
         this.personajes_luz.on('pointerdown', function (pointer) {
-            console.log('Boton salir pulsado');
             that.sound.play('tambor');
             that.scene.start("select_menu_personajes");
         });
         this.powerups_luz.on('pointerdown', function (pointer) {
-            console.log('Boton salir pulsado');
             that.sound.play('tambor');
             that.scene.start("select_menu_powerups");
         });
@@ -294,9 +286,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
 
     update() {
         var that = this;
-
         this.boton1.on('pointerover', function (pointer) {
-            console.log(that.boton1_luz);
             that.boton1_luz.alpha = 1;
             that.boton2_luz.alpha = 0;
             that.salir_luz.alpha = 0;
@@ -306,7 +296,6 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.powerups_luz.alpha = 0;
         });
         this.boton2.on('pointerover', function (pointer) {
-            console.log(that.boton1_luz);
             that.boton1_luz.alpha = 0;
             that.boton2_luz.alpha = 1;
             that.salir_luz.alpha = 0;
@@ -316,7 +305,6 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.powerups_luz.alpha = 0;
         });
         this.salir.on('pointerover', function (pointer) {
-            console.log(that.boton1_luz);
             that.boton1_luz.alpha = 0;
             that.boton2_luz.alpha = 0;
             that.salir_luz.alpha = 1;
@@ -326,7 +314,6 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.powerups_luz.alpha = 0;
         });
         this.configuracion.on('pointerover', function (pointer) {
-            console.log(that.boton1_luz);
             that.boton1_luz.alpha = 0;
             that.boton2_luz.alpha = 0;
             that.salir_luz.alpha = 0;
@@ -336,7 +323,6 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.powerups_luz.alpha = 0;
         });
         this.controles.on('pointerover', function (pointer) {
-            console.log(that.boton1_luz);
             that.boton1_luz.alpha = 0;
             that.boton2_luz.alpha = 0;
             that.salir_luz.alpha = 0;
@@ -346,7 +332,6 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.powerups_luz.alpha = 0;
         });
         this.personajes.on('pointerover', function (pointer) {
-            console.log(that.boton1_luz);
             that.boton1_luz.alpha = 0;
             that.boton2_luz.alpha = 0;
             that.salir_luz.alpha = 0;
@@ -356,7 +341,6 @@ export class Play_Menu_Scene extends Phaser.Scene {
             that.powerups_luz.alpha = 0;
         });
         this.powerups.on('pointerover', function (pointer) {
-            console.log(that.boton1_luz);
             that.boton1_luz.alpha = 0;
             that.boton2_luz.alpha = 0;
             that.salir_luz.alpha = 0;
@@ -368,7 +352,6 @@ export class Play_Menu_Scene extends Phaser.Scene {
         if (this.iniciar.isDown) {
             switch (this.menu_boton) {
                 case 0: //elecion offline
-                    console.log('enter')
                     this.sound.play('tambor');
                     this.scene.start("select_menu_Scene");
                     break;

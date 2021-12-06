@@ -8,6 +8,7 @@ import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
 import { Platano } from '../powerups/platano.js';
 import { Pistola } from '../powerups/pistola.js';
 import { Fusil } from '../powerups/fusil.js';
+import { TT_WebSocket } from "../sokets/TT_WebSocket";
 
 // exporting
 export class Game_Scene extends Phaser.Scene {
@@ -16,6 +17,7 @@ export class Game_Scene extends Phaser.Scene {
 
     constructor() {
         super({ key: 'game_Scene' });
+
 
         this.player;
         this.player2;
@@ -63,9 +65,14 @@ export class Game_Scene extends Phaser.Scene {
         this.selectedCharacter = data.character;
 
     }
+    
+    hola(){
+        console.log("Hola");
+    }
 
     preload() {
         // loading the spritesheet on 
+        
 
         //let route = "stores/characters/" + this.selectedCharacter;
         this.load.atlas('grundlegend', "stores/characters/grundlegend.png", "stores/characters/grundlegend.json");         
@@ -75,8 +82,6 @@ export class Game_Scene extends Phaser.Scene {
 
         //this.load.atlas(this.selectedCharacter, "stores/characters/a.png", "stores/characters/a.json");
 
-
-        console.log(this.textures)
         //this.load.spritesheet('byConfetti', 'stores/characters/by_Confetti.png', { frameWidth: 60, frameHeight: 84 });
         this.load.image('fondoescenario', 'stores/schenery/fondo_escenario.jpg');
         this.load.spritesheet('dude', 'stores/characters/dude.png', { frameWidth: 32, frameHeight: 48 });
@@ -222,6 +227,9 @@ export class Game_Scene extends Phaser.Scene {
         //this.punchingBag.play('PB_idle');
 
         this.game_duration_timer = this.time.delayedCall(this.game_duration, this.endGame, [3], this);
+        
+        this.soket = new TT_WebSocket(window.location + "/get", this);
+    
     }
 
     spawnPowerUp(){

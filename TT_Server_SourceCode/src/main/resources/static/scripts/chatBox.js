@@ -1,5 +1,6 @@
 var aux = window.location + "get/";
 
+
 var Color = "black";
 
 //player name

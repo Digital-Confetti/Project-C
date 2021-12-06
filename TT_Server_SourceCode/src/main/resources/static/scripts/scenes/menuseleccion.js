@@ -18,9 +18,7 @@ export class Play_Select_Scene extends Phaser.Scene{
 
     preload() {
         console.log('Menu Seleccion Escena');
-
         //this.scene.launch("game_Scene");
-
         this.load.image('fondoseleccion', 'stores/menu/seleccion_perosnajes2.jpg');
         this.load.image('gunlegends', 'stores/menu/grunlegend.png');
         this.load.image('otonai', 'stores/menu/grunlegend.png');
