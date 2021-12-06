@@ -8,7 +8,7 @@ import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
 import { Platano } from '../powerups/platano.js';
 import { Pistola } from '../powerups/pistola.js';
 import { Fusil } from '../powerups/fusil.js';
-import { TT_WebSocket } from "../sokets/TT_WebSocket";
+import { TT_WebSocket } from "../sokets/TT_WebSocket.js";
 
 // exporting
 export class Game_Scene extends Phaser.Scene {
