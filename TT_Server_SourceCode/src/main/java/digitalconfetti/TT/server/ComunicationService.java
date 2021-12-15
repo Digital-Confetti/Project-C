@@ -28,6 +28,23 @@ public class ComunicationService {
 		this.lobbyList.add(0, this.active);
 	}
 	
+	public List<String> getLobbys()
+	{
+		List<String> out = new ArrayList<String>();
+		
+		Iterator<Lobby> it = this.lobbyList.iterator();
+		
+		while(it.hasNext()){
+			Lobby lobby = it.next();
+			String aux = "";
+			aux += lobby.getId() + ';';
+			aux += String.valueOf(lobby.getNumPlayers()) + ';';
+			aux += String.valueOf(lobbySize) + '\n';
+			out.add(aux);
+		}
+		return out;
+	}
+	
 	private Lobby getActiveLobby() {
 		Iterator<Lobby> it = this.lobbyList.iterator();
 		while(it.hasNext())

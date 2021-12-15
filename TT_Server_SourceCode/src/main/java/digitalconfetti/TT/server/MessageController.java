@@ -57,6 +57,12 @@ public class MessageController {
 		return out;
 	}
 	
+	//GET->Lobbys
+	@GetMapping()
+	public List<String> getLobbys(){
+		List<String> out = this.conmutron.getLobbys();
+		return out;
+	}
 	
 	
 }
