@@ -2,9 +2,14 @@ export class TT_WebSocket {
 
     constructor(path, f) {
         console.log("SOCKET CONSTRUCTOR")
-        //this.s = new WebSocket(path);
+        this.connection = new WebSocket(path);
         this.f = f;
         this.f.hola();
+
+        /*
+        this.connection.onopen = function(){
+            connection.send('hola');
+        }*/
     }
 
     send(massage){

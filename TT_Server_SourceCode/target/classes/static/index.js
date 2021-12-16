@@ -33,6 +33,7 @@ import { Game_Scene } from './scripts/scenes/game.js';
 import { Menu_Scene } from './scripts/scenes/menu.js';
 import { Play_Menu_Scene } from './scripts/scenes/menujugar.js';
 import { Play_Select_Scene } from './scripts/scenes/menuseleccion.js';
+import { Play_Select_Scene_Online } from './scripts/scenes/menuselecciononline.js';
 import { Controles_Scene } from './scripts/scenes/controles.js';
 import { Personajes_Scene } from './scripts/scenes/personajes.js';
 import { Musica_Scene } from './scripts/scenes/escenamusica.js';
@@ -66,7 +67,7 @@ const config = {
         disableWebAudio: true
     },
 
-        scene: [Menu_Scene, Musica_Scene, Play_Menu_Scene, Play_Select_Scene, Game_Scene,Controles_Scene,Personajes_Scene,Pausa_Scene,Poweups_Scene,Victoria_Scene]
+        scene: [Menu_Scene, Musica_Scene, Play_Menu_Scene, Play_Select_Scene,Play_Select_Scene_Online, Game_Scene,Controles_Scene,Personajes_Scene,Pausa_Scene,Poweups_Scene,Victoria_Scene]
 
 };
 

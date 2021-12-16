@@ -105,7 +105,6 @@ function pingServer()
     $.ajax({
         url: aux + lobby + '/' + player,
     }).done(function (info) {
-        getLobby();
         let chat = $("#chatbox");
         let out;
         // Limpiamos el contenedor
@@ -120,18 +119,6 @@ function pingServer()
     })
 }
 
-// GET -> LOBBY
-function getLobby()
-{
-    $.ajax({
-        url: aux,
-    }).done(function (out) {
-        for (i = 0; i < out.length; i++){
-            console.log(out[i])
-        }
-    })
-
-}
 
 $(document).ready(function () {
     var nick = $("#nick");

@@ -252,7 +252,7 @@ export class Play_Menu_Scene extends Phaser.Scene {
         var that = this;
         this.boton1_luz.on('pointerdown', function (pointer) {
             that.sound.play('tambor');
-            that.scene.start("select_menu_Scene");
+            that.scene.start("select_menu_Scene_online");
         });
 
         this.boton2_luz.on('pointerdown', function (pointer) {

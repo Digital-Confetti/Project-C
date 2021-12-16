@@ -8,7 +8,7 @@ import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
 import { Platano } from '../powerups/platano.js';
 import { Pistola } from '../powerups/pistola.js';
 import { Fusil } from '../powerups/fusil.js';
-import { TT_WebSocket } from "../sokets/TT_WebSocket.js";
+
 
 // exporting
 export class Game_Scene extends Phaser.Scene {
@@ -64,10 +64,6 @@ export class Game_Scene extends Phaser.Scene {
         // saving the selected character
         this.selectedCharacter = data.character;
 
-    }
-    
-    hola(){
-        console.log("Hola");
     }
 
     preload() {
@@ -228,7 +224,7 @@ export class Game_Scene extends Phaser.Scene {
 
         this.game_duration_timer = this.time.delayedCall(this.game_duration, this.endGame, [3], this);
         
-        this.soket = new TT_WebSocket(window.location + "/get", this);
+        
     
     }
 
