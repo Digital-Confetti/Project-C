@@ -50,12 +50,16 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 	
 		JsonNode node = mapper.readTree(message.getPayload());
-		
+		Boolean encontrado = false;
 		for(Entry<String, Lobby> ses: lobbys.entrySet()){
 			if(ses.getKey().equals(session.getId())){
-				ses.getValue().a
+				ses.getValue().handleMessage();
+				encontrado = true;
 			}
+		}
 		
+		if (!encontrado){
+			
 		}
 		
 		if(checkConnection(session)){
