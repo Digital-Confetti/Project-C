@@ -1,13 +1,9 @@
-import { TT_WebSocket } from "../sokets/TT_WebSocket.js";
-
 export class Play_Select_Scene_Online extends Phaser.Scene{
     
 
     constructor() {
         super({ key: 'select_menu_Scene_online' });
-
-        this.socket = new TT_WebSocket('ws://192.168.1.132:8080/menu', this);
-
+       
         this.background;
         
         this.text1;

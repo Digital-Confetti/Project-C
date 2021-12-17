@@ -1,5 +1,6 @@
-var aux = window.location + "get/";
+import { TT_WebSocket } from "./socket/TT_WebSocket.js";
 
+var aux = window.location + "get/";
 
 var Color = "black";
 
@@ -119,20 +120,26 @@ function pingServer()
     })
 }
 
+var nick = $("#nick");
+
+$("#setName").click( function () {
+    let aux = nick.val();
+    player = aux;
+    nick.val("");
+
+    TT_WebSocket.prototype.sendMessage(aux);
+
+    //setColor($('select option').filter(':selected').val());
+
+    //sendPlayer(aux, pingServer);
+});
+
 
 $(document).ready(function () {
-    var nick = $("#nick");
+    
 
     //Boton asociado al addPlayer()
-    $("#setName").click( function () {
-        let aux = nick.val();
-        player = aux;
-        nick.val("");
-        
-        setColor($('select option').filter(':selected').val());
-
-        sendPlayer(aux, pingServer);
-    });
+    
 	
 });
 

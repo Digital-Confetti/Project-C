@@ -8,6 +8,7 @@ import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
 import { Platano } from '../powerups/platano.js';
 import { Pistola } from '../powerups/pistola.js';
 import { Fusil } from '../powerups/fusil.js';
+import { TT_WebSocket } from "../socket/TT_WebSocket.js";
 
 
 // exporting
@@ -18,6 +19,7 @@ export class Game_Scene extends Phaser.Scene {
     constructor() {
         super({ key: 'game_Scene' });
 
+        this.socket = new TT_WebSocket('ws://192.168.1.132:8080/menu', this);
 
         this.player;
         this.player2;
@@ -407,11 +409,14 @@ export class Game_Scene extends Phaser.Scene {
         var that = this.player;
         var thet = this.player2;
 
+        var socket = this.socket;
+
         // Input event that checks when a key goes down
         this.input.keyboard.on('keydown', function (event) {
 
             if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W) {
                 that.keySPACE = true;
+                socket.send("Espacio");
                 console.log('W Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.A && !that.keyA) {
                 that.keyA = true;
