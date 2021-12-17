@@ -32,6 +32,7 @@ export class Menu_Scene extends Phaser.Scene {
 
         var that = this;
         this.input.on('pointerdown', function(pointer){
+            
             console.log('Menu a Game');
             that.sound.play('tambor');
             that.scene.start("play_menu_Scene");

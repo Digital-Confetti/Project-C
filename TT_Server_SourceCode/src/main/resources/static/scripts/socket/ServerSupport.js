@@ -1,5 +1,5 @@
-import { TT_WebSocket } from "./socket/TT_WebSocket.js";
-
+import { TT_WebSocket } from "./TT_WebSocket.js";
+/*
 var aux = window.location + "get/";
 
 var Color = "black";
@@ -120,6 +120,15 @@ function pingServer()
     })
 }
 
+$(document).ready(function () {
+    
+
+    //Boton asociado al addPlayer()
+    
+	
+});
+
+*/
 var nick = $("#nick");
 
 $("#setName").click( function () {
@@ -133,13 +142,3 @@ $("#setName").click( function () {
 
     //sendPlayer(aux, pingServer);
 });
-
-
-$(document).ready(function () {
-    
-
-    //Boton asociado al addPlayer()
-    
-	
-});
-

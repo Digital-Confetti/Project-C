@@ -2,22 +2,52 @@
 import { GrundLegend } from '../player/grundlegend.js';
 import { Ottonai } from '../player/ottonai.js';
 import { Player } from '../player/player.js';
-import { PunchingBag } from '../player/punchingbag.js';
 import { EspecialDeTuichi } from '../powerups/especialdetuichi.js';
 import { BebidaEnergetica } from '../powerups/bebidaenergetica.js';
 import { Platano } from '../powerups/platano.js';
 import { Pistola } from '../powerups/pistola.js';
 import { Fusil } from '../powerups/fusil.js';
 import { TT_WebSocket } from "../socket/TT_WebSocket.js";
-
+//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO//TODO
+//TODO
 
 // exporting
-export class Game_Scene extends Phaser.Scene {
-
+export class Online_Game_Scene extends Phaser.Scene {
+//TODO
+//TODO
 
 
     constructor() {
         super({ key: 'game_Scene' });
+
+        this.socket = new TT_WebSocket('ws://192.168.1.132:8080/menu', this);
 
         this.player;
         this.player2;

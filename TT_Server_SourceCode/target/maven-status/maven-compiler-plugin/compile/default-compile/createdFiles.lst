@@ -1,2 +1,4 @@
-es\urjc\code\network\game\WebsocketEchoHandler.class
-es\urjc\code\network\game\EchoApplication.class
+es\digitalconfetti\server\game\TT_Aplication.class
+es\digitalconfetti\server\game\WebsocketTTHandler.class
+es\digitalconfetti\server\game\ComunicationHUD.class
+es\digitalconfetti\elements\Player.class

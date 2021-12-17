@@ -1,4 +1,4 @@
-package es.urjc.code.network.game;
+package es.digitalconfetti.server.game;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 @SpringBootApplication
 @EnableWebSocket
-public class EchoApplication implements WebSocketConfigurer {
+public class TT_Aplication implements WebSocketConfigurer {
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
@@ -18,11 +18,11 @@ public class EchoApplication implements WebSocketConfigurer {
 	}
 	
 	@Bean
-	public WebsocketEchoHandler echoHandler() {
-		return new WebsocketEchoHandler();
+	public WebsocketTTHandler echoHandler() {
+		return new WebsocketTTHandler();
 	}
 	public static void main(String[] args) {
-		SpringApplication.run(EchoApplication.class, args);
+		SpringApplication.run(TT_Aplication.class, args);
 	}
 
 }
