@@ -1,6 +1,10 @@
 package es.digitalconfetti.elements;
 
+import java.io.IOException;
 import java.util.Random;
+
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 public class Lobby {
 	
@@ -15,6 +19,8 @@ public class Lobby {
 		
 	public Lobby(){
 		this.id = generate_Id();
+		
+		System.out.println("Lobby creado: " + id);
 	}
 	
 	public void addPlayer(Player p) {
@@ -26,8 +32,29 @@ public class Lobby {
 		}
 	}
 	
-	public void handleMessage(){
-		//TODO
+	public void handleMessage(TextMessage message) throws IOException{
+		if (red != null){
+			System.out.println("Mandando a ROJO");
+			this.red.send(message);
+		}
+			
+		
+		if (blue != null) {
+			System.out.println("Mandando a AZUL");
+			this.blue.send(message);
+		}
+			
+	}
+	
+	public void remove(WebSocketSession session)
+	{
+		if (this.red != null && this.red.equals(session)){
+			this.red = null;
+		}
+		
+		if (this.blue != null && this.blue.equals(session)) {
+			this.blue = null;
+		}
 	}
 	
 	// Genera una ID
@@ -54,5 +81,19 @@ public class Lobby {
 			return true;
 		else
 			return false;
+	}
+	
+	public Boolean hasRoom(Player p) {
+		if (this.isFull()) {
+			return false;
+		} else if(this.red == null){
+			this.red = p;
+			return true;
+		} else if(this.blue == null) {
+			this.blue = p;
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

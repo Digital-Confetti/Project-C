@@ -1,4 +1,6 @@
 import { TT_WebSocket } from "./TT_WebSocket.js";
+// En este Script se recopilará y manejará toda la informacion relevante a la conexion de un usuario con el servidor
+
 /*
 var aux = window.location + "get/";
 
@@ -133,7 +135,6 @@ var nick = $("#nick");
 
 $("#setName").click( function () {
     let aux = nick.val();
-    player = aux;
     nick.val("");
 
     TT_WebSocket.prototype.sendMessage(aux);
@@ -142,3 +143,4 @@ $("#setName").click( function () {
 
     //sendPlayer(aux, pingServer);
 });
+

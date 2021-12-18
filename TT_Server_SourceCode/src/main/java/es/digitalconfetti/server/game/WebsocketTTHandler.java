@@ -28,48 +28,71 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 	
 	private Map<String, Lobby> lobbys = new ConcurrentHashMap();
 	
-	private List<Player> waitingLobby = new ArrayList<>();
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		String in = session.getId();
 		System.out.println("New session: " + in);
 		sessions.put(session.getId(), session);
-		
-		Player aux = new Player(session);
-		waitingLobby.add(aux);
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("Session closed: " + session.getId());
+		removePlayer(session);
 		sessions.remove(session.getId());
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		System.out.println("Message received: " + message.getPayload());
+		
+		if (!sendToLobby(session, message)){
+			System.out.println("Mensaje de una persona sin lobby, loañadimos");
+			Lobby autoSelected = getLobby(session, message);
+			lobbys.put(session.getId(), autoSelected);
+		}
+		//sendOtherParticipants(session, message.getPayload());
+			
+		
+	}
 	
-		JsonNode node = mapper.readTree(message.getPayload());
-		Boolean encontrado = false;
+	private Lobby getLobby(WebSocketSession session, TextMessage message){
+		Player p =  new Player(session, message.getPayload());
+		for(Entry<String, Lobby> ses: lobbys.entrySet()){
+			if(ses.getValue().hasRoom(p)){
+				System.out.println("Enccontrado Lobby con un hueco");
+				return ses.getValue();
+			}		
+		}
+		System.out.println("No lobbys libres, creamos uno");
+		Lobby l = new Lobby();
+		l.hasRoom(p);
+		return l;
+	}
+	
+	private boolean sendToLobby(WebSocketSession session, TextMessage message) throws IOException {
+		//JsonNode node = mapper.readTree(message.getPayload());
+		
 		for(Entry<String, Lobby> ses: lobbys.entrySet()){
 			if(ses.getKey().equals(session.getId())){
-				ses.getValue().handleMessage();
-				encontrado = true;
+				ses.getValue().handleMessage(message);
+				return true;
+			}
+		}
+		return false;
+}
+	private void removePlayer(WebSocketSession session) {
+		for(Entry<String, Lobby> ses: lobbys.entrySet()){
+			if(ses.getKey().equals(session.getId())){
+				ses.getValue().remove(session);
+				this.lobbys.remove(ses.getKey());
 			}
 		}
 		
-		if (!encontrado){
-			
-		}
 		
-		if(checkConnection(session)){
-			System.out.println("Message received: " + message.getPayload());
-			sendOtherParticipants(session, message.getPayload());
-			
-		} else if(message.getPayload().equals("/a")) {
-				setConnection(session);
-		}
 	}
+	
 	
 	private void sendOtherParticipants(WebSocketSession session, String payload) throws IOException {
 		for(WebSocketSession participant : sessions.values()) {
@@ -79,26 +102,5 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 		}
 	}
 	
-	private Boolean checkConnection(WebSocketSession session) {
-		Iterator<Player> it = this.waitingLobby.iterator();
-		
-		while(it.hasNext()){
-			Player i = it.next();
-			if(i.equals(session)) return i.isConnected();
-		}
-		
-		return null;
-	}
-	
-	private void setConnection(WebSocketSession session) {
-		Iterator<Player> it = this.waitingLobby.iterator();
-		
-		while(it.hasNext()){
-			Player i = it.next();
-			if(i.equals(session))
-				i.connect();
-		}
-		
-	}
 	
 }
