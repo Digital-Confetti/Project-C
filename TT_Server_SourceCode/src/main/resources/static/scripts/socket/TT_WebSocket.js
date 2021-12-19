@@ -6,10 +6,15 @@ export class TT_WebSocket {
 
 	proMessage(msg){
 		var data = JSON.parse(msg.data);
-		if(data.type == "chat")
-		{
+		
+		if(data.type == "chat"){
+			
 			console.log("Mensaje tipo chat: " + data.body);
+		} else if (data.type == "menu"){
+			// this.menuSeleccion.processMsg();
 		}
+
+
 	}
 	
 	sendMessage(msg, type)

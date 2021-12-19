@@ -131,6 +131,7 @@ $(document).ready(function () {
 });
 
 */
+
 var nick = $("#nick");
 var color =  "black";
 
@@ -142,6 +143,8 @@ $("#setName").click( function () {
     nick.val("");
 
     TT_WebSocket.prototype.sendMessage(aux, "chat");
+
+    TT_WebSocket.prototype.setServerSupport()
 
     
 

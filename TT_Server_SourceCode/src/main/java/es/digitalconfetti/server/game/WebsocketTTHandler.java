@@ -48,7 +48,7 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 		System.out.println("Message received: " + message.getPayload());
 		
 		if (!sendToLobby(session, message)){
-			System.out.println("Mensaje de una persona sin lobby, loañadimos");
+			System.out.println("Mensaje de una persona sin lobby, lo añadimos");
 			Lobby autoSelected = getLobby(session, message);
 			lobbys.put(session.getId(), autoSelected);
 		}
@@ -72,7 +72,7 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 	}
 	
 	private boolean sendToLobby(WebSocketSession session, TextMessage message) throws IOException {
-		//JsonNode node = mapper.readTree(message.getPayload());
+		JsonNode node = mapper.readTree(message.getPayload());
 		
 		for(Entry<String, Lobby> ses: lobbys.entrySet()){
 			if(ses.getKey().equals(session.getId())){

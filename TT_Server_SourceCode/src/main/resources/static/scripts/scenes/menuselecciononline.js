@@ -234,4 +234,15 @@ export class Play_Select_Scene_Online extends Phaser.Scene{
         }
         
     }
+
+    //TODO: Encargado de comunicar los cambios que hace el usuario
+    sendMsg(){
+
+    }
+
+    //TODO: Encarfado de procesar los cambios del otro jugador (online)
+    processMsg(body){
+
+    }
+
 }
