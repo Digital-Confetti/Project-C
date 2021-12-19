@@ -32,14 +32,14 @@ public class Lobby {
 		}
 	}
 	
-	public void handleMessage(TextMessage message) throws IOException{
-		if (red != null){
+	public void handleMessage(TextMessage message, String session) throws IOException{
+		if (red != null && !red.getWss().equals(session)){
 			System.out.println("Mandando a ROJO");
 			this.red.send(message);
 		}
 			
 		
-		if (blue != null) {
+		if (blue != null && !blue.getWss().equals(session)) {
 			System.out.println("Mandando a AZUL");
 			this.blue.send(message);
 		}

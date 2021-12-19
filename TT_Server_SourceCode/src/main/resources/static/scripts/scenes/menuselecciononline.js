@@ -1,3 +1,6 @@
+import { TT_WebSocket } from "../socket/TT_WebSocket.js";
+
+
 export class Play_Select_Scene_Online extends Phaser.Scene{
     
 
@@ -15,12 +18,14 @@ export class Play_Select_Scene_Online extends Phaser.Scene{
         this.pointer;
 
         this.escena_musica;
+
+        this.side;
     }
 
     preload() {
         console.log('Menu Seleccion Escena Online');
 
-        //this.socket = new TT_WebSocket('ws://localhost:8080/get', this);
+        TT_WebSocket.prototype.setMenu(this);
 
         this.load.image('fondoseleccion', 'stores/menu/seleccion_perosnajes2.jpg');
         this.load.image('gunlegends', 'stores/menu/grunlegend.png');
@@ -218,17 +223,17 @@ export class Play_Select_Scene_Online extends Phaser.Scene{
             switch (this.menu_boton) {
                 case 0: //elecion salir
                     this.sound.play('espada');
-                    this.scene.start("play_menu_Scene");
+                    //this.scene.start("play_menu_Scene");
                     break;
                 case 1: // eleccion grund legend
                     this.sound.play('tambor');
                     this.escena_musica.stopMenuMusic();
-                    this.scene.start("game_Scene", {character: 'grundlegend'});
+                    //this.scene.start("game_Scene", {character: 'grundlegend'});
                     break;
                 case 2: // eleccion ottonai
                     this.sound.play('tambor');
                     this.escena_musica.stopMenuMusic();
-                    this.scene.start("game_Scene", {character: 'ottonai'});
+                    //this.scene.start("game_Scene", {character: 'ottonai'});
                     break;
             }
         }

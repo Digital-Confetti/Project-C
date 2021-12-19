@@ -76,7 +76,7 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 		
 		for(Entry<String, Lobby> ses: lobbys.entrySet()){
 			if(ses.getKey().equals(session.getId())){
-				ses.getValue().handleMessage(message);
+				ses.getValue().handleMessage(message, session.getId());
 				return true;
 			}
 		}

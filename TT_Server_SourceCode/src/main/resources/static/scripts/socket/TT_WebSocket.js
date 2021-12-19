@@ -4,6 +4,10 @@ export class TT_WebSocket {
 		this.serverSupport = serverSupport;
 	}
 
+	setMenu(menu){
+		this.menu = menu;
+	}
+
 	proMessage(msg){
 		var data = JSON.parse(msg.data);
 		
@@ -29,7 +33,7 @@ export class TT_WebSocket {
 	}
 
 	init_TTsocket(){
-		this.connection = new WebSocket('ws://192.168.1.38:8080/TT');
+		this.connection = new WebSocket('ws://localhost:8080/TT');
 
 		this.lobby = undefined;
 

@@ -24,6 +24,10 @@ public class Player {
 		return name;
 	}
 	
+	public String getWss() {
+		return wss.getId();
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
