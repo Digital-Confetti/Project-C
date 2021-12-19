@@ -132,14 +132,18 @@ $(document).ready(function () {
 
 */
 var nick = $("#nick");
+var color =  "black";
 
 $("#setName").click( function () {
+    //Cogemos el color del mensaje
+    color = $('select option').filter(':selected').val();
+
     let aux = nick.val();
     nick.val("");
 
-    TT_WebSocket.prototype.sendMessage(aux);
+    TT_WebSocket.prototype.sendMessage(aux, "chat");
 
-    //setColor($('select option').filter(':selected').val());
+    
 
     //sendPlayer(aux, pingServer);
 });

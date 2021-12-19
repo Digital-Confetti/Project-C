@@ -57,7 +57,6 @@ public class Lobby {
 		}
 	}
 	
-	// Genera una ID
 	private String generate_Id(){
 		String out = "";
 		Random r = new Random();

@@ -93,7 +93,7 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 		
 	}
 	
-	
+	//OLD
 	private void sendOtherParticipants(WebSocketSession session, String payload) throws IOException {
 		for(WebSocketSession participant : sessions.values()) {
 			if(participant.getId().equals(session.getId())) {
