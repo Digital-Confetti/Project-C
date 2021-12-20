@@ -6,16 +6,24 @@ import java.util.Random;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 public class Lobby {
 	
 	// Definimos las constantes de la clave
 	final private String KEYSET = "ABCDEFGHIJKLMNOPQRSTUVXYZ0123456789";
 	final private int KEYSIZE = 8;
 	
+	private ObjectMapper mapper = new ObjectMapper();
+	
 	String id;
 
 	Player red;
 	Player blue;
+	
+	Boolean redP = false, blueP = false;
 		
 	public Lobby(){
 		this.id = generate_Id();
@@ -32,16 +40,37 @@ public class Lobby {
 		}
 	}
 	
+	public void checkGameStart() throws IOException {
+		if(this.blueP && this.redP) {
+			ObjectNode newNode = mapper.createObjectNode();
+			newNode.put("type", "start");
+			newNode.put("body", "alfredo");
+			TextMessage out = new TextMessage(newNode.toString());
+			red.send(out);
+			blue.send(out);
+		}
+	}
+	
 	public void handleMessage(TextMessage message, String session) throws IOException{
+		JsonNode node = mapper.readTree(message.getPayload());
+		
 		if (red != null && !red.getWss().equals(session)){
 			System.out.println("Mandando a ROJO");
 			this.red.send(message);
+		} else if (red != null && node.get("body").toString().equals("red")){
+			if (node.get("type").toString().equals("picked"))
+			this.redP = true;
+			this.checkGameStart();
 		}
 			
 		
 		if (blue != null && !blue.getWss().equals(session)) {
 			System.out.println("Mandando a AZUL");
 			this.blue.send(message);
+		} else if (blue != null && node.get("body").toString().equals("blue")){
+			if (node.get("type").toString().equals("picked"))
+			this.blueP = true;
+			this.checkGameStart();
 		}
 			
 	}
