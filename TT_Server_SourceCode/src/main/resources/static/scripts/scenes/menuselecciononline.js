@@ -6,8 +6,6 @@ export class Play_Select_Scene_Online extends Phaser.Scene{
 
     constructor() {
         super({ key: 'select_menu_Scene_online' });
-
-        TT_WebSocket.prototype.setMenu(this);
        
         this.background;
         
@@ -22,16 +20,12 @@ export class Play_Select_Scene_Online extends Phaser.Scene{
         this.escena_musica;
 
         this.side;
-
-        this.setSide = function(lado) {
-            this.side = lado;
-            console.log("Su lado es el: " + this.side);
-        }
-    
     }
 
     preload() {
         console.log('Menu Seleccion Escena Online');
+
+        TT_WebSocket.prototype.setMenu(this);
 
         this.load.image('fondoseleccion', 'stores/menu/seleccion_perosnajes2.jpg');
         this.load.image('gunlegends', 'stores/menu/grunlegend.png');
@@ -246,20 +240,13 @@ export class Play_Select_Scene_Online extends Phaser.Scene{
         
     }
 
-   
     //TODO: Encargado de comunicar los cambios que hace el usuario
     sendMsg(){
-        var pkg = {
-            playerSelected: "a",
-            otro_tipo: "b"
-        }
 
-        TT_WebSocket.prototype.sendMessage(pkg, "menu");
     }
 
     //TODO: Encarfado de procesar los cambios del otro jugador (online)
     processMsg(body){
-
 
     }
 

@@ -16,7 +16,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import es.digitalconfetti.elements.Player;
 import es.digitalconfetti.elements.Lobby;
@@ -58,36 +57,19 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 		
 	}
 	
-	private void sendColor(WebSocketSession session, Lobby l, Player p) throws IOException{
-		String msg = l.getColor(p);
-		
-		ObjectNode newNode = mapper.createObjectNode();
-		newNode.put("type", "side");
-		newNode.put("body", msg);
-		
-		session.sendMessage(new TextMessage(newNode.toString()));
-		
-	}
-	
 	private Lobby getLobby(WebSocketSession session, TextMessage message) throws IOException{
 		JsonNode node = mapper.readTree(message.getPayload());
 		
 		Player p =  new Player(session, node.get("body").asText());
 		for(Entry<String, Lobby> ses: lobbys.entrySet()){
 			if(ses.getValue().hasRoom(p)){
-				System.out.println("Encontrado Lobby con un hueco");
-				
-				sendColor(session, ses.getValue(), p);
-				
+				System.out.println("Enccontrado Lobby con un hueco");
 				return ses.getValue();
 			}		
 		}
 		System.out.println("No lobbys libres, creamos uno");
 		Lobby l = new Lobby();
 		l.hasRoom(p);
-		
-		sendColor(session, l, p);
-		
 		return l;
 	}
 	
