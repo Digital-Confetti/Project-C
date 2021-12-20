@@ -47,6 +47,8 @@ export class Online_Game_Scene extends Phaser.Scene {
     constructor() {
         super({ key: 'game_Scene' });
 
+        this.socket = new TT_WebSocket('ws://192.168.1.132:8080/menu', this);
+
         this.player;
         this.player2;
 
