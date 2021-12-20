@@ -559,4 +559,13 @@ export class Online_Game_Scene extends Phaser.Scene {
             }
         });
     }
+
+    //
+    sendMsg(){
+    }
+
+    processMsg(){
+
+    }
+
 }
