@@ -57,8 +57,10 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 		
 	}
 	
-	private Lobby getLobby(WebSocketSession session, TextMessage message){
-		Player p =  new Player(session, message.getPayload());
+	private Lobby getLobby(WebSocketSession session, TextMessage message) throws IOException{
+		JsonNode node = mapper.readTree(message.getPayload());
+		
+		Player p =  new Player(session, node.get("body").asText());
 		for(Entry<String, Lobby> ses: lobbys.entrySet()){
 			if(ses.getValue().hasRoom(p)){
 				System.out.println("Enccontrado Lobby con un hueco");

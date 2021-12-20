@@ -8,12 +8,23 @@ export class TT_WebSocket {
 		this.menu = menu;
 	}
 
+	proChatMessage(msg){
+		let chat = $("#chatbox");
+		let out;
+			
+		out = '<p>' + msg.date;
+        out += '- <label style="color:'+ msg.color + '"><b>' + msg.user + "</b>: " + msg.text;
+        out += "</label></p>"
+
+		chat.append(out);
+	}
+
 	proMessage(msg){
 		var data = JSON.parse(msg.data);
 		
 		if(data.type == "chat"){
-			
 			console.log("Mensaje tipo chat: " + data.body);
+			this.proChatMessage(data.body);
 		} else if (data.type == "menu"){
 			// this.menuSeleccion.processMsg();
 		}

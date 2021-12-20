@@ -132,21 +132,55 @@ $(document).ready(function () {
 
 */
 
-var nick = $("#nick");
+var player = undefined;
 var color =  "black";
+
+function changeDisplay() {
+
+    // Rellenamos lon la interfaz de chat
+    let msgAction = $("#messageAction");
+    msgAction.empty();
+    msgAction.append('<input name"usermsg" type="text" id="usermsg" size="63"/>');
+    msgAction.append('<input name"submitmsg" type="button" id="submitmsg" value="Send"/>');
+    
+    $('#submitmsg').click( function () {
+        let plainText = $("#usermsg").val();
+        var now = new Date();
+        now = "> " + now.toLocaleString();
+        var pickedColor = color;
+
+        var msg = {
+            date: now,
+            text: plainText,
+            user: player,
+            color: pickedColor,
+        }
+
+        if(plainText != ''){
+            TT_WebSocket.prototype.sendMessage(msg, "chat");
+            TT_WebSocket.prototype.proChatMessage(msg);
+        }
+
+        //Borramos el field text
+        $("#usermsg").val('');
+    });
+}
 
 $("#setName").click( function () {
     //Cogemos el color del mensaje
     color = $('select option').filter(':selected').val();
 
+    let nick = $("#nick");
     let aux = nick.val();
+    player = aux;
     nick.val("");
 
-    TT_WebSocket.prototype.sendMessage(aux, "chat");
+    TT_WebSocket.prototype.sendMessage(aux, "id");
 
-    TT_WebSocket.prototype.setServerSupport()
+    $("#userdata").empty();
+    $("#userdata").append("<h2>" + player + "</h2>");
 
-    
+    changeDisplay();
 
     //sendPlayer(aux, pingServer);
 });
