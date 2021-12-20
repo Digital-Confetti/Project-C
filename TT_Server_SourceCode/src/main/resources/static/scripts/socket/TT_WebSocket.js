@@ -8,6 +8,11 @@ export class TT_WebSocket {
 		this.menu = menu;
 	}
 
+	//TODO: 
+	proMenuMessage(msg){
+		// this.menu.processMsg(msg)
+	}
+
 	proChatMessage(msg){
 		let chat = $("#chatbox");
 		let out;
@@ -27,8 +32,11 @@ export class TT_WebSocket {
 			this.proChatMessage(data.body);
 		} else if (data.type == "menu"){
 			// this.menuSeleccion.processMsg();
+		} else if (data.type == "side")
+		{
+			// "red" ó "blue"
+			this.menu.setSide(data.body);
 		}
-
 
 	}
 	

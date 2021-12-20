@@ -97,6 +97,16 @@ public class Lobby {
 		return out;
 	}
 	
+	public String getColor(Player p) {
+		if (this.red.equals(p)) {
+			return "red";
+		} else if (this.blue.equals(p)) {
+			return "blue";
+		} else {
+			return "undefined";
+		}
+	}
+	
 	public Boolean isFull() {
 		if(this.red != null && this.blue != null)
 			return true;
