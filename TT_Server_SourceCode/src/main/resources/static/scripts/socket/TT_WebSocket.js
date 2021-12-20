@@ -8,10 +8,6 @@ export class TT_WebSocket {
 		this.menu = menu;
 	}
 
-	setInMenu(menu){
-		this.inMenu = menu;
-	}
-
 	//TODO: 
 	proMenuMessage(msg){
 		// this.menu.processMsg(msg)
@@ -34,14 +30,12 @@ export class TT_WebSocket {
 		if(data.type == "chat"){
 			console.log("Mensaje tipo chat: " + data.body);
 			this.proChatMessage(data.body);
-		} else if (data.type == "menu" && this.inMenu){
-			this.menu.processMsg(data.body);
+		} else if (data.type == "menu"){
+			// this.menuSeleccion.processMsg();
 		} else if (data.type == "side")
 		{
 			// "red" ó "blue"
 			this.menu.setSide(data.body);
-		}else if(data.type == "start"){
-			this.menu.startGame();
 		}
 
 	}
@@ -59,8 +53,6 @@ export class TT_WebSocket {
 
 	init_TTsocket(){
 		this.connection = new WebSocket('ws://localhost:8080/TT');
-
-		this.inMenu = false;
 
 		this.lobby = undefined;
 

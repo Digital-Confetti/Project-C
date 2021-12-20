@@ -1,18 +1,18 @@
 import { TT_WebSocket } from "../socket/TT_WebSocket.js";
 
 
-export class Play_Select_Scene_Online extends Phaser.Scene {
-
+export class Play_Select_Scene_Online extends Phaser.Scene{
+    
 
     constructor() {
         super({ key: 'select_menu_Scene_online' });
 
         TT_WebSocket.prototype.setMenu(this);
-
+       
         this.background;
-
+        
         this.text1;
-
+        
         this.text2;
 
         this.salir;
@@ -22,45 +22,12 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         this.escena_musica;
 
         this.side;
-        
-        this.playerPicked;
 
-        this.setSide = function (lado) {
+        this.setSide = function(lado) {
             this.side = lado;
             console.log("Su lado es el: " + this.side);
         }
-
-        //TODO: Encargado de comunicar los cambios que hace el usuario
-        this.sendMsg = function (character) {
-            var pkg = {
-                hovered: character,
-            }
-
-            TT_WebSocket.prototype.sendMessage(pkg, "menu");
-        }
-
-        //TODO: Encarfado de procesar los cambios del otro jugador (online)
-        var that = this;
-        this.processMsg = function (body) {
-
-            console.log(body.hovered);
-
-            if (that.side == "blue") {
-                if (body.hovered == "grundlegend") {
-                    that.showRedGL();
-                } else if (body.hovered == "otonnai") {
-                    that.showRedOtonnai();
-                }
-            } else if (that.side == "red") {
-                if (body.hovered == "grundlegend") {
-                    that.showBlueGL();
-                } else if (body.hovered == "otonnai") {
-                    that.showBlueOtonnai();
-                }
-            }
-
-        }
-
+    
     }
 
     preload() {
@@ -81,60 +48,62 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         this.escena_musica = this.scene.get('musica_Scene');
     }
 
-    hola() {
+    hola(){
         console.log('socket menu online');
     }
 
-    Moveup() {
-        if (this.grunlegendsboton.alpha == 0.4) {
+    Moveup()
+    {
+        if (this.grunlegendsboton.alpha == 0.4){
             console.log('1')
-            this.Otonaiplayer.alpha = 1;
-            this.grunlegendplayer.alpha = 0;
+            this.Otonaiplayer.alpha=1;
+            this.grunlegendplayer.alpha=0;
             this.otonaiboton.alpha = 0.4;
             this.grunlegendsboton.alpha = 0;
             this.menu_boton = 2;
             this.salir_luz.alpha = 0;
-        } else if (this.salir_luz.alpha == 1) {
+        }else if (this.salir_luz.alpha == 1){
             console.log('3')
-            this.Otonaiplayer.alpha = 0;
-            this.grunlegendplayer.alpha = 1;
+            this.Otonaiplayer.alpha=0;
+            this.grunlegendplayer.alpha=1;
             this.otonaiboton.alpha = 0;
-            this.grunlegendsboton.alpha = 0.4;
+            this.grunlegendsboton.alpha = 0.4 ;
             this.menu_boton = 1;
             this.salir_luz.alpha = 0;
-
-        } else if (this.otonaiboton.alpha == 0.4) {
+            
+        }else if(this.otonaiboton.alpha == 0.4){
             console.log('2')
-            this.Otonaiplayer.alpha = 0;
-            this.grunlegendplayer.alpha = 0;
+            this.Otonaiplayer.alpha=0;
+            this.grunlegendplayer.alpha=0;
             this.otonaiboton.alpha = 0;
             this.grunlegendsboton.alpha = 0;
             this.menu_boton = 0;
             this.salir_luz.alpha = 1;
-        }
     }
-    Movedown() {
-        if (this.grunlegendsboton.alpha == 0.4) {
+    }
+    Movedown()
+    {
+        if (this.grunlegendsboton.alpha == 0.4){
             console.log('1')
-            this.Otonaiplayer.alpha = 0;
-            this.grunlegendplayer.alpha = 0;
+            this.Otonaiplayer.alpha=0;
+            this.grunlegendplayer.alpha=0;
             this.otonaiboton.alpha = 0;
             this.grunlegendsboton.alpha = 0;
             this.menu_boton = 0;
             this.salir_luz.alpha = 1;
             //console.log(this.menu_boton);
-        } else if (this.salir_luz.alpha == 1) {
+        }else if (this.salir_luz.alpha == 1){
             console.log('3')
-            this.Otonaiplayer.alpha = 1;
-            this.grunlegendplayer.alpha = 0;
+            this.Otonaiplayer.alpha=1;
+            this.grunlegendplayer.alpha=0;
             this.otonaiboton.alpha = 0.4;
-            this.grunlegendsboton.alpha = 0;
+            this.grunlegendsboton.alpha = 0 ;
             this.menu_boton = 2;
-            this.salir_luz.alpha = 0;
-        } else if (this.otonaiboton.alpha == 0.4) {
+            this.salir_luz.alpha = 0;                  
+        }else if(this.otonaiboton.alpha == 0.4){
             console.log('2')
-            this.Otonaiplayer.alpha = 0;
-            this.grunlegendplayer.alpha = 1;
+            this.Otonaiplayer.alpha=0;
+            this.grunlegendplayer.alpha=1;
             this.otonaiboton.alpha = 0;
             this.grunlegendsboton.alpha = 0.4;
             this.menu_boton = 1;
@@ -144,26 +113,23 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
     create() {
         var that = this;
         this.input.keyboard.on('keydown', function (event) {
-            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W && !that.keyW) {
+            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W && !that.keyW) {            
                 console.log('W Pressed');
                 that.Movedown();
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.A && !that.keyA) {
+            }else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.A && !that.keyA) {                             
                 console.log('A Pressed');
                 that.Movedown();
             }
-            else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.D && !that.keyD) {
+            else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.D && !that.keyD) {               
                 that.Moveup();
                 console.log('A Pressed');
             }
-            else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.S && !that.keyS) {
-                that.Moveup();
-
+            else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.S && !that.keyS) {  
+                that.Moveup();             
+                
                 console.log('A Pressed');
             }
         });
-
-        TT_WebSocket.prototype.setInMenu(true);
-
         this.TeclaA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.TeclaD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.TeclaW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -181,54 +147,51 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         this.salir_luz = this.add.image(100, 50, 'botonsalir2').setInteractive();
         this.salir_luz.setScale(1);
         this.salir_luz.alpha = 0;
-
         this.grunlegendsboton = this.add.image(670, 210, 'gunlegends').setInteractive();
         this.grunlegendsboton.setScale(1.2);
-        this.grunlegendsboton.alpha = 0.4;
-
+        this.grunlegendsboton.alpha=0.4;
         //player 1
         this.Otonaiplayer = this.add.image(200, 180, 'otonai_player').setInteractive();
         this.Otonaiplayer.setScale(1.2);
-        this.Otonaiplayer.alpha = 0;
-
+        this.Otonaiplayer.alpha=0;
+        
         this.grunlegendplayer = this.add.image(230, 180, 'grunlegends_player').setInteractive();
         this.grunlegendplayer.setScale(1.0);
-        this.grunlegendplayer.alpha = 0;
-
+        this.grunlegendplayer.alpha=0;
         //player 2
         this.Otonaiplayer2 = this.add.image(200, 480, 'otonai_player').setInteractive();
         this.Otonaiplayer2.setScale(1.2);
-        this.Otonaiplayer2.alpha = 0;
-
+        this.Otonaiplayer2.alpha=0;
+        
         this.grunlegendplayer2 = this.add.image(220, 480, 'grunlegends_player').setInteractive();
         this.grunlegendplayer2.setScale(1.0);
-        this.grunlegendplayer2.alpha = 0;
+        this.grunlegendplayer2.alpha=0;
 
         ////
         this.otonaiboton = this.add.image(1000, 210, 'otonai').setInteractive();
         this.otonaiboton.setScale(1.2);
-        this.otonaiboton.alpha = 0.1;
-
-
+        this.otonaiboton.alpha=0.1;
+        
+        
         //this.salir = this.add.text(50,50,'Salir', { color: '#000000', fontSize: '40px', fontFamily: 'Gemunu Libre'});
         //this.salir.setInteractive();
 
         //this.events.emit ('gameCountDown', ({countDown: 10}));
-
+        
         var that = this;
-        this.grunlegendsboton.on('pointerdown', function (pointer) {
+        this.grunlegendsboton.on('pointerdown', function(pointer){
             console.log('Personaje 1 seleccionado');
             that.sound.play('tambor');
             that.escena_musica.stopMenuMusic();
-            that.scene.start("game_Scene", { character: 'grundlegend' });
+           that.scene.start("game_Scene", {character: 'grundlegend'});
         });
-        this.otonaiboton.on('pointerdown', function (pointer) {
+        this.otonaiboton.on('pointerdown', function(pointer){
             console.log('Personaje 2 seleccionado');
             that.sound.play('tambor');
             that.escena_musica.stopMenuMusic();
-            that.scene.start("game_Scene", { character: 'ottonai' });
+           that.scene.start("game_Scene", {character: 'ottonai'});
         });
-        this.salir_luz.on('pointerdown', function (pointer) {
+        this.salir_luz.on('pointerdown', function(pointer){
             console.log('Boton salir pulsado');
             that.sound.play('espada');
             that.scene.start("play_menu_Scene");
@@ -237,69 +200,31 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
 
     }
 
-    showBlueGL() {
-        this.Otonaiplayer.alpha = 0;
-        this.grunlegendplayer.alpha = 1;
-    }
-
-    showBlueOtonnai() {
-        this.Otonaiplayer.alpha = 1;
-        this.grunlegendplayer.alpha = 0;
-    }
-
-    showRedGL() {
-        this.Otonaiplayer2.alpha = 0;
-        this.grunlegendplayer2.alpha = 1;
-    }
-
-    showRedOtonnai() {
-        this.Otonaiplayer2.alpha = 1;
-        this.grunlegendplayer2.alpha = 0;
-    }
-
-    startGame() {
-        this.scene.start("game_Scene", {character: this.playerPicked});
-    }
-
     update() {
         var that = this;
-        this.salir.on('pointerover', function (pointer) {
-
-            that.salir_luz.alpha = 1;
+        this.salir.on('pointerover', function(pointer){
+                    
+            that.salir_luz.alpha = 1;           
         });
-        this.grunlegendsboton.on('pointerover', function (pointer) {
-
+        this.grunlegendsboton.on('pointerover', function(pointer){
+            
             that.grunlegendsboton.alpha = 0.4;
             that.otonaiboton.alpha = 0.1;
             that.salir_luz.alpha = 0;
-
-            that.sendMsg("grundlegend");
-
-            if (that.side == "blue") {
-                that.showBlueGL();
-            } else if (that.side == "red") {
-                that.showRedGL();
-            }
-
+            that.Otonaiplayer.alpha=0;
+            that.grunlegendplayer.alpha=1;   
         });
-        this.otonaiboton.on('pointerover', function (pointer) {
-
+        this.otonaiboton.on('pointerover', function(pointer){
+            
             that.otonaiboton.alpha = 0.4;
             that.grunlegendsboton.alpha = 0.1;
-            that.salir_luz.alpha = 0;
-
-            that.sendMsg("otonnai");
-
-            if (that.side == "blue") {
-                that.showBlueOtonnai();
-            } else if (that.side == "red") {
-                that.showRedOtonnai();
-            }
-
+            that.salir_luz.alpha = 0; 
+            that.Otonaiplayer.alpha=1;
+            that.grunlegendplayer.alpha=0;  
         });
 
         this.pointer = this.input.activePointer;
-        if (this.iniciar.isDown) {
+        if(this.iniciar.isDown){
 
             switch (this.menu_boton) {
                 case 0: //elecion salir
@@ -309,23 +234,33 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
                 case 1: // eleccion grund legend
                     this.sound.play('tambor');
                     this.escena_musica.stopMenuMusic();
-                    TT_Websocket.prototype.sendMessage(this.side, "picked");
-                    this.playerPicked = 'grundlegend';
-                    
+                    //this.scene.start("game_Scene", {character: 'grundlegend'});
                     break;
                 case 2: // eleccion ottonai
                     this.sound.play('tambor');
                     this.escena_musica.stopMenuMusic();
-                    TT_Websocket.prototype.sendMessage(this.side, "picked");
-                    this.playerPicked = 'ottonai';
-
+                    //this.scene.start("game_Scene", {character: 'ottonai'});
                     break;
             }
         }
-
+        
     }
 
+   
+    //TODO: Encargado de comunicar los cambios que hace el usuario
+    sendMsg(){
+        var pkg = {
+            playerSelected: "a",
+            otro_tipo: "b"
+        }
+
+        TT_WebSocket.prototype.sendMessage(pkg, "menu");
+    }
+
+    //TODO: Encarfado de procesar los cambios del otro jugador (online)
+    processMsg(body){
 
 
+    }
 
 }
