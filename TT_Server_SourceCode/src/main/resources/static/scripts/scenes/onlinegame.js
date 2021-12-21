@@ -289,6 +289,8 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.inputDeclaration();
 
         // text debug
+        if(this.mySide == "blue"){
+
         this.text_Debug = this.add.text(32, 32);
         this.text_vida = this.add.text(32, 82);
         this.text_vidas = this.add.text(32, 132);
@@ -296,6 +298,20 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.text_Debug2 = this.add.text(1100, 32);
         this.text_vida2 = this.add.text(1100, 82);
         this.text_vidas2 = this.add.text(1100, 132);
+
+        }else if(this.mySide == "red"){
+
+        this.text_Debug = this.add.text(1100, 32);
+        this.text_vida = this.add.text(1100, 82);
+        this.text_vidas = this.add.text(1100, 132);
+
+        this.text_Debug2 = this.add.text(32, 32);
+        this.text_vida2 = this.add.text(32, 82);
+        this.text_vidas2 = this.add.text(32, 132);
+
+        }
+
+        
 
         this.text_game_timer = this.add.text(610, 50, '', { fontSize: 40, color: '#000000' });
 
@@ -367,49 +383,25 @@ export class Online_Game_Scene extends Phaser.Scene {
         //this.punchingBag.renove(delta);
         var out;
 
-        if(this.mySide == "blue"){
+        out = 'Progreso: ' + this.playerLocal.dash_Timer.getProgress().toString().substr(0, 4);
 
-            out = 'Progreso: ' + this.playerLocal.dash_Timer.getProgress().toString().substr(0, 4);
+        this.text_Debug.setText(out);
 
-            this.text_Debug.setText(out);
+        this.text_vida.setText('Vida: ' + this.playerLocal.getVida());
 
-            this.text_vida.setText('Vida: ' + this.playerLocal.getVida());
+        this.text_vidas.setText('Vidas: ' + this.playerLocal.getVidas());
 
-            this.text_vidas.setText('Vidas: ' + this.playerLocal.getVidas());
+        this.text_Debug2.setText('Progreso: ' + this.playerNet.dash_Timer.getProgress().toString().substr(0, 4));
 
-            this.text_Debug2.setText('Progreso: ' + this.playerNet.dash_Timer.getProgress().toString().substr(0, 4));
+        this.text_vida2.setText('Vida: ' + this.playerNet.getVida());
 
-            this.text_vida2.setText('Vida: ' + this.playerNet.getVida());
+        this.text_vidas2.setText('Vidas: ' + this.playerNet.getVidas());
 
-            this.text_vidas2.setText('Vidas: ' + this.playerNet.getVidas());
-
-            this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 5) * this.game_duration / 1000;
+        this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 5) * this.game_duration / 1000;
             
-            this.duration_aux2 = parseInt(this.duration_aux, 10);
+        this.duration_aux2 = parseInt(this.duration_aux, 10);
 
-        }else if (this.mySide == "red"){
-
-            out = 'Progreso: ' + this.playerNet.dash_Timer.getProgress().toString().substr(0, 4);
-
-            this.text_Debug.setText(out);
-
-            this.text_vida.setText('Vida: ' + this.playerNet.getVida());
-
-            this.text_vidas.setText('Vidas: ' + this.playerNet.getVidas());
-
-
-            this.text_Debug2.setText('Progreso: ' + this.playerLocal.dash_Timer.getProgress().toString().substr(0, 4));
-
-            this.text_vida2.setText('Vida: ' + this.playerLocal.getVida());
-
-            this.text_vidas2.setText('Vidas: ' + this.playerLocal.getVidas());
-
-            this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 5) * this.game_duration / 1000;
-            
-            this.duration_aux2 = parseInt(this.duration_aux, 10);
-
-        }
-
+        
         
 
 
