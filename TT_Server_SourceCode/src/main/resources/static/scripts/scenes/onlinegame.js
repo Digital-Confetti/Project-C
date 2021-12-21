@@ -63,40 +63,36 @@ export class Online_Game_Scene extends Phaser.Scene {
         //first player-powerup collider
         this.game_player_powerup_collider;
 
+        var that = this;
+
         this.processImperative = function(body) {
-            if (body.Hp == undefined) {
-                this.playerNet.x = body.x;
-                this.playerNet.y = body.y;
-                this.playerNet.body.setVelocityX(body.vX);
-                this.playerNet.body.setVelocityY(body.vY);
-            } else {
-                this.playerLocal.Vida = body.Hp; 
-                this.playerLocal.vidas = body.Vidas;
+            that.playerNet.x = body.x;
+            that.playerNet.y = body.y;
+            that.playerNet.body.setVelocityX(body.vX);
+            that.playerNet.body.setVelocityY(body.vY);
+            that.playerLocal.vida = body.Hp; 
+            if (this.playerLocal.vidas > body.Vidas){
+                this.playerLocal.muerto = true;
+                this.playerLocal.respawn();
             }
-        }
-
-        this.sendHitImperative = function () {
-            let Hp_ = this.playerLocal.Vida;
-            let vidas = this.playerLocal.vidas;
-
-            let pkg = {
-                Hp: Hp_,
-                Vidas: vidas
-            }
-            TT_WebSocket.prototype.sendMessage(pkg, 'imp');
+            that.playerLocal.vidas = body.Vidas;
         }
         
         this.sendImperative = function () {
-            if (this.playerLocal != undefined) {
-                let a = this.playerLocal.x, b = this.playerLocal.y;
-                let v_x = this.playerLocal.body.velocity.x, v_y = this.playerLocal.body.velocity.y;
+            if (that.playerLocal != undefined) {
+                let a = that.playerLocal.x, b = that.playerLocal.y;
+                let v_x = that.playerLocal.body.velocity.x, v_y = that.playerLocal.body.velocity.y;
 
                 let pkg = {
                     x: a,
                     y: b,
                     vX: v_x,
-                    vY: v_y
+                    vY: v_y,
+                    Hp: that.playerNet.vida,
+                    Vidas: that.playerNet.vidas
                 }
+
+                console.log(pkg);
     
                 TT_WebSocket.prototype.sendMessage(pkg, "imp")
             }
@@ -350,9 +346,11 @@ export class Online_Game_Scene extends Phaser.Scene {
     checkEndGame() {
         if (this.playerLocal.getVidas() == 0) {
             //gana jugador 2
+            this.sendImperative();
             this.endGame(this.playerNet.key);
         } else if (this.playerNet.getVidas() == 0) {
             //gana jugador 1
+            this.sendImperative();
             this.endGame(this.playerLocal.key);
         }
     }
@@ -451,7 +449,6 @@ export class Online_Game_Scene extends Phaser.Scene {
                 this.playerNet.playerStatus = Player.PlayerStatus.HITTED;
                 this.playerNet.vida -= this.playerLocal.attack_damage;
                 this.playerNet.lauch_reset_HITTED();
-                this.sendHitImperative();
             } else if (this.playerLocal.playerStatus == Player.PlayerStatus.ATA_N && this.playerNet.playerStatus != Player.PlayerStatus.HITTED) {
                 this.playerNet.x_move = 2;
                 this.playerNet.y_move = -250;
@@ -459,24 +456,23 @@ export class Online_Game_Scene extends Phaser.Scene {
                 this.playerNet.playerStatus = Player.PlayerStatus.HITTED;
                 this.playerNet.vida -= this.playerLocal.attack_damage;
                 this.playerNet.lauch_reset_HITTED();
-                this.sendHitImperative();
             }
         }
-        //Ottonai hitting player
+        
         if (this.playerLocal.playerStatus != Player.PlayerStatus.ATA_N) {
             if (this.playerNet.playerStatus == Player.PlayerStatus.DASHING && this.playerLocal.playerStatus != Player.PlayerStatus.HITTED) {
                 this.playerLocal.x_move = 2;
                 this.playerLocal.y_move = -250;
                 this.playerLocal.looking_R = this.playerNet.x < this.playerLocal.x;
                 this.playerLocal.playerStatus = Player.PlayerStatus.HITTED;
-                this.playerLocal.vida -= this.playerNet.attack_damage;
+                //this.playerLocal.vida -= this.playerNet.attack_damage;
                 this.playerLocal.lauch_reset_HITTED();
             } else if (this.playerNet.playerStatus == Player.PlayerStatus.ATA_N && this.playerLocal.playerStatus != Player.PlayerStatus.HITTED) {
                 this.playerLocal.x_move = 1;
                 this.playerLocal.y_move = -50;
                 this.playerLocal.looking_R = this.playerNet.x < this.playerLocal.x;
                 this.playerLocal.playerStatus = Player.PlayerStatus.HITTED;
-                this.playerLocal.vida -= this.playerNet.attack_damage;
+                //this.playerLocal.vida -= this.playerNet.attack_damage;
                 this.playerLocal.lauch_reset_HITTED();
             }
         }

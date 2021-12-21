@@ -28,6 +28,7 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         this.elseCharacter = undefined;
 
         this.playerPicked = undefined;
+        
 
         this.setSide = function (lado) {
             this.side = lado;
@@ -68,6 +69,7 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
     }
 
     preload() {
+
         console.log('Menu Seleccion Escena Online');
 
         this.load.image('fondoseleccion', 'stores/menu/seleccion_perosnajes2.jpg');
@@ -162,6 +164,13 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
     }
 
     create() {
+        
+        this.lastHover = "none";
+
+        this.elseCharacter = undefined;
+        
+        this.playerPicked = undefined;
+        
         var that = this;
         this.input.keyboard.on('keydown', function (event) {
             if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W && !that.keyW) {

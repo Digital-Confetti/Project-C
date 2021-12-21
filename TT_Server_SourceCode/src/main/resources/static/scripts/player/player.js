@@ -48,7 +48,7 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.dashActivated = false;
 
         this.maxVida;
-        this.Vida;
+        this.vida;
 
         this.vidas = 3;
 

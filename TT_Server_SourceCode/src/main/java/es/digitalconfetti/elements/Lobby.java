@@ -49,6 +49,9 @@ public class Lobby {
 			TextMessage out = new TextMessage(newNode.toString());
 			red.send(out);
 			blue.send(out);
+			
+			this.blueP = false;
+			this.redP = false;
 		}
 	}
 	

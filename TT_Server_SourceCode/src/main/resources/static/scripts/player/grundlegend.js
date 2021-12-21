@@ -349,7 +349,7 @@ export class GrundLegend extends Player{
                     this.check_Jump();
                     this.check_Dash();
                     this.check_NormalAttack();
-                    this.check_SpecialAttack()
+                    //this.check_SpecialAttack()
                 break;
             case Player.PlayerStatus.MOVING:
                     if(this.keyA){
@@ -363,11 +363,11 @@ export class GrundLegend extends Player{
                     this.check_Jump();
                     this.check_Dash();
                     this.check_NormalAttack();
-                    this.check_SpecialAttack()
+                    //this.check_SpecialAttack()
                 break;
             case Player.PlayerStatus.DASHING:
                 this.dashAllowed = false;
-                break;
+                 break;
             case Player.PlayerStatus.JUMP_1:
                 if (this.keySPACE && this.body.velocity.y > -200) {
                     this.body.setVelocityY(-430);
@@ -573,8 +573,7 @@ export class GrundLegend extends Player{
         // Load the animation
         this.animate(delta);
 
-        for (var i = 0; i < this.proyectiles.length; i++)
-        {
+        for (var i = 0; i < this.proyectiles.length; i++){
             this.proyectiles[i].update(delta);
         }
 
