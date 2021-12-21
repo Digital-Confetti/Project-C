@@ -9,49 +9,15 @@ import { Pistola } from '../powerups/pistola.js';
 import { Fusil } from '../powerups/fusil.js';
 import { TT_WebSocket } from "../socket/TT_WebSocket.js";
 
-//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO//TODO
-//TODO
-
 // exporting
 export class Online_Game_Scene extends Phaser.Scene {
-//TODO
-//TODO
 
 
     constructor() {
-        super({ key: 'game_Scene' });
+        super({ key: 'Online_Game_Scene' });
 
-        this.socket = new TT_WebSocket('ws://192.168.1.132:8080/menu', this);
-
-        this.player;
-        this.player2;
+        this.playerLocal;
+        this.playerNet;
 
         this.platforms;
 
@@ -79,8 +45,13 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.min_duration = 1;
         this.game_duration = this.min_duration * 60 * 1000;
 
-        // receiver of the selected character
-        this.selectedCharacter;
+        // lado del jugador
+        this.mySide;
+
+        // Player picked
+        this.myPlayer;
+
+        this.elsePlayer;
 
         //active powerup
         this.activePowerUp = null;
@@ -89,12 +60,17 @@ export class Online_Game_Scene extends Phaser.Scene {
         //first player-powerup collider
         this.game_player_powerup_collider;
 
+        TT_WebSocket.prototype.setGame(this);
+
     }
 
     init(data) {
         // saving the selected character
-        this.selectedCharacter = data.character;
+        this.myPlayer = data.character;
+        this.mySide = data.side;
+        this.elsePlayer = data.elseChara;
 
+        console.log(data);
     }
 
     preload() {
@@ -133,18 +109,43 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.load.audio('caida', 'stores/sounds/caida.mp3');
     }
 
+    createPlayers(){
+        let x, y;
+        let a, b;
+
+        if (this.mySide == "blue"){
+            x = 100, a = 1000;
+            y = 100; b = 100;
+        } else {
+            x = 1000; a = 100;
+            y = 100; b = 100;
+        }
+
+        if (this.myPlayer == 'ottonai') {
+            this.playerLocal = new Ottonai(this, x, y);
+        } else if (this.myPlayer == 'grundlegend') {
+            this.playerLocal = new GrundLegend(this, x, y);
+        } else {
+            console.log('error al crear playerLocal')
+        }
+
+        if (this.elsePlayer == 'otonnai') {
+            this.playerNet = new Ottonai(this, a, b);
+        } else if (this.elsePlayer == 'grundlegend') {
+            this.playerNet = new GrundLegend(this, a, b);
+        } else {
+            console.log('error al crear playerLocal')
+        }
+    }
+
+
+
     // Function thats add all the sprites to the gameObjects
     createGameObjects() {
-        // Creating the player
-        if (this.selectedCharacter == 'ottonai') {
-            this.player = new Ottonai(this, 100, 100);
-            this.player2 = new GrundLegend(this, 1000, 100);
-        } else if (this.selectedCharacter == 'grundlegend') {
-            this.player = new GrundLegend(this, 100, 100);
-            this.player2 = new Ottonai(this, 1000, 100);
-        } else {
-            console.log('error al crear personaje')
-        }
+
+        this.createPlayers();
+
+        
         // Creating Punching Bag
 
         //this.punchingBag = new PunchingBag(this, 600, 100);
@@ -166,20 +167,20 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.platforms.create(1100,300, 'medium_ground').setScale(2.5, 2).refreshBody();
 
         // Add collider
-        this.physics.add.collider(this.player, this.platforms);
-        //this.physics.add.collider(this.player, this.punchingBag, this.hit_Treatment, null, this);
+        this.physics.add.collider(this.playerLocal, this.platforms);
+        //this.physics.add.collider(this.playerLocal, this.punchingBag, this.hit_Treatment, null, this);
 
-        this.physics.add.collider(this.player2, this.platforms);
-        //this.physics.add.collider(this.player2, this.punchingBag, this.hit_Treatment, null, this);
+        this.physics.add.collider(this.playerNet, this.platforms);
+        //this.physics.add.collider(this.playerNet, this.punchingBag, this.hit_Treatment, null, this);
 
-        this.physics.add.collider(this.player2, this.player, this.hit_Treatment_2P, null, this);
+        this.physics.add.collider(this.playerNet, this.playerLocal, this.hit_Treatment_2P, null, this);
 
-        //this.game_player_powerup_collider = this.physics.add.collider(this.player2, this.activePowerUp, this.pickPowerUp, null, this);
+        //this.game_player_powerup_collider = this.physics.add.collider(this.playerNet, this.activePowerUp, this.pickPowerUp, null, this);
 
         //this.physics.add.collider(this.punchingBag, this.platforms);
         //this.physics.add.collider(this.activePowerUp, this.platforms);
 
-        //this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
+        //this.game_player_powerup_collider = this.physics.add.collider(this.playerLocal, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     //TO DO: Use JSON atlas.
@@ -281,17 +282,17 @@ export class Online_Game_Scene extends Phaser.Scene {
             this.activePowerUp = new Fusil(this, this.x, this.y);
         }
         this.physics.add.collider(this.activePowerUp, this.platforms);
-        this.game_player_powerup_collider = this.physics.add.collider(this.player, this.activePowerUp, this.pickPowerUp, null, this);
-        this.game_player2_powerup_collider = this.physics.add.collider(this.player2, this.activePowerUp, this.pickPowerUp, null, this);
+        this.game_player_powerup_collider = this.physics.add.collider(this.playerLocal, this.activePowerUp, this.pickPowerUp, null, this);
+        this.game_player2_powerup_collider = this.physics.add.collider(this.playerNet, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
     checkEndGame(){
-        if(this.player.getVidas() == 0){
+        if(this.playerLocal.getVidas() == 0){
             //gana jugador 2
-            this.endGame(this.player2.key);
-        }else if(this.player2.getVidas() == 0){
+            this.endGame(this.playerNet.key);
+        }else if(this.playerNet.getVidas() == 0){
             //gana jugador 1
-            this.endGame(this.player.key);
+            this.endGame(this.playerLocal.key);
         }
     }
 
@@ -313,26 +314,26 @@ export class Online_Game_Scene extends Phaser.Scene {
         
         //this.timer_Update();
 
-        this.player.update(delta);
-        this.player2.update(delta);
+        this.playerLocal.update(delta);
+        this.playerNet.update(delta);
 
         //this.punchingBag.renove(delta);
         var out;
 
-        out = 'Progreso: ' + this.player.dash_Timer.getProgress().toString().substr(0, 4);
+        out = 'Progreso: ' + this.playerLocal.dash_Timer.getProgress().toString().substr(0, 4);
 
         this.text_Debug.setText(out);
 
-        this.text_vida.setText('Vida: ' + this.player.getVida());
+        this.text_vida.setText('Vida: ' + this.playerLocal.getVida());
 
-        this.text_vidas.setText('Vidas: ' + this.player.getVidas());
+        this.text_vidas.setText('Vidas: ' + this.playerLocal.getVidas());
 
 
-        this.text_Debug2.setText('Progreso: ' + this.player2.dash_Timer.getProgress().toString().substr(0, 4));
+        this.text_Debug2.setText('Progreso: ' + this.playerNet.dash_Timer.getProgress().toString().substr(0, 4));
 
-        this.text_vida2.setText('Vida: ' + this.player2.getVida());
+        this.text_vida2.setText('Vida: ' + this.playerNet.getVida());
 
-        this.text_vidas2.setText('Vidas: ' + this.player2.getVidas());
+        this.text_vidas2.setText('Vidas: ' + this.playerNet.getVidas());
 
         this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 5) * this.game_duration / 1000;
         this.duration_aux2 = parseInt(this.duration_aux, 10);
@@ -368,45 +369,45 @@ export class Online_Game_Scene extends Phaser.Scene {
 
     hit_Treatment_2P()
     {
-        if (this.player2.playerStatus != Player.PlayerStatus.ATA_N)
+        if (this.playerNet.playerStatus != Player.PlayerStatus.ATA_N)
         {
-            if (this.player.playerStatus == Player.PlayerStatus.DASHING && this.player2.playerStatus != Player.PlayerStatus.HITTED)
+            if (this.playerLocal.playerStatus == Player.PlayerStatus.DASHING && this.playerNet.playerStatus != Player.PlayerStatus.HITTED)
             {
-                this.player2.x_move = 2;
-                this.player2.y_move = -250;
-                this.player2.looking_R = this.player.x < this.player2.x;
-                this.player2.playerStatus = Player.PlayerStatus.HITTED;
-                this.player2.vida -= this.player.attack_damage;
-                this.player2.lauch_reset_HITTED();
-            } else if (this.player.playerStatus == Player.PlayerStatus.ATA_N && this.player2.playerStatus != Player.PlayerStatus.HITTED)
+                this.playerNet.x_move = 2;
+                this.playerNet.y_move = -250;
+                this.playerNet.looking_R = this.playerLocal.x < this.playerNet.x;
+                this.playerNet.playerStatus = Player.PlayerStatus.HITTED;
+                this.playerNet.vida -= this.playerLocal.attack_damage;
+                this.playerNet.lauch_reset_HITTED();
+            } else if (this.playerLocal.playerStatus == Player.PlayerStatus.ATA_N && this.playerNet.playerStatus != Player.PlayerStatus.HITTED)
             {
-                this.player2.x_move = 2;
-                this.player2.y_move = -250;
-                this.player2.looking_R = this.player.x < this.player2.x;
-                this.player2.playerStatus = Player.PlayerStatus.HITTED;
-                this.player2.vida -= this.player.attack_damage;
-                this.player2.lauch_reset_HITTED();
+                this.playerNet.x_move = 2;
+                this.playerNet.y_move = -250;
+                this.playerNet.looking_R = this.playerLocal.x < this.playerNet.x;
+                this.playerNet.playerStatus = Player.PlayerStatus.HITTED;
+                this.playerNet.vida -= this.playerLocal.attack_damage;
+                this.playerNet.lauch_reset_HITTED();
             }
         }
 //Ottonai hitting player
-        if (this.player.playerStatus != Player.PlayerStatus.ATA_N)
+        if (this.playerLocal.playerStatus != Player.PlayerStatus.ATA_N)
         {
-            if (this.player2.playerStatus == Player.PlayerStatus.DASHING && this.player.playerStatus != Player.PlayerStatus.HITTED)
+            if (this.playerNet.playerStatus == Player.PlayerStatus.DASHING && this.playerLocal.playerStatus != Player.PlayerStatus.HITTED)
             {
-                this.player.x_move = 2;
-                this.player.y_move = -250;
-                this.player.looking_R = this.player2.x < this.player.x;
-                this.player.playerStatus = Player.PlayerStatus.HITTED;
-                this.player.vida -= this.player2.attack_damage;
-                this.player.lauch_reset_HITTED();
-            } else if (this.player2.playerStatus == Player.PlayerStatus.ATA_N && this.player.playerStatus != Player.PlayerStatus.HITTED)
+                this.playerLocal.x_move = 2;
+                this.playerLocal.y_move = -250;
+                this.playerLocal.looking_R = this.playerNet.x < this.playerLocal.x;
+                this.playerLocal.playerStatus = Player.PlayerStatus.HITTED;
+                this.playerLocal.vida -= this.playerNet.attack_damage;
+                this.playerLocal.lauch_reset_HITTED();
+            } else if (this.playerNet.playerStatus == Player.PlayerStatus.ATA_N && this.playerLocal.playerStatus != Player.PlayerStatus.HITTED)
             {
-                this.player.x_move = 1;
-                this.player.y_move = -50;
-                this.player.looking_R = this.player2.x < this.player.x;
-                this.player.playerStatus = Player.PlayerStatus.HITTED;
-                this.player.vida -= this.player2.attack_damage;
-                this.player.lauch_reset_HITTED();
+                this.playerLocal.x_move = 1;
+                this.playerLocal.y_move = -50;
+                this.playerLocal.looking_R = this.playerNet.x < this.playerLocal.x;
+                this.playerLocal.playerStatus = Player.PlayerStatus.HITTED;
+                this.playerLocal.vida -= this.playerNet.attack_damage;
+                this.playerLocal.lauch_reset_HITTED();
             }
         }
         
@@ -414,12 +415,12 @@ export class Online_Game_Scene extends Phaser.Scene {
 
     hit_Treatment()
     {
-        if (this.player.playerStatus == Player.PlayerStatus.DASHING)
+        if (this.playerLocal.playerStatus == Player.PlayerStatus.DASHING)
         {
-            this.punchingBag.getHitted(this.player.x < this.punchingBag.x,2,-250);
-        } else if (this.player.playerStatus == Player.PlayerStatus.ATA_N && !this.punchingBag.hited)
+            this.punchingBag.getHitted(this.playerLocal.x < this.punchingBag.x,2,-250);
+        } else if (this.playerLocal.playerStatus == Player.PlayerStatus.ATA_N && !this.punchingBag.hited)
         {
-            this.punchingBag.getHitted(this.player.x < this.punchingBag.x, 1,-50);
+            this.punchingBag.getHitted(this.playerLocal.x < this.punchingBag.x, 1,-50);
         }
     }
 
@@ -435,58 +436,46 @@ export class Online_Game_Scene extends Phaser.Scene {
     inputDeclaration() {
 
         // that
-        var that = this.player;
-        var thet = this.player2;
+        var that = this.playerLocal;
+        var this_game = this;
 
-        var socket = this.socket;
 
         // Input event that checks when a key goes down
         this.input.keyboard.on('keydown', function (event) {
 
             if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W) {
                 that.keySPACE = true;
-                socket.send("Espacio");
+                this_game.sendMsg("SPACE", "1");
                 console.log('W Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.A && !that.keyA) {
                 that.keyA = true;
+                this_game.sendMsg("A", "1");
                 console.log('A Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.S && !that.keyS) {
                 that.keyS = true;
+                this_game.sendMsg("S", "1");
                 console.log('S Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.D && !that.keyD) {
                 that.keyD = true;
+                this_game.sendMsg("D", "1");
                 console.log('D Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SPACE) {
                 that.keySPACE = true;
+                this_game.sendMsg("SPACE", "1");
                 console.log('SPACE Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SHIFT) {
                 that.keySHIFT = true;
+                this_game.sendMsg("SHIFT", "1");
                 console.log('SHIFT Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.J) {
                 that.keyNA = true;
+                this_game.sendMsg("NA", "1");
                 console.log('J Pressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.K) {
                 that.keySA = true;
+                this_game.sendMsg("SA", "1");
                 console.log('K Pressed');
             }
-
-            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP) {
-                thet.keySPACE = true;
-                console.log('UP Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.LEFT && !thet.keyA) {
-                thet.keyA = true;
-                console.log('LEFT Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.DOWN && !thet.keyS) {
-                thet.keyS = true;
-                console.log('DOWN Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.RIGHT && !thet.keyD) {
-                thet.keyD = true;
-                console.log('RIGHT Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
-                thet.keySHIFT = true;
-                console.log('CTRL Pressed');
-            }
-
         });
 
         // Input event that checks when a key goes up
@@ -494,79 +483,100 @@ export class Online_Game_Scene extends Phaser.Scene {
 
             if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.W) {
                 that.keySPACE = false;
+                this_game.sendMsg("SPACE", "0");
                 console.log('W Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.A && that.keyA) {
                 that.keyA = false;
+                this_game.sendMsg("A", "0");
                 console.log('A Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.S && that.keyS) {
                 that.keyS = false;
                 console.log('S Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.D && that.keyD) {
                 that.keyD = false;
+                this_game.sendMsg("D", "0");
                 console.log('D Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SPACE) {
                 that.keySPACE = false;
+                this_game.sendMsg("SPACE", "0");
                 console.log('SPACE Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.SHIFT) {
                 that.keySHIFT = false;
+                this_game.sendMsg("SHIFT", "0");
                 console.log('SHIFT Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.J) {
                 that.keyNA = false;
+                this_game.sendMsg("NA", "0");
                 console.log('J Depressed');
             } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.K) {
                 that.keySA = false;
+                this_game.sendMsg("SA", "0");
                 console.log('K Depressed');
             }
 
-            if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.UP) {
-                thet.keySPACE = false;
-                console.log('UP Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.LEFT && thet.keyA) {
-                thet.keyA = false;
-                console.log('LEFT Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.DOWN && thet.keyS) {
-                thet.keyS = false;
-                console.log('DOWN Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.RIGHT && thet.keyD) {
-                thet.keyD = false;
-                console.log('RIGHT Pressed');
-            } else if (event.keyCode == Phaser.Input.Keyboard.KeyCodes.CTRL) {
-                thet.keySHIFT = false;
-                console.log('CTRL Pressed');
-            }
         });
 
         // Mouse Input
         this.input.mouse.disableContextMenu();
-
-        this.input.on('pointerdown', function (event) {
-            if (event.rightButtonDown()) {
-                thet.keySA = true;
-                console.log('RClick Pressed');
-            } else if (event.leftButtonDown()) {
-                thet.keyNA = true;
-                console.log('LClick Pressed');
-            }
-        });
-
-        this.input.on('pointerup', function (event) {
-            if (event.leftButtonReleased()) {
-                thet.keyNA = false;
-                console.log('LClick Deressed');
-            }
-            else if (event.rightButtonReleased()) {
-                thet.keySA = false;
-                console.log('RClick Depressed');
-            }
-        });
     }
 
-    //
-    sendMsg(){
+    // Desde aqui comunicaremos al servidor lo que estamos haciendo
+    sendMsg(k, val){
+
+        var pkg = {
+            key: k,
+            value: val
+        }
+
+        TT_WebSocket.prototype.sendMessage(pkg, "game");
     }
 
-    processMsg(){
+    // Desde aqui controlaremos el player2 a "comandazos"
+    processMsg(pkg){
+        if (pkg.value == "1"){
+            switch (pkg.key) {
+                case "SPACE":
+                    this.playerNet.keySPACE = true;
+                    break;
+                case "SHIFT":
+                    this.playerNet.keySHIFT = true;
+                    break;
+                case "A":
+                    this.playerNet.keyA = true;
+                    break;
+                case "D":
+                    this.playerNet.keyD = true;
+                    break;
+                case "NA":
+                    this.playerNet.keyNA = true;
+                    break;
+                case "SA":
+                    this.playerNet.keySA = true;
+                    break;
+            }
+        } else if (pkg.value == "0") {
+            switch (pkg.key) {
+                case "SPACE":
+                    this.playerNet.keySPACE = false;
+                    break;
+                case "SHIFT":
+                    this.playerNet.keySHIFT = false;
+                    break;
+                case "A":
+                    this.playerNet.keyA = false;
+                    break;
+                case "D":
+                    this.playerNet.keyD = false;
+                    break;
+                case "NA":
+                    this.playerNet.keyNA = false;
+                    break;
+                case "SA":
+                    this.playerNet.keySA = false;
+                    break;
+            }
 
+        }
     }
 
 }

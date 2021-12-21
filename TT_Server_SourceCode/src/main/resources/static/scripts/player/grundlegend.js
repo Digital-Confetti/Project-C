@@ -199,7 +199,6 @@ export class GrundLegend extends Player{
         this.colisionador2 = this.scene.physics.add.collider(this.scene.player2, bala, this.hitPlayer, null, this);
 
         this.proyectiles.push(bala);
-          
     }
 
     hitPlayer(player, bullet)

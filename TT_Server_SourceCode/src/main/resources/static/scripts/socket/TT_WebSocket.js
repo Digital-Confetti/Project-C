@@ -7,6 +7,9 @@ export class TT_WebSocket {
 	setMenu(menu){
 		this.menu = menu;
 	}
+	setGame(game){
+		this.game = game;
+	}
 
 	setInMenu(menu){
 		this.inMenu = menu;
@@ -42,6 +45,8 @@ export class TT_WebSocket {
 			this.menu.setSide(data.body);
 		}else if(data.type == "start"){
 			this.menu.startGame();
+		} else if(data.type == "game"){
+			this.game.processMsg(data.body);
 		}
 
 	}

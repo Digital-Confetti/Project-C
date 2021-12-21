@@ -41,6 +41,7 @@ import { Pausa_Scene } from './scripts/scenes/pausa.js';
 import { Poweups_Scene } from './scripts/scenes/powerups.js';
 import { Victoria_Scene } from './scripts/scenes/victoria.js';
 import { TT_WebSocket } from './scripts/socket/TT_WebSocket.js';
+import {Online_Game_Scene} from './scripts/scenes/onlinegame.js';
 
 
 
@@ -69,7 +70,7 @@ const config = {
         disableWebAudio: true
     },
 
-        scene: [Menu_Scene, Musica_Scene, Play_Menu_Scene, Play_Select_Scene,Play_Select_Scene_Online, Game_Scene,Controles_Scene,Personajes_Scene,Pausa_Scene,Poweups_Scene,Victoria_Scene]
+        scene: [Menu_Scene, Musica_Scene, Play_Menu_Scene, Play_Select_Scene,Play_Select_Scene_Online, Game_Scene, Online_Game_Scene,Controles_Scene,Personajes_Scene,Pausa_Scene,Poweups_Scene,Victoria_Scene]
 
 };
 

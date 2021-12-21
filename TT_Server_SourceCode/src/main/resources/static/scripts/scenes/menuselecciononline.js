@@ -24,6 +24,8 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         this.side;
 
         this.lastHover = "none";
+
+        this.elseCharacter = undefined;
         
         this.playerPicked;
 
@@ -45,7 +47,7 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         var that = this;
         this.processMsg = function (body) {
 
-            console.log(body.hovered);
+            that.elseCharacter = body.hovered;
 
             if (that.side == "blue") {
                 if (body.hovered == "grundlegend") {
@@ -260,7 +262,8 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
     }
 
     startGame() {
-        this.scene.start("game_Scene", {character: this.playerPicked});
+        console.log('Empezamos la partida');
+        this.scene.start("Online_Game_Scene", {character: this.playerPicked, side: this.side, elseChara: this.elseCharacter});
     }
 
     
@@ -278,9 +281,9 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
             that.otonaiboton.alpha = 0.1;
             that.salir_luz.alpha = 0;
             
-            if (this.lastHover != "GL")
+            if (that.lastHover != "GL")
             {
-                this.lastHover = "GL";
+                that.lastHover = "GL";
                 that.sendMsg("grundlegend");
             }
 
@@ -298,9 +301,9 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
             that.grunlegendsboton.alpha = 0.1;
             that.salir_luz.alpha = 0;
 
-            if (this.lastHover != "OT")
+            if (that.lastHover != "OT")
             {
-                this.lastHover = "OT";
+                that.lastHover = "OT";
                 that.sendMsg("otonnai");
             }
 
