@@ -26,7 +26,7 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         this.lastHover = "none";
 
         this.elseCharacter = undefined;
-        
+
         this.playerPicked = undefined;
 
         this.setSide = function (lado) {
@@ -145,6 +145,22 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
             this.salir_luz.alpha = 0;
         }
     }
+
+    chatPicked(character) {
+        var now = new Date();
+        now = "> " + now.toLocaleString();
+
+        var msg = {
+            date: now,
+            text: character + " picked",
+            user: "SYSTEM",
+            color: "#000000",
+        }
+
+        TT_WebSocket.prototype.sendMessage(msg, "chat");
+        TT_WebSocket.prototype.proChatMessage(msg);
+    }
+
     create() {
         var that = this;
         this.input.keyboard.on('keydown', function (event) {
@@ -225,12 +241,18 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
             that.escena_musica.stopMenuMusic();
             TT_WebSocket.prototype.sendMessage(that.side, "picked");
             that.playerPicked = 'grundlegend';
+
+            that.chatPicked("Grund Legend");
+
         });
         this.otonaiboton.on('pointerdown', function (pointer) {
             that.sound.play('tambor');
             that.escena_musica.stopMenuMusic();
             TT_WebSocket.prototype.sendMessage(that.side, "picked");
             that.playerPicked = 'ottonai';
+
+            that.chatPicked("Otonnai");
+
         });
         this.salir_luz.on('pointerdown', function (pointer) {
             console.log('Boton salir pulsado');
@@ -263,10 +285,10 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
 
     startGame() {
         console.log('Empezamos la partida');
-        this.scene.start("Online_Game_Scene", {character: this.playerPicked, side: this.side, elseChara: this.elseCharacter});
+        this.scene.start("Online_Game_Scene", { character: this.playerPicked, side: this.side, elseChara: this.elseCharacter });
     }
 
-    
+
 
     update() {
         var that = this;
@@ -276,13 +298,12 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         });
 
         this.grunlegendsboton.on('pointerover', function (pointer) {
-            if (that.playerPicked == undefined){
+            if (that.playerPicked == undefined) {
                 that.grunlegendsboton.alpha = 0.4;
                 that.otonaiboton.alpha = 0.1;
                 that.salir_luz.alpha = 0;
-                
-                if (that.lastHover != "GL")
-                {
+
+                if (that.lastHover != "GL") {
                     that.lastHover = "GL";
                     that.sendMsg("grundlegend");
                 }
@@ -296,12 +317,11 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         });
 
         this.otonaiboton.on('pointerover', function (pointer) {
-            if (that.playerPicked == undefined){
+            if (that.playerPicked == undefined) {
                 that.otonaiboton.alpha = 0.4;
                 that.grunlegendsboton.alpha = 0.1;
                 that.salir_luz.alpha = 0;
-                if (that.lastHover != "OT")
-                {
+                if (that.lastHover != "OT") {
                     that.lastHover = "OT";
                     that.sendMsg("otonnai");
                 }
@@ -326,12 +346,16 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
                     this.escena_musica.stopMenuMusic();
                     TT_WebSocket.prototype.sendMessage(this.side, "picked");
                     this.playerPicked = 'grundlegend';
+                    this.chatPicked("Grund Legend");
+
                     break;
                 case 2: // eleccion ottonai
                     this.sound.play('tambor');
                     this.escena_musica.stopMenuMusic();
                     TT_WebSocket.prototype.sendMessage(this.side, "picked");
                     this.playerPicked = 'ottonai';
+                    this.chatPicked("Otonnai");
+
                     break;
             }
         }
