@@ -92,8 +92,6 @@ public class WebsocketTTHandler extends TextWebSocketHandler {
 	}
 	
 	private boolean sendToLobby(WebSocketSession session, TextMessage message) throws IOException {
-		JsonNode node = mapper.readTree(message.getPayload());
-		
 		for(Entry<String, Lobby> ses: lobbys.entrySet()){
 			if(ses.getKey().equals(session.getId())){
 				ses.getValue().handleMessage(message, session.getId());

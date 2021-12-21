@@ -22,6 +22,8 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         this.escena_musica;
 
         this.side;
+
+        this.lastHover = "none";
         
         this.playerPicked;
 
@@ -217,16 +219,16 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
 
         var that = this;
         this.grunlegendsboton.on('pointerdown', function (pointer) {
-            console.log('Personaje 1 seleccionado');
             that.sound.play('tambor');
             that.escena_musica.stopMenuMusic();
-            that.scene.start("game_Scene", { character: 'grundlegend' });
+            TT_WebSocket.prototype.sendMessage(that.side, "picked");
+            that.playerPicked = 'grundlegend';
         });
         this.otonaiboton.on('pointerdown', function (pointer) {
-            console.log('Personaje 2 seleccionado');
             that.sound.play('tambor');
             that.escena_musica.stopMenuMusic();
-            that.scene.start("game_Scene", { character: 'ottonai' });
+            TT_WebSocket.prototype.sendMessage(that.side, "picked");
+            that.playerPicked = 'ottonai';
         });
         this.salir_luz.on('pointerdown', function (pointer) {
             console.log('Boton salir pulsado');
@@ -261,19 +263,26 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         this.scene.start("game_Scene", {character: this.playerPicked});
     }
 
+    
+
     update() {
         var that = this;
         this.salir.on('pointerover', function (pointer) {
 
             that.salir_luz.alpha = 1;
         });
+
         this.grunlegendsboton.on('pointerover', function (pointer) {
 
             that.grunlegendsboton.alpha = 0.4;
             that.otonaiboton.alpha = 0.1;
             that.salir_luz.alpha = 0;
-
-            that.sendMsg("grundlegend");
+            
+            if (this.lastHover != "GL")
+            {
+                this.lastHover = "GL";
+                that.sendMsg("grundlegend");
+            }
 
             if (that.side == "blue") {
                 that.showBlueGL();
@@ -282,13 +291,18 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
             }
 
         });
+
         this.otonaiboton.on('pointerover', function (pointer) {
 
             that.otonaiboton.alpha = 0.4;
             that.grunlegendsboton.alpha = 0.1;
             that.salir_luz.alpha = 0;
 
-            that.sendMsg("otonnai");
+            if (this.lastHover != "OT")
+            {
+                this.lastHover = "OT";
+                that.sendMsg("otonnai");
+            }
 
             if (that.side == "blue") {
                 that.showBlueOtonnai();
@@ -309,16 +323,14 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
                 case 1: // eleccion grund legend
                     this.sound.play('tambor');
                     this.escena_musica.stopMenuMusic();
-                    TT_Websocket.prototype.sendMessage(this.side, "picked");
+                    TT_WebSocket.prototype.sendMessage(this.side, "picked");
                     this.playerPicked = 'grundlegend';
-                    
                     break;
                 case 2: // eleccion ottonai
                     this.sound.play('tambor');
                     this.escena_musica.stopMenuMusic();
-                    TT_Websocket.prototype.sendMessage(this.side, "picked");
+                    TT_WebSocket.prototype.sendMessage(this.side, "picked");
                     this.playerPicked = 'ottonai';
-
                     break;
             }
         }
