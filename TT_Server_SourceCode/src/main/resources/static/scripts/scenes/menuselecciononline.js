@@ -27,7 +27,7 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
 
         this.elseCharacter = undefined;
         
-        this.playerPicked;
+        this.playerPicked = undefined;
 
         this.setSide = function (lado) {
             this.side = lado;
@@ -276,43 +276,41 @@ export class Play_Select_Scene_Online extends Phaser.Scene {
         });
 
         this.grunlegendsboton.on('pointerover', function (pointer) {
+            if (that.playerPicked == undefined){
+                that.grunlegendsboton.alpha = 0.4;
+                that.otonaiboton.alpha = 0.1;
+                that.salir_luz.alpha = 0;
+                
+                if (that.lastHover != "GL")
+                {
+                    that.lastHover = "GL";
+                    that.sendMsg("grundlegend");
+                }
 
-            that.grunlegendsboton.alpha = 0.4;
-            that.otonaiboton.alpha = 0.1;
-            that.salir_luz.alpha = 0;
-            
-            if (that.lastHover != "GL")
-            {
-                that.lastHover = "GL";
-                that.sendMsg("grundlegend");
+                if (that.side == "blue") {
+                    that.showBlueGL();
+                } else if (that.side == "red") {
+                    that.showRedGL();
+                }
             }
-
-            if (that.side == "blue") {
-                that.showBlueGL();
-            } else if (that.side == "red") {
-                that.showRedGL();
-            }
-
         });
 
         this.otonaiboton.on('pointerover', function (pointer) {
-
-            that.otonaiboton.alpha = 0.4;
-            that.grunlegendsboton.alpha = 0.1;
-            that.salir_luz.alpha = 0;
-
-            if (that.lastHover != "OT")
-            {
-                that.lastHover = "OT";
-                that.sendMsg("otonnai");
+            if (that.playerPicked == undefined){
+                that.otonaiboton.alpha = 0.4;
+                that.grunlegendsboton.alpha = 0.1;
+                that.salir_luz.alpha = 0;
+                if (that.lastHover != "OT")
+                {
+                    that.lastHover = "OT";
+                    that.sendMsg("otonnai");
+                }
+                if (that.side == "blue") {
+                    that.showBlueOtonnai();
+                } else if (that.side == "red") {
+                    that.showRedOtonnai();
+                }
             }
-
-            if (that.side == "blue") {
-                that.showBlueOtonnai();
-            } else if (that.side == "red") {
-                that.showRedOtonnai();
-            }
-
         });
 
         this.pointer = this.input.activePointer;

@@ -64,17 +64,33 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.game_player_powerup_collider;
 
         this.processImperative = function(body) {
-            this.playerNet.x = body.x;
-            this.playerNet.y = body.y;
-            this.playerNet.body.setVelocityX(body.vX);
-            this.playerNet.body.setVelocityY(body.vY);
+            if (body.Hp == undefined) {
+                this.playerNet.x = body.x;
+                this.playerNet.y = body.y;
+                this.playerNet.body.setVelocityX(body.vX);
+                this.playerNet.body.setVelocityY(body.vY);
+            } else {
+                this.playerLocal.Vida = body.Hp; 
+                this.playerLocal.vidas = body.Vidas;
+            }
+        }
+
+        this.sendHitImperative = function () {
+            let Hp_ = this.playerLocal.Vida;
+            let vidas = this.playerLocal.vidas;
+
+            let pkg = {
+                Hp: Hp_,
+                Vidas: vidas
+            }
+            TT_WebSocket.prototype.sendMessage(pkg, 'imp');
         }
         
         this.sendImperative = function () {
             if (this.playerLocal != undefined) {
                 let a = this.playerLocal.x, b = this.playerLocal.y;
                 let v_x = this.playerLocal.body.velocity.x, v_y = this.playerLocal.body.velocity.y;
-                console.log("Mandando imperativo: " + a + " " + b);
+
                 let pkg = {
                     x: a,
                     y: b,
@@ -86,6 +102,7 @@ export class Online_Game_Scene extends Phaser.Scene {
             }
     
         }
+
         TT_WebSocket.prototype.setGame(this);
     }
 
@@ -424,7 +441,7 @@ export class Online_Game_Scene extends Phaser.Scene {
 
         this.checkEndGame();
 
-        if (this.i%38 == 0) {
+        if (this.i%40 == 0) {
             this.sendImperative();
             if (this.i >= 6000000)
             {
@@ -442,6 +459,7 @@ export class Online_Game_Scene extends Phaser.Scene {
                 this.playerNet.playerStatus = Player.PlayerStatus.HITTED;
                 this.playerNet.vida -= this.playerLocal.attack_damage;
                 this.playerNet.lauch_reset_HITTED();
+                this.sendHitImperative();
             } else if (this.playerLocal.playerStatus == Player.PlayerStatus.ATA_N && this.playerNet.playerStatus != Player.PlayerStatus.HITTED) {
                 this.playerNet.x_move = 2;
                 this.playerNet.y_move = -250;
@@ -449,6 +467,7 @@ export class Online_Game_Scene extends Phaser.Scene {
                 this.playerNet.playerStatus = Player.PlayerStatus.HITTED;
                 this.playerNet.vida -= this.playerLocal.attack_damage;
                 this.playerNet.lauch_reset_HITTED();
+                this.sendHitImperative();
             }
         }
         //Ottonai hitting player

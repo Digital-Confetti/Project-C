@@ -77,7 +77,43 @@ export class TT_WebSocket {
 			that.proMessage(msg);
 		}
 
-		this.connection.onclose = function() { console.log("Closing socket"); }
+		this.connection.onclose = function() { 
+			console.log("Closing socket"); 
+
+			let chat = $("#chatbox");
+			chat.empty();
+			chat.append('<h1 style= color: red> Servidor desconectado </h1>');
+			chat.append('<p>Prueba más adelante</p>');
+
+			$("#messageAction").empty();			
+
+			let usrData = $("#userdata");
+			usrData.empty();
+			usrData.append('<input type="text" id="nick"/><input type="button" id="setName" value="set Nickname"/> <label for="setColor">Choose color: </label><select id="setColor"><option value="magenta">Magenta</option><option value="red">Red</option><option value="orange">Orange</option><option value="yellow">Yellow</option><option value="green">Green</option><option value="cyan">Cyan</option><option value="blue">Blue</option><option value="violet">Violet</option></select>')
+			
+			$('#submitmsg').click( function () {
+				let plainText = $("#usermsg").val();
+				var now = new Date();
+				now = "> " + now.toLocaleString();
+				var pickedColor = color;
+		
+				var msg = {
+					date: now,
+					text: plainText,
+					user: player,
+					color: pickedColor,
+				}
+		
+				if(plainText != ''){
+					TT_WebSocket.prototype.sendMessage(msg, "chat");
+					TT_WebSocket.prototype.proChatMessage(msg);
+				}
+		
+				//Borramos el field text
+				$("#usermsg").val('');
+			});
+		
+		}
 		this.connection.onerror = function(e){ console.log("WS error: " + e); }
     }
 
