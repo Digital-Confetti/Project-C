@@ -18,16 +18,19 @@ export class Online_Game_Scene extends Phaser.Scene {
 
         this.playerLocal;
         this.playerNet;
+        
+        this.i = 0;
 
         this.platforms;
 
         // Timers
         this.timer_dash;
+        this.timer_Imp;
         this.powerUp_duration_timer;
         this.game_duration_timer,
 
-        // debug player 1
-        this.text_Debug;
+            // debug player 1
+            this.text_Debug;
         this.text_vida;
         this.text_vidas;
 
@@ -42,7 +45,7 @@ export class Online_Game_Scene extends Phaser.Scene {
         // s -> ms
         this.dashCoolDown = 3 * 1000;
         this.power_ups_respawn_cooldown = 2 * 1000;
-        this.min_duration = 1;
+        this.min_duration = 5;
         this.game_duration = this.min_duration * 60 * 1000;
 
         // lado del jugador
@@ -60,8 +63,29 @@ export class Online_Game_Scene extends Phaser.Scene {
         //first player-powerup collider
         this.game_player_powerup_collider;
 
+        this.processImperative = function(body) {
+            this.playerNet.x = body.x;
+            this.playerNet.y = body.y;
+        }
+        
+        this.sendImperative = function () {
+            if (this.playerLocal != undefined) {
+                let a = this.playerLocal.x, b = this.playerLocal.y;
+                console.log("Mandando imperativo: " + a + " " + b);
+                let pkg = {
+                    x: a,
+                    y: b
+                }
+    
+                TT_WebSocket.prototype.sendMessage(pkg, "imp")
+            }
+    
+        }
         TT_WebSocket.prototype.setGame(this);
+    }
 
+    setMeFromOutside(){
+        TT_WebSocket.prototype.setGame(this);
     }
 
     init(data) {
@@ -78,7 +102,7 @@ export class Online_Game_Scene extends Phaser.Scene {
         
 
         //let route = "stores/characters/" + this.selectedCharacter;
-        this.load.atlas('grundlegend', "stores/characters/grundlegend.png", "stores/characters/grundlegend.json");         
+        this.load.atlas('grundlegend', "stores/characters/grundlegend.png", "stores/characters/grundlegend.json");
         this.load.atlas('ottonai', "stores/characters/ottonai.png", "stores/characters/ottonai.json");
 
         this.load.atlas("PunchingBag", "stores/characters/PunchingBag/PunchingBag.png", "stores/characters/PunchingBag/PunchingBag.json");
@@ -91,7 +115,7 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.load.image('large_ground', 'stores/schenery/Layer_large.png');
         this.load.image('medium_ground', 'stores/schenery/Layer_medium.png');
         this.load.image('short_ground', 'stores/schenery/Layer_short.png');
-        
+
 
         //powerups
         this.load.spritesheet('especialdetuichi', 'stores/powerups/especialdetuichi.png', { frameWidth: 42, frameHeight: 30 });
@@ -109,11 +133,11 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.load.audio('caida', 'stores/sounds/caida.mp3');
     }
 
-    createPlayers(){
+    createPlayers() {
         let x, y;
         let a, b;
 
-        if (this.mySide == "blue"){
+        if (this.mySide == "blue") {
             x = 100, a = 1000;
             y = 100; b = 100;
         } else {
@@ -136,6 +160,8 @@ export class Online_Game_Scene extends Phaser.Scene {
         } else {
             console.log('error al crear playerLocal')
         }
+
+        TT_WebSocket.prototype.setGame(this);
     }
 
 
@@ -144,8 +170,6 @@ export class Online_Game_Scene extends Phaser.Scene {
     createGameObjects() {
 
         this.createPlayers();
-
-        
         // Creating Punching Bag
 
         //this.punchingBag = new PunchingBag(this, 600, 100);
@@ -156,15 +180,15 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.platforms = this.physics.add.staticGroup();
 
         //Bottom layer
-        this.platforms.create(320,600, 'large_ground').setScale(2.5, 2).refreshBody();
-        this.platforms.create(960,600, 'large_ground').setScale(2.5, 2).refreshBody();
+        this.platforms.create(320, 600, 'large_ground').setScale(2.5, 2).refreshBody();
+        this.platforms.create(960, 600, 'large_ground').setScale(2.5, 2).refreshBody();
 
         //Medium layer
-        this.platforms.create(640,450, 'medium_ground').setScale(2.5, 2).refreshBody();
+        this.platforms.create(640, 450, 'medium_ground').setScale(2.5, 2).refreshBody();
 
         //Upper layer
-        this.platforms.create(180,300, 'medium_ground').setScale(2.5, 2).refreshBody();
-        this.platforms.create(1100,300, 'medium_ground').setScale(2.5, 2).refreshBody();
+        this.platforms.create(180, 300, 'medium_ground').setScale(2.5, 2).refreshBody();
+        this.platforms.create(1100, 300, 'medium_ground').setScale(2.5, 2).refreshBody();
 
         // Add collider
         this.physics.add.collider(this.playerLocal, this.platforms);
@@ -219,6 +243,7 @@ export class Online_Game_Scene extends Phaser.Scene {
 
     timer_Create() {
 
+        var that = this;
         // Dash Timer
         this.timer_dash = this.time.addEvent({ delay: this.dashCoolDown, loop: true });
 
@@ -245,40 +270,38 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.text_Debug = this.add.text(32, 32);
         this.text_vida = this.add.text(32, 82);
         this.text_vidas = this.add.text(32, 132);
-        
+
         this.text_Debug2 = this.add.text(1100, 32);
         this.text_vida2 = this.add.text(1100, 82);
         this.text_vidas2 = this.add.text(1100, 132);
 
-        this.text_game_timer = this.add.text(610,50,'', {fontSize: 40, color: '#000000'});
+        this.text_game_timer = this.add.text(610, 50, '', { fontSize: 40, color: '#000000' });
 
         //this.punchingBag.play('PB_idle');
 
         this.game_duration_timer = this.time.delayedCall(this.game_duration, this.endGame, [3], this);
-        
-        
-    
+
     }
 
-    spawnPowerUp(){
+    spawnPowerUp() {
         this.i = Math.floor(Math.random() * 5) + 1;
         //this.i = 5;
         this.x = Math.floor(Math.random() * 1080) + 200;
         this.y = 50;
 
-        if(this.i == 1){
+        if (this.i == 1) {
             this.activePowerUp = new EspecialDeTuichi(this, this.x, this.y);
 
-        }else if(this.i == 2){
+        } else if (this.i == 2) {
             this.activePowerUp = new BebidaEnergetica(this, this.x, this.y);
 
-        }else if(this.i == 3){
+        } else if (this.i == 3) {
             this.activePowerUp = new Platano(this, this.x, this.y);
-            
-        }else if(this.i == 4){
+
+        } else if (this.i == 4) {
             this.activePowerUp = new Pistola(this, this.x, this.y);
-            
-        }else if(this.i == 5){
+
+        } else if (this.i == 5) {
             this.activePowerUp = new Fusil(this, this.x, this.y);
         }
         this.physics.add.collider(this.activePowerUp, this.platforms);
@@ -286,21 +309,21 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.game_player2_powerup_collider = this.physics.add.collider(this.playerNet, this.activePowerUp, this.pickPowerUp, null, this);
     }
 
-    checkEndGame(){
-        if(this.playerLocal.getVidas() == 0){
+    checkEndGame() {
+        if (this.playerLocal.getVidas() == 0) {
             //gana jugador 2
             this.endGame(this.playerNet.key);
-        }else if(this.playerNet.getVidas() == 0){
+        } else if (this.playerNet.getVidas() == 0) {
             //gana jugador 1
             this.endGame(this.playerLocal.key);
         }
     }
 
-    endGame(i){
+    endGame(i) {
 
         console.log(i);
-        this.scene.start("Victoria_menu", {index: i});
-        
+        this.scene.start("Victoria_menu", { index: i });
+
     }
 
     update(timer, delta) {
@@ -310,8 +333,10 @@ export class Online_Game_Scene extends Phaser.Scene {
             this.scene.launch("select_Pausa");
             this.scene.pause("game_Scene")
         }
-*/
-        
+*/      
+
+        this.i += 1;
+
         //this.timer_Update();
 
         this.playerLocal.update(delta);
@@ -337,50 +362,55 @@ export class Online_Game_Scene extends Phaser.Scene {
 
         this.duration_aux = this.game_duration_timer.getProgress().toString().substr(0, 5) * this.game_duration / 1000;
         this.duration_aux2 = parseInt(this.duration_aux, 10);
-        
 
 
-        this.min_aux = (this.min_duration-1) - (parseInt(this.duration_aux2 / 60));
+
+        this.min_aux = (this.min_duration - 1) - (parseInt(this.duration_aux2 / 60));
         this.seg_aux = 59 - (this.duration_aux2 % 60);
 
         this.min = this.min_aux;
         this.seg = this.seg_aux;
         this.text_game_timer.setText(this.min + ':' + this.seg);
-        
+
+        /*
         if (this.activePowerUp !== null) {
 
             //console.log(this.activePowerUp.picked);
             if (this.activePowerUp.picked) {
-                
+
                 this.activePowerUp.trigger(delta);
             }
-        }else{
-            if(!this.power_up_spawned){
+        } else {
+            if (!this.power_up_spawned) {
                 this.power_up_spawned = true;
                 this.time.delayedCall(this.power_ups_respawn_cooldown, this.spawnPowerUp, null, this);
 
             }
-            
+
         }
+        */
 
         this.checkEndGame();
-        
+
+        if (this.i%38 == 0) {
+            this.sendImperative();
+            if (this.i >= 6000000)
+            {
+                this.i = 0;
+            }
+        }
     }
 
-    hit_Treatment_2P()
-    {
-        if (this.playerNet.playerStatus != Player.PlayerStatus.ATA_N)
-        {
-            if (this.playerLocal.playerStatus == Player.PlayerStatus.DASHING && this.playerNet.playerStatus != Player.PlayerStatus.HITTED)
-            {
+    hit_Treatment_2P() {
+        if (this.playerNet.playerStatus != Player.PlayerStatus.ATA_N) {
+            if (this.playerLocal.playerStatus == Player.PlayerStatus.DASHING && this.playerNet.playerStatus != Player.PlayerStatus.HITTED) {
                 this.playerNet.x_move = 2;
                 this.playerNet.y_move = -250;
                 this.playerNet.looking_R = this.playerLocal.x < this.playerNet.x;
                 this.playerNet.playerStatus = Player.PlayerStatus.HITTED;
                 this.playerNet.vida -= this.playerLocal.attack_damage;
                 this.playerNet.lauch_reset_HITTED();
-            } else if (this.playerLocal.playerStatus == Player.PlayerStatus.ATA_N && this.playerNet.playerStatus != Player.PlayerStatus.HITTED)
-            {
+            } else if (this.playerLocal.playerStatus == Player.PlayerStatus.ATA_N && this.playerNet.playerStatus != Player.PlayerStatus.HITTED) {
                 this.playerNet.x_move = 2;
                 this.playerNet.y_move = -250;
                 this.playerNet.looking_R = this.playerLocal.x < this.playerNet.x;
@@ -389,19 +419,16 @@ export class Online_Game_Scene extends Phaser.Scene {
                 this.playerNet.lauch_reset_HITTED();
             }
         }
-//Ottonai hitting player
-        if (this.playerLocal.playerStatus != Player.PlayerStatus.ATA_N)
-        {
-            if (this.playerNet.playerStatus == Player.PlayerStatus.DASHING && this.playerLocal.playerStatus != Player.PlayerStatus.HITTED)
-            {
+        //Ottonai hitting player
+        if (this.playerLocal.playerStatus != Player.PlayerStatus.ATA_N) {
+            if (this.playerNet.playerStatus == Player.PlayerStatus.DASHING && this.playerLocal.playerStatus != Player.PlayerStatus.HITTED) {
                 this.playerLocal.x_move = 2;
                 this.playerLocal.y_move = -250;
                 this.playerLocal.looking_R = this.playerNet.x < this.playerLocal.x;
                 this.playerLocal.playerStatus = Player.PlayerStatus.HITTED;
                 this.playerLocal.vida -= this.playerNet.attack_damage;
                 this.playerLocal.lauch_reset_HITTED();
-            } else if (this.playerNet.playerStatus == Player.PlayerStatus.ATA_N && this.playerLocal.playerStatus != Player.PlayerStatus.HITTED)
-            {
+            } else if (this.playerNet.playerStatus == Player.PlayerStatus.ATA_N && this.playerLocal.playerStatus != Player.PlayerStatus.HITTED) {
                 this.playerLocal.x_move = 1;
                 this.playerLocal.y_move = -50;
                 this.playerLocal.looking_R = this.playerNet.x < this.playerLocal.x;
@@ -410,17 +437,14 @@ export class Online_Game_Scene extends Phaser.Scene {
                 this.playerLocal.lauch_reset_HITTED();
             }
         }
-        
+
     }
 
-    hit_Treatment()
-    {
-        if (this.playerLocal.playerStatus == Player.PlayerStatus.DASHING)
-        {
-            this.punchingBag.getHitted(this.playerLocal.x < this.punchingBag.x,2,-250);
-        } else if (this.playerLocal.playerStatus == Player.PlayerStatus.ATA_N && !this.punchingBag.hited)
-        {
-            this.punchingBag.getHitted(this.playerLocal.x < this.punchingBag.x, 1,-50);
+    hit_Treatment() {
+        if (this.playerLocal.playerStatus == Player.PlayerStatus.DASHING) {
+            this.punchingBag.getHitted(this.playerLocal.x < this.punchingBag.x, 2, -250);
+        } else if (this.playerLocal.playerStatus == Player.PlayerStatus.ATA_N && !this.punchingBag.hited) {
+            this.punchingBag.getHitted(this.playerLocal.x < this.punchingBag.x, 1, -50);
         }
     }
 
@@ -521,7 +545,7 @@ export class Online_Game_Scene extends Phaser.Scene {
     }
 
     // Desde aqui comunicaremos al servidor lo que estamos haciendo
-    sendMsg(k, val){
+    sendMsg(k, val) {
 
         var pkg = {
             key: k,
@@ -532,8 +556,8 @@ export class Online_Game_Scene extends Phaser.Scene {
     }
 
     // Desde aqui controlaremos el player2 a "comandazos"
-    processMsg(pkg){
-        if (pkg.value == "1"){
+    processMsg(pkg) {
+        if (pkg.value == "1") {
             switch (pkg.key) {
                 case "SPACE":
                     this.playerNet.keySPACE = true;

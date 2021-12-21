@@ -47,6 +47,8 @@ export class TT_WebSocket {
 			this.menu.startGame();
 		} else if(data.type == "game"){
 			this.game.processMsg(data.body);
+		} else if(data.type == "imp"){
+			this.game.processImperative(data.body);
 		}
 
 	}
@@ -63,7 +65,7 @@ export class TT_WebSocket {
 	}
 
 	init_TTsocket(){
-		this.connection = new WebSocket('ws://localhost:8080/TT');
+		this.connection = new WebSocket('ws://83.36.186.86:8080/TT');
 
 		this.inMenu = false;
 
