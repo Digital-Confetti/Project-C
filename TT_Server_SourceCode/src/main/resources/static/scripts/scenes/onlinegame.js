@@ -66,15 +66,20 @@ export class Online_Game_Scene extends Phaser.Scene {
         this.processImperative = function(body) {
             this.playerNet.x = body.x;
             this.playerNet.y = body.y;
+            this.playerNet.body.setVelocityX(body.vX);
+            this.playerNet.body.setVelocityY(body.vY);
         }
         
         this.sendImperative = function () {
             if (this.playerLocal != undefined) {
                 let a = this.playerLocal.x, b = this.playerLocal.y;
+                let v_x = this.playerLocal.body.velocity.x, v_y = this.playerLocal.body.velocity.y;
                 console.log("Mandando imperativo: " + a + " " + b);
                 let pkg = {
                     x: a,
-                    y: b
+                    y: b,
+                    vX: v_x,
+                    vY: v_y
                 }
     
                 TT_WebSocket.prototype.sendMessage(pkg, "imp")
