@@ -4,32 +4,17 @@
 El ejecutable del servidor servidor de encuentra en la ruta. 
 El codigo fuente del servidor se encuentra en la siguiente ruta.
 ### Esquema interno
-![_Diagrama UML](https://github.com/Digital-Confetti/Travellers-Tournament/blob/main/TT_Server/imgs/UML.jpg)
+![_Diagrama UML](https://github.com/Digital-Confetti/Travellers-Tournament/blob/main/TT_Server/imgs/Blank_diagram.png)
 
-TT_Server cuenta con 2 partes diferenciadas, una orientada a la comunicacion (Compuesta por el Message Controller, y el Comunication service), y una orientada a la gestion interna de estos servicios (Clase Mensaje, Lobby...).
-- MessageController: Clase del tipo @Controller, es el controller encargado de las comunicaciones entre los clientes. Su funcionamiento basicamente se basa en convertir las disitnas peticiones HTTTP en solicitues a la clase ComunicationService.
-- ComunicationService: Clase tipo @Service, encargada de la gestion de lobbys, mensajes, connexiones...
+En la versión actual se ha eliminado todo el uso de Api Rest y todas las funcionalidades están implementadas a traves del uso de Web Sockets.
 
 Clases a resaltar:
--Clase Lobby: Es la encargada de toda la gestion del chat. Basicamente esta clase es la encargada de gestionar las conexiones y desconexiones, guardar los mensajes...
--Clase MessageStorage: Hemos optado por una clase de este tipo para cada lobby para simplificar su uso. Hemos usado .csv para un mejor manejo de la lectura y escritura de los datos.
+-Clase Lobby: Agrupa a los jugadores en parejas y se encarga de mandar los mensajes entre ellos.
+-Clase WebSocketTTHandler: Hereda de TextHandlerWebSocket y distribuye la información entre las lobbys.
+
+
 
 ### Guia de instalador del servidor.
-- Descargar el arcivo `TT_Server_RELEASE_Fase3.zip` dentro de la release, esta en la ruta: 
-
-`Travellers-Tournament/TT_Server/Instalador/'TT_Server_RELEASE_Fase3.zip'`
-- Descomprimir el archivo en la carpeta que deseemos. 
-
- ![_Foto fase 3](https://github.com/Digital-Confetti/Travellers-Tournament/blob/main/TT_Server/imgs/FASE%203.PNG)
-
-- Existen 2 maneras de ejecutalo: La facil y la manual.
-
-Camino Facil:
-
-![_Foto fase 4](https://github.com/Digital-Confetti/Travellers-Tournament/blob/main/TT_Server/imgs/FASE%204.PNG)
-
-- `Click-Derecho` en `TT_Server_BF13_EZEXECUTE.ps1`
-- Ejecutar con Powershell.
 
 Camino Manual:
 - Ejecutar el archivo `TT_SERVER_RELEASE_FASE3.jar`
