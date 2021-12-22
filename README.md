@@ -16,6 +16,9 @@ Clases a resaltar:
 
 ### Guia de instalador del servidor.
 
+Videotutorial:
+https://youtu.be/LIXpc8kKrDc
+
 Camino Manual:
 - Ejecutar el archivo `TT_SERVER_RELEASE_FASE3.jar`
 Desde DigitalConfetti desaconsejamos hacer click y ya está; puesto que esto generará un proceso de muy dificil acceso de terminar. Por lo que aconsejamos el uso del siguiente comando, desde una terminal situada en el `directorio /TT_Server_RELEASE_Fase3`
