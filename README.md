@@ -1,35 +1,5 @@
 # Travellers Tournament - Fighting Game
 
-## Servidor de Juego:
-El ejecutable del servidor servidor de encuentra en la ruta. 
-El codigo fuente del servidor se encuentra en la siguiente ruta.
-### Esquema interno
-![_Diagrama UML](https://github.com/Digital-Confetti/Travellers-Tournament/blob/main/TT_Server/imgs/Blank_diagram.png)
-
-En la versión actual se ha eliminado todo el uso de Api Rest y todas las funcionalidades están implementadas a traves del uso de Web Sockets.
-
-Clases a resaltar:
--Clase Lobby: Agrupa a los jugadores en parejas y se encarga de mandar los mensajes entre ellos.
--Clase WebSocketTTHandler: Hereda de TextHandlerWebSocket y distribuye la información entre las lobbys.
-
-
-
-### Guia de instalador del servidor.
-
-Videotutorial:
-https://youtu.be/LIXpc8kKrDc
-
-Camino Manual:
-- Ejecutar el archivo `TT_SERVER_RELEASE_FASE3.jar`
-Desde DigitalConfetti desaconsejamos hacer click y ya está; puesto que esto generará un proceso de muy dificil acceso de terminar. Por lo que aconsejamos el uso del siguiente comando, desde una terminal situada en el `directorio /TT_Server_RELEASE_Fase3`
-> java -jar TT_SERVER_RELEASE_FASE3.jar
-
--Tras haber ejecutado el servidor deberas ir a tu navegador y escribir -> localhost:8080
-
-*Si algun amigo tuyo quiere conectarse al servidor tendra que sustituir "localhost" por tu ip local -> ipLocal:8080 (solo si estais en la misma red) 
-
-Desde digitalConfetti recomendamos investigar que es y como encontrar tu ip local, enlace recomendado: https://computerhoy.com/paso-a-paso/internet/como-saber-cual-es-direccion-ip-mi-ordenador-24347
-
 ### Descripción del juego:
 Travellers Tournament se ambienta en un antiguo mundo medieval de fantasía. Los líderes de la nación más poderosa, Merloq, han organizado un torneo para encontrar al mejor luchador y nombrarlo Mariscal de la Abadía para que dirija todas las empresas militares de la nación, para atraer a los mejores luchadores, no solo se ofrece el título militar sino también un poderosa reliquia, el santo grial, del cual se dice que puede otorgarle lo que sea que desee a quien se haga con el. ¿Cuáles de todos los vasallos encontrará la manera de imponerse al resto de contendientes?
 
@@ -165,6 +135,33 @@ Pantalla en la cual vamos a poder ver al ganador de la pelea y futuro Mariscal d
 [Caida persona](http://www.sonidosmp3gratis.com/download.php?id=10085&sonido=caida%20persona "Caida persona")
 ##  ¡¡ESPERAMOS QUE OS GUSTE NUESTRO JUEGO!! 🧙 :wheelchair: 🤺   🛡️ 
 
+## Servidor de Juego:
+El ejecutable del servidor servidor de encuentra en la ruta. 
+El codigo fuente del servidor se encuentra en la siguiente ruta.
+### Esquema interno
+![_Diagrama UML](https://github.com/Digital-Confetti/Travellers-Tournament/blob/main/TT_Server/imgs/Blank_diagram.png)
+
+En la versión actual se ha eliminado todo el uso de Api Rest y todas las funcionalidades están implementadas a traves del uso de Web Sockets.
+
+Clases a resaltar:
+-Clase Lobby: Agrupa a los jugadores en parejas y se encarga de mandar los mensajes entre ellos.
+-Clase WebSocketTTHandler: Hereda de TextHandlerWebSocket y distribuye la información entre las lobbys.
+
+### Guia de instalador del servidor.
+
+Videotutorial:
+https://youtu.be/LIXpc8kKrDc
+
+Camino Manual:
+- Ejecutar el archivo `TT_SERVER_RELEASE_FASE3.jar`
+Desde DigitalConfetti desaconsejamos hacer click y ya está; puesto que esto generará un proceso de muy dificil acceso de terminar. Por lo que aconsejamos el uso del siguiente comando, desde una terminal situada en el `directorio /TT_Server_RELEASE_Fase3`
+> java -jar TT_SERVER_RELEASE_FASE3.jar
+
+-Tras haber ejecutado el servidor deberas ir a tu navegador y escribir -> localhost:8080
+
+*Si algun amigo tuyo quiere conectarse al servidor tendra que sustituir "localhost" por tu ip local -> ipLocal:8080 (solo si estais en la misma red) 
+
+Desde digitalConfetti recomendamos investigar que es y como encontrar tu ip local, enlace recomendado: https://computerhoy.com/paso-a-paso/internet/como-saber-cual-es-direccion-ip-mi-ordenador-24347
 
 ##### Integrantes:
 - 🎃 Javier Raja Huertas.
